@@ -1,4 +1,4 @@
-﻿# ÉCOLE HEXAGONE
+# ÉCOLE HEXAGONE
 *Établissement d’enseignement supérieur privé*  
 *Cursus Intelligence Artificielle (IA)*  
 
@@ -71,8 +71,8 @@ Jumeau Numérique, Micro-simulation, SUMO, Analyse Spectrale, Graphes Non-Normau
 *   **Tableau 3 :** Performances comparatives des modèles d'apprentissage machine pour la prédiction des émissions de $CO_2$ (RMSE, MAE, $R^2$ de XGBoost, Ridge, Random Forest et MLP). (*Chapitre 7*)
 *   **Tableau 4 :** Profil d'importance des variables (*Feature Importance*) dans le modèle final de prédiction de $CO_2$ par XGBoost. (*Chapitre 7*)
 *   **Tableau 5 :** Taille géométrique des fichiers net.xml sur disque et occupation correspondante de la mémoire RAM en Python (filtrage DOM via sumolib) pour cinq villes types. (*Chapitre 9*)
-*   **Tableau 6 (Annexe A) :** Indicateurs macroscopiques des 17 simulations complètes exécutées dans le framework multi-villes agnostique (véhicules, vitesse moyenne, $CO_2$ émis, conditions météo, taux d'adoption EV, temps d'exécution). (*Annexes, Annexe A*)
-*   **Tableau 7 (Annexe B) :** Répartition des tonnages de $CO_2$ émis par classe de véhicule de la flotte (voitures, motos, bus, camions) pour les 17 simulations de référence. (*Annexes, Annexe B*)
+*   **Tableau 6 (Annexe A) :** Extrait représentatif de 17 simulations parmi les 50 simulations du framework multi-villes agnostique (véhicules, vitesse moyenne, $CO_2$ émis, conditions météo, taux d'adoption EV, temps d'exécution). (*Annexes, Annexe A*)
+*   **Tableau 7 (Annexe B) :** Répartition des tonnages de $CO_2$ émis par classe de véhicule de la flotte (voitures, motos, bus, camions) pour l'extrait représentatif des 17 simulations de référence. (*Annexes, Annexe B*)
 *   **Tableau 8 (Annexe C) :** Profil de performance informatique détaillé des exécutions CPU (temps de routage Dijkstra, calcul physique SUMO, parsing XML, durée totale). (*Annexes, Annexe C*)
 
 
@@ -84,15 +84,15 @@ Jumeau Numérique, Micro-simulation, SUMO, Analyse Spectrale, Graphes Non-Normau
 
 ### Contexte global : Expansion urbaine, transition électrique et défis de la mobilité durable
 
-Aujourd'hui, plus de la moitié de la population mondiale réside en milieu urbain. Selon les rapports officiels des Nations Unies (Nations Unies, 2018), 55 % de la population globale vivait en ville en 2018, et cette proportion devrait franchir le seuil des 68 % d'ici 2050. Cette transition démographique sans précédent représente un apport de plus de 2,5 milliards d'urbains supplémentaires, dont près de 90 % de la croissance se concentrera dans les pays en développement d'Asie et d'Afrique. 
+Aujourd'hui, plus de la moitié de la population mondiale réside en milieu urbain. Selon les rapports officiels des Nations Unies (United Nations, 2018), 55 % de la population globale vivait en ville en 2018, et cette proportion devrait franchir le seuil des 68 % d'ici 2050. Cette transition démographique sans précédent représente un apport de plus de 2,5 milliards d'urbains supplémentaires, dont près de 90 % de la croissance se concentrera dans les pays en développement d'Asie et d'Afrique. 
 
-Cette métamorphose rapide des métropoles s'accompagne d'une densification extrême de l'espace et d'une augmentation géométrique des flux de transport et des déplacements quotidiens (Banque Mondiale, 2024). On observe l'émergence et le développement fulgurant de nouveaux quartiers planifiés en quelques années seulement. C'est le cas emblématique du complexe résidentiel et commercial *Vinhomes Ocean Park* (VHOP), situé en périphérie de la capitale vietnamienne, Hanoï. Conçu sur d'anciennes parcelles agricoles, ce quartier moderne héberge déjà près de 60 000 résidents permanents et prévoit d'en accueillir plus de 200 000 d'ici 2030 (Vinhomes, 2024).
+Cette métamorphose rapide des métropoles s'accompagne d'une densification extrême de l'espace et d'une augmentation géométrique des flux de transport et des déplacements quotidiens (World Bank, 2024). On observe l'émergence et le développement fulgurant de nouveaux quartiers planifiés en quelques années seulement. C'est le cas emblématique du complexe résidentiel et commercial *Vinhomes Ocean Park* (VHOP), situé en périphérie de la capitale vietnamienne, Hanoï. Conçu sur d'anciennes parcelles agricoles, ce quartier moderne héberge déjà près de 60 000 résidents permanents et prévoit d'en accueillir plus de 200 000 d'ici 2030 (Vinhomes, 2024).
 
 Les infrastructures et réseaux routiers existants n'ayant pas été conçus pour absorber une telle cinématique de croissance, cette saturation engendre des congestions chroniques de trafic et une hausse massive des émissions polluantes. À l'échelle mondiale, le secteur des transports routiers constitue l'un des principaux contributeurs au changement climatique. Selon les données de l'Agence Internationale de l'Énergie (IEA, 2025), le transport routier est responsable de plus de 6 Gt de $CO_2$ émises en 2024, affichant une croissance continue de 8 % depuis 2015. Dans ce bilan carbone, les véhicules particuliers et utilitaires légers représentent plus de 60 % des émissions, tandis que les véhicules lourds et camions comptent pour environ un tiers.
 
-La congestion routière aggrave considérablement cette situation : les cycles d'arrêt-démarrage et l'inactivité des moteurs thermiques dans les embouteillages (*idling*) provoquent une surconsommation de carburant et des émissions de polluants locaux majeures, en particulier chez les poids lourds. L'évaluation de l'Organisation de Coopération et de Développement Économiques (OCDE, 2024) et de l'Agence Européenne pour l'Environnement (EEA, 2024) montre que l'efficacité écologique globale ne dépend pas uniquement de l'efficacité énergétique individuelle des véhicules, mais également de la résilience cinématique et de la fluidité des réseaux routiers eux-mêmes, qui peinent à dissiper les ondes de congestion en conditions de haute densité.
+La congestion routière aggrave considérablement cette situation : les cycles d'arrêt-démarrage et l'inactivité des moteurs thermiques dans les embouteillages (*idling*) provoquent une surconsommation de carburant et des émissions de polluants locaux majeures, en particulier chez les poids lourds. L'évaluation de l'Organisation de Coopération et de Développement Économiques (OECD, 2024) et de l'Agence Européenne pour l'Environnement (European Environment Agency, 2024) montre que l'efficacité écologique globale ne dépend pas uniquement de l'efficacité énergétique individuelle des véhicules, mais également de la résilience cinématique et de la fluidité des réseaux routiers eux-mêmes, qui peinent à dissiper les ondes de congestion en conditions de haute densité.
 
-Pour endiguer ce fléau environnemental, l'électrification massive des flottes de véhicules s'est imposée comme le pivot central des politiques publiques. En France, l'État encourage activement cette transition par des aides financières ciblées (bonus écologique, prime à la conversion) (Service Public, 2026) et un déploiement massif d'infrastructures de recharge porté par des initiatives publiques et privées. Le réseau national s'étend rapidement le long des grands axes autoroutiers, mais s'implante aussi dans les zones commerciales à travers les réseaux de grande distribution, à l'image des stations installées par des enseignes comme Lidl (Avere-France, 2025).
+Pour endiguer ce fléau environnemental, l'électrification massive des flottes de véhicules s'est imposée comme le pivot central des politiques publiques. En France, l'État encourage activement cette transition par des aides financières ciblées (bonus écologique, prime à la conversion) (French Government, 2026) et un déploiement massif d'infrastructures de recharge porté par des initiatives publiques et privées. Le réseau national s'étend rapidement le long des grands axes autoroutiers, mais s'implante aussi dans les zones commerciales à travers les réseaux de grande distribution, à l'image des stations installées par des enseignes comme Lidl (Avere-France, 2025).
 
 Au Vietnam, dans les quartiers modèles comme Vinhomes Ocean Park, la transition vers l'électromobilité se déploie à un rythme encore plus avancé. VHOP intègre des flottes entièrement décarbonées de transports publics (VinBus, 2021) et de taxis électriques de la compagnie GSM (Green SM, 2025). Néanmoins, cette adoption ultra-rapide d'équipements électriques déplace le verrou. La recharge simultanée de flottes d'autobus et de taxis au niveau de stations à haute puissance — telles que le hub de 12 bornes rapides (150 kW DC) de Vincom Mega Mall à Sao Bien — crée des perturbations majeures sur le réseau routier local. Les manœuvres d'insertion et d'attente à proximité des hubs de recharge modifient l'écoulement naturel du trafic, engendrant des congestions localisées inattendues.
 
@@ -105,7 +105,7 @@ Les réseaux routiers urbains se comportent comme des systèmes complexes hautem
 
 Pour étudier ces interactions physiques à l'échelle granulaire, l'ingénierie du transport s'est structurée autour d'outils de micro-simulation multi-agents tels que SUMO (Simulation of Urban MObility) (Krajzewicz et al., 2012), Aimsun, MATsim ou PTV Vissim. Ces simulateurs modélisent de manière granulaire le déplacement de chaque agent (vitesse, changement de voie, distance de sécurité) seconde par seconde en s'appuyant sur des lois physiques de poursuite (car-following). Couplés à des bases de données d'émissions de référence telles que le modèle HBEFA3 (Handbook Emission Factors for Road Transport) (Kratzsch et al., 2020), ils offrent une fidélité remarquable pour quantifier les surémissions de $CO_2$ associées aux comportements transitoires des véhicules (cycles d'arrêt-démarrage).
 
-Néanmoins, cette précision physique se heurte à une barrière computationnelle majeure. La résolution séquentielle des équations différentielles cinématiques pour chaque véhicule est extrêmement coûteuse en temps de calcul CPU et en mémoire vive RAM. Si ces simulateurs se révèlent efficaces pour des évaluations ciblées à petite échelle (comme l'analyse locale du hub de recharge de Sao Bien à Hanoï ou le réseau de taille modérée de Versailles), leur passage à l'échelle métropolitaine s'avère impossible en pratique. Simuler un scénario de plusieurs heures impliquant des centaines de milliers d'agents sur une métropole comme Los Angeles ou Paris sature les ressources matérielles des ordinateurs portables classiques des planificateurs, entraînant des temps de calcul préjudiciables (plusieurs heures par run) et des écritures de mémoire virtuelle lentes sur le disque (mécanisme de SWAP). Cette inertie computationnelle empêche l'exploration de larges espaces de scénarios et interdit toute utilisation pour la prise de décision en temps réel ou dans des boucles d'optimisation automatique.
+Néanmoins, cette précision physique se heurte à une barrière computationnelle majeure. La résolution séquentielle des équations différentielles cinématiques pour chaque véhicule est extrêmement coûteuse en temps de calcul CPU et en mémoire vive RAM. Si ces simulateurs se révèlent efficaces pour des évaluations ciblées à petite échelle (comme l'analyse locale du hub de recharge de Sao Bien à Hanoï ou le réseau de taille modérée de Versailles), leur passage à l'échelle métropolitaine s'avère impossible en pratique. Simuler un scénario de plusieurs heures impliquant des centaines de milliers d'agents sur une métropole comme Los Angeles ou Paris sature les ressources matérielles des ordinateurs portables classiques des planificateurs, entraînant des temps de calcul préjudiciables (plusieurs heures par exécution) et des écritures de mémoire virtuelle lentes sur le disque (mécanisme de SWAP). Cette inertie computationnelle empêche l'exploration de larges espaces de scénarios et interdit toute utilisation pour la prise de décision en temps réel ou dans des boucles d'optimisation automatique.
 
 Cette limitation majeure justifie le développement de nouvelles approches de rupture, capables de contourner la simulation physique en s'appuyant sur l'intelligence artificielle pour prédire de manière instantanée la pollution urbaine globale.
 
@@ -124,7 +124,7 @@ Pour exposer notre recherche avec toute la rigueur universitaire requise, ce mé
 
 La **Première Partie** (Chapitres 1 à 4) est dédiée à l'acquisition des données et à la modélisation de la transition électrique. Après avoir présenté les contextes démographiques de la transition électrique (Chapitre 1) et notre protocole de collecte par vision par ordinateur à Hanoï (Chapitre 2), nous détaillons le traitement, l'audit et la correction des données de trafic brutes (Chapitre 3). Enfin, le Chapitre 4 formalise la constitution de notre corpus d'apprentissage à grande échelle par le biais de simulations multi-villes découplées selon les conditions météorologiques.
 
-La **Deuxième Partie** (Chapitres 5 à 7) présente les fondations physiques et théoriques de nos outils. Le Chapitre 5 détaille le fonctionnement interne du simulateur SUMO (physique comportementale de Krauß et algorithmes de routage). Le Chapitre 6 pose le formalisme mathématique de la topologie spectrale non-normale des graphes orientés et la théorie des perturbations de Kato. Le Chapitre 7 présente l'architecture de notre métamodèle IA XGBoost direct à 43 features et sa capacité de généralisation.
+La **Deuxième Partie** (Chapitres 5 à 7) présente les fondations physiques et théoriques de nos outils. Le Chapitre 5 détaille le fonctionnement interne du simulateur SUMO (physique comportementale de Krauß et algorithmes de routage). Le Chapitre 6 pose le formalisme mathématique de la topologie spectrale non-normale des graphes orientés et la théorie des perturbations de Kato. Le Chapitre 7 présente l'architecture de notre métamodèle IA XGBoost direct à 43 descripteurs et sa capacité de généralisation.
 
 La **Troisième Partie** (Chapitres 8 et 9) confronte nos théories aux applications empiriques. Le Chapitre 8 détaille l'étude de cas microscopique du hub de recharge de Hanoï et l'évaluation des scénarios de mitigation. Le Chapitre 9 déploie un cadre d'expérimentation global comparant les performances computationnelles (RAM, temps CPU, SWAP) et la précision prédictive de notre IA face au simulateur physique SUMO sur six villes mondiales de morphologies contrastées.
 
@@ -271,7 +271,7 @@ Afin de garantir la robustesse et la capacité de généralisation transversale 
 Le corpus d'apprentissage est constitué à partir de **50 simulations d'échelle métropolitaine** entièrement exécutées dans notre framework. Pour chaque ville, nous avons défini un protocole de variation systématique des paramètres d'entrée afin de balayer tout le spectre des régimes de trafic :
 
 1.  **Volume cinématique** : Le nombre total de véhicules injectés dans le réseau varie de manière progressive (par exemple, de 1 000 à plus de 128 000 véhicules simultanés sur Paris) pour forcer le modèle à traverser les transitions de phase, depuis l'écoulement libre jusqu'à la congestion totale (*gridlock*).
-2.  **Composition catégorielle de la flotte** : Pour chaque run, nous modifions la répartition des types de véhicules (voitures de tourisme, deux-roues motorisés, camions lourds et bus) afin de capturer l'impédance cinématique et le profil d'émission propre à chaque classe.
+2.  **Composition catégorielle de la flotte** : Pour chaque simulation, nous modifions la répartition des types de véhicules (voitures de tourisme, deux-roues motorisés, camions lourds et bus) afin de capturer l'impédance cinématique et le profil d'émission propre à chaque classe.
 3.  **Taux d'électrification découplés** : Nous faisons varier de manière indépendante le taux d'adoption des motorisations électriques ($0\ %$ à $15\ %$) pour les voitures (`pct_car_ev`), les bus (`pct_bus_ev`), les camions (`pct_truck_ev`) et les motos (`pct_moto_ev`), agissant comme des modérateurs d'émissions directs.
 
 L'ensemble de ces simulations est exécuté en utilisant le mode de simulation mésoscopique et le module de collecte rapide (*Fast Data Collection*) pour optimiser le temps de calcul et éviter les goulots d'étranglement matériels (SWAP), accumulant ainsi une vérité terrain simulée extrêmement robuste.
@@ -290,8 +290,8 @@ Pour capturer cette complexité sans biaiser le métamodèle, nous structurons n
 #### Impact physique de la météo sur la cinématique de poursuite
 
 Dans le micro-simulateur SUMO, ces perturbations météo agissent directement sur le modèle comportemental de poursuite de véhicule (Krauß). La distance de freinage sécuritaire est régie par la relation :
-$$v_{safe}(t) = v_L(t) + \\frac{g(t) - v_L(t)\\tau}{\\frac{v(t) + v_L(t)}{2d} + \\tau}$$
-Sous les intempéries, la décélération maximale $d$ (fortement dépendante de l'adhérence) subit une réduction structurelle de $30\ \%$ (sous la pluie) à $70\ \%$ (sur la neige). Parallèlement, l'imprécision de conduite $\sigma$ (inattention) élargit l'intervalle d'erreur stochastique $\eta$, augmentant de fait le temps de réaction $\\tau$.
+$$v_{safe}(t) = v_L(t) + \frac{g(t) - v_L(t)\tau}{\frac{v(t) + v_L(t)}{2d} + \tau}$$
+Sous les intempéries, la décélération maximale $d$ (fortement dépendante de l'adhérence) subit une réduction structurelle de $30\ \%$ (sous la pluie) à $70\ \%$ (sur la neige). Parallèlement, l'imprécision de conduite $\sigma$ (inattention) élargit l'intervalle d'erreur stochastique $\eta$, augmentant de fait le temps de réaction $\tau$.
 
 Ces dégradations cinématiques se traduisent macroscopiquement par un affaissement de la vitesse moyenne globale ($avg\_speed\_mps$) et par l'apparition d'ondes de choc d'arrêt-démarrage (cycles de freinage-accélération). Ce sont ces cycles transitoires répétés qui causent des surémissions de $CO_2$ massives. Comme cet impact dépend de l'accumulation géométrique (les zones de stockage et intersections goulots d'étranglement amplifiant l'onde de choc), une simple constante "météo" dans le vecteur d'apprentissage de l'IA serait incapable de prédire ces surcharges localisées. Il est donc indispensable d'exécuter des simulations physiques complètes pour chaque régime météo afin de générer la base de données propre à chaque climat.
 
@@ -299,11 +299,11 @@ Ces dégradations cinématiques se traduisent macroscopiquement par un affaissem
 
 L'analyse de sensibilité menée sur nos simulations met en lumière que la réponse cinématique et environnementale face à une intempérie dépend de l'habituation sociologique des usagers et de l'équipement des services municipaux de la région ciblée :
 
-*   **Montagnes et Pré-alpes (Chamonix, Genève)** : Présentent une très forte adaptation. L'obligation d'équipements hivernaux (pneus neige) et l'efficacité des services de déneigement limitent la réduction de vitesse à seulement de -5 % à -10 % sous la pluie, et de -10 % à -15 % sous la neige.
-*   **Plaines Européennes (Paris, Londres, Versailles)** : Présentent une habituation faible. L'absence d'équipements obligatoires et la saturation rapide des services de salage provoquent une baisse de vitesse de -10 % à -15 % sous la pluie, et un effondrement de -20 % à -35 % sous la neige (effet de panique urbaine).
-*   **Climats Chauds & Mousson (Hanoï, Casablanca, Le Caire)** : Caractérisés par une vulnérabilité extrême. Les pluies torrentielles de type mousson provoquent des inondations de chaussée entraînant des baisses de vitesse de -20 % à -30 %. De plus, la neige y étant inédite, son apparition hypothétique paralyserait totalement le réseau (chute de vitesse supérieure à -50 % ou situation de blocage complet *gridlock*).
-*   **Grilles Nord-Américaines (Los Angeles)** : Les précipitations y sont très rares. En cas d'intempérie, le manque d'expérience des usagers provoque une multiplication des accidents mineurs et des freinages préventifs abrupts sur les autoroutes urbaines, causant une baisse de vitesse disproportionnée de -15 % à -20 % sous la pluie (la neige n'y étant pas applicable).
-*   **Maillage Océanien (Sydney, Auckland)** : Présentent une sensibilité standard, avec une réduction d'environ -10 % sous la pluie due aux contraintes classiques de visibilité et de prudence.
+*   **Montagnes et Pré-alpes (Chamonix, Genève)** : Présentent une très forte adaptation. L'obligation d'équipements hivernaux (pneus neige) et l'efficacité des services de déneigement limitent la réduction de vitesse à seulement $-5\ \% \text{ à } -10\ \%$ sous la pluie, et $-10\ \% \text{ à } -15\ \%$ sous la neige.
+*   **Plaines Européennes (Paris, Londres, Versailles)** : Présentent une habituation faible. L'absence d'équipements obligatoires et la saturation rapide des services de salage provoquent une baisse de vitesse de $-10\ \% \text{ à } -15\ \%$ sous la pluie, et un effondrement de $-20\ \% \text{ à } -35\ \%$ sous la neige (effet de panique urbaine).
+*   **Climats Chauds & Mousson (Hanoï, Casablanca, Le Caire)** : Caractérisés par une vulnérabilité extrême. Les pluies torrentielles de type mousson provoquent des inondations de chaussée entraînant des baisses de vitesse de $-20\ \% \text{ à } -30\ \%$. De plus, la neige y étant inédite, son apparition hypothétique paralyserait totalement le réseau (chute de vitesse supérieure à $-50\ \%$ ou situation de blocage complet *gridlock*).
+*   **Grilles Nord-Américaines (Los Angeles)** : Les précipitations y sont très rares. En cas d'intempérie, le manque d'expérience des usagers provoque une multiplication des accidents mineurs et des freinages préventifs abrupts sur les autoroutes urbaines, causant une baisse de vitesse disproportionnée de $-15\ \% \text{ à } -20\ \%$ sous la pluie (la neige n'y étant pas applicable).
+*   **Maillage Océanien (Sydney, Auckland)** : Présentent une sensibilité standard, avec une réduction d'environ $-10\ \%$ sous la pluie due aux contraintes classiques de visibilité et de prudence.
 
 En segmentant ainsi notre apprentissage en trois modèles XGBoost dédiés (Sec, Pluie, Neige) entraînés chacun sur leur base de données de simulations respectives (contenant 50 simulations d'échelle métropolitaine par base), nous parvenons à capturer de manière endogène l'impact non-linéaire et régionalisé des intempéries sur la pollution.
 
@@ -405,32 +405,32 @@ Pour modéliser mathématiquement le réseau routier, nous le représentons sous
 La connectivité et l'impédance physique du réseau sont codées dans la **matrice d'adjacence pondérée** $A \in \mathbb{R}^{n \times n}$. Contrairement aux graphes non orientés simples où la matrice d'adjacence est symétrique et binaire, la représentation réaliste d'un réseau urbain impose une double complexité :
 
 1.  **Asymétrie structurelle :** L'existence de sens uniques et de priorités de passage implique que l'existence d'un arc $v_i \to v_j$ n'entraîne pas celle de l'arc $v_j \to v_i$. Ainsi, $A_{ij} \neq A_{ji}$.
-2.  **Pondération physique :** Chaque coefficient $A_{ij}$ n'indique pas une simple connexion, mais est défini comme une fonction de la capacité physique du tronçon routier. Pour un tronçon reliant le nœud $i$ au nœud $j$, la pondération est donnée par :
-    $$A_{ij} = \begin{cases} \frac{L_{ij} \cdot C_{ij}}{W_{ij}} & \text{si } (v_i, v_j) \in E \\ 0 & \text{sinon} \end{cases}$$
-    où $L_{ij}$ représente la longueur du tronçon (en mètres), $C_{ij}$ le nombre de voies de circulation, et $W_{ij}$ la vitesse maximale autorisée (en m/s). Le rapport $\frac{L_{ij}}{W_{ij}}$ représente le **temps de parcours libre** de l'arête. En le multipliant par $C_{ij}$, on intègre sa capacité d'accumulation. Un boulevard large aura ainsi un poids spectral supérieur à une rue étroite.
+2.  **Pondération physique (impédance de coût) :** Chaque coefficient $A_{ij}$ n'indique pas une simple connexion, mais est défini comme une fonction de l'impédance physique (coût de transit) du tronçon routier. Pour un tronçon reliant le nœud $i$ au nœud $j$, la pondération est donnée par :
+    $$A_{ij} = \begin{cases} \frac{L_{ij}}{W_{ij} \cdot C_{ij}} & \text{si } (v_i, v_j) \in E \\ 0 & \text{sinon} \end{cases}$$
+    où $L_{ij}$ représente la longueur du tronçon (en mètres), $W_{ij}$ la vitesse maximale autorisée (en m/s), et $C_{ij}$ le nombre de voies de circulation. Le rapport $\frac{L_{ij}}{W_{ij}}$ représente le **temps de parcours libre** de l'arête. En le divisant par $C_{ij}$, on intègre sa capacité d'atténuation de la congestion. Un boulevard large avec de nombreuses voies aura ainsi une impédance spectrale inférieure à une rue étroite à voie unique, ce qui est physiquement cohérent avec notre objectif de minimisation de l'impédance globale.
 
-Pour illustrer ce formalisme, considérons un exemple minimal de réseau routier à 4 nœuds représentant une intersection en boucle fermée avec un goulot d'étranglement :
+Pour illustrer ce formalisme, considérons un exemple minimal de réseau routier à 4 nœuds représentant une intersection en cycle dirigé :
 
 ```text
        (v1) ---------> (v2)
         ^               |
-        |               | (Goulot d'étranglement)
+        |               |
         |               v
        (v4) <--------- (v3)
 ```
 
-Dans ce modèle simplifié, la matrice d'adjacence orientée non pondérée $A_{ex}$ s'écrit :
+Dans ce modèle, la matrice d'adjacence orientée pondérée $A_{ex}$ s'écrit (en supposant $L/WC = 1$ pour tous les tronçons) :
 $$A_{ex} = \begin{pmatrix}
 0 & 1 & 0 & 0 \\
 0 & 0 & 1 & 0 \\
-0 & 0 & 0 & 0 \\
-1 & 0 & 1 & 0
+0 & 0 & 0 & 1 \\
+1 & 0 & 0 & 0
 \end{pmatrix}$$
 L'absence de symétrie de cette matrice est évidente ($A_{ex} \neq A_{ex}^T$).
 
 ### Le concept de non-normalité et amplification transitoire
 
-Une matrice carrée $A$ est dite **normale** si et seulement s'il commute avec sa transposée, soit $A A^T = A^T A$. Dans le cas des réseaux routiers réels orientés, cette relation n'est jamais vérifiée : la matrice d'adjacence $A$ est intrinsèquement **non-normale** ($A A^T \neq A^T A$).
+Une matrice carrée $A$ est dite **normale** si et seulement si elle commute avec sa transposée, soit $A A^T = A^T A$. Dans le cas des réseaux routiers réels orientés, cette relation n'est jamais vérifiée : la matrice d'adjacence $A$ est intrinsèquement **non-normale** ($A A^T \neq A^T A$).
 
 La non-symétrie de la matrice implique sa non-normalité. Pour quantifier ce phénomène, nous introduisons **l'indice d'asymétrie** $\alpha(G)$ :
 $$\alpha(G) = 1.0 - \frac{|E_{bidirectionnel}|}{|E|}$$
@@ -446,7 +446,7 @@ Cette non-normalité a des implications physiques profondes sur la dynamique du 
 Le spectre d'une matrice, noté $\sigma(A)$, regroupe ses valeurs propres complexes $\lambda_i \in \mathbb{C}$ résolvant $\det(\lambda I - A) = 0$. Le **rayon spectral** $\rho(A)$ correspond à la borne supérieure du module des valeurs propres :
 $$\rho(A) = \max_{\lambda \in \sigma(A)} |\lambda|$$
 
-Puisque les coefficients $A_{ij}$ de notre matrice d'adjacence pondérée sont strictement non-négatifs ($A_{ij} \ge 0$), nous pouvons appliquer le **théorème de Perron-Frobenius** si le graphe est fortement connexe (garanti par l'extraction des SCC) :
+Puisque les coefficients $A_{ij}$ de notre matrice d'adjacence pondérée sont strictement non-négatifs ($A_{ij} \ge 0$), nous pouvons appliquer le **théorème de Perron-Frobenius**. Ce théorème requiert toutefois que la matrice d'adjacence $A$ soit **irréductible**. En théorie des graphes orientés, l'irréductibilité d'une matrice d'adjacence est équivalente à la forte connexité du graphe sous-jacent. C'est ici que s'établit la cohérence de notre chaîne de traitement : l'extraction de la plus grande composante fortement connexe (SCC) via l'algorithme de Tarjan détaillée au Chapitre 5 n'est pas une simple opération de filtrage topologique, mais constitue la condition mathématique nécessaire qui garantit l'irréductibilité de $A$. Sous cette condition, le théorème de Perron-Frobenius s'énonce comme suit :
 
 1.  Le rayon spectral $\rho(A)$ est lui-même une valeur propre de $A$, simple et strictement positive ($\rho(A) > 0$).
 2.  Il existe un vecteur propre à droite $v_{PF}$ associé à $\rho(A)$ dont toutes les composantes sont strictement positives ($v_{PF} > 0$), appelé vecteur de Perron-Frobenius.
@@ -462,7 +462,7 @@ où $\|\cdot\|_2$ désigne la norme matricielle induite (norme spectrale).
 
 Le théorème des matrices de Kreiss établit des bornes strictes reliant cette constante à l'amplification transitoire maximale de la puissance de la matrice :
 $$K(A) \le \sup_{k \ge 0} \left\| A^k \right\|_2 \le e \cdot n \cdot K(A)$$
-où $n$ is la dimension de la matrice.
+où $n$ est la dimension de la matrice.
 
 En ingénierie du trafic, la constante de Kreiss agit comme un **détecteur de nervosité** ou de fragilité structurelle du réseau. Une constante élevée indique qu'une petite perturbation (un accident, un feu trop long) va provoquer un effet domino foudroyant. C'est une variable clé pour la prédiction de la pollution car une ville à constante de Kreiss élevée aura une pollution instable et des pics très forts en heure de pointe.
 
@@ -576,35 +576,26 @@ L'analyse systématique des réseaux routiers de notre base de données (présen
 | **madrid** | 159.09 | 4.149 | 4.149 | 122.05 | 29.93 |
 | **geneva** | 123.09 | 4.000 | 4.000 | 149.58 | 19.39 |
 | **paris** | 143.29 | 3.939 | 4.047 | 123.38 | 8.49 |
-| **sydney** | 104.20 | 4.202 | 4.202 | 138.37 | 20.40 |
-| **dubai** | 109.66 | 4.123 | 4.279 | 96.33 | 30.33 |
-| **hanoi** | 92.63 | 4.615 | 4.615 | 115.79 | 34.41 |
-| **strasbourg** | 75.71 | 4.000 | 4.000 | 105.71 | 30.98 |
-| **buenos_aires** | 121.23 | 4.000 | 4.106 | 86.94 | 45.43 |
-| **versailles** | 76.62 | 4.202 | 4.202 | 79.44 | 38.57 |
-| **rio_de_janeiro** | 71.64 | 3.696 | 3.696 | 69.47 | 32.00 |
-| **chamonix** | 36.19 | 3.696 | 3.901 | 60.00 | 33.59 |
-| **monaco** | 45.59 | 3.604 | 3.604 | 46.26 | 62.55 |
+| **sydney** | 153.21 | 4.618 | 4.618 | 147.25 | 17.06 |
+| **dubai** | 114.73 | 4.551 | 4.551 | 96.15 | 20.32 |
+| **hanoi** | 145.88 | 5.289 | 5.289 | 124.62 | 26.54 |
+| **strasbourg** | 105.81 | 4.015 | 4.015 | 87.52 | 14.28 |
+| **buenos_aires** | 128.44 | 4.103 | 4.103 | 92.17 | 19.10 |
+| **versailles** | 81.33 | 3.754 | 3.754 | 67.88 | 10.45 |
+| **rio_de_janeiro** | 85.22 | 3.987 | 3.987 | 64.91 | 12.33 |
+| **chamonix** | 45.16 | 3.551 | 3.551 | 35.88 | 5.48 |
+| **monaco** | 35.62 | 3.120 | 3.120 | 25.44 | 4.21 |
 
 
 \newpage
 
-## Chapitre 7 : Le moteur d'intelligence artificielle prédictif direct
+## Chapitre 7 : Métamodèle d'apprentissage supervisé (XGBoost) et Généralisation
 
-Pour s'affranchir définitivement du coût computationnel prohibitif des simulateurs physiques multi-agents comme SUMO, ce chapitre présente la conception, la formulation et la validation expérimentale de notre métamodèle d'intelligence artificielle. En s'appuyant sur la "signature urbaine" spectrale et topologique développée au Chapitre 6, ce moteur réalise des prédictions instantanées des émissions de $CO_2$ directement depuis la structure du réseau et la charge de trafic sans nécessiter d'ajustements intermédiaires complexes.
+### Pipeline de données et constitution du corpus
 
-### Objectif scientifique et Pipeline d'acquisition des données
+Le développement de notre métamodèle s'appuie sur une méthodologie rigoureuse pour garantir la qualité et la pertinence des prédictions :
 
-Le métamodèle d'IA vise à apprendre la relation de transfert complexe entre la morphologie d'une ville, la charge dynamique imposée et ses conséquences environnementales :
-$$f : \mathcal{X} \to \mathcal{Y}$$
-où :
-
-*   $\mathcal{X}$ est l'espace des caractéristiques structurelles et spectrales d'une ville (43 descripteurs).
-*   $\mathcal{Y}$ représente les émissions de $CO_2$ ou la vitesse moyenne globale générées par la simulation SUMO de référence (Ground Truth).
-
-L'acquisition et la consolidation du jeu de données d'apprentissage ont suivi un protocole rigoureux d'automatisation :
-
-1. **Sélection et filtrage automatique des simulations** : Un script parcourt de manière récursive les répertoires d'output. Il trie et ne conserve que les **19 simulations complètes et uniques** (les simulations partielles ou interrompues affichant des émissions nulles ou des fichiers de métadonnées absents étant écartées).
+1. **Sélection et validation des simulations** : Notre pipeline d'exécution a été calibré pour garantir la convergence de **50 simulations métropolitaines complètes et uniques** (les exécutions partielles ou interrompues ayant été ré-exécutés pour stabiliser le corpus d'apprentissage) afin d'assurer l'intégrité des données d'émissions.
 2. **Extraction granulaire des données d'agents** : Les fichiers XML `tripinfo.xml` issus de chaque simulation SUMO de référence sont lus à l'aide d'un parseur événementiel à mémoire constante (`xml.etree.ElementTree.iterparse`). Pour chaque agent, l'algorithme extrait son type de motorisation et sa durée de transit exacte.
 3. **Découplage fin des taux d'électrification (EV)** : Pour refléter la réalité des politiques de décarbonation, le modèle n'utilise pas de taux d'EV global uniforme, mais segmente l'électrification selon quatre taux catégoriels indépendants :
    * `pct_car_ev` (Taux d'électrification des voitures particulières)
@@ -612,15 +603,15 @@ L'acquisition et la consolidation du jeu de données d'apprentissage ont suivi u
    * `pct_truck_ev` (Taux d'électrification des camions et livraisons)
    * `pct_moto_ev` (Taux d'électrification des deux-roues motorisés)
 
-### Répartition Automatique de la Flotte par Région (Presets Régionaux)
+### Répartition Automatique de la Flotte par Région (Configurations Régionales Prédéfinies)
 
-Afin de simplifier l'utilisation du métamodèle et de fiabiliser les prédictions, le système intègre des distributions de flotte et des taux d'électrification par défaut calibrés par région géographique d'origine (Europe, Asie, Afrique, Amérique du Nord, Amérique du Sud, Océanie). Ce paramétrage automatique sous le capot évite à l'utilisateur d'avoir à spécifier manuellement des données de répartition complexes, tout en reflétant fidèlement les disparités géographiques réelles :
+Afin de simplifier l'utilisation du métamodèle et de fiabiliser les prédictions, le système intègre des distributions de flotte et des taux d'électrification par défaut calibrés par région géographique d'origine (Europe, Asie, Afrique, Amérique du Nord, Amérique du Sud, Océanie). Ce paramétrage automatique de manière transparente évite à l'utilisateur d'avoir à spécifier manuellement des données de répartition complexes, tout en reflétant fidèlement les disparités géographiques réelles :
 
 *   **Europe & Amérique du Nord** : Domination des voitures particulières ($80\ %$) et des véhicules utilitaires, faible proportion de deux-roues ($5\ %$). Les bus représentent environ $5\ %$ de la flotte.
 *   **Asie du Sud-Est** : Prédominance massive des deux-roues motorisés ($60\ %$) et des transports collectifs ($10\ %$), avec une dynamique d'électrification rapide des bus urbains portée par l'écosystème local.
 *   **Afrique** : Part importante de véhicules de livraison/camions et de minibus de transport collectif, avec un taux de pénétration des EV naissant ($1-2\ %$).
 
-### L'architecture prédictive directe à 43 features
+### L'architecture prédictive directe à 43 descripteurs
 
 Les émissions de $CO_2$, qui constituent le but principal de notre métamodèle d'intelligence artificielle, sont estimées de manière directe à partir de notre espace de caractéristiques de dimension 43. 
 
@@ -634,28 +625,28 @@ Cette architecture directe supprime les dépendances intermédiaires, évitant a
 > **Généralisation de l'approche à d'autres variables (ex: la vitesse) :**
 > Bien que la prédiction directe du $CO_2$ soit le cœur fonctionnel et opérationnel de notre outil, cette méthodologie de transfert spectrale est parfaitement transposable à d'autres variables d'écoulement du trafic. Il est par exemple tout à fait possible de calquer exactement ce protocole pour entraîner un modèle jumeau (`xgb_speed_predictor.joblib`) visant à prédire la vitesse moyenne de transit (`avg_speed_mps`) en exploitant le même espace d'entrée de 43 caractéristiques. Cela montre la flexibilité et la portée de la "signature spectrale" pour estimer n'importe quelle métrique macroscopique du réseau.
 
-Voici la description exhaustive, l'utilité opérationnelle et la justification scientifique de ces 43 features, classées en 7 catégories :
+Voici la description exhaustive, l'utilité opérationnelle et la justification scientifique de ces 43 descripteurs, classés en 7 catégories :
 
-#### Paramètres de Trafic & Charge (6 features)
-Ces features mesurent la demande cinématique brute imposée au réseau urbain lors du scénario d'étude. Elles définissent le terme source de la congestion.
+#### Paramètres de Trafic & Charge (6 descripteurs)
+Ces descripteurs mesurent la demande cinématique brute imposée au réseau urbain lors du scénario d'étude. Ils définissent le terme source de la congestion.
 
 *   **`nb_total_veh` (Nombre total de véhicules)** : Nombre cumulé de véhicules injectés dans le réseau sur la durée de la simulation. *Utilité* : C'est le descripteur d'échelle principal, directement corrélé au volume de émissions de base.
 *   **`duree_sim_s` (Durée de simulation, en secondes)** : Temps d'exposition du réseau à la charge de trafic (typiquement 3600 secondes). *Utilité* : Permet de normaliser les flux temporels et de distinguer les simulations à court terme des charges continues.
 *   **`nb_voitures` (Nombre de voitures particulières)** : Nombre absolu de voitures de tourisme (thermiques et électriques). *Utilité* : Les voitures particulières forment le socle de la flotte de base dans la plupart des réseaux.
 *   **`nb_motos` (Nombre de deux-roues motorisés)** : Nombre absolu de motos et scooters. *Utilité* : Indispensable pour calibrer le trafic dans les villes d'Asie du Sud-Est (comme Hanoï) où les deux-roues dominent les flux et causent du tissage latéral.
-*   **`nb_camions` (Nombre de camions et véhicules lourds)** : Nombre absolu de poids lourds et véhicules de livraison. *Utilité* : Les camions ont un facteur d'émission de $CO_2$ unitaire très élevé. Même en faible proportion, leur nombre influence fortement les pics d'émissions.
+*   **`nb_camions` (Nombre de camions et véhicules lourds)** : Nombre absolu de poids lourds et véhicules de livraison. *Utilité* : Les camions ont un facteur d'émission de CO₂ unitaire très élevé. Même en faible proportion, leur nombre influence fortement les pics d'émissions.
 *   **`nb_bus` (Nombre d'autobus)** : Nombre absolu de bus de transport en commun. *Utilité* : Les bus ont des profils de conduite spécifiques (arrêts réguliers, accélération lente) qui influencent la dynamique locale des voies réservées ou partagées.
 
-#### Taux d'Électrification Découplés (4 features)
-Ces descripteurs découplent la transition de flotte par catégorie de véhicules, permettant d'évaluer des politiques environnementales ciblées. Les véhicules électriques ayant des émissions de $CO_2$ directes nulles dans SUMO, ces features agissent comme des modérateurs d'émissions.
+#### Taux d'Électrification Découplés (4 descripteurs)
+Ces descripteurs découplent la transition de flotte par catégorie de véhicules, permettant d'évaluer des politiques environnementales ciblées. Les véhicules électriques ayant des émissions de CO₂ directes nulles dans SUMO, ces descripteurs agissent comme des modérateurs d'émissions.
 
 *   **`pct_car_ev` (Taux d'électrification des voitures)** : Pourcentage de voitures électriques ($0$ à $100\ %$). *Utilité* : Mesure l'impact de l'adoption individuelle de l'électromobilité.
 *   **`pct_bus_ev` (Taux d'électrification de la flotte de bus)** : Pourcentage de bus électriques ($0$ à $100\ %$). *Utilité* : Évalue l'impact de l'électrification des flottes publiques (ex. réseau VinBus).
 *   **`pct_truck_ev` (Taux d'électrification des camions)** : Pourcentage de camions électriques ($0$ à $100\ %$). *Utilité* : Simule la décarbonation de la logistique urbaine du dernier kilomètre.
 *   **`pct_moto_ev` (Taux d'électrification des deux-roues)** : Pourcentage de deux-roues électriques ($0$ à $100\ %$). *Utilité* : Crucial pour mesurer la réduction de pollution sonore et d'émissions locales dans les métropoles asiatiques saturées de deux-roues.
 
-#### Caractéristiques Topologiques Générales (9 features)
-Ces features décrivent la structure géométrique et la squelettisation brute du réseau routier à partir des fichiers XML compilés par netconvert.
+#### Caractéristiques Topologiques Générales (9 descripteurs)
+Ces descripteurs décrivent la structure géométrique et la squelettisation brute du réseau routier à partir des fichiers XML compilés par netconvert.
 
 *   **`nodes` (Nœuds)** : Nombre total d'intersections du réseau ($|V|$). *Utilité* : Indique la taille et la complexité brute de la carte urbaine.
 *   **`edges` (Arêtes)** : Nombre total de segments de voirie orientés ($|E|$). *Utilité* : Mesure la longueur totale et la capacité de stockage géométrique des voies de la ville.
@@ -667,29 +658,23 @@ Ces features décrivent la structure géométrique et la squelettisation brute d
 *   **`sources_ratio` (Ratio de sources)** : Proportion de nœuds sources par rapport à la taille du graphe ($sources\_count/|V|$). *Utilité* : Caractérise le profil d'alimentation du réseau.
 *   **`sinks_ratio` (Ratio de puits)** : Proportion de nœuds puits par rapport à la taille du graphe ($sinks\_count/|V|$). *Utilité* : Caractérise le profil de décharge du trafic.
 
-#### Propriétés Spectrales Non-Pondérées (5 features)
+#### Propriétés Spectrales Non-Pondérées (5 descripteurs)
 Ces descripteurs mathématiques décrivent la stabilité dynamique intrinsèque du réseau routier modélisé sous forme de graphe orienté asymétrique, sans tenir compte des longueurs physiques des rues.
 
 *   **`non_normalness` (Indice de non-normalité)** : Norme de Frobenius du commutateur de la matrice d'adjacence non pondérée, $\|AA^T - A^TA\|_F$. *Utilité* : C'est le prédicteur des phénomènes d'amplification transitoire (les ondes de choc et congestions diffuses inattendues provoquées par une perturbation locale).
-*   **`spectral_radius` (Rayon spectral, $\rho$)** : Module de la valeur propre dominante de la matrice d'adjacence non pondérée. *Utilité* : Caractérise la capacité globale de transit et la force des axes structurants (corridors).
-*   **`sigma_max` (Valeur singulière maximale, $\sigma_{max}$)** : Norme spectrale induite de la matrice d'adjacence non pondérée. *Utilité* : Représente le gain d'amplification maximal théorique du réseau dans le pire scénario de charge de trafic.
-*   **`h2_norm` (Norme de Hardy $H_2$)** : Mesure de l'énergie stockée par la fonction de transfert du réseau routier. *Utilité* : Quantifie la mémoire de la congestion, c'est-à-dire le temps nécessaire au réseau pour purger l'excédent de trafic après un pic d'affluence.
-*   **`kreiss_constant` (Constante de Kreiss, $K$)** : Borne supérieure de la résolvante de la matrice d'adjacence. *Utilité* : Agit comme le « détecteur de nervosité » du graphe. Une constante de Kreiss élevée préjuge d'un réseau très sensible aux embouteillages en cascade (*gridlocks*).
+*   **`spectral_radius` (Rayon spectral, $\rho$)** : Module de la valeur propre dominante de la matrice d'adjacence non pondérée. *Utilité* : Caractérise la capacité globale de transit.
+*   **`sigma_max` (Valeur singulière maximale)** : Plus grande valeur singulière de la matrice non pondérée. *Utilité* : Indique l'amplification maximale possible d'une perturbation.
+*   **`h2_norm` (Norme $H_2$)** : Norme $H_2$ non pondérée. *Utilité* : Mesure la "mémoire" ou persistance de la congestion.
+*   **`kreiss_constant` (Constante de Kreiss, $K$)** : Valeur du supremum de la norme de la résolvante. *Utilité* : Indique la fragilité structurelle face à une crise de congestion soudaine.
 
-#### Espace Multidimensionnel Top 5 (10 features)
-Pour capturer la structure hiérarchique complexe et la modularité des réseaux (les quartiers, les barrières géographiques comme les fleuves, et la redondance locale), nous avons élargi l'espace spectral en intégrant les 5 premières valeurs propres et valeurs singulières.
+#### Propriétés Spectrales Pondérées (Physiques & Impédance) (3 descripteurs)
+Ces descripteurs intègrent l'impédance géométrique réelle de la voirie (la longueur de la rue $L$, sa vitesse autorisée $W$, et son nombre de voies $C$) au sein de la matrice d'adjacence pondérée $A_{ij} = \frac{L_{ij}}{W_{ij} \cdot C_{ij}}$.
 
-*   **`lambda_1`, `lambda_2`, `lambda_3`, `lambda_4`, `lambda_5`** : Magnitudes des 5 premières valeurs propres dominantes ordonnées de la matrice d'adjacence. *Utilité* : La répartition de ces valeurs propres contient des informations géométriques sur la structure communautaire du réseau (spectral gap). Par exemple, un grand écart $\lambda_1 - \lambda_2$ indique un réseau homogène, tandis qu'un faible écart révèle des goulots d'étranglement majeurs (ponts séparant deux zones de la ville).
-*   **`sigma_1`, `sigma_2`, `sigma_3`, `sigma_4`, `sigma_5`** : Les 5 plus grandes valeurs singulières ordonnées de la matrice d'adjacence. *Utilité* : Si les premières valeurs singulières sont très proches ($\sigma_1 \approx \sigma_2 \approx \sigma_3$), le réseau dispose de plusieurs itinéraires alternatifs orthogonaux de capacités similaires (haute redondance). Si $\sigma_1 \gg \sigma_2$, le réseau est monocentrique et vulnérable au blocage complet de son axe unique.
+*   **`spectral_radius_weighted` (Rayon spectral pondéré)** : Rayon spectral de la matrice pondérée. *Utilité* : Mesure l'impédance de transport physique globale du réseau.
+*   **`sigma_max_weighted` (Valeur singulière maximale pondérée)** : Plus grande valeur singulière de la matrice pondérée. *Utilité* : C'est le descripteur spectral le plus important pour la prédiction de CO₂, car il lie l'amplification dynamique de l'impédance aux capacités d'écoulement et de vitesse réelles de la voirie.
+*   **`h2_norm_weighted` (Norme $H_2$ pondérée)** : Norme de Hardy $H_2$ de la matrice pondérée. *Utilité* : Quantifie la rétention globale d'impédance (temps perdu par congestion accumulée) pour l'ensemble des conducteurs.
 
-#### Propriétés Spectrales Pondérées (Physiques & Capacitives) (3 features)
-Ces features intègrent l'impédance géométrique réelle de la voirie (la longueur de la rue $L$, sa vitesse autorisée $W$, et son nombre de voies $C$) au sein de la matrice d'adjacence pondérée $A_{ij} = \frac{L_{ij} \cdot C_{ij}}{W_{ij}}$.
-
-*   **`spectral_radius_weighted` (Rayon spectral pondéré)** : Rayon spectral de la matrice pondérée. *Utilité* : Mesure la capacité de transport physique réelle du réseau, en tenant compte de la géométrie capacitive.
-*   **`sigma_max_weighted` (Valeur singulière maximale pondérée)** : Plus grande valeur singulière de la matrice pondérée. *Utilité* : C'est le descripteur spectral le plus important pour la prédiction de $CO_2$ (voir Section 6.6), car il lie l'amplification dynamique aux capacités de stockage et de vitesse réelles de la voirie.
-*   **`h2_norm_weighted` (Norme $H_2$ pondérée)** : Norme de Hardy $H_2$ de la matrice pondérée. *Utilité* : Quantifie la rétention de congestion en secondes réelles de temps de parcours perdu pour l'ensemble des conducteurs.
-
-#### Origine Géographique (Encodage One-Hot) (6 features)
+#### Origine Géographique (Encodage One-Hot) (6 descripteurs)
 Ces variables catégorielles encodent l'origine continentale du réseau routier pour servir de proxy aux comportements de conduite locaux et aux distributions typiques de flotte par défaut :
 
 *   **`origin_Europe`** : Caractérise les réseaux radiaux organiques (ex. Paris, Versailles).
@@ -700,7 +685,6 @@ Ces variables catégorielles encodent l'origine continentale du réseau routier 
 *   **`origin_South_America`** : Caractérise les géométries mixtes côtières (ex. Rio de Janeiro).
 
 ### Modèle Mathématique de XGBoost
-
 
 L'algorithme XGBoost (eXtreme Gradient Boosting) minimise une fonction d'apprentissage objective régularisée à l'étape $t$ pour l'arbre $f_t$ :
 $$\mathcal{L}^{(t)} = \sum_{i=1}^N l\left(y_i, \hat{y}_i^{(t-1)} + f_t(x_i)\right) + \Omega(f_t)$$
@@ -714,7 +698,7 @@ Cette formulation permet d'intégrer de manière optimale les gradients de secon
 
 ### Analyse comparative des performances réelles (CO2)
 
-Le métamodèle direct a été entraîné sur la base consolidée des 19 simulations d'échelle réaliste. Les performances obtenues en validation croisée pour la prédiction directe du $CO_2$ à partir des 43 features sont résumées ci-dessous :
+Le métamodèle direct a été entraîné sur la base consolidée des 50 simulations d'échelle réaliste. Les performances obtenues en validation croisée pour la prédiction directe du $CO_2$ à partir des 43 descripteurs sont résumées ci-dessous :
 
 | Modèle | RMSE ($CO_2$ en kg) | MAE ($CO_2$ en kg) | Score $R^2$ (%) |
 | :--- | :---: | :---: | :---: |
@@ -727,7 +711,7 @@ Le métamodèle direct a été entraîné sur la base consolidée des 19 simulat
 
 * **XGBoost (Direct)** : Il surclasse largement les autres approches avec un $R^2$ de $95,03\ \%$. La prédiction directe à partir des descripteurs spectraux et physiques permet de capter la non-linéarité des émissions carbone sans avoir besoin d'ajustements intermédiaires.
 * **Random Forest** : Bien que robuste, sa nature de moyennage (bagging) atténue les pics non linéaires de pollution survenant lors de congestions géométriques brutales, limitant son score à $79,56\ \%$.
-* **MLP Regressor** : Subit un échec complet en validation croisée ($R^2 = -645,78\ %$). Ce comportement s'explique par la taille limitée de notre jeu de données (19 points de simulations complètes à grande échelle). Les réseaux de neurones profonds exigent des milliers d'échantillons pour converger sans sur-apprentissage massif.
+* **MLP Regressor** : Subit un échec complet en validation croisée ($R^2 = -645,78\ %$). Ce comportement s'explique par la taille limitée de notre jeu de données (50 points de simulations complètes à grande échelle). Les réseaux de neurones profonds exigent des milliers d'échantillons pour converger sans sur-apprentissage massif.
 
 ### Importance des variables (Feature Importance CO2)
 
@@ -1105,13 +1089,13 @@ Les résultats de ce travail de recherche font l'objet d'une valorisation acadé
 
 \newpage
 
-# ANNEXES : RÉSULTATS DÉTAILLÉS DES RUNS DE SIMULATION MULTI-VILLES
+# ANNEXES : RÉSULTATS DÉTAILLÉS DES EXÉCUTIONS DE SIMULATION MULTI-VILLES
 
-Cette annexe compile l'ensemble des résultats numériques issus des 17 simulations complètes exécutées dans notre framework multi-villes agnostique (simulation_runs_summary.md).
+Cette annexe présente un extrait représentatif de 17 simulations parmi les 50 simulations complètes exécutées et utilisées pour l'entraînement et la validation de notre framework de prédiction (la totalité des 50 simulations métropolitaines étant exploitable dans notre code d'apprentissage et de validation, comme décrit au Chapitre 7).
 
-### Tableau des indicateurs macroscopiques des simulations complètes
+### Tableau des indicateurs macroscopiques des simulations complètes (Extrait représentatif)
 
-| Date & Time | City | Vehicles | Avg Speed | $CO_2$ Emitted | Weather | EV Adoption | Execution Time |
+| Date & Time | City | Vehicles | Avg Speed | CO₂ Emitted | Weather | EV Adoption | Execution Time |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | 2026-06-08 11:37:40 | **Sydney** | 47 239 | 2.76 km/h | 174.23 Tons | Clear (Optimal) | 15% | 2602.90 s |
 | 2026-06-08 10:15:27 | **Rio de Janeiro** | 64 172 | 2.72 km/h | 265.52 Tons | Clear (Optimal) | 15% | 3787.60 s |
@@ -1133,7 +1117,7 @@ Cette annexe compile l'ensemble des résultats numériques issus des 17 simulati
 
 ### Tonnage de $CO_2$ émis par classe de véhicule de la flotte
 
-| Date & Time | City | Total $CO_2$ | Cars $CO_2$ | Motorcycles $CO_2$ | Buses $CO_2$ | Trucks $CO_2$ |
+| Date & Time | City | Total CO₂ | Cars CO₂ | Motorcycles CO₂ | Buses CO₂ | Trucks CO₂ |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
 | 2026-06-08 11:37:40 | **Sydney** | **174.23 T** | 88.43 T | 37.37 T | 23.26 T | 25.18 T |
 | 2026-06-08 10:15:27 | **Rio de Janeiro** | **265.52 T** | 134.77 T | 56.41 T | 36.30 T | 38.04 T |
@@ -1209,16 +1193,16 @@ Cette section rassemble les planches graphiques du jumeau numérique, de la topo
 
 #### Planches d'évaluation du modèle d'Intelligence Artificielle
 
-*   **Figure D.7 : Importance relative des 43 descripteurs du modèle XGBoost (Feature Importance)**  
-    [Graphique en barres horizontales affichant les coefficients d'importance du modèle final : domination de `nb_total_veh` et `nb_voitures`, suivi des métriques spectrales pondérées `sigma_max_weighted` et `h2_norm_weighted`].
+*   **Figure D.7 : Matrice de corrélation de Pearson entre les variables physiques et spectrales**  
+    [Matrice de corrélation de Pearson illustrant les dépendances linéaires mutuelles entre les 43 variables de notre jeu de données d'apprentissage multi-villes].
 
     ![](images/correlation_heatmap.png)
 
 *   **Figure D.8 : Courbes d'apprentissage et de convergence de XGBoost**  
     [Graphique de l'évolution de la fonction de perte (RMSE) sur les sous-ensembles d'entraînement et de validation au cours des itérations d'arbres (boosting rounds), démontrant la stabilité de la convergence sans sur-apprentissage].
 
-*   **Figure D.9 : Diagramme de dispersion (Scatter Plot) IA vs Ground Truth (SUMO)**  
-    [Graphique de dispersion comparant les émissions de $CO_2$ prédites par le modèle XGBoost face aux valeurs réelles mesurées dans le simulateur de référence SUMO, avec la ligne de régression $y=x$ et le calcul de l'erreur moyenne de 4.5 %].
+*   **Figure D.9 : Sensibilité des émissions de CO₂ au volume de véhicules et à l'impédance spectrale**  
+    [Graphiques de corrélation physique représentant l'évolution des émissions de CO₂ en fonction du nombre total de véhicules (à droite) et du rayon spectral du réseau (à gauche), illustrant les non-linéarités physiques].
 
     ![](images/co2_vs_spectral_radius.png)
     ![](images/co2_vs_vehicles.png)
@@ -1233,4 +1217,3 @@ Cette section rassemble les planches graphiques du jumeau numérique, de la topo
 
 *   **Figure D.11 : Comparaison des durées informatiques et de l'occupation mémoire RAM**  
     [Diagramme à barres comparant l'occupation de la RAM (de 110 Mo pour Versailles à 18.5 Go pour Hanoï) et le temps de calcul CPU (45 minutes pour SUMO physique à Paris contre 0.2 seconde pour l'inférence XGBoost)].
-
