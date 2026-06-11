@@ -1,0 +1,81 @@
+name: Build PDF & Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Pandoc & LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-lang-french texlive-xetex latexmk fonts-lmodern
+
+      - name: Download CSL style (Chicago full note — footnotes)
+        run: |
+          curl -sSfL "https://www.zotero.org/styles/chicago-fullnote-bibliography" -o chicago-note.csl
+
+      - name: Convert Markdown to PDF via LaTeX
+        run: |
+          pandoc REDACTION_MEMOIRE_NOUVEAU.md \
+            --template=template.tex \
+            --pdf-engine=xelatex \
+            --no-highlight \
+            --citeproc \
+            --bibliography=references.bib \
+            --csl=chicago-note.csl \
+            --metadata-file=metadata.yaml \
+            --toc \
+            --number-sections \
+            -o memoire.pdf
+
+      - name: Also generate standalone .tex
+        run: |
+          pandoc REDACTION_MEMOIRE_NOUVEAU.md \
+            --template=template.tex \
+            --standalone \
+            --no-highlight \
+            --citeproc \
+            --bibliography=references.bib \
+            --csl=chicago-note.csl \
+            --metadata-file=metadata.yaml \
+            --toc \
+            --number-sections \
+            -o memoire.tex
+
+      - name: Prepare Pages directory
+        run: |
+          mkdir -p _site
+          cp memoire.pdf _site/
+          cp memoire.tex _site/
+          cp index.html _site/
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

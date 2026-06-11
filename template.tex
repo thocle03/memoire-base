@@ -1,0 +1,211 @@
+\documentclass[11pt, a4paper]{article}
+
+% --- Encodage et langue ---
+% Compatible pdflatex / xelatex / lualatex.
+% Sous xelatex/lualatex, on charge fontspec (Unicode natif) ; sous pdflatex,
+% on garde inputenc/fontenc + lmodern.
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+  % Caractères Unicode rencontrés dans le mémoire mais non gérés par défaut.
+  \DeclareUnicodeCharacter{2248}{\ensuremath{\approx}}
+  \DeclareUnicodeCharacter{2265}{\ensuremath{\geq}}
+  \DeclareUnicodeCharacter{2264}{\ensuremath{\leq}}
+  \DeclareUnicodeCharacter{2260}{\ensuremath{\neq}}
+  \DeclareUnicodeCharacter{2212}{\ensuremath{-}}
+  \DeclareUnicodeCharacter{2192}{\ensuremath{\rightarrow}}
+  \DeclareUnicodeCharacter{2190}{\ensuremath{\leftarrow}}
+  \DeclareUnicodeCharacter{2191}{\ensuremath{\uparrow}}
+  \DeclareUnicodeCharacter{2193}{\ensuremath{\downarrow}}
+  \DeclareUnicodeCharacter{2194}{\ensuremath{\leftrightarrow}}
+  \DeclareUnicodeCharacter{21D2}{\ensuremath{\Rightarrow}}
+  \DeclareUnicodeCharacter{2026}{\ldots}
+  \DeclareUnicodeCharacter{2075}{\ensuremath{^{5}}}
+  \DeclareUnicodeCharacter{2076}{\ensuremath{^{6}}}
+  \DeclareUnicodeCharacter{25BA}{\ensuremath{\blacktriangleright}}
+  \DeclareUnicodeCharacter{25C4}{\ensuremath{\blacktriangleleft}}
+  \DeclareUnicodeCharacter{2500}{-}
+  \DeclareUnicodeCharacter{2502}{|}
+  \DeclareUnicodeCharacter{250C}{+}
+  \DeclareUnicodeCharacter{2510}{+}
+  \DeclareUnicodeCharacter{2514}{+}
+  \DeclareUnicodeCharacter{2518}{+}
+  \DeclareUnicodeCharacter{2082}{\textsubscript{2}}
+\else
+  \usepackage{fontspec}
+  \defaultfontfeatures{Ligatures=TeX}
+  % « Arial » (équivalent libre métrique-compatible fourni par texlive-fonts-recommended).
+  \setmainfont{TeX Gyre Heros}
+  \setsansfont{TeX Gyre Heros}
+  \setmonofont{TeX Gyre Cursor}
+\fi
+\usepackage[french]{babel}
+
+% --- Caractères Unicode manquants (valable pdflatex ET xelatex/lualatex) ---
+\usepackage{newunicodechar}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{≠}{\ensuremath{\neq}}
+\newunicodechar{⇒}{\ensuremath{\Rightarrow}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{←}{\ensuremath{\leftarrow}}
+\newunicodechar{↑}{\ensuremath{\uparrow}}
+\newunicodechar{↓}{\ensuremath{\downarrow}}
+\newunicodechar{↔}{\ensuremath{\leftrightarrow}}
+\newunicodechar{−}{\ensuremath{-}}
+\newunicodechar{…}{\ldots}
+\newunicodechar{⁵}{\ensuremath{^{5}}}
+\newunicodechar{⁶}{\ensuremath{^{6}}}
+\newunicodechar{►}{\ensuremath{\blacktriangleright}}
+\newunicodechar{◄}{\ensuremath{\blacktriangleleft}}
+\newunicodechar{─}{\texttt{-}}
+\newunicodechar{│}{\texttt{|}}
+\newunicodechar{┌}{\texttt{+}}
+\newunicodechar{┐}{\texttt{+}}
+\newunicodechar{└}{\texttt{+}}
+\newunicodechar{┘}{\texttt{+}}
+\newunicodechar{₂}{\textsubscript{2}}
+
+% --- Mise en page ---
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{setspace}
+\setstretch{1.15}
+
+% --- Titres : forcer \paragraph et \subparagraph à passer à la ligne ---
+% Par défaut LaTeX rend \paragraph (= #### Markdown) en titre « run-in »,
+% collé au début du paragraphe qui suit. On les redéfinit en blocs.
+\usepackage{titlesec}
+\titleformat{\paragraph}[block]
+  {\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+  {0pt}{2.25ex plus 1ex minus .2ex}{1ex plus .2ex}
+\titleformat{\subparagraph}[block]
+  {\normalfont\normalsize\bfseries\itshape}{\thesubparagraph}{1em}{}
+\titlespacing*{\subparagraph}
+  {0pt}{2ex plus 1ex minus .2ex}{0.8ex plus .2ex}
+
+% --- Anti-débordement (inline code, longs identifiants, URLs) ---
+% Pandoc convertit `code` en \texttt{...}. Par défaut, la fonte monospace
+% interdit toute coupure : les identifiants type « recursive-1024-128 »
+% débordent en marge.
+% Stratégie :
+%   (a) marge d'élasticité d'urgence + \sloppy,
+%   (b) coupure aux tirets « - » réactivée dans la fonte monospace,
+%   (c) le paquet « underscore » rend « \_ » sécable en mode texte,
+%       ce qui permet le retour à la ligne après un « _ » dans les
+%       identifiants type « entité_émettrice », sans couper le mot
+%       au milieu d'une syllabe.
+\setlength{\emergencystretch}{4em}
+\usepackage[strings]{underscore}
+
+\makeatletter
+% Active la coupure aux tirets « - » dans la fonte monospace
+\renewcommand\ttfamily{%
+  \not@math@alphabet\ttfamily\mathtt
+  \fontfamily\ttdefault\selectfont
+  \hyphenchar\font=`\-\relax}
+\makeatother
+
+% --- Maths ---
+\usepackage{amsmath, amssymb, amsfonts}
+
+% --- Tableaux et figures ---
+\usepackage{array}
+\usepackage{calc}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+
+% --- Liens ---
+\usepackage[colorlinks=true, linkcolor=blue!60!black, citecolor=blue!60!black, urlcolor=blue!60!black]{hyperref}
+
+% --- Support pour les tables sans légende Pandoc 3.8+ ---
+\newcounter{none}
+\newcommand{\theHnone}{\thenone}
+
+% --- Code ---
+% Build uses pandoc --no-highlight, so we provide minimal Shaded / Highlighting
+% environments ourselves (pandoc still wraps code blocks in them).
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{fancyvrb}
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+
+% --- Notes de bas de page (footnotes Pandoc) ---
+\usepackage{footnote}
+
+% --- En-têtes / pieds de page ---
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setlength{\headheight}{28pt}
+\fancyhf{}
+\fancyhead[L]{\nouppercase{\leftmark}}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+% Classe « article » : \leftmark est alimenté par \sectionmark.
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+
+% --- Titre ---
+\title{$title$}
+\author{$author$}
+\date{$date$}
+
+% --- Pandoc tight list ---
+% Pandoc insère \tightlist au début des listes serrées (items sans ligne
+% vide entre eux). La définition par défaut écrase tout espace vertical,
+% ce qui rend les puces illisibles. On la neutralise pour conserver les
+% espacements standards de \itemize.
+\providecommand{\tightlist}{}
+
+% --- Pandoc syntax highlighting macros ---
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+% --- CSL refs (Pandoc --citeproc) ---
+$if(csl-refs)$
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2]%
+  {\setlength{\parindent}{0pt}%
+   \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces}%
+  {\par}
+\newcommand{\CSLBlock}[1]{\hfill\break#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth - 3pt}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+$endif$
+
+\begin{document}
+
+% --- Page de titre ---
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+{\Huge\bfseries $title$\par}
+\vspace{1.5cm}
+{\Large Mémoire\par}
+\vspace{1cm}
+{\large $author$\par}
+\vspace{0.5cm}
+{\large $date$\par}
+\vfill
+\end{titlepage}
+
+% --- Table des matières ---
+\tableofcontents
+\newpage
+
+% --- Corps ---
+$body$
+
+\end{document}
