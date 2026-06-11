@@ -51,7 +51,7 @@ jobs:
           path: pandoc.log
 
       - name: Push Pandoc Log to repo
-        if: always()
+        if: failure()
         run: |
           if [ -f pandoc.log ]; then
             git config --global user.name "github-actions[bot]"
