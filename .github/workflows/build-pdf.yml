@@ -41,7 +41,14 @@ jobs:
             --metadata-file=metadata.yaml \
             --toc \
             --number-sections \
-            -o memoire.pdf
+            -o memoire.pdf > pandoc.log 2>&1
+
+      - name: Upload Pandoc Log
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pandoc-log
+          path: pandoc.log
 
       - name: Also generate standalone .tex
         run: |
