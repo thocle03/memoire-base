@@ -12,9 +12,11 @@
 **Année Universitaire :** 2025-2026  
 
 **Sous le tutorat de :**  
+
 *   **M. Pierre UZARRALDE (IA)**, Professeur à l'École Hexagone  
 
 **Co-encadrant de recherche (VinUniversity) :**  
+
 *   **Équipe de recherche Smart Mobility**, VinUniversity (Hanoï, Vietnam)  
 
 *Illustration de couverture : Jumeau Numérique Urbain et Signature Spectrale de Graphe*
@@ -172,6 +174,7 @@ Ce positionnement en hauteur (angle d'observation incliné entre 30 et 45 degré
 L'établissement de la ligne de visée depuis le 3ème étage du centre commercial a imposé des contraintes géométriques strictes liées à l'architecture du bâtiment. La présence de piliers de soutien en béton, de montants de fenêtres en aluminium et de vitrines de magasins obstruait une grande partie du champ visuel horizontal. 
 
 L'analyse comparative des formats de capture a révélé les éléments suivants :
+
 *   **Le format paysage (horizontal) :** Bien qu'adapté pour capturer la longueur du tronçon routier, il intégrait dans le cadre plusieurs obstacles physiques majeurs qui divisaient la zone d'intérêt en sous-sections disjointes, empêchant le suivi continu des trajectoires par l'algorithme de vision par ordinateur.
 *   **Le format portrait (vertical) :** En orientant la caméra verticalement, nous avons pu aligner le champ de vision principal dans l'espace situé entre deux piliers consécutifs du bâtiment. Cette configuration a permis de cadrer de manière ininterrompue les trois zones critiques du corridor : la zone d'approche amont, la zone d'insertion du hub de recharge, et la zone de sortie vers le carrefour aval.
 
@@ -181,6 +184,7 @@ L'analyse comparative des formats de capture a révélé les éléments suivants
 Pour automatiser l'extraction des données de trafic à partir des séquences vidéo haute définition capturées sur site, nous avons déployé un pipeline de traitement d'images basé sur le modèle de réseau de neurones convolutifs **YOLOv8** (You Only Look Once, version 8) (voir Figure D.1, Annexe D). 
 
 Ce pipeline de vision par ordinateur fonctionne de la manière suivante :
+
 1.  **Segmentation temporelle :** Les vidéos brutes sont découpées en segments de 10 minutes pour correspondre aux intervalles standards d'analyse de trafic.
 2.  **Inférence et détection :** Le modèle YOLOv8 traite les trames vidéo avec un seuil de confiance de détection fixé à $0.50$.
 3.  **Classification catégorielle :** Les objets détectés sont classés selon trois classes de véhicules : *Standard Car*, *Electric Vehicle*, et *Motorcycle*.
@@ -196,6 +200,7 @@ Ce pipeline de vision par ordinateur fonctionne de la manière suivante :
 Malgré l'efficacité de l'architecture YOLOv8 pour la détection automatique, la phase d'audit qualité des données a mis en évidence un biais de classification systématique lors de l'analyse des flux de véhicules particuliers. En comparant les résultats de l'extraction automatisée à un comptage manuel de référence effectué sur 3 heures de vidéo, nous avons identifié une **surestimation constante de la classe des voitures de l'ordre de +30 %**.
 
 L'analyse d'erreur a révélé que ce biais provenait de deux facteurs :
+
 *   La confusion visuelle induite par les longs véhicules (SUV familiaux VinFast de type VF8 et VF9, mini-fourgonnettes et véhicules de livraison légers) qui, sous certains angles de vue inclinés, étaient fragmentés par l'algorithme en plusieurs boîtes de délimitation distinctes.
 *   L'occlusion partielle transitoire causée par le passage de bus électriques, qui masquaient puis révélaient des véhicules adjacents, entraînant une réinitialisation de l'identifiant du véhicule.
 
@@ -208,6 +213,7 @@ L'analyse des données corrigées a permis de définir les caractéristiques de 
 
 #### Baseline Midday (12:00 PM)
 Cette période caractérise un régime de trafic régulier et modéré, avec un débit moyen observé de **124,4 véhicules par intervalle de 10 minutes**. La composition de la flotte se répartit comme suit :
+
 *   *Motorcycles* : 63,6 unités (soit 51,1 % de la flotte).
 *   *Electric Vehicles (EV)* : 32,5 unités (soit 26,1 %).
 *   *Standard Cars (ICE)* : 28,3 unités (soit 22,8 %).
@@ -216,6 +222,7 @@ Le trafic à midi est fluide, et la vitesse moyenne des véhicules avoisine les 
 
 #### Baseline Rush Hour (5:00 PM)
 Le pic de fin d'après-midi se caractérise par une augmentation de **72 % du volume global**, atteignant un débit moyen de **214,5 véhicules par intervalle de 10 minutes**. La structure de la flotte se modifie significativement :
+
 *   *Motorcycles* : 136,4 unités (soit 63,6 % de la flotte).
 *   *Electric Vehicles (EV)* : 45,5 unités (soit 21,2 %).
 *   *Standard Cars (ICE)* : 32,6 unités (soit 15,2 %).
@@ -228,6 +235,7 @@ Le volume élevé de deux-roues motorisés (63,6 %) sature l'espace de circulati
 L'analyse des données de collecte a mis en lumière un comportement de trafic singulier lors des périodes de congés officiels (notamment les journées du 30 avril et du 1er mai, correspondant aux vacances nationales au Vietnam). Nous avons qualifié ce phénomène de **"Holiday Reversal"** (inversion de vacances).
 
 Alors que les jours de semaine classiques présentent une domination nette des deux-roues motorisés (51 % à 64 % de la flotte), les jours fériés révèlent une structure inversée, dite "Car-Locked" (voir Figure D.3, Annexe D). Les observations enregistrées à 12h00 lors des vacances indiquent :
+
 *   Une baisse de la proportion de motos, qui chute à **34,6 %** (soit 42,25 unités).
 *   Une augmentation importante de la part des véhicules électriques, qui grimpe à **43,3 %** (soit 53,00 unités).
 *   Une part stable de voitures thermiques à **19,4 %** (soit 23,75 unités).
@@ -312,6 +320,7 @@ En segmentant ainsi notre apprentissage en trois modèles XGBoost dédiés (Sec,
 Le progiciel SUMO modélise les réseaux de transport sous forme de réseaux logiques basés sur la théorie des graphes orientés. Dans ce formalisme, chaque intersection physique est représentée par un nœud unique doté d'une géométrie polygonale décrivant sa surface de jonction. Les tronçons routiers reliant les nœuds sont modélisés par des arêtes, subdivisées en une ou plusieurs voies de circulation (*lanes*).
 
 Chaque voie possède des attributs géométriques et comportementaux stricts :
+
 *   Une polyligne tridimensionnelle décrivant son axe central.
 *   Une largeur constante (généralement fixée à 3,2 mètres pour les voies urbaines standards).
 *   Une liste de classes de véhicules autorisées (ex: `passenger`, `taxi`, `motorcycle`, `bus`, `delivery`).
@@ -346,6 +355,7 @@ où $\eta$ est une variable aléatoire distribuée uniformément sur l'intervall
 La conversion de données topologiques brutes issues d'OpenStreetMap (OSM) en réseaux de simulation exploitables par SUMO nécessite l'exécution d'un pipeline de traitement rigoureux via l'outil `netconvert`. 
 
 Ce pipeline effectue les opérations de nettoyage suivantes :
+
 1.  **Uniformisation géométrique :** Re-projection des coordonnées géographiques sphériques (WGS84) vers un système de coordonnées cartésiennes planes UTM (Universal Transverse Mercator), permettant d'effectuer les calculs de distance et de vitesse en mètres et mètres par seconde.
 2.  **Simplification des nœuds :** Fusion des grappes d'intersections complexes et des micro-carrefours d'OSM en nœuds logiques uniques. Cette opération élimine les segments de voirie artificiellement courts (inférieurs à 5 mètres) qui s'avèrent impossibles à gérer pour les modèles cinématiques de car-following.
 3.  **Nettoyage des connexions redondantes :** Suppression des voies d'accès et des bretelles d'insertion non connectées ou mal définies dans la base de données source, évitant la création de trajectoires conflictuelles anormales.
@@ -388,10 +398,12 @@ L'évaluation de la résilience et des émissions de carbone au sein d'un résea
 ### Formalisation matricielle du réseau viaire
 
 Pour modéliser mathématiquement le réseau routier, nous le représentons sous la forme d'un graphe orienté et pondéré $G = (V, E)$, où :
+
 *   $V = \{v_1, v_2, \dots, v_n\}$ désigne l'ensemble des nœuds ($n = |V|$), représentant les intersections physiques du réseau.
 *   $E \subset V \times V$ désigne l'ensemble des arêtes orientées ($m = |E|$), modélisant les tronçons routiers à sens unique reliant ces intersections.
 
 La connectivité et l'impédance physique du réseau sont codées dans la **matrice d'adjacence pondérée** $A \in \mathbb{R}^{n \times n}$. Contrairement aux graphes non orientés simples où la matrice d'adjacence est symétrique et binaire, la représentation réaliste d'un réseau urbain impose une double complexité :
+
 1.  **Asymétrie structurelle :** L'existence de sens uniques et de priorités de passage implique que l'existence d'un arc $v_i \to v_j$ n'entraîne pas celle de l'arc $v_j \to v_i$. Ainsi, $A_{ij} \neq A_{ji}$.
 2.  **Pondération physique :** Chaque coefficient $A_{ij}$ n'indique pas une simple connexion, mais est défini comme une fonction de la capacité physique du tronçon routier. Pour un tronçon reliant le nœud $i$ au nœud $j$, la pondération est donnée par :
     $$A_{ij} = \begin{cases} \frac{L_{ij} \cdot C_{ij}}{W_{ij}} & \text{si } (v_i, v_j) \in E \\ 0 & \text{sinon} \end{cases}$$
@@ -435,6 +447,7 @@ Le spectre d'une matrice, noté $\sigma(A)$, regroupe ses valeurs propres comple
 $$\rho(A) = \max_{\lambda \in \sigma(A)} |\lambda|$$
 
 Puisque les coefficients $A_{ij}$ de notre matrice d'adjacence pondérée sont strictement non-négatifs ($A_{ij} \ge 0$), nous pouvons appliquer le **théorème de Perron-Frobenius** si le graphe est fortement connexe (garanti par l'extraction des SCC) :
+
 1.  Le rayon spectral $\rho(A)$ est lui-même une valeur propre de $A$, simple et strictement positive ($\rho(A) > 0$).
 2.  Il existe un vecteur propre à droite $v_{PF}$ associé à $\rho(A)$ dont toutes les composantes sont strictement positives ($v_{PF} > 0$), appelé vecteur de Perron-Frobenius.
 3.  Cette valeur propre domine toutes les autres : $\forall \lambda \in \sigma(A) \setminus \{\rho(A)\}, \ |\lambda| \le \rho(A)$.
@@ -456,9 +469,11 @@ En ingénierie du trafic, la constante de Kreiss agit comme un **détecteur de n
 ### Les Normes de Hardy $H_2$ et $H_\infty$
 
 En modélisant le réseau routier comme un filtre dynamique linéaire entrée-sortie (où l'entrée est le flux d'injection des véhicules et la sortie la congestion), nous évaluons sa robustesse via les normes $H_2$ et $H_\infty$ de sa fonction de transfert $T(z) = (zI - A)^{-1}$ :
+
 1.  **La Norme $H_\infty$ (Pire scénario d'amplification)** :
     $$\|T\|_{H_\infty} = \sup_{|z| > 1} \left\| (zI - A)^{-1} \right\|_2 = \sup_{\theta \in [0, 2\pi]} \sigma_{max}\left( (e^{i\theta}I - A)^{-1} \right)$$
     Elle caractérise le niveau de pollution "de base" inévitable dû à la géométrie de la ville (gain maximal stabilisé).
+
 2.  **La Norme $H_2$ (Énergie de perturbation stockée)** :
     $$\|T\|_{H_2} = \left( \sum_{k=0}^{\infty} \left\| A^k \right\|_F^2 \right)^{1/2}$$
     Elle caractérise la **mémoire temporelle de la congestion** : le temps que met la pollution à s'évacuer après un pic d'affluence.
@@ -472,6 +487,7 @@ Dans le cadre de l'optimisation des réseaux urbains, une question centrale se p
 Pour répondre à cela, nous modélisons les modifications d'infrastructure comme des perturbations de la matrice d'adjacence pondérée $A$ sous la forme :
 $$\delta A = \epsilon B$$
 où :
+
 *   $\epsilon \in \mathbb{R}^+$ est un paramètre d'échelle infinitésimal régissant l'intensité globale de la modification.
 *   $B \in \mathbb{R}^{n \times n}$ désigne la **matrice de perturbation (ou matrice de contrôle topologique)**. Chaque élément $B_{ij}$ quantifie l'action d'aménagement local sur le tronçon orienté reliant le nœud $i$ au nœud $j$ :
     - $B_{ij} > 0$ correspond à une expansion de capacité physique (e.g., ajout d'une voie de circulation, recalibrage géométrique d'une intersection) ou à des aménagements fluidifiant l'écoulement (e.g., instauration d'une onde verte de feux tricolores, hausse de la vitesse limite).
@@ -483,6 +499,7 @@ En s'appuyant sur la **théorie des perturbations de Kato** (Kato, 1995), nous p
 1.  **Dérivée Première (Sensibilité linéaire)** :
     $$\lambda_i^{(1)} = \frac{w_i^T B v_i}{w_i^T v_i}$$
     où $v_i$ et $w_i$ désignent respectivement les vecteurs propres à droite et à gauche associés à $\lambda_i$.
+
 2.  **Dérivée Seconde (Couplage non-linéaire du second ordre)** :
     $$\lambda_i^{(2)} = w_i^T B S_i B v_i$$
     Où $S_i$ représente la résolvante réduite définie par $S_i = \lim_{z \to \lambda_i} (zI - A)^{-1}(I - P_i)$, avec $P_i = \frac{v_i w_i^T}{w_i^T v_i}$ le projecteur spectral associé. Cette résolvante modélise la propagation indirecte de la perturbation à travers les chemins alternatifs du graphe.
@@ -493,12 +510,15 @@ $$B^* = \arg\min_{B \in \mathcal{B}} \rho(A + \epsilon B) \approx \arg\min_{B \i
 où $\lambda_{PF}$, $v_{PF}$ et $w_{PF}$ désignent les valeurs et vecteurs propres dominants de Perron-Frobenius associés au graphe initial stable.
 
 L'espace des contrôles admissibles $\mathcal{B}$ est structuré par des contraintes opérationnelles réelles :
+
 1.  **Contrainte budgétaire et d'échelle (Sparsité et volume d'action)** :
     $$\sum_{(i,j) \in E} |B_{ij}| \le C_{budget}$$
     Le coût total des travaux de restructuration ou d'ajout de capacité est borné supérieurement.
+
 2.  **Limites géométriques locales** :
     $$B_{ij} \le B_{max} \quad \forall (i,j) \in E$$
     La largeur de voirie et le foncier urbain limitent physiquement le nombre maximal de voies qu'il est possible d'ajouter sur un tronçon donné.
+
 3.  **Contraintes patrimoniales et géographiques (Sparsité stricte)** :
     $$B_{ij} = 0 \quad \forall (i,j) \notin E_{modifiable}$$
     Certaines zones (hyper-centres historiques protégés, ponts critiques) ne peuvent subir de modifications géométriques, imposant des coefficients nuls dans la matrice de contrôle.
@@ -578,10 +598,12 @@ Pour s'affranchir définitivement du coût computationnel prohibitif des simulat
 Le métamodèle d'IA vise à apprendre la relation de transfert complexe entre la morphologie d'une ville, la charge dynamique imposée et ses conséquences environnementales :
 $$f : \mathcal{X} \to \mathcal{Y}$$
 où :
+
 *   $\mathcal{X}$ est l'espace des caractéristiques structurelles et spectrales d'une ville (43 descripteurs).
 *   $\mathcal{Y}$ représente les émissions de $CO_2$ ou la vitesse moyenne globale générées par la simulation SUMO de référence (Ground Truth).
 
 L'acquisition et la consolidation du jeu de données d'apprentissage ont suivi un protocole rigoureux d'automatisation :
+
 1. **Sélection et filtrage automatique des simulations** : Un script parcourt de manière récursive les répertoires d'output. Il trie et ne conserve que les **19 simulations complètes et uniques** (les simulations partielles ou interrompues affichant des émissions nulles ou des fichiers de métadonnées absents étant écartées).
 2. **Extraction granulaire des données d'agents** : Les fichiers XML `tripinfo.xml` issus de chaque simulation SUMO de référence sont lus à l'aide d'un parseur événementiel à mémoire constante (`xml.etree.ElementTree.iterparse`). Pour chaque agent, l'algorithme extrait son type de motorisation et sa durée de transit exacte.
 3. **Découplage fin des taux d'électrification (EV)** : Pour refléter la réalité des politiques de décarbonation, le modèle n'utilise pas de taux d'EV global uniforme, mais segmente l'électrification selon quatre taux catégoriels indépendants :
@@ -593,6 +615,7 @@ L'acquisition et la consolidation du jeu de données d'apprentissage ont suivi u
 ### Répartition Automatique de la Flotte par Région (Presets Régionaux)
 
 Afin de simplifier l'utilisation du métamodèle et de fiabiliser les prédictions, le système intègre des distributions de flotte et des taux d'électrification par défaut calibrés par région géographique d'origine (Europe, Asie, Afrique, Amérique du Nord, Amérique du Sud, Océanie). Ce paramétrage automatique sous le capot évite à l'utilisateur d'avoir à spécifier manuellement des données de répartition complexes, tout en reflétant fidèlement les disparités géographiques réelles :
+
 *   **Europe & Amérique du Nord** : Domination des voitures particulières ($80\ %$) et des véhicules utilitaires, faible proportion de deux-roues ($5\ %$). Les bus représentent environ $5\ %$ de la flotte.
 *   **Asie du Sud-Est** : Prédominance massive des deux-roues motorisés ($60\ %$) et des transports collectifs ($10\ %$), avec une dynamique d'électrification rapide des bus urbains portée par l'écosystème local.
 *   **Afrique** : Part importante de véhicules de livraison/camions et de minibus de transport collectif, avec un taux de pénétration des EV naissant ($1-2\ %$).
@@ -602,6 +625,7 @@ Afin de simplifier l'utilisation du métamodèle et de fiabiliser les prédictio
 Les émissions de $CO_2$, qui constituent le but principal de notre métamodèle d'intelligence artificielle, sont estimées de manière directe à partir de notre espace de caractéristiques de dimension 43. 
 
 Plutôt que d'utiliser un modèle en cascade complexe (qui estimerait d'abord la vitesse moyenne sur le réseau pour ensuite en déduire les émissions), notre framework réalise un entraînement direct et optimal :
+
 * **Modèle d'Émissions de CO2** (`xgb_co2_predictor.joblib`) : Estime directement la masse totale d'émissions de $CO_2$ (en kg) rejetée sur la voirie à partir des 43 caractéristiques structurelles, géométriques, spectrales et de charge de trafic.
 
 Cette architecture directe supprime les dépendances intermédiaires, évitant ainsi la propagation d'erreurs d'estimation d'une étape à l'autre et garantissant une robustesse accrue.
@@ -614,6 +638,7 @@ Voici la description exhaustive, l'utilité opérationnelle et la justification 
 
 #### Paramètres de Trafic & Charge (6 features)
 Ces features mesurent la demande cinématique brute imposée au réseau urbain lors du scénario d'étude. Elles définissent le terme source de la congestion.
+
 *   **`nb_total_veh` (Nombre total de véhicules)** : Nombre cumulé de véhicules injectés dans le réseau sur la durée de la simulation. *Utilité* : C'est le descripteur d'échelle principal, directement corrélé au volume de émissions de base.
 *   **`duree_sim_s` (Durée de simulation, en secondes)** : Temps d'exposition du réseau à la charge de trafic (typiquement 3600 secondes). *Utilité* : Permet de normaliser les flux temporels et de distinguer les simulations à court terme des charges continues.
 *   **`nb_voitures` (Nombre de voitures particulières)** : Nombre absolu de voitures de tourisme (thermiques et électriques). *Utilité* : Les voitures particulières forment le socle de la flotte de base dans la plupart des réseaux.
@@ -623,6 +648,7 @@ Ces features mesurent la demande cinématique brute imposée au réseau urbain l
 
 #### Taux d'Électrification Découplés (4 features)
 Ces descripteurs découplent la transition de flotte par catégorie de véhicules, permettant d'évaluer des politiques environnementales ciblées. Les véhicules électriques ayant des émissions de $CO_2$ directes nulles dans SUMO, ces features agissent comme des modérateurs d'émissions.
+
 *   **`pct_car_ev` (Taux d'électrification des voitures)** : Pourcentage de voitures électriques ($0$ à $100\ %$). *Utilité* : Mesure l'impact de l'adoption individuelle de l'électromobilité.
 *   **`pct_bus_ev` (Taux d'électrification de la flotte de bus)** : Pourcentage de bus électriques ($0$ à $100\ %$). *Utilité* : Évalue l'impact de l'électrification des flottes publiques (ex. réseau VinBus).
 *   **`pct_truck_ev` (Taux d'électrification des camions)** : Pourcentage de camions électriques ($0$ à $100\ %$). *Utilité* : Simule la décarbonation de la logistique urbaine du dernier kilomètre.
@@ -630,6 +656,7 @@ Ces descripteurs découplent la transition de flotte par catégorie de véhicule
 
 #### Caractéristiques Topologiques Générales (9 features)
 Ces features décrivent la structure géométrique et la squelettisation brute du réseau routier à partir des fichiers XML compilés par netconvert.
+
 *   **`nodes` (Nœuds)** : Nombre total d'intersections du réseau ($|V|$). *Utilité* : Indique la taille et la complexité brute de la carte urbaine.
 *   **`edges` (Arêtes)** : Nombre total de segments de voirie orientés ($|E|$). *Utilité* : Mesure la longueur totale et la capacité de stockage géométrique des voies de la ville.
 *   **`density` (Densité du réseau)** : Ratio du nombre d'arêtes par unité de surface ($|E|/\text{Area}$). *Utilité* : Distingue les réseaux aérés et suburbains (faible densité) des hyper-centres urbains denses (forte densité).
@@ -642,6 +669,7 @@ Ces features décrivent la structure géométrique et la squelettisation brute d
 
 #### Propriétés Spectrales Non-Pondérées (5 features)
 Ces descripteurs mathématiques décrivent la stabilité dynamique intrinsèque du réseau routier modélisé sous forme de graphe orienté asymétrique, sans tenir compte des longueurs physiques des rues.
+
 *   **`non_normalness` (Indice de non-normalité)** : Norme de Frobenius du commutateur de la matrice d'adjacence non pondérée, $\|AA^T - A^TA\|_F$. *Utilité* : C'est le prédicteur des phénomènes d'amplification transitoire (les ondes de choc et congestions diffuses inattendues provoquées par une perturbation locale).
 *   **`spectral_radius` (Rayon spectral, $\rho$)** : Module de la valeur propre dominante de la matrice d'adjacence non pondérée. *Utilité* : Caractérise la capacité globale de transit et la force des axes structurants (corridors).
 *   **`sigma_max` (Valeur singulière maximale, $\sigma_{max}$)** : Norme spectrale induite de la matrice d'adjacence non pondérée. *Utilité* : Représente le gain d'amplification maximal théorique du réseau dans le pire scénario de charge de trafic.
@@ -650,17 +678,20 @@ Ces descripteurs mathématiques décrivent la stabilité dynamique intrinsèque 
 
 #### Espace Multidimensionnel Top 5 (10 features)
 Pour capturer la structure hiérarchique complexe et la modularité des réseaux (les quartiers, les barrières géographiques comme les fleuves, et la redondance locale), nous avons élargi l'espace spectral en intégrant les 5 premières valeurs propres et valeurs singulières.
+
 *   **`lambda_1`, `lambda_2`, `lambda_3`, `lambda_4`, `lambda_5`** : Magnitudes des 5 premières valeurs propres dominantes ordonnées de la matrice d'adjacence. *Utilité* : La répartition de ces valeurs propres contient des informations géométriques sur la structure communautaire du réseau (spectral gap). Par exemple, un grand écart $\lambda_1 - \lambda_2$ indique un réseau homogène, tandis qu'un faible écart révèle des goulots d'étranglement majeurs (ponts séparant deux zones de la ville).
 *   **`sigma_1`, `sigma_2`, `sigma_3`, `sigma_4`, `sigma_5`** : Les 5 plus grandes valeurs singulières ordonnées de la matrice d'adjacence. *Utilité* : Si les premières valeurs singulières sont très proches ($\sigma_1 \approx \sigma_2 \approx \sigma_3$), le réseau dispose de plusieurs itinéraires alternatifs orthogonaux de capacités similaires (haute redondance). Si $\sigma_1 \gg \sigma_2$, le réseau est monocentrique et vulnérable au blocage complet de son axe unique.
 
 #### Propriétés Spectrales Pondérées (Physiques & Capacitives) (3 features)
 Ces features intègrent l'impédance géométrique réelle de la voirie (la longueur de la rue $L$, sa vitesse autorisée $W$, et son nombre de voies $C$) au sein de la matrice d'adjacence pondérée $A_{ij} = \frac{L_{ij} \cdot C_{ij}}{W_{ij}}$.
+
 *   **`spectral_radius_weighted` (Rayon spectral pondéré)** : Rayon spectral de la matrice pondérée. *Utilité* : Mesure la capacité de transport physique réelle du réseau, en tenant compte de la géométrie capacitive.
 *   **`sigma_max_weighted` (Valeur singulière maximale pondérée)** : Plus grande valeur singulière de la matrice pondérée. *Utilité* : C'est le descripteur spectral le plus important pour la prédiction de $CO_2$ (voir Section 6.6), car il lie l'amplification dynamique aux capacités de stockage et de vitesse réelles de la voirie.
 *   **`h2_norm_weighted` (Norme $H_2$ pondérée)** : Norme de Hardy $H_2$ de la matrice pondérée. *Utilité* : Quantifie la rétention de congestion en secondes réelles de temps de parcours perdu pour l'ensemble des conducteurs.
 
 #### Origine Géographique (Encodage One-Hot) (6 features)
 Ces variables catégorielles encodent l'origine continentale du réseau routier pour servir de proxy aux comportements de conduite locaux et aux distributions typiques de flotte par défaut :
+
 *   **`origin_Europe`** : Caractérise les réseaux radiaux organiques (ex. Paris, Versailles).
 *   **`origin_Asia_Middle_East`** : Caractérise les mégapoles denses à trafic mixte (ex. Hanoï, Dubaï).
 *   **`origin_Africa`** : Caractérise les réseaux en développement rapide (ex. Nairobi, Casablanca).
@@ -693,6 +724,7 @@ Le métamodèle direct a été entraîné sur la base consolidée des 19 simulat
 | **MLP Regressor (Réseau de Neurones)** | 194 716,32 | 141 992,69 | -645,78 % |
 
 #### Analyse critique des résultats :
+
 * **XGBoost (Direct)** : Il surclasse largement les autres approches avec un $R^2$ de $95,03\ \%$. La prédiction directe à partir des descripteurs spectraux et physiques permet de capter la non-linéarité des émissions carbone sans avoir besoin d'ajustements intermédiaires.
 * **Random Forest** : Bien que robuste, sa nature de moyennage (bagging) atténue les pics non linéaires de pollution survenant lors de congestions géométriques brutales, limitant son score à $79,56\ \%$.
 * **MLP Regressor** : Subit un échec complet en validation croisée ($R^2 = -645,78\ %$). Ce comportement s'explique par la taille limitée de notre jeu de données (19 points de simulations complètes à grande échelle). Les réseaux de neurones profonds exigent des milliers d'échantillons pour converger sans sur-apprentissage massif.
@@ -745,6 +777,7 @@ Si le profil spectral de Nairobi se révèle géométriquement proche de Marseil
 Le complexe résidentiel et commercial de Vinhomes Ocean Park (VHOP), situé à la périphérie Est de la métropole de Hanoï, constitue une opportunité d'étude unique pour analyser la pénétration à grande échelle de l'électromobilité en milieu urbain hyper-dense. Notre recherche se focalise spécifiquement sur le corridor de l'avenue Sao Bien, un axe routier bidirectionnel structurant qui dessert l'entrée principale du centre commercial *Vincom Mega Mall*. 
 
 Le site d'étude concentre deux infrastructures de service contiguës situées sur une voie latérale de desserte commerciale à faible capacité (largeur de voie de 3,5 mètres, limitée à deux voies de circulation unidirectionnelle après insertion depuis l'avenue principale) :
+
 1.  **Une zone d'attente de taxis (GSM Taxi Waiting Zone) :** Positionnée immédiatement en amont du centre commercial, disposant de 16 places de stockage organisées en stationnement parallèle le long de la chaussée.
 2.  **Le Hub de recharge ultra-rapide VinFast (V-Green Super-fast Charging Hub) :** Situé à environ 75 mètres après l'intersection d'entrée, configuré avec 12 emplacements de recharge en épi à 135 degrés par rapport au sens de circulation de la voie de service (voir Figure D.2, Annexe D). Cette géométrie spécifique impose aux véhicules un recul à 90 degrés pour s'extraire de la borne de recharge, créant un blocage temporaire complet de la voie de circulation adjacente lors de chaque manœuvre de départ.
 
@@ -771,12 +804,16 @@ Selon les spécifications techniques de VinFast et de l'opérateur de recharge V
 Pour intégrer cette variabilité au sein du simulateur SUMO, nous avons développé un **Modèle de Temps d'Arrêt Stochastique** basé sur une loi normale tronquée. La durée d'arrêt $d$ d'un véhicule électrique ciblé pour une session de recharge suit la loi :
 $$d \sim \mathcal{N}(\mu, \sigma^2)$$
 calibrée selon quatre profils opérationnels d'encombrement du hub issus de nos observations :
+
 *   **Profil Léger (Light) :** Modélise des recharges d'appoint rapides.
     $$\mu = 1050 \text{ s } (17.5 \text{ min}), \quad \sigma = 225 \text{ s } (3.75 \text{ min})$$
+
 *   **Profil Modéré (Moderate) :** Calibré sur le benchmark standard VinFast.
     $$\mu = 2100 \text{ s } (35 \text{ min}), \quad \sigma = 300 \text{ s } (5 \text{ min})$$
+
 *   **Profil Lourd (Heavy) :** Modélise les sessions de recharge complètes ou les ralentissements dus au partage de puissance dynamique (*power-sharing*) entre bornes adjacentes.
     $$\mu = 3600 \text{ s } (60 \text{ min}), \quad \sigma = 450 \text{ s } (7.5 \text{ min})$$
+
 *   **Profil Critique (Critical) :** Représente les situations de saturation sévère et le comportement d'indiscipline des usagers ("overstaying"), où les véhicules restent connectés ou stationnés après la fin effective de leur cycle de charge.
     $$\mu = 5400 \text{ s } (90 \text{ min}), \quad \sigma = 900 \text{ s } (15 \text{ min})$$
 
@@ -786,6 +823,7 @@ Les simulateurs de trafic microscopiques démarrent classiquement dans un état 
 Pour résoudre ce verrou de fidélité, nous avons conçu un algorithme d'initialisation dynamique par **"Warm-Start" (démarrage à chaud)**. À l'instant $t=0$, avant l'injection du premier véhicule actif de la simulation, le hub est pré-peuplé stochastiquement avec des **véhicules fantômes** (*ghost vehicles*) occupant un nombre prédéterminé de bornes de recharge. 
 
 Le nombre de bornes occupées à l'initialisation est calibré selon le niveau de charge du scénario :
+
 *   *Scénarios fluides / creux (Midday) :* 7 à 9 slots occupés stochastiquement (taux d'occupation initial de 58 % à 75 %).
 *   *Scénarios de pointe (Rush Hour / Holiday) :* 11 à 12 slots occupés (taux d'occupation initial de 91 % à 100 %).
 
@@ -801,6 +839,7 @@ Ainsi, dès la première seconde de la simulation physique, les bornes de rechar
 Pour calibrer le jumeau numérique, nous exploitons les comptages de trafic issus de notre campagne de mesures vidéo par vision artificielle (YOLOv8) sur l'avenue Sao Bien. Le jeu de données consolidé comporte 72 enregistrements unitaires de 10 minutes, couvrant différentes journées et tranches horaires entre le 14 avril et le 7 mai 2026.
 
 Dans notre formalisation des flux cinématiques et environnementaux, **les bus de transport en commun ont été systématiquement exclus des statistiques de composition et des temps d'attente du hub**. Cette décision méthodologique s'appuie sur deux fondements scientifiques :
+
 1.  **Indépendance fonctionnelle :** Les bus électriques circulants (flotte *VinBus*) opèrent sur des itinéraires fixes et rigides avec des fréquences déterminées (2.0 à 3.0 passages par intervalle de 10 minutes en moyenne). Ils ne s'insèrent jamais dans le hub de recharge des véhicules légers, disposant de leurs propres stations de charge dédiées au dépôt principal.
 2.  **Distorsion statistique :** Intégrer les bus dans les calculs de répartition globale sous-estimerait l'importance relative de la flotte de voitures particulières et de taxis, qui constitue 100 % de la demande physique pesant sur le hub de recharge de Sao Bien.
 
@@ -809,6 +848,7 @@ Le traitement statistique des données réelles a permis d'isoler trois profils 
 
 ##### Le Profil de Ligne de Base (Regular Midday Baseline)
 Ce profil, calculé à partir de 58 observations stables lors des heures creuses de la mi-journée (11h00 - 13h00) hors jours fériés, caractérise un écoulement fluide à volume modéré :
+
 *   **Volume moyen total (excluant les bus) :** **134,10 véhicules par tranche de 10 minutes**.
 *   **Répartition modale :**
     *   *Motorcycles (deux-roues) :* **67,97 unités** (**50,7 %**). Le mode deux-roues reste majoritaire, reflétant la structure classique des déplacements quotidiens à Hanoï.
@@ -817,6 +857,7 @@ Ce profil, calculé à partir de 58 observations stables lors des heures creuses
 
 ##### Le Profil d'Heure de Pointe (Regular Evening Peak)
 Ce profil modélise la surpression cinématique observée en fin de journée (17h00 - 18h00), marquée par le retour des travailleurs et la convergence vers les pôles de restauration du centre commercial :
+
 *   **Volume moyen total (excluant les bus) :** **227,67 véhicules par tranche de 10 minutes** (soit une augmentation de **70 %** du flux par rapport à la baseline).
 *   **Répartition modale :**
     *   *Motorcycles (deux-roues) :* **143,06 unités** (**62,8 %**). La part des deux-roues s'accroît significativement, exacerbant le phénomène de friction latérale.
@@ -827,6 +868,7 @@ Ce profil modélise la surpression cinématique observée en fin de journée (17
 Les observations menées lors des journées nationales chômées du 30 avril et du 1er mai ont révélé une anomalie comportementale majeure. Contrairement aux modèles classiques qui prévoient une simple homothétie des volumes, nous avons observé une **inversion modale structurelle complète (Holiday Reversal)**.
 
 Le volume de trafic total global diminue légèrement pour atteindre **117,17 véhicules par tranche de 10 minutes** en moyenne (en raison du départ de la population de la ville), mais la composition de la flotte subit une mutation drastique :
+
 *   *Motorcycles (deux-roues) :* **46,50 unités** (**39,7 %**). On observe une baisse de plus de 10 points de pourcentage de la part des motos par rapport au midi normal.
 *   *Standard Cars (ICE) :* **23,83 unités** (**20,3 %**).
 *   *Electric Vehicles (EV) :* **46,83 unités** (**40,0 %**). 
@@ -846,6 +888,7 @@ Pour le hub de recharge, ce profil représente un cas d'étude critique de satur
 
 ##### La Période de Transition Pré-Vacances (27 - 29 Avril)
 Les mesures enregistrées durant les trois jours précédant les fêtes (27, 28 et 29 avril) décrivent un régime transitoire de montée en charge. Le volume moyen s'établit à **123,83 véhicules par tranche de 10 minutes**, avec une répartition intermédiaire :
+
 *   *Motorcycles :* **58,00 unités** (**46,8 %**).
 *   *Standard Cars (ICE) :* **32,33 unités** (**26,1 %**).
 *   *Electric Vehicles :* **33,50 unités** (**27,1 %**).
@@ -865,15 +908,18 @@ Modélise la configuration du "Holiday Reversal" (taux d'adoption EV à 75 % au 
 
 #### Scénarios S3a & S3b : Horizon 2028 (60 % d'occupation urbaine)
 Ces scénarios projettent une augmentation globale des volumes de trafic (x2.0 pour le midi S3a, x3.2 pour l'heure de pointe S3b) et un taux d'adoption EV de 80 % à 85 %. 
+
 *   **Résultats :** Dans le scénario S3a, la file d'attente au hub commence à déborder de la voie de service pour impacter la voie lente de l'avenue Sao Bien. 
 *   Dans le scénario de pointe S3b, le goulot d'étranglement devient structurel : le temps d'attente moyen pour un véhicule électrique avant d'accéder à une borne s'élève à **18,4 minutes**. La congestion sur l'avenue Sao Bien remonte sur plus de 150 mètres en amont de l'intersection d'entrée.
 
 #### Scénarios S4a & S4b : Horizon 2030 (Saturation à 80 % d'occupation)
 Ce scénario modélise le stress-test limite avec une multiplication par 4.0 du volume de trafic global d'heure de pointe et une transition à 100 % vers l'électromobilité pour les véhicules légers.
+
 *   **Résultats (S4b) :** Le système atteint son point de rupture physique complète. La voie de service est entièrement paralysée par une file d'attente ininterrompue de taxis et de véhicules électriques. Les manœuvres d'extraction des bornes (recul à 135 degrés) bloquent les flux durant plusieurs minutes. Ce blocage local se propage par effet cascade (gridlock) sur l'intégralité du carrefour principal de l'avenue Sao Bien. Le temps d'attente moyen au hub s'envole à **45,2 minutes**, et la vitesse moyenne sur le réseau s'effondre à **4,2 km/h** (vitesse équivalente à de la marche à pied), confirmant la paralysie fonctionnelle de l'infrastructure.
 
 #### Scénario S5 : La politique de mitigation par expansion physique
 Face au constat de rupture du scénario S4b, nous avons testé l'impact d'une décision d'aménagement urbain : l'expansion du hub de recharge à **20 slots (+8 bornes de 150 kW DC)** et la création d'une voie d'insertion dédiée pour la zone d'attente des taxis (voir Figure D.4, Annexe D).
+
 *   **Résultats :** L'évaluation sur le jumeau numérique SUMO démontre l'efficacité de cette politique de mitigation. L'augmentation de la capacité de traitement résorbe la file d'attente sur la voie de service. Le temps d'attente moyen pour accéder à une borne de recharge chute de 45,2 minutes à **6,8 minutes** (-85 %). Les manœuvres de sortie en épi, bien que toujours gênantes, ne bloquent plus le flux principal grâce à la voie d'évitement supplémentaire. La vitesse moyenne globale sur le corridor Sao Bien remonte à **21,5 km/h**, rétablissant un niveau de service (Level of Service - LOS) acceptable pour la communauté.
 
 Ce cas d'étude démontre de manière empirique l'utilité du jumeau numérique microscopique comme outil d'aide à la décision publique pour planifier la transition énergétique des réseaux de transport urbain.
@@ -886,6 +932,7 @@ Ce cas d'étude démontre de manière empirique l'utilité du jumeau numérique 
 ### Conception d'un framework de simulation multi-ville agnostique
 
 Pour valider l'indépendance de notre moteur de simulation et sa capacité à traiter des réseaux de complexités variées, nous avons déployé un protocole expérimental global impliquant six réseaux urbains aux caractéristiques contrastées :
+
 *   **Versailles :** Réseau aéré de taille modérée (2 308 nœuds, 9 095 arêtes) caractérisé par une structure géométrique planifiée.
 *   **Paris :** Réseau historique de grande taille (15 735 nœuds, 62 378 arêtes) présentant une structure radiale dense.
 *   **Madrid :** Réseau métropolitain étendu (61 258 nœuds, 214 400 arêtes) mêlant un centre dense et des autoroutes urbaines.
@@ -968,6 +1015,7 @@ D'autre part, nous avons proposé une méthode de rupture basée sur l'intellige
 La complémentarité des deux approches développées dans ce mémoire ouvre la voie à un cadre d'optimisation urbaine hybride (IA-SUMO) alliant la rapidité de l'apprentissage machine et la précision chirurgicale de la simulation physique.
 
 Dans ce schéma opérationnel :
+
 1.  Le modèle prédictif basé sur l'IA (XGBoost) est utilisé en amont pour explorer rapidement de larges espaces de solutions (par exemple, tester des milliers d'implantations géométriques de voirie ou de localisations de hubs de recharge). L'IA évalue chaque configuration en une fraction de seconde, éliminant les scénarios inefficaces et sélectionnant les configurations optimales.
 2.  Les scénarios retenus par le modèle prédictif sont ensuite injectés dans le jumeau numérique microscopique haute-fidélité (SUMO). Cette simulation physique détaillée permet d'affiner l'analyse locale (vérification des files d'attente au mètre près, comportement d'évitement des deux-roues, impact électrique précis, voir les cartes de congestion en Figure D.10, Annexe D).
 
@@ -981,6 +1029,7 @@ Les résultats de ce travail de recherche font l'objet d'une valorisation acadé
 1.  **Première Publication (co-écrite avec VinUniversity) :**
     *   *Titre :* "Microscopic Traffic Flow and Emission Modeling of High-Power Electric Vehicle Charging Infrastructure in Hyper-Dense Master-Planned Communities: The Case of Sao Bien, Vinhomes Ocean Park."
     *   *Contenu :* Présentation du protocole de capture par vision par ordinateur (YOLOv8), de l'architecture du jumeau numérique SUMO localisé, et de l'évaluation des scénarios de densification à Sao Bien.
+
 2.  **Deuxième Publication (co-écrite avec l'École Hexagone) :**
     *   *Titre :* "Topological Graph-Spectral Machine Learning for Real-Time Urban CO2 Emissions Prediction: Applying Kato's Perturbation Theory and Kreiss Constants to Non-Normal Urban Networks."
     *   *Contenu :* Formalisation de la méthode de prédiction spectrale sur graphes non-symétriques, étude de la stabilité via la constante de Kreiss, et évaluation des performances du modèle XGBoost par rapport au simulateur de référence.
@@ -1133,44 +1182,55 @@ Cette annexe compile l'ensemble des résultats numériques issus des 17 simulati
 Cette section rassemble les planches graphiques du jumeau numérique, de la topologie spectrale et du modèle d'apprentissage supervisé.
 
 #### Planches relatives au hub de recharge de Sao Bien (Hanoï)
+
 *   **Figure D.1 : Détection et classification multi-classes via YOLOv8**  
     [Illustration de la vue plongeante du 3ème étage du Vincom Mega Mall montrant les boîtes de délimitation de détection pour les classes *Standard Car*, *Electric Vehicle* et *Motorcycle* avec l'affichage de l'identifiant unique de suivi (tracking)].
+
 *   **Figure D.2 : Géométrie d'accès du Hub de recharge de Sao Bien (Floor 0)**  
     [Plan masse géométrique représentant les 12 places de recharge en épi à 135 degrés le long de la voie de service et la file d'attente de taxis GSM en amont].
+
 *   **Figure D.3 : Profils de charge de trafic et inversion modale (« Holiday Reversal »)**  
     [Histogramme comparatif de la répartition modale de la flotte de véhicules légers en circulation à midi : Semaine classique (dominée par 50.7 % de motos) vs Vacances nationales (dominée par 40.0 % de véhicules électriques et 66.3 % de part électrique sur le total des véhicules à 4 roues)].
 
-    ![](images/traffic_composition_pie-Hanoi.png){width=70%}
+    ![](images/traffic_composition_pie-Hanoi.png)
+
 *   **Figure D.4 : Profils d'évolution temporelle des temps d'attente au hub sous les scénarios S0 à S5**  
     [Graphiques de files d'attente stochastiques montrant l'envolée des temps d'attente à 45.2 minutes sous le scénario critique de saturation S4b, et sa chute spectaculaire à 6.8 minutes sous le scénario de mitigation S5 par expansion physique (+8 slots)].
 
-    ![](images/daily_timeline_by_hour.png){width=80%}
+    ![](images/daily_timeline_by_hour.png)
 
 #### Planches de topologie spectrale et mathématique des réseaux urbains
+
 *   **Figure D.5 : Distribution des spectres des matrices d'adjacence dans le plan complexe**  
     [Nuages de points représentant les valeurs propres complexes ($\lambda_1, \dots, \lambda_n$) des graphes asymétriques pour les villes de Paris, Los Angeles et Hanoï, illustrant la dissymétrie et les structures communautaires].
+
 *   **Figure D.6 : Frontières de pseudospectres et non-normalité**  
     [Contours de la résolvante $\|(zI - A)^{-1}\|_2$ dans le plan complexe pour Marseille, Paris et Los Angeles, mettant en évidence les zones d'amplification transitoire et le calcul graphique de la constante de Kreiss].
 
 #### Planches d'évaluation du modèle d'Intelligence Artificielle
+
 *   **Figure D.7 : Importance relative des 43 descripteurs du modèle XGBoost (Feature Importance)**  
     [Graphique en barres horizontales affichant les coefficients d'importance du modèle final : domination de `nb_total_veh` et `nb_voitures`, suivi des métriques spectrales pondérées `sigma_max_weighted` et `h2_norm_weighted`].
 
-    ![](images/correlation_heatmap.png){width=80%}
+    ![](images/correlation_heatmap.png)
+
 *   **Figure D.8 : Courbes d'apprentissage et de convergence de XGBoost**  
     [Graphique de l'évolution de la fonction de perte (RMSE) sur les sous-ensembles d'entraînement et de validation au cours des itérations d'arbres (boosting rounds), démontrant la stabilité de la convergence sans sur-apprentissage].
+
 *   **Figure D.9 : Diagramme de dispersion (Scatter Plot) IA vs Ground Truth (SUMO)**  
     [Graphique de dispersion comparant les émissions de $CO_2$ prédites par le modèle XGBoost face aux valeurs réelles mesurées dans le simulateur de référence SUMO, avec la ligne de régression $y=x$ et le calcul de l'erreur moyenne de 4.5 %].
 
-    ![](images/co2_vs_spectral_radius.png){width=48%}
-    ![](images/co2_vs_vehicles.png){width=48%}
+    ![](images/co2_vs_spectral_radius.png)
+    ![](images/co2_vs_vehicles.png)
 
 #### Planches de cartographie des congestions et heatmaps de simulation
+
 *   **Figure D.10 : Cartes thermiques (Heatmaps) de congestion spatiale dans le jumeau numérique**  
     [Visualisations SIG colorées des réseaux routiers de Paris, Londres, Los Angeles et Hanoï après une simulation de pointe de 1 heure. Les segments routiers sont colorés du gris foncé (fluide) au rouge écarlate (saturation complète / gridlock)].
 
-    ![](images/paris-heat_map_trafic.png){width=80%}
-    ![](images/paris-heat_map-legend.png){width=35%}
+    ![](images/paris-heat_map_trafic.png)
+    ![](images/paris-heat_map-legend.png)
+
 *   **Figure D.11 : Comparaison des durées informatiques et de l'occupation mémoire RAM**  
     [Diagramme à barres comparant l'occupation de la RAM (de 110 Mo pour Versailles à 18.5 Go pour Hanoï) et le temps de calcul CPU (45 minutes pour SUMO physique à Paris contre 0.2 seconde pour l'inférence XGBoost)].
 
