@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -49,6 +49,17 @@ jobs:
         with:
           name: pandoc-log
           path: pandoc.log
+
+      - name: Push Pandoc Log to repo
+        if: always()
+        run: |
+          if [ -f pandoc.log ]; then
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add pandoc.log
+            git commit -m "chore: upload pandoc log [skip ci]" || echo "No changes to commit"
+            git push
+          fi
 
       - name: Also generate standalone .tex
         run: |
