@@ -13,30 +13,18 @@
 
 **Sous le tutorat de :**  
 
-*   **M. Pierre UZARRALDE (IA)**, Professeur à l'École Hexagone  
+*   ** **, Professeur à l'École Hexagone  
 
 **Co-encadrant de recherche (VinUniversity) :**  
 
 *   **Équipe de recherche Smart Mobility**, VinUniversity (Hanoï, Vietnam)  
 
-*Illustration de couverture : Jumeau Numérique Urbain et Signature Spectrale de Graphe*
+* *
 
 
 \newpage
 
 # REMERCIEMENTS
-
-Je tiens à exprimer ma profonde gratitude à l'ensemble des personnes qui ont contribué au succès de ce travail de recherche et à l'aboutissement de mon cursus de fin d'études.
-
-Tout d'abord, je remercie chaleureusement mon tuteur académique, **M. Pierre Uzarralde**, pour son suivi rigoureux, ses conseils méthodologiques et son exigence scientifique tout au long de la rédaction de ce rapport professionnel.
-
-Mes remerciements s'adressent également aux équipes de recherche en mobilité intelligente de l'Université **VinUniversity** à Hanoï (Vietnam), qui m'ont accueilli lors de mon séjour de recherche et m'ont fourni les moyens matériels et de collecte de données nécessaires à cette étude.
-
-Je remercie particulièrement les groupes **Vingroup**, **VinFast** et **V-Green** pour l'accès aux données opérationnelles du hub de recharge ultra-rapide de Sao Bien (Vinhomes Ocean Park), ainsi que la compagnie **GSM (Green and Smart Mobility)** pour les données relatives à leur flotte de taxis électriques.
-
-Enfin, je remercie l'administration et le corps enseignant de l'**École Hexagone** pour la qualité de l'enseignement dispensé, ainsi que ma famille et mes proches pour leur soutien indéfectible durant cette année académique.
-
-
 \newpage
 
 # RÉSUMÉ & MOTS-CLÉS
