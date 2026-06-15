@@ -374,8 +374,7 @@ L'analyse systématique des réseaux routiers de notre base de données a permis
 
 *Explication physique des variables spectrales du Tableau 2 :*
 *   **non_normalness (Indice de non-normalité) :** Mesure la distance de Schur de la matrice d'adjacence par rapport à une matrice normale. Plus cet indice est élevé, plus le réseau est sensible à des amplifications de congestion transitoires et soudaines.
-*   **spectral_radius (Rayon spectral $
-ho$) :** Module de la valeur propre dominante. Dans notre approche d'impédance, il mesure la résistance globale au transit. Un rayon spectral faible indique que la ville dissipe efficacement ses flux de véhicules.
+*   **spectral_radius (Rayon spectral $\rho$) :** Module de la valeur propre dominante. Dans notre approche d'impédance, il mesure la résistance globale au transit. Un rayon spectral faible indique que la ville dissipe efficacement ses flux de véhicules.
 *   **sigma_max ($\sigma_{max}$) :** Valeur singulière maximale de la matrice d'adjacence, caractérisant le pire des scénarios de gain de flux à court terme.
 *   **h2_norm (Norme $H_2$) :** Énergie cumulée de la réponse impulsionnelle du réseau. En ingénierie de trafic, elle correspond à la "mémoire de la congestion", c'est-à-dire le temps nécessaire à la voirie pour évacuer les embouteillages accumulés lors d'une perturbation.
 *   **kreiss_constant (Constante de Kreiss $K$) :** Borne supérieure de l'amplification transitoire. Elle sert d'indicateur de vulnérabilité structurelle de la ville face à des blocages en cascade (effet domino ou gridlock).
