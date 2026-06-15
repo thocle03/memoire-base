@@ -1,6 +1,10 @@
 Error producing PDF.
-! Missing $ inserted.
-<inserted text> 
-                $
-l.1394 ...x de véhicules. * **sigma_max (\)\sigma
+! LaTeX Error: Unicode character ế (U+1EBF)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2431 ... (Ex. Chiang Mai, Huế, Muscat, Kyoto)}
 
