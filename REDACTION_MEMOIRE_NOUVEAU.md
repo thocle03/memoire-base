@@ -927,7 +927,7 @@ Le tableau ci-dessous récapitule l'intégralité des villes composant notre cor
 *   **Strasbourg** : Réseau insulaire contraint par l'Ill et le Rhin.
 *   **Buenos Aires** : Grande grille orthogonale coloniale espagnole avec de très larges boulevards de transit.
 *   **Queenstown** : Réseau alpin compact contraint par le lac Wakatipu et les montagnes.
-*   **Hue** (Huế) : Réseau de ville impériale vietnamienne, marqué par un fossé défensif et un axe fluvial contraignant.
+*   **Hue** (Hue) : Réseau de ville impériale vietnamienne, marqué par un fossé défensif et un axe fluvial contraignant.
 *   **Hobart** : Réseau estuarien dépendant de ponts critiques traversant la Derwent River.
 
 
