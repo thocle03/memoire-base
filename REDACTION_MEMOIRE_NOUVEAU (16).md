@@ -51,19 +51,17 @@ Enfin, je remercie chaleureusement ma famille et mes proches pour leur soutien i
 # LISTE DES ILLUSTRATIONS
 
 *   **Figure 1 :** Distribution temporelle de la flotte d'autobus publics à Sao Bien (*Chapitre 3, Section 1*).
-*   **Figure 1b :** Structure modale du trafic en période régulière de mi-journée (Regular Midday) (*Chapitre 3, Section 1*).
-*   **Figure 1c :** Structure modale du trafic en heure de pointe de soirée (Evening Rush Hour) (*Chapitre 3, Section 1*).
-*   **Figure 1d :** Répartition modale comparée du fluide de trafic (Midi Régulier vs Holiday Reversal) (*Chapitre 3, Section 1*).
-*   **Figure 1e :** Évolution de la structure modale du trafic selon les périodes (Midi régulier, Transition, Vacances) (*Chapitre 3, Section 1*).
-*   **Figure 1f :** Taux de pénétration des véhicules électriques (EV) au sein de la flotte de quatre roues (voitures thermiques vs électriques) (*Chapitre 3, Section 1*).
-*   **Figure 2 :** Évolution journalière des volumes de trafic par créneaux horaires à Sao Bien (Hanoï) (*Chapitre 3, Section 1*).
-*   **Figure 2b :** Profil d'intensité horaire global du trafic sur l'avenue Sao Bien (*Chapitre 3, Section 1*).
-*   **Figure 3 :** Matrice de corrélation de Pearson entre les variables physiques et spectrales de la base de données multi-villes (*Chapitre 3, Section 2*).
-*   **Figure 4 :** Sensibilité des émissions de CO₂ au volume de véhicules (à droite) et à l'impédance spectrale (à gauche) (*Chapitre 3, Section 2*).
-*   **Figure 5 :** Analyse de corrélation et résidus (Scatter Plot) de la validation croisée IA vs SUMO sur les 27 scénarios des 9 villes tests (*Chapitre 3, Section 2*).
-*   **Figure 6 :** Visualisation SIG de la ville test (Illustration de la cartographie des congestions) (*Chapitre 3, Section 2*).
-*   **Figure 7 :** Capture d'écran de l'interface utilisateur Streamlit - Configuration du scénario de trafic (*Chapitre 3, Section 2*).
-*   **Figure 8 :** Visualisation des résultats d'émissions de CO₂ instantanés sur l'interface Streamlit (Illustration à intégrer ultérieurement) (*Chapitre 3, Section 2*).
+*   **Figure 2 :** Structure modale du trafic en période régulière de mi-journée (Regular Midday) (*Chapitre 3, Section 1*).
+*   **Figure 3 :** Structure modale du trafic en heure de pointe de soirée (Evening Rush Hour) (*Chapitre 3, Section 1*).
+*   **Figure 4 :** Répartition modale comparée du fluide de trafic (Midi Régulier vs Holiday Reversal) (*Chapitre 3, Section 1*).
+*   **Figure 5 :** Évolution de la structure modale du trafic selon les périodes (Midi régulier, Transition, Vacances) (*Chapitre 3, Section 1*).
+*   **Figure 6 :** Taux de pénétration des véhicules électriques (EV) au sein de la flotte de quatre roues (*Chapitre 3, Section 1*).
+*   **Figure 7 :** Évolution journalière des volumes de trafic par créneaux horaires à Sao Bien (Hanoï) (*Chapitre 3, Section 1*).
+*   **Figure 8 :** Profil d'intensité horaire global du trafic sur l'avenue Sao Bien (*Chapitre 3, Section 1*).
+*   **Figure 9 :** Analyse de corrélation et résidus (Scatter Plot) de la validation croisée IA vs SUMO sur les 27 scénarios des 9 villes tests (*Chapitre 3, Section 2*).
+*   **Figure 10 :** Capture d'écran de l'interface utilisateur Streamlit - Configuration du scénario de trafic (*Chapitre 3, Section 2*).
+*   **Figure 11 :** Visualisation SIG de la ville test (Illustration de la cartographie des congestions) (*Chapitre 3, Section 2*).
+
 
 \newpage
 
@@ -363,8 +361,8 @@ L'analyse systématique des réseaux routiers de notre base de données a permis
 
 ##### Tableau 1 : Caractéristiques Topologiques Générales des Villes
 
-| city | origin | nodes | edges | density | avg_degree | asymmetry_index | sources_ratio | sinks_ratio |
-| :--- | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| City | Origin | Nodes | Edges | Density | Degree | Index | Ratio | Ratio |
+| :------------------ | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Nairobi** | Africa | 40 685 | 89 950 | 5.43e-05 | 2.21 | -0.44 | 0.002 | 0.002 |
 | **Marseille** | Europe | 17 035 | 34 858 | 1.20e-04 | 2.05 | -0.14 | 0.021 | 0.020 |
 | **Le Caire** | Africa | 13 095 | 29 575 | 1.72e-04 | 2.26 | -0.33 | 0.005 | 0.005 |
@@ -388,17 +386,23 @@ L'analyse systématique des réseaux routiers de notre base de données a permis
 | **Monaco** | Europe | 672 | 1 286 | 2.85e-03 | 1.91 | 0.00 | 0.039 | 0.039 |
 
 *Explication physique des variables topologiques du Tableau 1 :*
+
 *   **nodes (Nœuds) :** Le nombre total d'intersections physiques du réseau routier. Il s'agit de la dimension $n$ de la matrice d'adjacence $A$.
+
 *   **edges (Arêtes) :** Le nombre total de tronçons routiers orientés reliant les nœuds. C'est le nombre de connexions directionnelles du graphe.
+
 *   **density (Densité) :** Ratio entre le nombre d'arêtes réelles et le nombre maximal théorique d'arêtes possibles dans un graphe de taille $n$, mesurant la compacité spatiale du réseau routier.
+
 *   **avg_degree (Degré moyen) :** Nombre moyen d'arêtes connectées à un nœud. Un degré moyen proche de 2 indique un réseau routier linéaire simple, tandis qu'une valeur supérieure reflète des intersections complexes (échangeurs, ronds-points).
+
 *   **asymmetry_index (Indice d'asymétrie) :** Proportion de rues à sens unique dans le réseau. Un indice proche de 1 signifie que la quasi-totalité des voies sont à sens unique, ce qui augmente la non-normalité de la matrice.
+
 *   **sources_ratio & sinks_ratio (Ratio de sources et de puits) :** Proportion de nœuds n'ayant que des voies sortantes (sources) ou uniquement des voies entrantes (puits). Ces nœuds représentent les zones d'injection et d'absorption naturelle des véhicules aux frontières de la ville.
 
 ##### Tableau 2 : Métriques Spectrales de Non-Normalité (Matrices Non-Pondérées)
 
-| city | non_normalness | spectral_radius | sigma_max | h2_norm | kreiss_constant |
-| :--- | ---: | ---: | ---: | ---: | ---: |
+| City | Non normalness | Spectral radius | Sigma max | H2 norm | Kreiss constant |
+| :------------------ | :---: | :---: | :---: | :---: | :---: |
 | **Nairobi** | 137.04 | 4.717 | 4.720 | 419.80 | 8.49 |
 | **Marseille** | 207.55 | 4.149 | 4.149 | 247.51 | 24.17 |
 | **Le Caire** | 155.40 | 4.571 | 4.571 | 236.32 | 32.50 |
@@ -422,10 +426,15 @@ L'analyse systématique des réseaux routiers de notre base de données a permis
 | **Monaco** | 35.62 | 3.120 | 3.120 | 25.44 | 4.21 |
 
 *Explication physique des variables spectrales du Tableau 2 :*
+
 *   **non_normalness (Indice de non-normalité) :** Mesure la distance de Schur de la matrice d'adjacence par rapport à une matrice normale. Plus cet indice est élevé, plus le réseau est sensible à des amplifications de congestion transitoires et soudaines.
+
 *   **spectral_radius (Rayon spectral $\rho$) :** Module de la valeur propre dominante. Dans notre approche d'impédance, il mesure la résistance globale au transit. Un rayon spectral faible indique que la ville dissipe efficacement ses flux de véhicules.
+
 *   **sigma_max ($\sigma_{max}$) :** Valeur singulière maximale de la matrice d'adjacence, caractérisant le pire des scénarios de gain de flux à court terme.
+
 *   **h2_norm (Norme $H_2$) :** Énergie cumulée de la réponse impulsionnelle du réseau. En ingénierie de trafic, elle correspond à la "mémoire de la congestion", c'est-à-dire le temps nécessaire à la voirie pour évacuer les embouteillages accumulés lors d'une perturbation.
+
 *   **kreiss_constant (Constante de Kreiss $K$) :** Borne supérieure de l'amplification transitoire. Elle sert d'indicateur de vulnérabilité structurelle de la ville face à des blocages en cascade (effet domino ou gridlock).
 
 ### Section 3 : Le modèle d'intelligence artificielle XGBoost
@@ -745,8 +754,7 @@ Dans notre formalisation des flux du hub, **les bus de transport en commun ont �
 
 Toutefois, pour rendre compte de leur présence et garantir l'exhaustivité de la campagne de mesure, une analyse dédiée à la flotte de transport public a été menée. Les bus maintiennent un flux faible et constant d'environ 2,0 à 3,0 bus par tranche de 10 minutes, avec une légère diminution en période de vacances scolaires et de fêtes nationales.
 
-##### Figure 1 : Distribution temporelle de la flotte d'autobus publics à Sao Bien
-![Distribution temporelle de la flotte d'autobus publics](images/bus_distribution.png)
+![Distribution temporelle de la flotte d'autobus publics à Sao Bien](images/bus_distribution.png)
 
 #### Caractérisation des profils empiriques de trafic (Baselines et Holiday Reversal)
 
@@ -770,15 +778,14 @@ Calculé sur 58 observations stables lors des heures creuses de la mi-journée (
 | Véhicules électriques (Electric Cars EV) | 35,74 | 26,7 % |
 | **Total moyen** | **134,10** | **100,0 %** |
 
-##### Figure 1b : Structure modale du trafic en période régulière de mi-journée (Regular Midday)
-![Structure modale du trafic à Sao Bien lors de la mi-journée régulière](images/traffic_composition_pie.png)
+![Structure modale du trafic en période régulière de mi-journée (Regular Midday) - Répartition à Sao Bien](images/traffic_composition_pie.png)
 
 ##### Le Profil d'Heure de Pointe (Regular Evening Peak)
 Modélise la surpression cinématique observée en fin de journée (17h00 - 18h00), marquée par le retour des travailleurs :
 
 *   **Volume moyen total (excluant les bus) :** **227,67 véhicules par tranche de 10 minutes** (214,5 dans l'audit initial), soit une hausse de **70 %** par rapport à la baseline.
 *   **Répartition modale :**
-    *   *Motorcycles (deux-roues) :* **143,06 unités** (**62,8 %**). La part des motos s'accroît, accentuant les frictions inter-voies.
+    *   *Motorcycles (deux-roues) :* **143,06 unités** (**62,8 %**). La part des motos s'accroit, accentuant les frictions inter-voies.
     *   *Standard Cars (ICE) :* **34,44 unités** (**15,1 %**).
     *   *Electric Vehicles (EV) :* **50,17 unités** (**22,0 %**).
 *   **État cinématique :** Apparition de congestions localisées et baisse des vitesses.
@@ -791,8 +798,7 @@ Modélise la surpression cinématique observée en fin de journée (17h00 - 18h0
 | Véhicules électriques (Electric Cars EV) | 50,17 | 22,0 % |
 | **Total moyen** | **227,67** | **100,0 %** |
 
-##### Figure 1c : Structure modale du trafic en heure de pointe de soirée (Evening Rush Hour)
-![Structure modale du trafic à Sao Bien lors de la pointe de soirée](images/traffic_composition_rush_pie.png)
+![Structure modale du trafic en heure de pointe de soirée (Evening Rush Hour) - Répartition à Sao Bien](images/traffic_composition_rush_pie.png)
 
 ##### Le Profil de Rupture : Le phénomène de "Holiday Reversal"
 Les mesures enregistrées lors des fêtes nationales du 30 avril et du 1er mai ont révélé une anomalie comportementale majeure. Le volume de trafic global diminue légèrement à **117,17 véhicules par 10 minutes** (en raison du départ d'une partie des résidents hors de la ville), mais la répartition modale subit une inversion complète :
@@ -811,8 +817,7 @@ Sur le segment des véhicules à 4 roues (ICE + EV), **les véhicules électriqu
 | Véhicules électriques (Electric Cars EV) | 35,74 | 26,7 % | 46,83 | 40,0 % |
 | **Total** | **134,10** | **100,0 %** | **117,17** | **100,0 %** |
 
-##### Figure 1d : Répartition modale comparée du fluide de trafic (Midi Régulier vs Holiday Reversal)
-![Répartition modale comparée du fluide de trafic lors d'un midi de semaine classique face à l'inversion modale observée en période de congés](images/traffic_composition_pie-Hanoi.png)
+![Répartition modale comparée du fluide de trafic (Midi Régulier vs Holiday Reversal) lors de la campagne de mesures](images/traffic_composition_pie-Hanoi.png)
 
 ##### La Période de Transition Pré-Vacances (27 - 29 Avril)
 Un régime transitoire de montée en charge avec un volume moyen de **123,83 véhicules par 10 minutes** :
@@ -821,16 +826,12 @@ Un régime transitoire de montée en charge avec un volume moyen de **123,83 vé
 *   *Standard Cars (ICE) :* **32,33 unités** (**26,1 %**).
 *   *Electric Vehicles :* **33,50 unités** (**27,1 %**).
 
-##### Figure 1e : Évolution de la structure modale du trafic selon les périodes (Midi régulier, Transition, Vacances)
-![Évolution de la structure modale du trafic selon les périodes](images/vacation_comparison.png)
+![Évolution de la structure modale du trafic selon les périodes (Midi régulier, Transition, Vacances)](images/vacation_comparison.png)
 
-##### Figure 1f : Taux de pénétration des véhicules électriques au sein du segment des quatre roues
-![Taux de pénétration des véhicules électriques](images/ev_distribution_bar.png)
+![Taux de pénétration des véhicules électriques au sein du segment des quatre roues](images/ev_distribution_bar.png)
 
-##### Figure 2 : Évolution journalière des volumes de trafic par créneaux horaires à Sao Bien (Hanoï)
 ![Évolution journalière des volumes de trafic par créneaux horaires (11h00, 12h00, 17h00) durant la campagne de mesures à Sao Bien (Hanoï)](images/daily_timeline_by_hour.png)
 
-##### Figure 2b : Profil d'intensité horaire global du trafic sur l'avenue Sao Bien
 ![Profil d'intensité horaire global du trafic sur l'avenue Sao Bien](images/hourly_peaks.png)
 #### Modélisation stochastique de la recharge et initialisation par Warm-Start
 
@@ -976,15 +977,6 @@ Le tableau ci-dessous récapitule l'intégralité des villes composant notre cor
 > [!NOTE]
 > Les villes marquées **"Descripteurs topologiques uniquement"** contribuent pleinement à l'espace de représentation spectral de l'IA. Même sans simulation SUMO associée, leurs 47 descripteurs spectraux servent de **voisins morphologiques** lors de l'inférence barycentrique : quand l'IA prédit les émissions d'une nouvelle ville inconnue, elle identifie les villes d'apprentissage les plus proches géométriquement dans l'espace spectral et pondère leurs connaissances accumulées pour construire l'estimation finale.
 
-##### Figure 3 : Matrice de corrélation de Pearson entre les variables physiques et spectrales
-
-![Matrice de corrélation de Pearson illustrant les dépendances linéaires mutuelles entre les 47 variables de notre jeu de données d'apprentissage multi-villes](images/correlation_heatmap.png)
-
-##### Figure 4 : Sensibilité des émissions de CO₂ au volume de véhicules et à l'impédance spectrale
-
-![Graphiques de corrélation physique représentant l'évolution des émissions de CO₂ en fonction du nombre total de véhicules (à droite) et du rayon spectral du réseau (à gauche), illustrant les non-linéarités physiques](images/co2_vs_spectral_radius.png)
-![Graphiques de corrélation physique représentant l'évolution des émissions de CO₂ en fonction du nombre total de véhicules (à droite) et du rayon spectral du réseau (à gauche), illustrant les non-linéarités physiques](images/co2_vs_vehicles.png)
-
 #### Analyse comparative des résiliences géométriques : Radial européen vs Grille orthogonale vs Boucles fermées
 
 L'évaluation des quatre scénarios comportementaux (Constant, Rush Hour, Max Jam, Bottleneck) sur ces six réseaux révèle l'influence déterminante de la géométrie de la voirie sur la résilience globale du trafic.
@@ -1118,9 +1110,7 @@ L'analyse physique des écarts prédictifs permet de valider ou de remettre en q
 *   **La friction cinématique mixte dans Siem Reap et Nara (Sous-estimations par l'IA) :** 
     Dans ces deux villes asiatiques sous fort trafic, le modèle sous-estime le $CO_2$ de $25\ \%$ à $30\ \%$. Le ratio par défaut de ces régions comporte **$60\ \%$ de motos**. Le modèle applique une pondération à la baisse du fait du faible facteur d'émission unitaire des deux-roues. Cependant, en simulation physique, l'insertion de 9 000 motos au milieu de 6 000 voitures dans un réseau dense crée une **friction cinématique extrême**. Le comportement de faufilement des motos perturbe les trajectoires des voitures et des camions, les forçant à des cycles arrêt-démarrage répétés qui augmentent significativement leur pollution thermique. Cet effet d'interaction dynamique n'est pas modélisé par la simple composition moyenne de la flotte.
 
-##### Figure 5 : Analyse de corrélation et résidus du métamodèle IA vs simulations SUMO
-
-![Scatter Plot de comparaison entre le métamodèle IA et la simulation SUMO de référence sur les 27 scénarios de validation croisée](images/real_vs_predicted_validation.png)
+![Analyse de corrélation et résidus (Scatter Plot) de comparaison entre le métamodèle IA et la simulation SUMO de référence sur les 27 scénarios de validation croisée](images/real_vs_predicted_validation.png)
 
 #### Interface d'aide à la décision : Dashboard Streamlit
 
@@ -1138,7 +1128,7 @@ L'application est découpée en quatre sections fonctionnelles :
 Pour éviter la saisie manuelle de données de trafic arbitraires, l'application couple automatiquement la structure physique du réseau avec un profil d'activité horaire :
 
 *   **Calcul de la capacité physique nominale ($C_{ville}$)** : La capacité de stockage fluide du réseau est estimée à partir du nombre de nœuds du graphe routier (représentant les intersections réelles) :
-    $$C_{ville} = |V| 	imes 5.0$$
+    $$C_{ville} = |V| \times 5.0$$
     Le coefficient $5.0$ représente le ratio de véhicules actifs par carrefour requis pour occuper le réseau sans créer d'engorgement en régime stabilisé.
 
 *   **Le facteur de charge temporel ($\alpha_t$)** : La demande de trafic fluctue au cours des 24 heures de la journée selon une courbe typique de charge en "M". La variable $\alpha_t \in [0.10, 0.95]$ exprime la part de capacité routière sollicitée :
@@ -1164,18 +1154,11 @@ L'interface Streamlit propose deux indicateurs de performance avancés :
     $$\text{Taux d'abattement (\%)} = \left( 1 - \frac{\widehat{CO}_2(\text{avec EV})}{\widehat{CO}_2(\text{sans EV})} \right) \times 100$$
     Ce taux compare la configuration active avec un scénario fictif 100% thermique de référence pour quantifier le bénéfice écologique immédiat de la transition.
 
-##### Figure 7 : Interface de configuration du dashboard Streamlit
-Le candidat insérera ici la capture d'écran montrant le panneau latéral de configuration de la demande et de l'électromobilité.
+![Interface de configuration du dashboard Streamlit - Panneau latéral de configuration de la demande et de l'électromobilité](images/streamlit-interface.png)
 
-![Interface de configuration du dashboard Streamlit](images/streamlit-interface.png)
+**Visualisation des résultats d'émissions de CO₂ instantanés sur l'interface :** *(L'illustration présentant les courbes et jauges de prédiction instantanée de CO₂ sur le dashboard sera intégrée dans une version ultérieure).*
 
-##### Figure 8 : Visualisation des résultats d'émissions de CO₂ instantanés sur l'interface
-
-*(L'illustration présentant les courbes et jauges de prédiction instantanée de CO₂ sur le dashboard sera intégrée dans une version ultérieure lorsque l'interface de prédiction finale sera validée).*
-
-##### Figure 6 : Visualisation SIG de la ville test (Illustration de la cartographie des congestions)
-
-![Visualisations SIG colorées du réseau routier après une simulation de pointe de 1 heure. Les segments routiers sont colorés du gris (fluide) au rouge (saturation complète / gridlock)](images/paris-heat_map_trafic.png)
+![Visualisation SIG de la ville test (Illustration de la cartographie des congestions) - Segments routiers colorés du gris (fluide) au rouge (saturation complète / gridlock)](images/paris-heat_map_trafic.png)
 
 ### Section 3 : Perspectives opérationnelles
 
