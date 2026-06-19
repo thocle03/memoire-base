@@ -40,7 +40,6 @@ jobs:
             --csl=chicago-note.csl \
             --metadata-file=metadata.yaml \
             --toc \
-            --number-sections \
             -o memoire.pdf > pandoc.log 2>&1
 
       - name: Upload Pandoc Log
@@ -72,7 +71,6 @@ jobs:
             --csl=chicago-note.csl \
             --metadata-file=metadata.yaml \
             --toc \
-            --number-sections \
             -o memoire.tex
 
       - name: Prepare Pages directory

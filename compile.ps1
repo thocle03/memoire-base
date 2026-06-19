@@ -97,10 +97,10 @@ foreach ($File in $MarkdownFiles) {
         $Trimmed = $Line.Trim()
         
         # Nettoyer la numérotation des sous-titres (H3, H4, H5)
-        if ($Line -match "^(#{3,})\s*(?:\d+\.\d+\.\d+|\d+\.\d+|\d+\.)\s*(.*)$") {
-            $Line = "$($Matches[1]) $($Matches[2])"
-            $Trimmed = $Line.Trim()
-        }
+        # if ($Line -match "^(#{3,})\s*(?:\d+\.\d+\.\d+|\d+\.\d+|\d+\.)\s*(.*)$") {
+        #     $Line = "$($Matches[1]) $($Matches[2])"
+        #     $Trimmed = $Line.Trim()
+        # }
         
         # Insérer \newpage avant H1 et H2
         $IsChapterOrPart = $false
@@ -146,7 +146,7 @@ foreach ($File in $MarkdownFiles) {
         }
         
         $FinalContent.Add($Line)
-    }
+     }
     
     Set-Content -Path $SourceFile -Value $FinalContent -Encoding UTF8
     
@@ -159,7 +159,6 @@ foreach ($File in $MarkdownFiles) {
       --syntax-highlighting=none `
       --metadata-file=metadata.yaml `
       --toc `
-      --number-sections `
       -o "$OutputFile"
 
     if ($LASTEXITCODE -eq 0) {
