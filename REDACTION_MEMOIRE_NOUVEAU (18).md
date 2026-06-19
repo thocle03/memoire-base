@@ -8,7 +8,7 @@ Pour briser ce goulot d'étranglement, ce mémoire propose une méthodologie ori
 En outre, la pertinence opérationnelle de ce cadre prédictif est démontrée à travers une étude de cas microscopique locale calibrée par vision par ordinateur (YOLOv8) sur le hub de recharge de Vinhomes Ocean Park (Hanoï), illustrant comment l'IA s'interface avec les micro-simulations pour guider les politiques de mitigation et la transition vers l'électromobilité.
 
 ### Mots-clés
-Analyse Spectrale, Graphes Non-Normaux, Constante de Kreiss, Théorie des Perturbations de Kato, XGBoost, Métamodèle Prédictif, Micro-simulation, SUMO, Mobilité Durable, Vinhomes Ocean Park, Hanoï.
+IA, Analyse Spectrale, Analyse Topologique, Matrice d'adjacence, Graphes Non-Normaux, Constante de Kreiss, Théorie des Perturbations de Kato, XGBoost, Métamodèle Prédictif, Micro-simulation, SUMO, Mobilité Durable, Réseaux Urbains.
 
 \newpage
 
