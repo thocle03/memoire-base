@@ -16,7 +16,7 @@ Analyse Spectrale, Graphes Non-Normaux, Constante de Kreiss, Théorie des Pertur
 
 Je tiens à exprimer ma profonde gratitude à l'ensemble des personnes qui ont contribué au succès de ce mémoire et à l'aboutissement de mon cursus de fin d'études.
 
-Tout d'abord, je remercie chaleureusement mes tuteurs académiques, **M. Pierre Uzarralde** et **M. Alain Faye**, pour leur suivi rigoureux, leurs conseils méthodologiques et leur exigence scientifique tout au long de la rédaction de ce mémoire.
+Tout d'abord, je remercie chaleureusement mes tuteurs académiques, **M. Pierre Uzarralde** et **M. Alain Faye**, pour leur suivi, leurs conseils méthodologiques et leur exigence scientifique tout au long de la rédaction de ce mémoire.
 
 Je tiens également à remercier l'École Hexagone, qui m'a permis de réaliser ce projet et d'effectuer ce séjour d'études au Vietnam.
 
@@ -108,7 +108,7 @@ Pour briser ce verrou technologique, ce mémoire propose une méthodologie hybri
 Pour exposer notre travail avec toute la rigueur universitaire requise, ce mémoire est structuré en trois grands chapitres :
 
 *   Le chapitre 1 réexplique le contexte général de l'urbanisation mondiale et de la décarbonation des transports, présente le verrou computationnel lié à l'utilisation des micro-simulateurs physiques en temps réel, et détaille le protocole d'acquisition et de traitement topologique des réseaux routiers à partir de cartes.
-*   Le chapitre 2 pose le cadre théorique et mathématique rigoureux de notre méthodologie. Nous y détaillons les équations cinématiques du modèle de Krauß, le traitement géométrique de la connexité (Tarjan), le formalisme des graphes non-normaux (constante de Kreiss [9], perturbations de Kato [6], normes de Hardy) et l'architecture mathématique de notre modèle IA XGBoost à 47 descripteurs. Chaque formule est accompagnée d'une explication physique vulgarisée.
+*   Le chapitre 2 pose le cadre théorique et mathématique de notre méthodologie. Nous y détaillons les équations cinématiques du modèle de Krauß, le traitement géométrique de la connexité (Tarjan), le formalisme des graphes non-normaux (constante de Kreiss [9], perturbations de Kato [6], normes de Hardy) et l'architecture mathématique de notre modèle IA XGBoost à 47 descripteurs. Chaque formule est accompagnée d'une explication physique vulgarisée.
 *   Le chapitre 3 est notre chapitre principal d'applications et de validations. Le sous-chapitre 3.1 y présente l'étude de cas microscopique locale du hub de recharge de Vinhomes Ocean Park (Hanoï) à l'aide de données de flux de trafic calibrées par vision par ordinateur et ses scénarios de mitigation. Le sous-chapitre 3.2 y présente l'expérimentation macroscopique globale sur le corpus de 36 villes et 242 simulations, l'évaluation des performances informatiques (RAM, SWAP), la validation transversale (*cross-city*) de l'IA sur des villes cibles non entraînées, et la présentation du dashboard Streamlit interactif.
 
 \newpage
@@ -144,7 +144,7 @@ Pour y répondre, nous développons un **métamodèle d'Intelligence Artificiell
 
 ### 1.2 Traitement topologique des réseaux urbains
 
-La mise en œuvre de notre approche prédictive repose sur une chaîne rigoureuse de traitement de la géométrie urbaine, convertissant des cartes brutes en graphes mathématiques exploitables.
+La mise en œuvre de notre approche prédictive repose sur une chaîne de traitement de la géométrie urbaine, convertissant des cartes brutes en graphes mathématiques exploitables.
 
 #### Acquisition des données géographiques brutes
 Pour obtenir la géométrie de la voirie d'une ville quelconque, nous exploitons la base de données cartographiques mondiale libre et collaborative **OpenStreetMap (OSM)** [2]. OSM structure l'information géographique selon un modèle de données XML composé de trois primitives fondamentales :
@@ -179,7 +179,7 @@ Ce fichier `net.xml` joue un rôle de passerelle et de pivot dans notre méthodo
 
 # CHAPITRE 2 : MODÉLISATION CINÉMATIQUE ET FONDATIONS THÉORIQUES DE LA TOPOLOGIE SPECTRALE
 
-Le développement d'un modèle d'intelligence artificielle capable de se substituer à la simulation physique requiert une compréhension intime des équations cinématiques qui régissent le déplacement des véhicules (microscopique) et des propriétés topologiques du réseau qui gouvernent l'écoulement des flux (macroscopique). Ce chapitre pose le formalisme mathématique rigoureux de ces deux échelles et explicite physiquement la signification de chaque formule.
+Le développement d'un modèle d'intelligence artificielle capable de se substituer à la simulation physique requiert une compréhension intime des équations cinématiques qui régissent le déplacement des véhicules (microscopique) et des propriétés topologiques du réseau qui gouvernent l'écoulement des flux (macroscopique). Ce chapitre pose le formalisme mathématique de ces deux échelles et explicite physiquement la signification de chaque formule.
 
 ### 2.1 Le moteur behavioriste de SUMO
 
@@ -305,7 +305,7 @@ Puisque les coefficients $A_{ij}$ de notre matrice d'adjacence pondérée sont s
 > Le rayon spectral de la matrice d'impédance $\rho(A)$ caractérise la **résistance globale au transit** du réseau routier. Plus $\rho(A)$ est grand, plus le réseau présente une impédance globale élevée (rues longues, étroites, ou à faibles vitesses limites), ce qui allonge les temps de parcours moyens. Le vecteur propre de Perron-Frobenius $v_{PF}$ quant à lui identifie les carrefours clés du réseau où les flux s'accumulent naturellement.
 
 #### La Constante de Kreiss ($K$) et la dynamique de crise
-Pour quantifier rigoureusement la sensibilité d'un réseau non-normal aux amplifications transitoires et modéliser son instabilité dynamique, nous introduisons la **constante de Kreiss [9]** $K(A)$. Soit $A$ une matrice stable ($\rho(A) < 1$). La constante de Kreiss [9] est définie par :
+Pour quantifier la sensibilité d'un réseau non-normal aux amplifications transitoires et modéliser son instabilité dynamique, nous introduisons la **constante de Kreiss [9]** $K(A)$. Soit $A$ une matrice stable ($\rho(A) < 1$). La constante de Kreiss [9] est définie par :
 $$K(A) = \sup_{|z| > 1} (|z| - 1) \left\| (zI - A)^{-1} \right\|_2$$
 où $\|\cdot\|_2$ désigne la norme matricielle induite (norme spectrale). Le théorème des matrices de Kreiss établit des bornes strictes reliant cette constante à l'amplification transitoire maximale de la puissance de la matrice :
 $$K(A) \le \sup_{k \ge 0} \left\| A^k \right\|_2 \le e \cdot n \cdot K(A)$$
@@ -888,7 +888,7 @@ Ainsi, dès la première seconde de la simulation physique, les bornes de rechar
 Pour entraîner et valider le modèle XGBoost spectral, le protocole a collecté les données de **242 simulations physiques complètes** issues du simulateur SUMO, exécutées sur **36 villes de morphologies cartographiques radicalement distinctes**, réparties sur les **six continents**. Les variations systématiques portaient sur le volume cinématique (charge de congestion allant de 1 000 à 128 644 véhicules par heure de simulation), la composition catégorielle de la flotte (voitures, motos, camions, bus) et les taux d'électrification catégoriels indépendants (entre 0 % et 100 % d'EV par classe). Ce corpus d'apprentissage représente plus de **2 000 heures cumulées de simulation physique CPU** et constitue, à notre connaissance, l'un des jeux de données les plus diversifiés géographiquement jamais constitués pour la prédiction de la pollution urbaine par apprentissage machine.
 
 ##### A. Briser le biais de volume par la diversité topologique mondiale
-Pour que notre métamodèle d'IA (XGBoost) devienne un véritable outil d'aide à la décision urbanistique et ne se contente pas de multiplier le nombre de véhicules par un facteur fixe de pollution (ce qui constituait le biais majeur du dataset initial où $CO_2 \approx 3.0 \times \text{nb\_total\_veh}$), il est indispensable de structurer notre base de données selon un plan d'échantillonnage multidimensionnel extrêmement rigoureux. Cette approche repose sur l'intégration de dizaines de villes issues des quatre coins du monde, sélectionnées pour leurs caractéristiques topologiques uniques, et simulées sous des volumes de trafic très variés.
+Pour que notre métamodèle d'IA (XGBoost) devienne un véritable outil d'aide à la décision urbanistique et ne se contente pas de multiplier le nombre de véhicules par un facteur fixe de pollution (ce qui constituait le biais majeur du dataset initial où $CO_2 \approx 3.0 \times \text{nb\_total\_veh}$), il est indispensable de structurer notre base de données selon un plan d'échantillonnage multidimensionnel. Cette approche repose sur l'intégration de dizaines de villes issues des quatre coins du monde, sélectionnées pour leurs caractéristiques topologiques uniques, et simulées sous des volumes de trafic très variés.
 
 Les villes du monde entier ne se ressemblent pas ; elles sont le fruit de choix historiques, géographiques et politiques qui façonnent leur squelette routier. En intégrant des topologies radicalement différentes, nous forçons l'IA à analyser la matrice d'adjacence plutôt qu'à simplement compter le nombre de véhicules :
 
@@ -1035,7 +1035,7 @@ Si le profil spectral de la ville cible (par exemple Nairobi) se révèle géom�
 
 L'évaluation de cette inférence IA est comparée à une simulation physique SUMO de référence (Ground Truth) exécutée sur cette même ville.
 
-Pour évaluer rigoureusement cette capacité de transfert et illustrer la précision du métamodèle sur des cas d'études optimaux, nous confrontons en premier lieu les estimations de notre métamodèle IA aux résultats physiques obtenus par simulation SUMO de référence (Ground Truth) sur trois villes cibles totalement exclues de la base d'apprentissage qui illustrent une excellente adéquation générale : **Nelson** (Océanie, sous 6 000 véhicules), **Maseru** (Afrique, sous 15 000 véhicules) et **Pamplona** (Europe, sous 15 000 véhicules).
+Pour évaluer cette capacité de transfert et illustrer la précision du métamodèle sur des cas d'études optimaux, nous confrontons en premier lieu les estimations de notre métamodèle IA aux résultats physiques obtenus par simulation SUMO de référence (Ground Truth) sur trois villes cibles totalement exclues de la base d'apprentissage qui illustrent une excellente adéquation générale : **Nelson** (Océanie, sous 6 000 véhicules), **Maseru** (Afrique, sous 15 000 véhicules) et **Pamplona** (Europe, sous 15 000 véhicules).
 
 Les résultats de cette validation de transfert ciblée sont consignés dans le tableau ci-dessous :
 

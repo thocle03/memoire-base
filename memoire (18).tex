@@ -253,9 +253,9 @@ ont contribué au succès de ce mémoire et à l'aboutissement de mon cursus
 de fin d'études.
 
 Tout d'abord, je remercie chaleureusement mes tuteurs académiques,
-\textbf{M. Pierre Uzarralde} et \textbf{M. Alain Faye}, pour leur suivi
-rigoureux, leurs conseils méthodologiques et leur exigence scientifique
-tout au long de la rédaction de ce mémoire.
+\textbf{M. Pierre Uzarralde} et \textbf{M. Alain Faye}, pour leur suivi,
+leurs conseils méthodologiques et leur exigence scientifique tout au
+long de la rédaction de ce mémoire.
 
 Je tiens également à remercier l'École Hexagone, qui m'a permis de
 réaliser ce projet et d'effectuer ce séjour d'études au Vietnam.
@@ -614,10 +614,10 @@ ce mémoire est structuré en trois grands chapitres :
   temps réel, et détaille le protocole d'acquisition et de traitement
   topologique des réseaux routiers à partir de cartes.
 \item
-  Le chapitre 2 pose le cadre théorique et mathématique rigoureux de
-  notre méthodologie. Nous y détaillons les équations cinématiques du
-  modèle de Krauß, le traitement géométrique de la connexité (Tarjan),
-  le formalisme des graphes non-normaux (constante de Kreiss {[}9{]},
+  Le chapitre 2 pose le cadre théorique et mathématique de notre
+  méthodologie. Nous y détaillons les équations cinématiques du modèle
+  de Krauß, le traitement géométrique de la connexité (Tarjan), le
+  formalisme des graphes non-normaux (constante de Kreiss {[}9{]},
   perturbations de Kato {[}6{]}, normes de Hardy) et l'architecture
   mathématique de notre modèle IA XGBoost à 47 descripteurs. Chaque
   formule est accompagnée d'une explication physique vulgarisée.
@@ -772,9 +772,9 @@ calculs physiques lourds en phase opérationnelle.
 \subsubsection{1.2 Traitement topologique des réseaux
 urbains}\label{traitement-topologique-des-ruxe9seaux-urbains}
 
-La mise en œuvre de notre approche prédictive repose sur une chaîne
-rigoureuse de traitement de la géométrie urbaine, convertissant des
-cartes brutes en graphes mathématiques exploitables.
+La mise en œuvre de notre approche prédictive repose sur une chaîne de
+traitement de la géométrie urbaine, convertissant des cartes brutes en
+graphes mathématiques exploitables.
 
 \paragraph{Acquisition des données géographiques
 brutes}\label{acquisition-des-donnuxe9es-guxe9ographiques-brutes}
@@ -898,7 +898,7 @@ substituer à la simulation physique requiert une compréhension intime
 des équations cinématiques qui régissent le déplacement des véhicules
 (microscopique) et des propriétés topologiques du réseau qui gouvernent
 l'écoulement des flux (macroscopique). Ce chapitre pose le formalisme
-mathématique rigoureux de ces deux échelles et explicite physiquement la
+mathématique de ces deux échelles et explicite physiquement la
 signification de chaque formule.
 
 \subsubsection{2.1 Le moteur behavioriste de
@@ -1272,16 +1272,15 @@ réseau où les flux s'accumulent naturellement.
 dynamique de
 crise}{La Constante de Kreiss (K) et la dynamique de crise}}\label{la-constante-de-kreiss-k-et-la-dynamique-de-crise}
 
-Pour quantifier rigoureusement la sensibilité d'un réseau non-normal aux
-amplifications transitoires et modéliser son instabilité dynamique, nous
-introduisons la \textbf{constante de Kreiss {[}9{]}} \(K(A)\). Soit
-\(A\) une matrice stable (\(\rho(A) < 1\)). La constante de Kreiss
-{[}9{]} est définie par :
-\[K(A) = \sup_{|z| > 1} (|z| - 1) \left\| (zI - A)^{-1} \right\|_2\] où
-\(\|\cdot\|_2\) désigne la norme matricielle induite (norme spectrale).
-Le théorème des matrices de Kreiss établit des bornes strictes reliant
-cette constante à l'amplification transitoire maximale de la puissance
-de la matrice :
+Pour quantifier la sensibilité d'un réseau non-normal aux amplifications
+transitoires et modéliser son instabilité dynamique, nous introduisons
+la \textbf{constante de Kreiss {[}9{]}} \(K(A)\). Soit \(A\) une matrice
+stable (\(\rho(A) < 1\)). La constante de Kreiss {[}9{]} est définie par
+: \[K(A) = \sup_{|z| > 1} (|z| - 1) \left\| (zI - A)^{-1} \right\|_2\]
+où \(\|\cdot\|_2\) désigne la norme matricielle induite (norme
+spectrale). Le théorème des matrices de Kreiss établit des bornes
+strictes reliant cette constante à l'amplification transitoire maximale
+de la puissance de la matrice :
 \[K(A) \le \sup_{k \ge 0} \left\| A^k \right\|_2 \le e \cdot n \cdot K(A)\]
 où \(n\) est la dimension de la matrice.
 
@@ -3086,10 +3085,10 @@ nombre de véhicules par un facteur fixe de pollution (ce qui constituait
 le biais majeur du dataset initial où
 \(CO_2 \approx 3.0 \times \text{nb\_total\_veh}\)), il est indispensable
 de structurer notre base de données selon un plan d'échantillonnage
-multidimensionnel extrêmement rigoureux. Cette approche repose sur
-l'intégration de dizaines de villes issues des quatre coins du monde,
-sélectionnées pour leurs caractéristiques topologiques uniques, et
-simulées sous des volumes de trafic très variés.
+multidimensionnel. Cette approche repose sur l'intégration de dizaines
+de villes issues des quatre coins du monde, sélectionnées pour leurs
+caractéristiques topologiques uniques, et simulées sous des volumes de
+trafic très variés.
 
 Les villes du monde entier ne se ressemblent pas ; elles sont le fruit
 de choix historiques, géographiques et politiques qui façonnent leur
@@ -3547,14 +3546,14 @@ d'inférence.
 L'évaluation de cette inférence IA est comparée à une simulation
 physique SUMO de référence (Ground Truth) exécutée sur cette même ville.
 
-Pour évaluer rigoureusement cette capacité de transfert et illustrer la
-précision du métamodèle sur des cas d'études optimaux, nous confrontons
-en premier lieu les estimations de notre métamodèle IA aux résultats
-physiques obtenus par simulation SUMO de référence (Ground Truth) sur
-trois villes cibles totalement exclues de la base d'apprentissage qui
-illustrent une excellente adéquation générale : \textbf{Nelson}
-(Océanie, sous 6 000 véhicules), \textbf{Maseru} (Afrique, sous 15 000
-véhicules) et \textbf{Pamplona} (Europe, sous 15 000 véhicules).
+Pour évaluer cette capacité de transfert et illustrer la précision du
+métamodèle sur des cas d'études optimaux, nous confrontons en premier
+lieu les estimations de notre métamodèle IA aux résultats physiques
+obtenus par simulation SUMO de référence (Ground Truth) sur trois villes
+cibles totalement exclues de la base d'apprentissage qui illustrent une
+excellente adéquation générale : \textbf{Nelson} (Océanie, sous 6 000
+véhicules), \textbf{Maseru} (Afrique, sous 15 000 véhicules) et
+\textbf{Pamplona} (Europe, sous 15 000 véhicules).
 
 Les résultats de cette validation de transfert ciblée sont consignés
 dans le tableau ci-dessous :
