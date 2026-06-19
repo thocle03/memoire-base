@@ -14,9 +14,9 @@ IA, Analyse Spectrale, Analyse Topologique, Matrice d'adjacence, Graphes Non-Nor
 
 # REMERCIEMENTS
 
-Je tiens à exprimer ma profonde gratitude à l'ensemble des personnes qui ont contribué au succès de ce mémoire et à l'aboutissement de mon cursus de fin d'études.
+Je tiens à exprimer ma reconnaissance à l'ensemble des personnes qui ont contribué au succès de ce mémoire et à l'aboutissement de mon cursus de fin d'études.
 
-Tout d'abord, je remercie chaleureusement mes tuteurs académiques, **M. Pierre Uzarralde** et **M. Alain Faye**, pour leur suivi, leurs conseils méthodologiques et leur exigence scientifique tout au long de la rédaction de ce mémoire.
+Tout d'abord, je remercie mes tuteurs académiques, **M. Pierre Uzarralde** et **M. Alain Faye**, pour leur suivi, leurs conseils méthodologiques et leur exigence scientifique tout au long de la rédaction de ce mémoire.
 
 Je tiens également à remercier l'École Hexagone, qui m'a permis de réaliser ce projet et d'effectuer ce séjour d'études au Vietnam.
 
