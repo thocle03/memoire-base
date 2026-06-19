@@ -107,13 +107,13 @@ Pour briser ce verrou technologique, ce mémoire propose une méthodologie hybri
 
 Pour exposer notre travail avec toute la rigueur universitaire requise, ce mémoire est structuré en trois grands chapitres :
 
-*   Le **Chapitre 1** réexplique le contexte général de l'urbanisation mondiale et de la décarbonation des transports, présente le verrou computationnel lié à l'utilisation des micro-simulateurs physiques (SUMO) en temps réel, et détaille le protocole d'acquisition et de traitement topologique des réseaux routiers à partir de cartes OpenStreetMap (OSM) [2] via l'outil `netconvert`.
-*   Le **Chapitre 2** pose le cadre théorique et mathématique rigoureux de notre méthodologie. Nous y détaillons les équations cinématiques du modèle de Krauß, le traitement géométrique de la connexité (Tarjan), le formalisme des graphes non-normaux (constante de Kreiss [9], perturbations de Kato [6], normes de Hardy) et l'architecture mathématique de notre modèle IA XGBoost à 47 descripteurs. Chaque formule est accompagnée d'une explication physique vulgarisée.
-*   Le **Chapitre 3** est notre chapitre principal d'applications et de validations. Le sous-chapitre 3.1 y présente l'étude de cas microscopique locale du hub de recharge de Vinhomes Ocean Park (Hanoï) à l'aide de données de flux de trafic calibrées par vision par ordinateur (YOLOv8) et ses scénarios de mitigation. Le sous-chapitre 3.2 y présente l'expérimentation macroscopique globale sur le corpus de 36 villes et 242 simulations, l'évaluation des performances informatiques (RAM, SWAP), la validation transversale (*cross-city*) de l'IA sur des villes cibles non entraînées, et la présentation du dashboard Streamlit interactif.
+*   Le chapitre 1 réexplique le contexte général de l'urbanisation mondiale et de la décarbonation des transports, présente le verrou computationnel lié à l'utilisation des micro-simulateurs physiques en temps réel, et détaille le protocole d'acquisition et de traitement topologique des réseaux routiers à partir de cartes.
+*   Le chapitre 2 pose le cadre théorique et mathématique rigoureux de notre méthodologie. Nous y détaillons les équations cinématiques du modèle de Krauß, le traitement géométrique de la connexité (Tarjan), le formalisme des graphes non-normaux (constante de Kreiss [9], perturbations de Kato [6], normes de Hardy) et l'architecture mathématique de notre modèle IA XGBoost à 47 descripteurs. Chaque formule est accompagnée d'une explication physique vulgarisée.
+*   Le chapitre 3 est notre chapitre principal d'applications et de validations. Le sous-chapitre 3.1 y présente l'étude de cas microscopique locale du hub de recharge de Vinhomes Ocean Park (Hanoï) à l'aide de données de flux de trafic calibrées par vision par ordinateur et ses scénarios de mitigation. Le sous-chapitre 3.2 y présente l'expérimentation macroscopique globale sur le corpus de 36 villes et 242 simulations, l'évaluation des performances informatiques (RAM, SWAP), la validation transversale (*cross-city*) de l'IA sur des villes cibles non entraînées, et la présentation du dashboard Streamlit interactif.
 
 \newpage
 
-# CHAPITRE 1 : CONTEXTE DE LA MOBILITÉ DURABLE, DU PROBLÈME COMPUTATIONNEL ET DE L'ACQUISITION TOPOLOGIQUE
+# CHAPITRE 1 : CONTEXTE DE LA MOBILITÉ, DU PROBLÈME COMPUTATIONNEL ET DE L'ACQUISITION TOPOLOGIQUE
 
 ### 1.1 Contexte de la décarbonation urbaine, congestion et verrou computationnel
 
@@ -142,12 +142,12 @@ Face à ce verrou technologique, la problématique de ce travail s'établit ains
 Pour y répondre, nous développons un **métamodèle d'Intelligence Artificielle Topologique Spectrale**. L'hypothèse scientifique fondamentale de ce travail est que la structure géométrique et mathématique du réseau routier (caractérisée par les valeurs propres et les valeurs singulières de sa matrice d'adjacence d'impédance) contient l'empreinte de sa résilience cinématique. En apprenant à un modèle d'apprentissage supervisé (XGBoost) la relation non-linéaire entre ces descripteurs spectraux, le volume de trafic et la pollution générée (vérité terrain issue de simulations SUMO préalables), nous pouvons prédire instantanément (en 0,2 seconde) le bilan carbone d'une ville avec une précision supérieure à 95 %, éliminant ainsi le besoin de calculs physiques lourds en phase opérationnelle.
 
 
-### 1.2 Traitement topologique des réseaux OpenStreetMap (OSM) via netconvert
+### 1.2 Traitement topologique des réseaux urbains
 
 La mise en œuvre de notre approche prédictive repose sur une chaîne rigoureuse de traitement de la géométrie urbaine, convertissant des cartes brutes en graphes mathématiques exploitables.
 
-#### Acquisition des données géographiques brutes (OpenStreetMap)
-Pour obtenir la géométrie de la voirie d'une ville quelconque, nous exploitons la base de données cartographiques mondiale libre et collaborative **OpenStreetMap (OSM)**. OSM structure l'information géographique selon un modèle de données XML composé de trois primitives fondamentales :
+#### Acquisition des données géographiques brutes
+Pour obtenir la géométrie de la voirie d'une ville quelconque, nous exploitons la base de données cartographiques mondiale libre et collaborative **OpenStreetMap (OSM)** [2]. OSM structure l'information géographique selon un modèle de données XML composé de trois primitives fondamentales :
 
 *   **Les nœuds (nodes) :** Points géographiques définis par leur latitude et longitude. Ils représentent des intersections routières, des virages, ou des points d'intérêt.
 *   **Les chemins (ways) :** Listes ordonnées de nœuds formant des polylignes. Ils décrivent les segments de route, les rues, les voies ferrées, ainsi que les limites de parcelles (polygones fermés).

@@ -73,6 +73,7 @@
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{setspace}
 \setstretch{1.15}
+\setcounter{secnumdepth}{-1}
 
 % --- Titres : forcer \paragraph et \subparagraph à passer à la ligne ---
 % Par défaut LaTeX rend \paragraph (= #### Markdown) en titre « run-in »,
@@ -607,40 +608,37 @@ ce mémoire est structuré en trois grands chapitres :
 \begin{itemize}
 \tightlist
 \item
-  Le \textbf{Chapitre 1} réexplique le contexte général de
-  l'urbanisation mondiale et de la décarbonation des transports,
-  présente le verrou computationnel lié à l'utilisation des
-  micro-simulateurs physiques (SUMO) en temps réel, et détaille le
-  protocole d'acquisition et de traitement topologique des réseaux
-  routiers à partir de cartes OpenStreetMap (OSM) {[}2{]} via l'outil
-  \texttt{netconvert}.
+  Le chapitre 1 réexplique le contexte général de l'urbanisation
+  mondiale et de la décarbonation des transports, présente le verrou
+  computationnel lié à l'utilisation des micro-simulateurs physiques en
+  temps réel, et détaille le protocole d'acquisition et de traitement
+  topologique des réseaux routiers à partir de cartes.
 \item
-  Le \textbf{Chapitre 2} pose le cadre théorique et mathématique
-  rigoureux de notre méthodologie. Nous y détaillons les équations
-  cinématiques du modèle de Krauß, le traitement géométrique de la
-  connexité (Tarjan), le formalisme des graphes non-normaux (constante
-  de Kreiss {[}9{]}, perturbations de Kato {[}6{]}, normes de Hardy) et
-  l'architecture mathématique de notre modèle IA XGBoost à 47
-  descripteurs. Chaque formule est accompagnée d'une explication
-  physique vulgarisée.
+  Le chapitre 2 pose le cadre théorique et mathématique rigoureux de
+  notre méthodologie. Nous y détaillons les équations cinématiques du
+  modèle de Krauß, le traitement géométrique de la connexité (Tarjan),
+  le formalisme des graphes non-normaux (constante de Kreiss {[}9{]},
+  perturbations de Kato {[}6{]}, normes de Hardy) et l'architecture
+  mathématique de notre modèle IA XGBoost à 47 descripteurs. Chaque
+  formule est accompagnée d'une explication physique vulgarisée.
 \item
-  Le \textbf{Chapitre 3} est notre chapitre principal d'applications et
-  de validations. Le sous-chapitre 3.1 y présente l'étude de cas
+  Le chapitre 3 est notre chapitre principal d'applications et de
+  validations. Le sous-chapitre 3.1 y présente l'étude de cas
   microscopique locale du hub de recharge de Vinhomes Ocean Park (Hanoï)
   à l'aide de données de flux de trafic calibrées par vision par
-  ordinateur (YOLOv8) et ses scénarios de mitigation. Le sous-chapitre
-  3.2 y présente l'expérimentation macroscopique globale sur le corpus
-  de 36 villes et 242 simulations, l'évaluation des performances
-  informatiques (RAM, SWAP), la validation transversale
-  (\emph{cross-city}) de l'IA sur des villes cibles non entraînées, et
-  la présentation du dashboard Streamlit interactif.
+  ordinateur et ses scénarios de mitigation. Le sous-chapitre 3.2 y
+  présente l'expérimentation macroscopique globale sur le corpus de 36
+  villes et 242 simulations, l'évaluation des performances informatiques
+  (RAM, SWAP), la validation transversale (\emph{cross-city}) de l'IA
+  sur des villes cibles non entraînées, et la présentation du dashboard
+  Streamlit interactif.
 \end{itemize}
 
 \newpage
 
-\section{CHAPITRE 1 : CONTEXTE DE LA MOBILITÉ DURABLE, DU PROBLÈME
+\section{CHAPITRE 1 : CONTEXTE DE LA MOBILITÉ, DU PROBLÈME
 COMPUTATIONNEL ET DE L'ACQUISITION
-TOPOLOGIQUE}\label{chapitre-1-contexte-de-la-mobilituxe9-durable-du-probluxe8me-computationnel-et-de-lacquisition-topologique}
+TOPOLOGIQUE}\label{chapitre-1-contexte-de-la-mobilituxe9-du-probluxe8me-computationnel-et-de-lacquisition-topologique}
 
 \subsubsection{1.1 Contexte de la décarbonation urbaine, congestion et
 verrou
@@ -771,22 +769,21 @@ prédire instantanément (en 0,2 seconde) le bilan carbone d'une ville
 avec une précision supérieure à 95 \%, éliminant ainsi le besoin de
 calculs physiques lourds en phase opérationnelle.
 
-\subsubsection{1.2 Traitement topologique des réseaux OpenStreetMap
-(OSM) via
-netconvert}\label{traitement-topologique-des-ruxe9seaux-openstreetmap-osm-via-netconvert}
+\subsubsection{1.2 Traitement topologique des réseaux
+urbains}\label{traitement-topologique-des-ruxe9seaux-urbains}
 
 La mise en œuvre de notre approche prédictive repose sur une chaîne
 rigoureuse de traitement de la géométrie urbaine, convertissant des
 cartes brutes en graphes mathématiques exploitables.
 
-\paragraph{Acquisition des données géographiques brutes
-(OpenStreetMap)}\label{acquisition-des-donnuxe9es-guxe9ographiques-brutes-openstreetmap}
+\paragraph{Acquisition des données géographiques
+brutes}\label{acquisition-des-donnuxe9es-guxe9ographiques-brutes}
 
 Pour obtenir la géométrie de la voirie d'une ville quelconque, nous
 exploitons la base de données cartographiques mondiale libre et
-collaborative \textbf{OpenStreetMap (OSM)}. OSM structure l'information
-géographique selon un modèle de données XML composé de trois primitives
-fondamentales :
+collaborative \textbf{OpenStreetMap (OSM)} {[}2{]}. OSM structure
+l'information géographique selon un modèle de données XML composé de
+trois primitives fondamentales :
 
 \begin{itemize}
 \tightlist
