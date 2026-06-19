@@ -369,41 +369,16 @@ MATHÉMATIQUES}\label{glossaire-des-termes-techniques-et-mathuxe9matiques}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Figure 1 :} Distribution temporelle de la flotte d'autobus
-  publics à Sao Bien (\emph{Chapitre 3, 3.1}).
+  \textbf{Figure 1 :} Visualisation SIG de la ville test (Illustration
+  de la cartographie des congestions à Paris) (\emph{Chapitre 3, 3.1}).
 \item
-  \textbf{Figure 2 :} Structure modale du trafic en période régulière de
-  mi-journée (Regular Midday) (\emph{Chapitre 3, 3.1}).
-\item
-  \textbf{Figure 3 :} Structure modale du trafic en heure de pointe de
-  soirée (Evening Rush Hour) (\emph{Chapitre 3, 3.1}).
-\item
-  \textbf{Figure 4 :} Répartition modale comparée du fluide de trafic
-  (Midi Régulier vs Holiday Reversal) (\emph{Chapitre 3, 3.1}).
-\item
-  \textbf{Figure 5 :} Évolution de la structure modale du trafic selon
-  les périodes (Midi régulier, Transition, Vacances) (\emph{Chapitre 3,
-  3.1}).
-\item
-  \textbf{Figure 6 :} Taux de pénétration des véhicules électriques (EV)
-  au sein de la flotte de quatre roues (\emph{Chapitre 3, 3.1}).
-\item
-  \textbf{Figure 7 :} Évolution journalière des volumes de trafic par
-  créneaux horaires à Sao Bien (Hanoï) (\emph{Chapitre 3, 3.1}).
-\item
-  \textbf{Figure 8 :} Profil d'intensité horaire global du trafic sur
-  l'avenue Sao Bien (\emph{Chapitre 3, 3.1}).
-\item
-  \textbf{Figure 9 :} Visualisation SIG de la ville test (Illustration
-  de la cartographie des congestions à Paris) (\emph{Chapitre 3, 3.2}).
-\item
-  \textbf{Figure 10 :} Analyse de corrélation et résidus (Scatter Plot)
+  \textbf{Figure 2 :} Analyse de corrélation et résidus (Scatter Plot)
   de la validation croisée IA vs SUMO sur les 27 scénarios des 9 villes
-  tests (\emph{Chapitre 3, 3.2}).
+  tests (\emph{Chapitre 3, 3.1}).
 \item
-  \textbf{Figure 11 :} Capture d'écran de l'interface utilisateur
+  \textbf{Figure 3 :} Capture d'écran de l'interface utilisateur
   Streamlit - Configuration du scénario de trafic et des taux
-  d'électromobilité (\emph{Chapitre 3, 3.2}).
+  d'électromobilité (\emph{Chapitre 3, 3.1}).
 \end{itemize}
 
 \newpage
@@ -1227,8 +1202,8 @@ représentée par la couleur des segments routiers :
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Figure 9 : Visualisation SIG de la ville test (Illustration de la cartographie des congestions à Paris) - Segments routiers colorés du gris (fluide) au rouge (saturation complète / gridlock).}]{images/paris-heat_map_trafic.png}}
-\caption{\textbf{Figure 9 :} Visualisation SIG de la ville test
+\pandocbounded{\includegraphics[keepaspectratio,alt={Figure 1 : Visualisation SIG de la ville test (Illustration de la cartographie des congestions à Paris) - Segments routiers colorés du gris (fluide) au rouge (saturation complète / gridlock).}]{images/paris-heat_map_trafic.png}}
+\caption{\textbf{Figure 1 :} Visualisation SIG de la ville test
 (Illustration de la cartographie des congestions à Paris) - Segments
 routiers colorés du gris (fluide) au rouge (saturation complète /
 gridlock).}
@@ -2517,15 +2492,15 @@ COMPARATIVES}\label{chapitre-4-applications-empiriques-uxe9tudes-de-cas-et-valid
 
 Ce chapitre présente les applications concrètes de notre démarche
 prédictive. L'étude de cas locale et microscopique présentée dans la
-section 4.1 a été menée dans le cadre d'un stage de recherche
-(\emph{internship}) au sein de l'université \textbf{VinUniversity}
-(Hanoï, Vietnam). Ce travail sur le terrain a été l'occasion de se
-familiariser avec le micro-simulateur physique SUMO et de maîtriser la
-configuration de simulations microscopiques réalistes. Cette expérience
-technique et pratique initiale a constitué le socle indispensable pour
-appréhender les dynamiques de trafic complexes et pouvoir, par la suite,
-concevoir et exécuter des simulations physiques à grande échelle sur le
-corpus multi-villes présenté dans la section 4.2.
+section 4.1 a été menée dans le cadre d'un internship au sein de
+l'université \textbf{VinUniversity} (Hanoï, Vietnam). Ce travail sur le
+terrain a été l'occasion de se familiariser avec le micro-simulateur
+physique SUMO et de maîtriser la configuration de simulations
+microscopiques réalistes. Cette expérience technique et pratique
+initiale a constitué le socle indispensable pour appréhender les
+dynamiques de trafic complexes et pouvoir, par la suite, concevoir et
+exécuter des simulations physiques à grande échelle sur le corpus
+multi-villes présenté dans la partie 4.2.
 
 \subsubsection{4.1 Analyse microscopique locale -- Le jumeau numérique
 de Vinhomes Ocean Park
@@ -2727,13 +2702,6 @@ constant d'environ 2,0 à 3,0 bus par tranche de 10 minutes, avec une
 légère diminution en période de vacances scolaires et de fêtes
 nationales.
 
-\begin{figure}
-\centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Distribution temporelle de la flotte d'autobus publics à Sao Bien}]{images/bus_distribution.png}}
-\caption{Distribution temporelle de la flotte d'autobus publics à Sao
-Bien}
-\end{figure}
-
 \paragraph{Caractérisation des profils empiriques de trafic (Baselines
 et Holiday
 Reversal)}\label{caractuxe9risation-des-profils-empiriques-de-trafic-baselines-et-holiday-reversal}
@@ -2804,13 +2772,6 @@ Véhicules électriques (Electric Cars EV) & 35,74 & 26,7 \% \\
 \end{longtable}
 }
 
-\begin{figure}
-\centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Structure modale du trafic en période régulière de mi-journée (Regular Midday) - Répartition à Sao Bien}]{images/traffic_composition_pie.png}}
-\caption{Structure modale du trafic en période régulière de mi-journée
-(Regular Midday) - Répartition à Sao Bien}
-\end{figure}
-
 \subparagraph{Le Profil d'Heure de Pointe (Regular Evening
 Peak)}\label{le-profil-dheure-de-pointe-regular-evening-peak}
 
@@ -2862,13 +2823,6 @@ Véhicules électriques (Electric Cars EV) & 50,17 & 22,0 \% \\
 \textbf{Total moyen} & \textbf{227,67} & \textbf{100,0 \%} \\
 \end{longtable}
 }
-
-\begin{figure}
-\centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Structure modale du trafic en heure de pointe de soirée (Evening Rush Hour) - Répartition à Sao Bien}]{images/traffic_composition_rush_pie.png}}
-\caption{Structure modale du trafic en heure de pointe de soirée
-(Evening Rush Hour) - Répartition à Sao Bien}
-\end{figure}
 
 \subparagraph{Le Profil de Rupture : Le phénomène de ``Holiday
 Reversal''}\label{le-profil-de-rupture-le-phuxe9nomuxe8ne-de-holiday-reversal}
@@ -2935,13 +2889,6 @@ Véhicules électriques (Electric Cars EV) & 35,74 & 26,7 \% & 46,83 &
 \textbf{100,0 \%} \\
 \end{longtable}
 }
-
-\begin{figure}
-\centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Répartition modale comparée du fluide de trafic (Midi Régulier vs Holiday Reversal) lors de la campagne de mesures}]{images/traffic_composition_pie-Hanoi.png}}
-\caption{Répartition modale comparée du fluide de trafic (Midi Régulier
-vs Holiday Reversal) lors de la campagne de mesures}
-\end{figure}
 
 \subparagraph{La Période de Transition Pré-Vacances (27 - 29
 Avril)}\label{la-puxe9riode-de-transition-pruxe9-vacances-27---29-avril}
@@ -3339,14 +3286,14 @@ principaux vers des points centraux (structures en étoile). Lors du
 scénario \emph{Bottleneck}, ces structures se révèlent vulnérables : la
 saturation d'un axe central remonte rapidement le long des voies d'accès
 radiales, bloquant les carrefours en amont (voir la cartographie de
-congestion de Paris en Figure 9). En raison de la densité des nœuds
+congestion de Paris en Figure 1). En raison de la densité des nœuds
 historiques et du manque de voies rapides de dérivation, les flux de
 trafic ne disposent pas d'alternatives viables, provoquant un
 effondrement de la vitesse moyenne et une hausse rapide des émissions de
 \(CO_2\).
 
 Cette vulnérabilité structurelle et la propagation de la congestion le
-long des axes radiaux sont illustrées dans la Figure 9, qui présente
+long des axes radiaux sont illustrées dans la Figure 1, qui présente
 l'état de saturation du réseau parisien obtenu par simulation
 microscopique.
 
@@ -3859,8 +3806,8 @@ limites actuelles du métamodèle :
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Figure 10 : Analyse de corrélation et résidus (Scatter Plot) de comparaison entre le métamodèle IA et la simulation SUMO de référence sur les 27 scénarios de validation croisée.}]{images/real_vs_predicted_validation.png}}
-\caption{\textbf{Figure 10 :} Analyse de corrélation et résidus (Scatter
+\pandocbounded{\includegraphics[keepaspectratio,alt={Figure 2 : Analyse de corrélation et résidus (Scatter Plot) de comparaison entre le métamodèle IA et la simulation SUMO de référence sur les 27 scénarios de validation croisée.}]{images/real_vs_predicted_validation.png}}
+\caption{\textbf{Figure 2 :} Analyse de corrélation et résidus (Scatter
 Plot) de comparaison entre le métamodèle IA et la simulation SUMO de
 référence sur les 27 scénarios de validation croisée.}
 \end{figure}
@@ -3879,14 +3826,14 @@ positionnés en haut de l'écran} pour naviguer entre les différentes
 
 Le tableau de bord développé permet de paramétrer interactivement les
 conditions de simulation et d'observer immédiatement les prédictions
-d'impact environnemental. La Figure 11 présente la structure générale de
+d'impact environnemental. La Figure 3 présente la structure générale de
 l'interface graphique de configuration et le panneau latéral permettant
 de régler les différents paramètres de simulation.
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Figure 11 : Capture d'écran de l'interface utilisateur Streamlit - Configuration du scénario de trafic et des taux d'électromobilité.}]{images/streamlit-interface.png}}
-\caption{\textbf{Figure 11 :} Capture d'écran de l'interface utilisateur
+\pandocbounded{\includegraphics[keepaspectratio,alt={Figure 3 : Capture d'écran de l'interface utilisateur Streamlit - Configuration du scénario de trafic et des taux d'électromobilité.}]{images/streamlit-interface.png}}
+\caption{\textbf{Figure 3 :} Capture d'écran de l'interface utilisateur
 Streamlit - Configuration du scénario de trafic et des taux
 d'électromobilité.}
 \end{figure}

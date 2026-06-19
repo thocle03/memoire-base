@@ -48,17 +48,9 @@ Mes remerciements s'adressent également aux équipes de l'Université **VinUniv
 
 # LISTE DES ILLUSTRATIONS
 
-*   **Figure 1 :** Distribution temporelle de la flotte d'autobus publics à Sao Bien (*Chapitre 3, 3.1*).
-*   **Figure 2 :** Structure modale du trafic en période régulière de mi-journée (Regular Midday) (*Chapitre 3, 3.1*).
-*   **Figure 3 :** Structure modale du trafic en heure de pointe de soirée (Evening Rush Hour) (*Chapitre 3, 3.1*).
-*   **Figure 4 :** Répartition modale comparée du fluide de trafic (Midi Régulier vs Holiday Reversal) (*Chapitre 3, 3.1*).
-*   **Figure 5 :** Évolution de la structure modale du trafic selon les périodes (Midi régulier, Transition, Vacances) (*Chapitre 3, 3.1*).
-*   **Figure 6 :** Taux de pénétration des véhicules électriques (EV) au sein de la flotte de quatre roues (*Chapitre 3, 3.1*).
-*   **Figure 7 :** Évolution journalière des volumes de trafic par créneaux horaires à Sao Bien (Hanoï) (*Chapitre 3, 3.1*).
-*   **Figure 8 :** Profil d'intensité horaire global du trafic sur l'avenue Sao Bien (*Chapitre 3, 3.1*).
-*   **Figure 9 :** Visualisation SIG de la ville test (Illustration de la cartographie des congestions à Paris) (*Chapitre 3, 3.2*).
-*   **Figure 10 :** Analyse de corrélation et résidus (Scatter Plot) de la validation croisée IA vs SUMO sur les 27 scénarios des 9 villes tests (*Chapitre 3, 3.2*).
-*   **Figure 11 :** Capture d'écran de l'interface utilisateur Streamlit - Configuration du scénario de trafic et des taux d'électromobilité (*Chapitre 3, 3.2*).
+*   **Figure 1 :** Visualisation SIG de la ville test (Illustration de la cartographie des congestions à Paris) (*Chapitre 3, 3.1*).
+*   **Figure 2 :** Analyse de corrélation et résidus (Scatter Plot) de la validation croisée IA vs SUMO sur les 27 scénarios des 9 villes tests (*Chapitre 3, 3.1*).
+*   **Figure 3 :** Capture d'écran de l'interface utilisateur Streamlit - Configuration du scénario de trafic et des taux d'électromobilité (*Chapitre 3, 3.1*).
 
 
 \newpage
@@ -286,7 +278,7 @@ Cette contrainte force le planificateur d'itinéraires à rejeter les trajets de
 
 Voici un exemple de ce qu'on obtient après une simulation SUMO d'une heure de trafic, sur la ville de Paris, avec l'intensité du traffic représentée par la couleur des segments routiers :
 
-![**Figure 9 :** Visualisation SIG de la ville test (Illustration de la cartographie des congestions à Paris) - Segments routiers colorés du gris (fluide) au rouge (saturation complète / gridlock).](images/paris-heat_map_trafic.png)
+![**Figure 1 :** Visualisation SIG de la ville test (Illustration de la cartographie des congestions à Paris) - Segments routiers colorés du gris (fluide) au rouge (saturation complète / gridlock).](images/paris-heat_map_trafic.png)
 
 
 \newpage
@@ -721,7 +713,7 @@ Le modèle entraîné est sauvegardé dans le répertoire `models/` sous forme d
 
 # CHAPITRE 4 : APPLICATIONS EMPIRIQUES, ÉTUDES DE CAS ET VALIDATIONS COMPARATIVES
 
-Ce chapitre présente les applications concrètes de notre démarche prédictive. L'étude de cas locale et microscopique présentée dans la section 4.1 a été menée dans le cadre d'un stage de recherche (*internship*) au sein de l'université **VinUniversity** (Hanoï, Vietnam). Ce travail sur le terrain a été l'occasion de se familiariser avec le micro-simulateur physique SUMO et de maîtriser la configuration de simulations microscopiques réalistes. Cette expérience technique et pratique initiale a constitué le socle indispensable pour appréhender les dynamiques de trafic complexes et pouvoir, par la suite, concevoir et exécuter des simulations physiques à grande échelle sur le corpus multi-villes présenté dans la section 4.2.
+Ce chapitre présente les applications concrètes de notre démarche prédictive. L'étude de cas locale et microscopique présentée dans la section 4.1 a été menée dans le cadre d'un internship au sein de l'université **VinUniversity** (Hanoï, Vietnam). Ce travail sur le terrain a été l'occasion de se familiariser avec le micro-simulateur physique SUMO et de maîtriser la configuration de simulations microscopiques réalistes. Cette expérience technique et pratique initiale a constitué le socle indispensable pour appréhender les dynamiques de trafic complexes et pouvoir, par la suite, concevoir et exécuter des simulations physiques à grande échelle sur le corpus multi-villes présenté dans la partie 4.2.
 
 ### 4.1 Analyse microscopique locale – Le jumeau numérique de Vinhomes Ocean Park (Hanoï)
 
@@ -779,7 +771,6 @@ Dans notre formalisation des flux du hub, **les bus de transport en commun ont �
 
 Toutefois, pour rendre compte de leur présence et garantir l'exhaustivité de la campagne de mesure, une analyse dédiée à la flotte de transport public a été menée. Les bus maintiennent un flux faible et constant d'environ 2,0 à 3,0 bus par tranche de 10 minutes, avec une légère diminution en période de vacances scolaires et de fêtes nationales.
 
-![Distribution temporelle de la flotte d'autobus publics à Sao Bien](images/bus_distribution.png)
 
 #### Caractérisation des profils empiriques de trafic (Baselines et Holiday Reversal)
 
@@ -803,7 +794,6 @@ Calculé sur 58 observations stables lors des heures creuses de la mi-journée (
 | Véhicules électriques (Electric Cars EV) | 35,74 | 26,7 % |
 | **Total moyen** | **134,10** | **100,0 %** |
 
-![Structure modale du trafic en période régulière de mi-journée (Regular Midday) - Répartition à Sao Bien](images/traffic_composition_pie.png)
 
 ##### Le Profil d'Heure de Pointe (Regular Evening Peak)
 Modélise la surpression cinématique observée en fin de journée (17h00 - 18h00), marquée par le retour des travailleurs :
@@ -823,7 +813,6 @@ Modélise la surpression cinématique observée en fin de journée (17h00 - 18h0
 | Véhicules électriques (Electric Cars EV) | 50,17 | 22,0 % |
 | **Total moyen** | **227,67** | **100,0 %** |
 
-![Structure modale du trafic en heure de pointe de soirée (Evening Rush Hour) - Répartition à Sao Bien](images/traffic_composition_rush_pie.png)
 
 ##### Le Profil de Rupture : Le phénomène de "Holiday Reversal"
 Les mesures enregistrées lors des fêtes nationales du 30 avril et du 1er mai ont révélé une anomalie comportementale majeure. Le volume de trafic global diminue légèrement à **117,17 véhicules par 10 minutes** (en raison du départ d'une partie des résidents hors de la ville), mais la répartition modale subit une inversion complète :
@@ -842,7 +831,6 @@ Sur le segment des véhicules à 4 roues (ICE + EV), **les véhicules électriqu
 | Véhicules électriques (Electric Cars EV) | 35,74 | 26,7 % | 46,83 | 40,0 % |
 | **Total** | **134,10** | **100,0 %** | **117,17** | **100,0 %** |
 
-![Répartition modale comparée du fluide de trafic (Midi Régulier vs Holiday Reversal) lors de la campagne de mesures](images/traffic_composition_pie-Hanoi.png)
 
 ##### La Période de Transition Pré-Vacances (27 - 29 Avril)
 Un régime transitoire de montée en charge avec un volume moyen de **123,83 véhicules par 10 minutes** :
@@ -967,9 +955,9 @@ Le tableau ci-dessous récapitule l'intégralité des villes composant notre cor
 L'évaluation des quatre scénarios comportementaux (Constant, Rush Hour, Max Jam, Bottleneck) sur ces six réseaux révèle l'influence déterminante de la géométrie de la voirie sur la résilience globale du trafic.
 
 ##### Morphologie Radiale Européenne (Paris, Madrid)
-Ces réseaux se caractérisent par une forte convergence des axes principaux vers des points centraux (structures en étoile). Lors du scénario *Bottleneck*, ces structures se révèlent vulnérables : la saturation d'un axe central remonte rapidement le long des voies d'accès radiales, bloquant les carrefours en amont (voir la cartographie de congestion de Paris en Figure 9). En raison de la densité des nœuds historiques et du manque de voies rapides de dérivation, les flux de trafic ne disposent pas d'alternatives viables, provoquant un effondrement de la vitesse moyenne et une hausse rapide des émissions de $CO_2$.
+Ces réseaux se caractérisent par une forte convergence des axes principaux vers des points centraux (structures en étoile). Lors du scénario *Bottleneck*, ces structures se révèlent vulnérables : la saturation d'un axe central remonte rapidement le long des voies d'accès radiales, bloquant les carrefours en amont (voir la cartographie de congestion de Paris en Figure 1). En raison de la densité des nœuds historiques et du manque de voies rapides de dérivation, les flux de trafic ne disposent pas d'alternatives viables, provoquant un effondrement de la vitesse moyenne et une hausse rapide des émissions de $CO_2$.
 
-Cette vulnérabilité structurelle et la propagation de la congestion le long des axes radiaux sont illustrées dans la Figure 9, qui présente l'état de saturation du réseau parisien obtenu par simulation microscopique.
+Cette vulnérabilité structurelle et la propagation de la congestion le long des axes radiaux sont illustrées dans la Figure 1, qui présente l'état de saturation du réseau parisien obtenu par simulation microscopique.
 
 
 ##### Grille Orthogonale Nord-Américaine (Los Angeles)
@@ -1098,15 +1086,15 @@ L'analyse physique des écarts prédictifs permet de valider ou de remettre en q
 *   **La friction cinématique mixte dans Siem Reap et Nara (Sous-estimations par l'IA) :** 
     Dans ces deux villes asiatiques sous fort trafic, le modèle sous-estime le $CO_2$ de $25\ \%$ à $30\ \%$. Le ratio par défaut de ces régions comporte **$60\ \%$ de motos**. Le modèle applique une pondération à la baisse du fait du faible facteur d'émission unitaire des deux-roues. Cependant, en simulation physique, l'insertion de 9 000 motos au milieu de 6 000 voitures dans un réseau dense crée une **friction cinématique extrême**. Le comportement de faufilement des motos perturbe les trajectoires des voitures et des camions, les forçant à des cycles arrêt-démarrage répétés qui augmentent significativement leur pollution thermique. Cet effet d'interaction dynamique n'est pas modélisé par la simple composition moyenne de la flotte.
 
-![**Figure 10 :** Analyse de corrélation et résidus (Scatter Plot) de comparaison entre le métamodèle IA et la simulation SUMO de référence sur les 27 scénarios de validation croisée.](images/real_vs_predicted_validation.png)
+![**Figure 2 :** Analyse de corrélation et résidus (Scatter Plot) de comparaison entre le métamodèle IA et la simulation SUMO de référence sur les 27 scénarios de validation croisée.](images/real_vs_predicted_validation.png)
 
 #### Interface d'aide à la décision : Dashboard Streamlit
 
 Pour valoriser opérationnellement notre modèle d'IA prédictif et le rendre exploitable par des planificateurs urbains non-spécialistes du code, nous avons développé une interface utilisateur interactive sous forme de tableau de bord **Streamlit**. L'application `app_thesis.py` se structure autour d'un design moderne avec une barre latérale de contrôle globale et **quatre onglets horizontaux positionnés en haut de l'écran** pour naviguer entre les différentes échelles d'analyse.
 
-Le tableau de bord développé permet de paramétrer interactivement les conditions de simulation et d'observer immédiatement les prédictions d'impact environnemental. La Figure 11 présente la structure générale de l'interface graphique de configuration et le panneau latéral permettant de régler les différents paramètres de simulation.
+Le tableau de bord développé permet de paramétrer interactivement les conditions de simulation et d'observer immédiatement les prédictions d'impact environnemental. La Figure 3 présente la structure générale de l'interface graphique de configuration et le panneau latéral permettant de régler les différents paramètres de simulation.
 
-![**Figure 11 :** Capture d'écran de l'interface utilisateur Streamlit - Configuration du scénario de trafic et des taux d'électromobilité.](images/streamlit-interface.png)
+![**Figure 3 :** Capture d'écran de l'interface utilisateur Streamlit - Configuration du scénario de trafic et des taux d'électromobilité.](images/streamlit-interface.png)
 
 ##### A. Organisation structurelle de l'interface graphique
 L'application est découpée en quatre sections fonctionnelles :
