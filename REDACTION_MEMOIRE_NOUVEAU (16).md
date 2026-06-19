@@ -16,11 +16,11 @@ Analyse Spectrale, Graphes Non-Normaux, Constante de Kreiss, Théorie des Pertur
 
 Je tiens à exprimer ma profonde gratitude à l'ensemble des personnes qui ont contribué au succès de ce travail de recherche et à l'aboutissement de mon cursus de fin d'études.
 
-Tout d'abord, je remercie chaleureusement mon tuteur académique, **M. Pierre Uzarralde**, pour son suivi rigoureux, ses conseils méthodologiques et son exigence scientifique tout au long de la rédaction de ce mémoire.
+Tout d'abord, je remercie chaleureusement mes tuteurs académiques, **M. Pierre Uzarralde** et **M. Alain Faye**, pour leur suivi rigoureux, leurs conseils méthodologiques et leur exigence scientifique tout au long de la rédaction de ce mémoire.
+
+Je tiens également à remercier l'École Hexagone, qui m'a permis de réaliser ce projet et d'effectuer ce séjour d'études et de recherche au Vietnam.
 
 Mes remerciements s'adressent également aux équipes de recherche en mobilité intelligente de l'Université **VinUniversity** à Hanoï (Vietnam), qui m'ont accueilli lors de mon séjour de recherche et m'ont fourni les moyens matériels et de collecte de données nécessaires à cette étude.
-
-Je remercie particulièrement les groupes **Vingroup**, **VinFast** et **V-Green** pour l'accès aux données opérationnelles du hub de recharge ultra-rapide de Sao Bien (Vinhomes Ocean Park), ainsi que la compagnie **GSM (Green and Smart Mobility)** pour les données relatives à leur flotte de taxis électriques.
 
 Enfin, je remercie chaleureusement ma famille et mes proches pour leur soutien indéfectible durant cette année académique.
 
