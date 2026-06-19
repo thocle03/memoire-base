@@ -107,7 +107,7 @@ Pour exposer notre travail avec toute la rigueur universitaire requise, ce mémo
 
 *   Le chapitre 1 réexplique le contexte général de l'urbanisation mondiale et de la décarbonation des transports, présente le verrou computationnel lié à l'utilisation des micro-simulateurs physiques en temps réel, et détaille le protocole d'acquisition et de traitement topologique des réseaux routiers à partir de cartes.
 *   Le chapitre 2 pose le cadre théorique et mathématique de notre méthodologie. Nous y détaillons les équations cinématiques du modèle de Krauß, le traitement géométrique de la connexité (Tarjan), le formalisme des graphes non-normaux (constante de Kreiss [9], perturbations de Kato [6], normes de Hardy) et l'architecture mathématique de notre modèle IA XGBoost à 47 descripteurs. Chaque formule est accompagnée d'une explication physique vulgarisée.
-*   Le chapitre 3 est notre chapitre principal d'applications et de validations. Le sous-chapitre 3.1 y présente l'étude de cas microscopique locale du hub de recharge de Vinhomes Ocean Park (Hanoï) à l'aide de données de flux de trafic calibrées par vision par ordinateur et ses scénarios de mitigation. Le sous-chapitre 3.2 y présente l'expérimentation macroscopique globale sur le corpus de 36 villes et 242 simulations, l'évaluation des performances informatiques (RAM, SWAP), la validation transversale (*cross-city*) de l'IA sur des villes cibles non entraînées, et la présentation du dashboard Streamlit interactif.
+*   Le chapitre 3 est notre chapitre d'applications et de validations. Le sous-chapitre 3.1 y présente l'étude de cas microscopique locale du hub de recharge de Vinhomes Ocean Park (Hanoï) à l'aide de données de flux de trafic calibrées par vision par ordinateur et ses scénarios de mitigation. Le sous-chapitre 3.2 y présente l'expérimentation macroscopique globale sur le corpus de 36 villes et 242 simulations, l'évaluation des performances informatiques (RAM, SWAP), la validation transversale (*cross-city*) de l'IA sur des villes cibles non entraînées, et la présentation du dashboard interactif.
 
 \newpage
 
@@ -139,8 +139,10 @@ Face à ce verrou technologique, la problématique de ce travail s'établit ains
 
 Pour y répondre, nous développons un **métamodèle d'Intelligence Artificielle Topologique Spectrale**. L'hypothèse scientifique fondamentale de ce travail est que la structure géométrique et mathématique du réseau routier (caractérisée par les valeurs propres et les valeurs singulières de sa matrice d'adjacence d'impédance) contient l'empreinte de sa résilience cinématique. En apprenant à un modèle d'apprentissage supervisé (XGBoost) la relation non-linéaire entre ces descripteurs spectraux, le volume de trafic et la pollution générée (vérité terrain issue de simulations SUMO préalables), nous pouvons prédire instantanément (en 0,2 seconde) le bilan carbone d'une ville avec une précision supérieure à 95 %, éliminant ainsi le besoin de calculs physiques lourds en phase opérationnelle.
 
+\newpage
 
-### 1.2 Traitement topologique des réseaux urbains
+# CHAPITRE 2 : CONSTRUCTION DE LA BASE DE CONNAISSANCE 
+### 2.1 Traitement topologique des réseaux urbains
 
 La mise en œuvre de notre approche prédictive repose sur une chaîne de traitement de la géométrie urbaine, convertissant des cartes brutes en graphes mathématiques exploitables.
 
@@ -167,19 +169,56 @@ Pour transformer le fichier `.osm` brut en un réseau logique routier unifié, n
 
 Le produit final de cette chaîne de traitement est un fichier XML unique nommé **`net.xml`**. Ce fichier contient le graphe épuré et complet de la ville, décrivant de manière structurée les nœuds d'intersection (`<junction>`), les arêtes routières orientées (`<edge>`), les voies de circulation associées (`<lane>`) et les liaisons de carrefour (`<connection>`). 
 
+--a faire
+*   **nodes (Nœuds) :** Le nombre total d'intersections physiques du réseau routier. Il s'agit de la dimension $n$ de la matrice d'adjacence $A$.
+
+*   **edges (Arêtes) :** Le nombre total de tronçons routiers orientés reliant les nœuds. C'est le nombre de connexions directionnelles du graphe.
+
+*   **density (Densité) :** Ratio entre le nombre d'arêtes réelles et le nombre maximal théorique d'arêtes possibles dans un graphe de taille $n$, mesurant la compacité spatiale du réseau routier.
+
+*   **avg_degree (Degré moyen) :** Nombre moyen d'arêtes connectées à un nœud. Un degré moyen proche de 2 indique un réseau routier linéaire simple, tandis qu'une valeur supérieure reflète des intersections complexes (échangeurs, ronds-points).
+
+*   **asymmetry_index (Indice d'asymétrie) :** Proportion de rues à sens unique dans le réseau. Un indice proche de 1 signifie que la quasi-totalité des voies sont à sens unique, ce qui augmente la non-normalité de la matrice.
+
+*   **sources_ratio & sinks_ratio (Ratio de sources et de puits) :** Proportion de nœuds n'ayant que des voies sortantes (sources) ou uniquement des voies entrantes (puits). Ces nœuds représentent les zones d'injection et d'absorption naturelle des véhicules aux frontières de la ville.
+
+##### Tableau 1 : Exemples
+
+| City | Origin | Nodes | Edges | Density | Degree | Index | Ratio | Ratio |
+| :------------------ | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Nairobi** | Africa | 40 685 | 89 950 | 5.43e-05 | 2.21 | -0.44 | 0.002 | 0.002 |
+| **Marseille** | Europe | 17 035 | 34 858 | 1.20e-04 | 2.05 | -0.14 | 0.021 | 0.020 |
+| **Le Caire** | Africa | 13 095 | 29 575 | 1.72e-04 | 2.26 | -0.33 | 0.005 | 0.005 |
+| **Londres** | Europe | 12 415 | 28 623 | 1.86e-04 | 2.31 | -0.32 | 0.021 | 0.014 |
+| **Casablanca** | Africa | 9 493 | 22 098 | 2.45e-04 | 2.33 | -0.28 | 0.015 | 0.015 |
+| **Berlin** | Europe | 8 855 | 21 043 | 2.68e-04 | 2.38 | -0.40 | 0.007 | 0.006 |
+| **Amsterdam** | Europe | 7 088 | 16 073 | 3.20e-04 | 2.27 | -0.13 | 0.035 | 0.029 |
+| **Lyon** | Europe | 6 356 | 11 661 | 2.89e-04 | 1.83 | 0.18 | 0.033 | 0.030 |
+| **Los Angeles** | North_America | 5 947 | 13 810 | 3.91e-04 | 2.32 | -0.35 | 0.008 | 0.009 |
+| **Madrid** | Europe | 5 651 | 10 567 | 3.31e-04 | 1.87 | 0.37 | 0.041 | 0.038 |
+| **Genève** | Europe | 5 634 | 12 314 | 3.88e-04 | 2.19 | -0.23 | 0.021 | 0.019 |
+| **Paris** | Europe | 5 199 | 9 904 | 3.66e-04 | 1.90 | 0.19 | 0.048 | 0.042 |
+| **Sydney** | Oceania | 4 823 | 10 483 | 4.51e-04 | 2.17 | -0.25 | 0.024 | 0.021 |
+| **Dubaï** | Asia_Middle_East | 3 841 | 6 476 | 4.39e-04 | 1.69 | 0.37 | 0.039 | 0.037 |
+| **Hanoï** | Asia_Middle_East | 3 195 | 7 256 | 7.11e-04 | 2.27 | -0.28 | 0.015 | 0.013 |
+| **Strasbourg** | Europe | 2 945 | 6 070 | 7.00e-04 | 2.06 | -0.27 | 0.036 | 0.034 |
+| **Buenos Aires** | South_America | 2 820 | 5 637 | 7.09e-04 | 2.00 | 0.49 | 0.018 | 0.017 |
+| **Versailles** | Europe | 1 794 | 3 686 | 1.15e-03 | 2.05 | -0.08 | 0.046 | 0.035 |
+| **Rio de Janeiro** | South_America | 1 628 | 3 092 | 1.17e-03 | 1.90 | 0.16 | 0.015 | 0.014 |
+| **Chamonix** | Europe | 848 | 1 896 | 2.64e-03 | 2.24 | -0.35 | 0.009 | 0.012 |
+| **Monaco** | Europe | 672 | 1 286 | 2.85e-03 | 1.91 | 0.00 | 0.039 | 0.039 |
+
+*Explication physique des variables topologiques du Tableau 1 :*
+
+
+
 #### Rôle pivot du fichier net.xml
 Ce fichier `net.xml` joue un rôle de passerelle et de pivot dans notre méthodologie :
 
 *   **En physique :** Il constitue l'environnement spatial dans lequel les flux de véhicules sont simulés dans SUMO pour collecter les données d'émissions réelles de $CO_2$ (vérité terrain d'apprentissage).
 *   **En mathématiques :** Il est lu par notre pipeline Python (bibliothèque `sumolib`) pour construire la matrice d'adjacence pondérée par l'impédance physique des tronçons, de laquelle nous extrayons les descripteurs spectraux indispensables aux prédictions de l'IA (comme décrit au Chapitre 2).
 
-\newpage
-
-# CHAPITRE 2 : MODÉLISATION CINÉMATIQUE ET FONDATIONS THÉORIQUES DE LA TOPOLOGIE SPECTRALE
-
-Le développement d'un modèle d'intelligence artificielle capable de se substituer à la simulation physique requiert une compréhension intime des équations cinématiques qui régissent le déplacement des véhicules (microscopique) et des propriétés topologiques du réseau qui gouvernent l'écoulement des flux (macroscopique). Ce chapitre pose le formalisme mathématique de ces deux échelles et explicite physiquement la signification de chaque formule.
-
-### 2.1 Le moteur behavioriste de SUMO
+### 2.2 Le moteur behavioriste de SUMO
 
 #### Abstraction de la voirie
 Le simulateur SUMO modélise les réseaux de transport sous forme de réseaux logiques basés sur la théorie des graphes orientés. Dans ce formalisme, chaque intersection physique est représentée par un nœud unique doté d'une géométrie polygonale décrivant sa surface de jonction. Les tronçons routiers reliant les nœuds sont modélisés par des arêtes, subdivisées en une ou plusieurs voies de circulation (*lanes*).
@@ -245,7 +284,19 @@ $$D_{Euclidienne}(o, d) = \sqrt{(x_d - x_o)^2 + (y_d - y_o)^2} \ge 300 \text{ m�
 
 Cette contrainte force le planificateur d'itinéraires à rejeter les trajets de très courte distance. En éliminant ces mouvements parasitaires qui se limitent à des phases d'insertion-sortie immédiates, le filtre garantit que l'ensemble de la flotte simulée s'insère dans les flux de transit principaux du réseau.
 
-### 2.2 Théorie des graphes non-normaux et signatures spectrales
+Voici un exemple de ce qu'on obtient après une simulation SUMO d'une heure de trafic, sur la ville de Paris, avec l'intensité du traffic représentée par la couleur des segments routiers :
+
+![**Figure 9 :** Visualisation SIG de la ville test (Illustration de la cartographie des congestions à Paris) - Segments routiers colorés du gris (fluide) au rouge (saturation complète / gridlock).](images/paris-heat_map_trafic.png)
+
+
+\newpage
+
+# CHAPITRE 3 : CHAPITRE MISE EN PLACE D'UN MODELE PREDICTIF 
+
+Le développement d'un modèle d'intelligence artificielle capable de se substituer à la simulation physique requiert une compréhension intime des équations cinématiques qui régissent le déplacement des véhicules (microscopique) et des propriétés topologiques du réseau qui gouvernent l'écoulement des flux (macroscopique). Ce chapitre pose le formalisme mathématique de ces deux échelles et explicite physiquement la signification de chaque formule.
+
+
+### 3.1 Fondation théorique de la topologie spectrale des réseaux routiers
 
 #### Formalisation matricielle et pondération d'impédance
 Pour modéliser mathématiquement le réseau routier, nous le représentons sous la forme d'un graphe orienté et pondéré $G = (V, E)$, où $V$ désigne l'ensemble des nœuds ($n = |V|$), représentant les intersections physiques du réseau, et $E$ désigne l'ensemble des arêtes orientées ($m = |E|$), modélisant les tronçons routiers.
@@ -358,47 +409,8 @@ L'espace des contrôles admissibles $\mathcal{B}$ est structuré par des contrai
 #### Données Expérimentales d'Analyse Topologique et Spectrale
 L'analyse systématique des réseaux routiers de notre base de données a permis d'extraire les caractéristiques topologiques et spectrales présentées dans les tableaux ci-dessous.
 
-##### Tableau 1 : Caractéristiques Topologiques Générales des Villes
 
-| City | Origin | Nodes | Edges | Density | Degree | Index | Ratio | Ratio |
-| :------------------ | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Nairobi** | Africa | 40 685 | 89 950 | 5.43e-05 | 2.21 | -0.44 | 0.002 | 0.002 |
-| **Marseille** | Europe | 17 035 | 34 858 | 1.20e-04 | 2.05 | -0.14 | 0.021 | 0.020 |
-| **Le Caire** | Africa | 13 095 | 29 575 | 1.72e-04 | 2.26 | -0.33 | 0.005 | 0.005 |
-| **Londres** | Europe | 12 415 | 28 623 | 1.86e-04 | 2.31 | -0.32 | 0.021 | 0.014 |
-| **Casablanca** | Africa | 9 493 | 22 098 | 2.45e-04 | 2.33 | -0.28 | 0.015 | 0.015 |
-| **Berlin** | Europe | 8 855 | 21 043 | 2.68e-04 | 2.38 | -0.40 | 0.007 | 0.006 |
-| **Amsterdam** | Europe | 7 088 | 16 073 | 3.20e-04 | 2.27 | -0.13 | 0.035 | 0.029 |
-| **Lyon** | Europe | 6 356 | 11 661 | 2.89e-04 | 1.83 | 0.18 | 0.033 | 0.030 |
-| **Los Angeles** | North_America | 5 947 | 13 810 | 3.91e-04 | 2.32 | -0.35 | 0.008 | 0.009 |
-| **Madrid** | Europe | 5 651 | 10 567 | 3.31e-04 | 1.87 | 0.37 | 0.041 | 0.038 |
-| **Genève** | Europe | 5 634 | 12 314 | 3.88e-04 | 2.19 | -0.23 | 0.021 | 0.019 |
-| **Paris** | Europe | 5 199 | 9 904 | 3.66e-04 | 1.90 | 0.19 | 0.048 | 0.042 |
-| **Sydney** | Oceania | 4 823 | 10 483 | 4.51e-04 | 2.17 | -0.25 | 0.024 | 0.021 |
-| **Dubaï** | Asia_Middle_East | 3 841 | 6 476 | 4.39e-04 | 1.69 | 0.37 | 0.039 | 0.037 |
-| **Hanoï** | Asia_Middle_East | 3 195 | 7 256 | 7.11e-04 | 2.27 | -0.28 | 0.015 | 0.013 |
-| **Strasbourg** | Europe | 2 945 | 6 070 | 7.00e-04 | 2.06 | -0.27 | 0.036 | 0.034 |
-| **Buenos Aires** | South_America | 2 820 | 5 637 | 7.09e-04 | 2.00 | 0.49 | 0.018 | 0.017 |
-| **Versailles** | Europe | 1 794 | 3 686 | 1.15e-03 | 2.05 | -0.08 | 0.046 | 0.035 |
-| **Rio de Janeiro** | South_America | 1 628 | 3 092 | 1.17e-03 | 1.90 | 0.16 | 0.015 | 0.014 |
-| **Chamonix** | Europe | 848 | 1 896 | 2.64e-03 | 2.24 | -0.35 | 0.009 | 0.012 |
-| **Monaco** | Europe | 672 | 1 286 | 2.85e-03 | 1.91 | 0.00 | 0.039 | 0.039 |
-
-*Explication physique des variables topologiques du Tableau 1 :*
-
-*   **nodes (Nœuds) :** Le nombre total d'intersections physiques du réseau routier. Il s'agit de la dimension $n$ de la matrice d'adjacence $A$.
-
-*   **edges (Arêtes) :** Le nombre total de tronçons routiers orientés reliant les nœuds. C'est le nombre de connexions directionnelles du graphe.
-
-*   **density (Densité) :** Ratio entre le nombre d'arêtes réelles et le nombre maximal théorique d'arêtes possibles dans un graphe de taille $n$, mesurant la compacité spatiale du réseau routier.
-
-*   **avg_degree (Degré moyen) :** Nombre moyen d'arêtes connectées à un nœud. Un degré moyen proche de 2 indique un réseau routier linéaire simple, tandis qu'une valeur supérieure reflète des intersections complexes (échangeurs, ronds-points).
-
-*   **asymmetry_index (Indice d'asymétrie) :** Proportion de rues à sens unique dans le réseau. Un indice proche de 1 signifie que la quasi-totalité des voies sont à sens unique, ce qui augmente la non-normalité de la matrice.
-
-*   **sources_ratio & sinks_ratio (Ratio de sources et de puits) :** Proportion de nœuds n'ayant que des voies sortantes (sources) ou uniquement des voies entrantes (puits). Ces nœuds représentent les zones d'injection et d'absorption naturelle des véhicules aux frontières de la ville.
-
-##### Tableau 2 : Métriques Spectrales de Non-Normalité (Matrices Non-Pondérées)
+##### Tableau 2 : Exemple
 
 | City | Non normalness | Spectral radius | Sigma max | H2 norm | Kreiss constant |
 | :------------------ | :---: | :---: | :---: | :---: | :---: |
@@ -436,7 +448,7 @@ L'analyse systématique des réseaux routiers de notre base de données a permis
 
 *   **kreiss_constant (Constante de Kreiss $K$) :** Borne supérieure de l'amplification transitoire. Elle sert d'indicateur de vulnérabilité structurelle de la ville face à des blocages en cascade (effet domino ou gridlock).
 
-### 2.3 Le modèle d'intelligence artificielle XGBoost
+### 3.2 Le modèle d'IA de prediction instantanée : une IA topologique 
 
 #### Formulation mathématique de la fonction objective
 L'algorithme XGBoost (*eXtreme Gradient Boosting*) minimise une fonction d'apprentissage objective régularisée à l'étape $t$ pour l'arbre $f_t$ :
@@ -707,9 +719,11 @@ Le modèle entraîné est sauvegardé dans le répertoire `models/` sous forme d
 
 \newpage
 
-# CHAPITRE 3 : APPLICATIONS EMPIRIQUES, ÉTUDES DE CAS ET VALIDATION COMPARATIVE
+# CHAPITRE 4 : APPLICATIONS EMPIRIQUES, ÉTUDES DE CAS ET VALIDATIONS COMPARATIVES
 
-### 3.1 Analyse microscopique locale – Le jumeau numérique de Vinhomes Ocean Park (Hanoï)
+Ce chapitre présente les applications concrètes de notre démarche prédictive. L'étude de cas locale et microscopique présentée dans la section 4.1 a été menée dans le cadre d'un stage de recherche (*internship*) au sein de l'université **VinUniversity** (Hanoï, Vietnam). Ce travail sur le terrain a été l'occasion de se familiariser avec le micro-simulateur physique SUMO et de maîtriser la configuration de simulations microscopiques réalistes. Cette expérience technique et pratique initiale a constitué le socle indispensable pour appréhender les dynamiques de trafic complexes et pouvoir, par la suite, concevoir et exécuter des simulations physiques à grande échelle sur le corpus multi-villes présenté dans la section 4.2.
+
+### 4.1 Analyse microscopique locale – Le jumeau numérique de Vinhomes Ocean Park (Hanoï)
 
 Pour valider l'interaction entre la micro-simulation et les données de terrain, et pour illustrer la transition vers l'électromobilité sur un cas concret, nous avons développé un jumeau numérique microscopique de haute-fidélité. Ce modèle local sert à évaluer l'impact cinématique et environnemental de la recharge des flottes électriques en zone hyper-dense.
 
@@ -837,13 +851,15 @@ Un régime transitoire de montée en charge avec un volume moyen de **123,83 vé
 *   *Standard Cars (ICE) :* **32,33 unités** (**26,1 %**).
 *   *Electric Vehicles :* **33,50 unités** (**27,1 %**).
 
-![Évolution de la structure modale du trafic selon les périodes (Midi régulier, Transition, Vacances)](images/vacation_comparison.png)
+##### Tableau 4e : Synthèse de la charge de trafic et du taux de pénétration des véhicules électriques sur l'avenue Sao Bien
+| Profil horaire / Journée | Volume horaire total (véh/h) | Volume moyen (véh/10 min) | Part Deux-roues (%) | Part Quatre roues (ICE+EV) (%) | Taux de pénétration EV (sur 4 roues) (%) |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Matinée creuse (11h00)** | ~600 | 100,00 | 55,0 % | 45,0 % | 48,0 % |
+| **Midi régulier (12h00) - Baseline** | 804 | 134,10 | 50,7 % | 49,3 % | 54,1 % |
+| **Période transitoire (Pre-Vacances)** | 743 | 123,83 | 46,8 % | 53,2 % | 50,9 % |
+| **Midi Vacances (Holiday Reversal)** | 703 | 117,17 | 39,7 % | 60,3 % | 66,3 % |
+| **Soirée de pointe (17h00) - Rush Hour** | 1 366 | 227,67 | 62,8 % | 37,2 % | 59,3 % |
 
-![Taux de pénétration des véhicules électriques au sein du segment des quatre roues](images/ev_distribution_bar.png)
-
-![Évolution journalière des volumes de trafic par créneaux horaires (11h00, 12h00, 17h00) durant la campagne de mesures à Sao Bien (Hanoï)](images/daily_timeline_by_hour.png)
-
-![Profil d'intensité horaire global du trafic sur l'avenue Sao Bien](images/hourly_peaks.png)
 #### Modélisation stochastique de la recharge et initialisation par Warm-Start
 
 ##### Le modèle de temps d'arrêt stochastique (Stochastic Dwell Time)
@@ -879,7 +895,7 @@ $$t_{res, j} \sim \mathcal{U}(300, 900) \text{ secondes}$$
 
 Ainsi, dès la première seconde de la simulation physique, les bornes de recharge présentent un niveau d'encombrement réaliste et libèrent leurs places de manière échelonnée dans le temps, offrant une reproduction fidèle des dynamiques d'attente et d'insertion vécues par les conducteurs arrivant sur site.
 
-### 3.2 Expérimentation globale, inférence IA et validation comparative
+### 4.2 Expérimentation globale, inférence IA et validation comparative
 
 #### Constitution du corpus d'apprentissage à grande échelle
 
@@ -946,47 +962,6 @@ Le tableau ci-dessous récapitule l'intégralité des villes composant notre cor
 | **Hue** | Asia_Middle_East | ~2 000 | Descripteurs topologiques uniquement |
 | **Hobart** | Oceania | 9 970 | 14 970 · 56 340 |
 
-##### Particularités topologiques et morphologiques des villes d'entraînement :
-
-*   **Paris** : Réseau radial organique hyperdense, nombreux sens uniques, goulots sur les grandes artères.
-*   **Versailles** : Réseau de ville moyenne, plan de ville royal en étoile + damier.
-*   **Madrid** : Grille orthogonale élargie, avenues majeures et périphériques urbains.
-*   **London** (Londres) : Réseau médiéval très dense, rues étroites et irrégulières.
-*   **Casablanca** : Mix de grille coloniale française et de périphérie étalée en développement.
-*   **Monaco** : Réseau balnéaire ultra-dense, fortement contraint en altitude.
-*   **Chamonix** : Réseau de montagne linéaire, structuré autour d'une seule vallée principale.
-*   **Sydney** : Réseau côtier avec CBD très concentré, baies réduisant la connectivité générale.
-*   **Rio de Janeiro** : Réseau côtier sinueux, fortement contraint par la topographie montagneuse et la mer.
-*   **Tours** : Centre historique médiéval avec le fleuve de la Loire agissant comme un goulot d'étranglement structurel majeur.
-*   **Utrecht** : Réseau concentrique de boucles fermées, canaux et très forte présence d'aménagements cyclables.
-*   **Windhoek** : Structure urbaine très étalée à faible densité, avec de larges artères réduisant la congestion naturelle.
-*   **Chiang Mai** : Fossé carré historique (Moat) créant une boucle de circulation périphérique obligatoire.
-*   **Chefchaouen** : Médina berbère montagneuse très serrée aux rues extrêmement étroites, constituant un réseau quasi piéton.
-*   **Wellington** : Réseau côtier et vallonné autour d'une baie, connectivité réduite dépendante de ponts et tunnels.
-*   **Ushuaia** : Réseau linéaire contraint par la Terre de Feu, structuré autour d'une seule artère principale.
-*   **Valparaíso** : Réseau en amphithéâtre avec des pentes extrêmement fortes modifiant l'empreinte cinématique de charge.
-*   **Victoria (Seychelles)** : Réseau insulaire compact à très faible étendue géographique.
-*   **Sousse** : Médina historique dense et fermée en interface directe avec des boulevards périphériques saturés.
-*   **Yazd** : Tissu urbain désertique avec des rues tortueuses et de nombreuses impasses.
-*   **Nairobi** : Mégalopole africaine en développement rapide, marquée par une forte asymétrie centre/périphérie.
-*   **Marseille** : Réseau portuaire méditerranéen dense avec un relief prononcé de collines.
-*   **Cairo** (Le Caire) : Réseau géant très dense à forte composante autoroutière urbaine traversé par le Nil.
-*   **Berlin** : Grille orthogonale régulière post-reconstruction couplée à des axes radiaux historiques.
-*   **Amsterdam** : Réseau concentrique de canaux avec une très forte densité de cyclistes.
-*   **Lyon** : Réseau de type péninsule encadré par le Rhône et la Saône, créant des goulots structurels d'accès.
-*   **Los Angeles** : Grande grille californienne régulière à grande échelle, vulnérable aux saturations synchronisées.
-*   **Geneva** (Genève) : Réseau lacustre avec une enclave franco-suisse limitant les débouchés du transit.
-*   **Dubai** (Dubaï) : Réseau linéaire côtier très étalé, avec une dépendance quasi absolue aux autoroutes urbaines.
-*   **Hanoi** (Hanoï) : Réseau dense à prédominance historique de deux-roues et de nombreuses impasses.
-*   **Strasbourg** : Réseau insulaire contraint par l'Ill et le Rhin.
-*   **Buenos Aires** : Grande grille orthogonale coloniale espagnole avec de très larges boulevards de transit.
-*   **Queenstown** : Réseau alpin compact contraint par le lac Wakatipu et les montagnes.
-*   **Hue** (Hue) : Réseau de ville impériale vietnamienne, marqué par un fossé défensif et un axe fluvial contraignant.
-*   **Hobart** : Réseau estuarien dépendant de ponts critiques traversant la Derwent River.
-
-
-Les villes marquées **"Descripteurs topologiques uniquement"** contribuent pleinement à l'espace de représentation spectral de l'IA. Même sans simulation SUMO associée, leurs 47 descripteurs spectraux servent de **voisins morphologiques** lors de l'inférence barycentrique : quand l'IA prédit les émissions d'une nouvelle ville inconnue, elle identifie les villes d'apprentissage les plus proches géométriquement dans l'espace spectral et pondère leurs connaissances accumulées pour construire l'estimation finale.
-
 #### Analyse comparative des résiliences géométriques : Radial européen vs Grille orthogonale vs Boucles fermées
 
 L'évaluation des quatre scénarios comportementaux (Constant, Rush Hour, Max Jam, Bottleneck) sur ces six réseaux révèle l'influence déterminante de la géométrie de la voirie sur la résilience globale du trafic.
@@ -996,7 +971,6 @@ Ces réseaux se caractérisent par une forte convergence des axes principaux ver
 
 Cette vulnérabilité structurelle et la propagation de la congestion le long des axes radiaux sont illustrées dans la Figure 9, qui présente l'état de saturation du réseau parisien obtenu par simulation microscopique.
 
-![**Figure 9 :** Visualisation SIG de la ville test (Illustration de la cartographie des congestions à Paris) - Segments routiers colorés du gris (fluide) au rouge (saturation complète / gridlock).](images/paris-heat_map_trafic.png)
 
 ##### Grille Orthogonale Nord-Américaine (Los Angeles)
 La structure régulière de Los Angeles présente un comportement différent. Grâce à la régularité des carrefours et à la redondance des itinéraires parallèles, le réseau absorbe mieux les surcharges locales du scénario *Bottleneck*. Les véhicules se répartissent d'eux-mêmes sur les axes adjacents via l'algorithme de routage dynamique. Cependant, cette structure est sensible au scénario *Max Jam* : le volume important d'intersections régulées par des feux de signalisation crée des files d'attente successives qui saturent les intersections si l'injection de véhicules est trop massive.
@@ -1342,3 +1316,45 @@ La boucle d'optimisation hybride (IA-SUMO) constitue la perspective ultime de ce
 | 2026-04-11 16:47:14 | **Paris** | 1134.40 s | 915.39 s | 1.20 s | **2051.00 s** |
 | 2026-04-11 16:11:53 | **Versailles** | 17.36 s | 201.73 s | 0.26 s | **219.36 s** |
 | 2026-04-11 13:25:05 | **Paris** | 1145.37 s | 892.65 s | 1.17 s | **2039.20 s** |
+
+
+##### Particularités topologiques et morphologiques des villes d'entraînement :
+
+*   **Paris** : Réseau radial organique hyperdense, nombreux sens uniques, goulots sur les grandes artères.
+*   **Versailles** : Réseau de ville moyenne, plan de ville royal en étoile + damier.
+*   **Madrid** : Grille orthogonale élargie, avenues majeures et périphériques urbains.
+*   **London** (Londres) : Réseau médiéval très dense, rues étroites et irrégulières.
+*   **Casablanca** : Mix de grille coloniale française et de périphérie étalée en développement.
+*   **Monaco** : Réseau balnéaire ultra-dense, fortement contraint en altitude.
+*   **Chamonix** : Réseau de montagne linéaire, structuré autour d'une seule vallée principale.
+*   **Sydney** : Réseau côtier avec CBD très concentré, baies réduisant la connectivité générale.
+*   **Rio de Janeiro** : Réseau côtier sinueux, fortement contraint par la topographie montagneuse et la mer.
+*   **Tours** : Centre historique médiéval avec le fleuve de la Loire agissant comme un goulot d'étranglement structurel majeur.
+*   **Utrecht** : Réseau concentrique de boucles fermées, canaux et très forte présence d'aménagements cyclables.
+*   **Windhoek** : Structure urbaine très étalée à faible densité, avec de larges artères réduisant la congestion naturelle.
+*   **Chiang Mai** : Fossé carré historique (Moat) créant une boucle de circulation périphérique obligatoire.
+*   **Chefchaouen** : Médina berbère montagneuse très serrée aux rues extrêmement étroites, constituant un réseau quasi piéton.
+*   **Wellington** : Réseau côtier et vallonné autour d'une baie, connectivité réduite dépendante de ponts et tunnels.
+*   **Ushuaia** : Réseau linéaire contraint par la Terre de Feu, structuré autour d'une seule artère principale.
+*   **Valparaíso** : Réseau en amphithéâtre avec des pentes extrêmement fortes modifiant l'empreinte cinématique de charge.
+*   **Victoria (Seychelles)** : Réseau insulaire compact à très faible étendue géographique.
+*   **Sousse** : Médina historique dense et fermée en interface directe avec des boulevards périphériques saturés.
+*   **Yazd** : Tissu urbain désertique avec des rues tortueuses et de nombreuses impasses.
+*   **Nairobi** : Mégalopole africaine en développement rapide, marquée par une forte asymétrie centre/périphérie.
+*   **Marseille** : Réseau portuaire méditerranéen dense avec un relief prononcé de collines.
+*   **Cairo** (Le Caire) : Réseau géant très dense à forte composante autoroutière urbaine traversé par le Nil.
+*   **Berlin** : Grille orthogonale régulière post-reconstruction couplée à des axes radiaux historiques.
+*   **Amsterdam** : Réseau concentrique de canaux avec une très forte densité de cyclistes.
+*   **Lyon** : Réseau de type péninsule encadré par le Rhône et la Saône, créant des goulots structurels d'accès.
+*   **Los Angeles** : Grande grille californienne régulière à grande échelle, vulnérable aux saturations synchronisées.
+*   **Geneva** (Genève) : Réseau lacustre avec une enclave franco-suisse limitant les débouchés du transit.
+*   **Dubai** (Dubaï) : Réseau linéaire côtier très étalé, avec une dépendance quasi absolue aux autoroutes urbaines.
+*   **Hanoi** (Hanoï) : Réseau dense à prédominance historique de deux-roues et de nombreuses impasses.
+*   **Strasbourg** : Réseau insulaire contraint par l'Ill et le Rhin.
+*   **Buenos Aires** : Grande grille orthogonale coloniale espagnole avec de très larges boulevards de transit.
+*   **Queenstown** : Réseau alpin compact contraint par le lac Wakatipu et les montagnes.
+*   **Hue** (Hue) : Réseau de ville impériale vietnamienne, marqué par un fossé défensif et un axe fluvial contraignant.
+*   **Hobart** : Réseau estuarien dépendant de ponts critiques traversant la Derwent River.
+
+
+Les villes marquées **"Descripteurs topologiques uniquement"** contribuent pleinement à l'espace de représentation spectral de l'IA. Même sans simulation SUMO associée, leurs 47 descripteurs spectraux servent de **voisins morphologiques** lors de l'inférence barycentrique : quand l'IA prédit les émissions d'une nouvelle ville inconnue, elle identifie les villes d'apprentissage les plus proches géométriquement dans l'espace spectral et pondère leurs connaissances accumulées pour construire l'estimation finale.

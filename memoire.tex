@@ -619,16 +619,15 @@ ce mémoire est structuré en trois grands chapitres :
   mathématique de notre modèle IA XGBoost à 47 descripteurs. Chaque
   formule est accompagnée d'une explication physique vulgarisée.
 \item
-  Le chapitre 3 est notre chapitre principal d'applications et de
-  validations. Le sous-chapitre 3.1 y présente l'étude de cas
-  microscopique locale du hub de recharge de Vinhomes Ocean Park (Hanoï)
-  à l'aide de données de flux de trafic calibrées par vision par
-  ordinateur et ses scénarios de mitigation. Le sous-chapitre 3.2 y
-  présente l'expérimentation macroscopique globale sur le corpus de 36
-  villes et 242 simulations, l'évaluation des performances informatiques
-  (RAM, SWAP), la validation transversale (\emph{cross-city}) de l'IA
-  sur des villes cibles non entraînées, et la présentation du dashboard
-  Streamlit interactif.
+  Le chapitre 3 est notre chapitre d'applications et de validations. Le
+  sous-chapitre 3.1 y présente l'étude de cas microscopique locale du
+  hub de recharge de Vinhomes Ocean Park (Hanoï) à l'aide de données de
+  flux de trafic calibrées par vision par ordinateur et ses scénarios de
+  mitigation. Le sous-chapitre 3.2 y présente l'expérimentation
+  macroscopique globale sur le corpus de 36 villes et 242 simulations,
+  l'évaluation des performances informatiques (RAM, SWAP), la validation
+  transversale (\emph{cross-city}) de l'IA sur des villes cibles non
+  entraînées, et la présentation du dashboard interactif.
 \end{itemize}
 
 \newpage
@@ -766,7 +765,12 @@ prédire instantanément (en 0,2 seconde) le bilan carbone d'une ville
 avec une précision supérieure à 95 \%, éliminant ainsi le besoin de
 calculs physiques lourds en phase opérationnelle.
 
-\subsubsection{1.2 Traitement topologique des réseaux
+\newpage
+
+\section{CHAPITRE 2 : CONSTRUCTION DE LA BASE DE
+CONNAISSANCE}\label{chapitre-2-construction-de-la-base-de-connaissance}
+
+\subsubsection{2.1 Traitement topologique des réseaux
 urbains}\label{traitement-topologique-des-ruxe9seaux-urbains}
 
 La mise en œuvre de notre approche prédictive repose sur une chaîne de
@@ -863,6 +867,121 @@ routières orientées (\texttt{\textless{}edge\textgreater{}}), les voies
 de circulation associées (\texttt{\textless{}lane\textgreater{}}) et les
 liaisons de carrefour (\texttt{\textless{}connection\textgreater{}}).
 
+--a faire * \textbf{nodes (Nœuds) :} Le nombre total d'intersections
+physiques du réseau routier. Il s'agit de la dimension \(n\) de la
+matrice d'adjacence \(A\).
+
+\begin{itemize}
+\item
+  \textbf{edges (Arêtes) :} Le nombre total de tronçons routiers
+  orientés reliant les nœuds. C'est le nombre de connexions
+  directionnelles du graphe.
+\item
+  \textbf{density (Densité) :} Ratio entre le nombre d'arêtes réelles et
+  le nombre maximal théorique d'arêtes possibles dans un graphe de
+  taille \(n\), mesurant la compacité spatiale du réseau routier.
+\item
+  \textbf{avg\_degree (Degré moyen) :} Nombre moyen d'arêtes connectées
+  à un nœud. Un degré moyen proche de 2 indique un réseau routier
+  linéaire simple, tandis qu'une valeur supérieure reflète des
+  intersections complexes (échangeurs, ronds-points).
+\item
+  \textbf{asymmetry\_index (Indice d'asymétrie) :} Proportion de rues à
+  sens unique dans le réseau. Un indice proche de 1 signifie que la
+  quasi-totalité des voies sont à sens unique, ce qui augmente la
+  non-normalité de la matrice.
+\item
+  \textbf{sources\_ratio \& sinks\_ratio (Ratio de sources et de puits)
+  :} Proportion de nœuds n'ayant que des voies sortantes (sources) ou
+  uniquement des voies entrantes (puits). Ces nœuds représentent les
+  zones d'injection et d'absorption naturelle des véhicules aux
+  frontières de la ville.
+\end{itemize}
+
+\subparagraph{Tableau 1 : Exemples}\label{tableau-1-exemples}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.3276}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0690}}
+  >{\centering\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0862}}
+  >{\centering\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0862}}
+  >{\centering\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0862}}
+  >{\centering\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0862}}
+  >{\centering\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0862}}
+  >{\centering\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0862}}
+  >{\centering\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0862}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+City
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Origin
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Nodes
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Edges
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Density
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Degree
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Index
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Ratio
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Ratio
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Nairobi} & Africa & 40 685 & 89 950 & 5.43e-05 & 2.21 & -0.44 &
+0.002 & 0.002 \\
+\textbf{Marseille} & Europe & 17 035 & 34 858 & 1.20e-04 & 2.05 & -0.14
+& 0.021 & 0.020 \\
+\textbf{Le Caire} & Africa & 13 095 & 29 575 & 1.72e-04 & 2.26 & -0.33 &
+0.005 & 0.005 \\
+\textbf{Londres} & Europe & 12 415 & 28 623 & 1.86e-04 & 2.31 & -0.32 &
+0.021 & 0.014 \\
+\textbf{Casablanca} & Africa & 9 493 & 22 098 & 2.45e-04 & 2.33 & -0.28
+& 0.015 & 0.015 \\
+\textbf{Berlin} & Europe & 8 855 & 21 043 & 2.68e-04 & 2.38 & -0.40 &
+0.007 & 0.006 \\
+\textbf{Amsterdam} & Europe & 7 088 & 16 073 & 3.20e-04 & 2.27 & -0.13 &
+0.035 & 0.029 \\
+\textbf{Lyon} & Europe & 6 356 & 11 661 & 2.89e-04 & 1.83 & 0.18 & 0.033
+& 0.030 \\
+\textbf{Los Angeles} & North\_America & 5 947 & 13 810 & 3.91e-04 & 2.32
+& -0.35 & 0.008 & 0.009 \\
+\textbf{Madrid} & Europe & 5 651 & 10 567 & 3.31e-04 & 1.87 & 0.37 &
+0.041 & 0.038 \\
+\textbf{Genève} & Europe & 5 634 & 12 314 & 3.88e-04 & 2.19 & -0.23 &
+0.021 & 0.019 \\
+\textbf{Paris} & Europe & 5 199 & 9 904 & 3.66e-04 & 1.90 & 0.19 & 0.048
+& 0.042 \\
+\textbf{Sydney} & Oceania & 4 823 & 10 483 & 4.51e-04 & 2.17 & -0.25 &
+0.024 & 0.021 \\
+\textbf{Dubaï} & Asia\_Middle\_East & 3 841 & 6 476 & 4.39e-04 & 1.69 &
+0.37 & 0.039 & 0.037 \\
+\textbf{Hanoï} & Asia\_Middle\_East & 3 195 & 7 256 & 7.11e-04 & 2.27 &
+-0.28 & 0.015 & 0.013 \\
+\textbf{Strasbourg} & Europe & 2 945 & 6 070 & 7.00e-04 & 2.06 & -0.27 &
+0.036 & 0.034 \\
+\textbf{Buenos Aires} & South\_America & 2 820 & 5 637 & 7.09e-04 & 2.00
+& 0.49 & 0.018 & 0.017 \\
+\textbf{Versailles} & Europe & 1 794 & 3 686 & 1.15e-03 & 2.05 & -0.08 &
+0.046 & 0.035 \\
+\textbf{Rio de Janeiro} & South\_America & 1 628 & 3 092 & 1.17e-03 &
+1.90 & 0.16 & 0.015 & 0.014 \\
+\textbf{Chamonix} & Europe & 848 & 1 896 & 2.64e-03 & 2.24 & -0.35 &
+0.009 & 0.012 \\
+\textbf{Monaco} & Europe & 672 & 1 286 & 2.85e-03 & 1.91 & 0.00 & 0.039
+& 0.039 \\
+\end{longtable}
+}
+
+\emph{Explication physique des variables topologiques du Tableau 1 :}
+
 \paragraph{Rôle pivot du fichier
 net.xml}\label{ruxf4le-pivot-du-fichier-net.xml}
 
@@ -884,21 +1003,7 @@ notre méthodologie :
   l'IA (comme décrit au Chapitre 2).
 \end{itemize}
 
-\newpage
-
-\section{CHAPITRE 2 : MODÉLISATION CINÉMATIQUE ET FONDATIONS THÉORIQUES
-DE LA TOPOLOGIE
-SPECTRALE}\label{chapitre-2-moduxe9lisation-cinuxe9matique-et-fondations-thuxe9oriques-de-la-topologie-spectrale}
-
-Le développement d'un modèle d'intelligence artificielle capable de se
-substituer à la simulation physique requiert une compréhension intime
-des équations cinématiques qui régissent le déplacement des véhicules
-(microscopique) et des propriétés topologiques du réseau qui gouvernent
-l'écoulement des flux (macroscopique). Ce chapitre pose le formalisme
-mathématique de ces deux échelles et explicite physiquement la
-signification de chaque formule.
-
-\subsubsection{2.1 Le moteur behavioriste de
+\subsubsection{2.2 Le moteur behavioriste de
 SUMO}\label{le-moteur-behavioriste-de-sumo}
 
 \paragraph{Abstraction de la voirie}\label{abstraction-de-la-voirie}
@@ -1116,8 +1221,35 @@ parasitaires qui se limitent à des phases d'insertion-sortie immédiates,
 le filtre garantit que l'ensemble de la flotte simulée s'insère dans les
 flux de transit principaux du réseau.
 
-\subsubsection{2.2 Théorie des graphes non-normaux et signatures
-spectrales}\label{thuxe9orie-des-graphes-non-normaux-et-signatures-spectrales}
+Voici un exemple de ce qu'on obtient après une simulation SUMO d'une
+heure de trafic, sur la ville de Paris, avec l'intensité du traffic
+représentée par la couleur des segments routiers :
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Figure 9 : Visualisation SIG de la ville test (Illustration de la cartographie des congestions à Paris) - Segments routiers colorés du gris (fluide) au rouge (saturation complète / gridlock).}]{images/paris-heat_map_trafic.png}}
+\caption{\textbf{Figure 9 :} Visualisation SIG de la ville test
+(Illustration de la cartographie des congestions à Paris) - Segments
+routiers colorés du gris (fluide) au rouge (saturation complète /
+gridlock).}
+\end{figure}
+
+\newpage
+
+\section{CHAPITRE 3 : CHAPITRE MISE EN PLACE D'UN MODELE
+PREDICTIF}\label{chapitre-3-chapitre-mise-en-place-dun-modele-predictif}
+
+Le développement d'un modèle d'intelligence artificielle capable de se
+substituer à la simulation physique requiert une compréhension intime
+des équations cinématiques qui régissent le déplacement des véhicules
+(microscopique) et des propriétés topologiques du réseau qui gouvernent
+l'écoulement des flux (macroscopique). Ce chapitre pose le formalisme
+mathématique de ces deux échelles et explicite physiquement la
+signification de chaque formule.
+
+\subsubsection{3.1 Fondation théorique de la topologie spectrale des
+réseaux
+routiers}\label{fondation-thuxe9orique-de-la-topologie-spectrale-des-ruxe9seaux-routiers}
 
 \paragraph{Formalisation matricielle et pondération
 d'impédance}\label{formalisation-matricielle-et-ponduxe9ration-dimpuxe9dance}
@@ -1418,125 +1550,7 @@ L'analyse systématique des réseaux routiers de notre base de données a
 permis d'extraire les caractéristiques topologiques et spectrales
 présentées dans les tableaux ci-dessous.
 
-\subparagraph{Tableau 1 : Caractéristiques Topologiques Générales des
-Villes}\label{tableau-1-caractuxe9ristiques-topologiques-guxe9nuxe9rales-des-villes}
-
-{\def\LTcaptype{none} % do not increment counter
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.3276}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0690}}
-  >{\centering\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0862}}
-  >{\centering\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0862}}
-  >{\centering\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0862}}
-  >{\centering\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0862}}
-  >{\centering\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0862}}
-  >{\centering\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0862}}
-  >{\centering\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0862}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-City
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Origin
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Nodes
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Edges
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Density
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Degree
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Index
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Ratio
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Ratio
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-\textbf{Nairobi} & Africa & 40 685 & 89 950 & 5.43e-05 & 2.21 & -0.44 &
-0.002 & 0.002 \\
-\textbf{Marseille} & Europe & 17 035 & 34 858 & 1.20e-04 & 2.05 & -0.14
-& 0.021 & 0.020 \\
-\textbf{Le Caire} & Africa & 13 095 & 29 575 & 1.72e-04 & 2.26 & -0.33 &
-0.005 & 0.005 \\
-\textbf{Londres} & Europe & 12 415 & 28 623 & 1.86e-04 & 2.31 & -0.32 &
-0.021 & 0.014 \\
-\textbf{Casablanca} & Africa & 9 493 & 22 098 & 2.45e-04 & 2.33 & -0.28
-& 0.015 & 0.015 \\
-\textbf{Berlin} & Europe & 8 855 & 21 043 & 2.68e-04 & 2.38 & -0.40 &
-0.007 & 0.006 \\
-\textbf{Amsterdam} & Europe & 7 088 & 16 073 & 3.20e-04 & 2.27 & -0.13 &
-0.035 & 0.029 \\
-\textbf{Lyon} & Europe & 6 356 & 11 661 & 2.89e-04 & 1.83 & 0.18 & 0.033
-& 0.030 \\
-\textbf{Los Angeles} & North\_America & 5 947 & 13 810 & 3.91e-04 & 2.32
-& -0.35 & 0.008 & 0.009 \\
-\textbf{Madrid} & Europe & 5 651 & 10 567 & 3.31e-04 & 1.87 & 0.37 &
-0.041 & 0.038 \\
-\textbf{Genève} & Europe & 5 634 & 12 314 & 3.88e-04 & 2.19 & -0.23 &
-0.021 & 0.019 \\
-\textbf{Paris} & Europe & 5 199 & 9 904 & 3.66e-04 & 1.90 & 0.19 & 0.048
-& 0.042 \\
-\textbf{Sydney} & Oceania & 4 823 & 10 483 & 4.51e-04 & 2.17 & -0.25 &
-0.024 & 0.021 \\
-\textbf{Dubaï} & Asia\_Middle\_East & 3 841 & 6 476 & 4.39e-04 & 1.69 &
-0.37 & 0.039 & 0.037 \\
-\textbf{Hanoï} & Asia\_Middle\_East & 3 195 & 7 256 & 7.11e-04 & 2.27 &
--0.28 & 0.015 & 0.013 \\
-\textbf{Strasbourg} & Europe & 2 945 & 6 070 & 7.00e-04 & 2.06 & -0.27 &
-0.036 & 0.034 \\
-\textbf{Buenos Aires} & South\_America & 2 820 & 5 637 & 7.09e-04 & 2.00
-& 0.49 & 0.018 & 0.017 \\
-\textbf{Versailles} & Europe & 1 794 & 3 686 & 1.15e-03 & 2.05 & -0.08 &
-0.046 & 0.035 \\
-\textbf{Rio de Janeiro} & South\_America & 1 628 & 3 092 & 1.17e-03 &
-1.90 & 0.16 & 0.015 & 0.014 \\
-\textbf{Chamonix} & Europe & 848 & 1 896 & 2.64e-03 & 2.24 & -0.35 &
-0.009 & 0.012 \\
-\textbf{Monaco} & Europe & 672 & 1 286 & 2.85e-03 & 1.91 & 0.00 & 0.039
-& 0.039 \\
-\end{longtable}
-}
-
-\emph{Explication physique des variables topologiques du Tableau 1 :}
-
-\begin{itemize}
-\item
-  \textbf{nodes (Nœuds) :} Le nombre total d'intersections physiques du
-  réseau routier. Il s'agit de la dimension \(n\) de la matrice
-  d'adjacence \(A\).
-\item
-  \textbf{edges (Arêtes) :} Le nombre total de tronçons routiers
-  orientés reliant les nœuds. C'est le nombre de connexions
-  directionnelles du graphe.
-\item
-  \textbf{density (Densité) :} Ratio entre le nombre d'arêtes réelles et
-  le nombre maximal théorique d'arêtes possibles dans un graphe de
-  taille \(n\), mesurant la compacité spatiale du réseau routier.
-\item
-  \textbf{avg\_degree (Degré moyen) :} Nombre moyen d'arêtes connectées
-  à un nœud. Un degré moyen proche de 2 indique un réseau routier
-  linéaire simple, tandis qu'une valeur supérieure reflète des
-  intersections complexes (échangeurs, ronds-points).
-\item
-  \textbf{asymmetry\_index (Indice d'asymétrie) :} Proportion de rues à
-  sens unique dans le réseau. Un indice proche de 1 signifie que la
-  quasi-totalité des voies sont à sens unique, ce qui augmente la
-  non-normalité de la matrice.
-\item
-  \textbf{sources\_ratio \& sinks\_ratio (Ratio de sources et de puits)
-  :} Proportion de nœuds n'ayant que des voies sortantes (sources) ou
-  uniquement des voies entrantes (puits). Ces nœuds représentent les
-  zones d'injection et d'absorption naturelle des véhicules aux
-  frontières de la ville.
-\end{itemize}
-
-\subparagraph{Tableau 2 : Métriques Spectrales de Non-Normalité
-(Matrices
-Non-Pondérées)}\label{tableau-2-muxe9triques-spectrales-de-non-normalituxe9-matrices-non-ponduxe9ruxe9es}
+\subparagraph{Tableau 2 : Exemple}\label{tableau-2-exemple}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -1618,8 +1632,8 @@ Kreiss constant
   (effet domino ou gridlock).
 \end{itemize}
 
-\subsubsection{2.3 Le modèle d'intelligence artificielle
-XGBoost}\label{le-moduxe8le-dintelligence-artificielle-xgboost}
+\subsubsection{3.2 Le modèle d'IA de prediction instantanée : une IA
+topologique}\label{le-moduxe8le-dia-de-prediction-instantanuxe9e-une-ia-topologique}
 
 \paragraph{Formulation mathématique de la fonction
 objective}\label{formulation-mathuxe9matique-de-la-fonction-objective}
@@ -2497,11 +2511,23 @@ plusieurs heures pour une simulation SUMO équivalente.
 
 \newpage
 
-\section{CHAPITRE 3 : APPLICATIONS EMPIRIQUES, ÉTUDES DE CAS ET
-VALIDATION
-COMPARATIVE}\label{chapitre-3-applications-empiriques-uxe9tudes-de-cas-et-validation-comparative}
+\section{CHAPITRE 4 : APPLICATIONS EMPIRIQUES, ÉTUDES DE CAS ET
+VALIDATIONS
+COMPARATIVES}\label{chapitre-4-applications-empiriques-uxe9tudes-de-cas-et-validations-comparatives}
 
-\subsubsection{3.1 Analyse microscopique locale -- Le jumeau numérique
+Ce chapitre présente les applications concrètes de notre démarche
+prédictive. L'étude de cas locale et microscopique présentée dans la
+section 4.1 a été menée dans le cadre d'un stage de recherche
+(\emph{internship}) au sein de l'université \textbf{VinUniversity}
+(Hanoï, Vietnam). Ce travail sur le terrain a été l'occasion de se
+familiariser avec le micro-simulateur physique SUMO et de maîtriser la
+configuration de simulations microscopiques réalistes. Cette expérience
+technique et pratique initiale a constitué le socle indispensable pour
+appréhender les dynamiques de trafic complexes et pouvoir, par la suite,
+concevoir et exécuter des simulations physiques à grande échelle sur le
+corpus multi-villes présenté dans la section 4.2.
+
+\subsubsection{4.1 Analyse microscopique locale -- Le jumeau numérique
 de Vinhomes Ocean Park
 (Hanoï)}\label{analyse-microscopique-locale-le-jumeau-numuxe9rique-de-vinhomes-ocean-park-hanouxef}
 
@@ -2933,31 +2959,52 @@ Un régime transitoire de montée en charge avec un volume moyen de
   \emph{Electric Vehicles :} \textbf{33,50 unités} (\textbf{27,1 \%}).
 \end{itemize}
 
-\begin{figure}
-\centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Évolution de la structure modale du trafic selon les périodes (Midi régulier, Transition, Vacances)}]{images/vacation_comparison.png}}
-\caption{Évolution de la structure modale du trafic selon les périodes
-(Midi régulier, Transition, Vacances)}
-\end{figure}
+\subparagraph{Tableau 4e : Synthèse de la charge de trafic et du taux de
+pénétration des véhicules électriques sur l'avenue Sao
+Bien}\label{tableau-4e-synthuxe8se-de-la-charge-de-trafic-et-du-taux-de-puxe9nuxe9tration-des-vuxe9hicules-uxe9lectriques-sur-lavenue-sao-bien}
 
-\begin{figure}
-\centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Taux de pénétration des véhicules électriques au sein du segment des quatre roues}]{images/ev_distribution_bar.png}}
-\caption{Taux de pénétration des véhicules électriques au sein du
-segment des quatre roues}
-\end{figure}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1379}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1724}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1724}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1724}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1724}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1724}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Profil horaire / Journée
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Volume horaire total (véh/h)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Volume moyen (véh/10 min)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Part Deux-roues (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Part Quatre roues (ICE+EV) (\%)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Taux de pénétration EV (sur 4 roues) (\%)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Matinée creuse (11h00)} & \textasciitilde600 & 100,00 & 55,0 \%
+& 45,0 \% & 48,0 \% \\
+\textbf{Midi régulier (12h00) - Baseline} & 804 & 134,10 & 50,7 \% &
+49,3 \% & 54,1 \% \\
+\textbf{Période transitoire (Pre-Vacances)} & 743 & 123,83 & 46,8 \% &
+53,2 \% & 50,9 \% \\
+\textbf{Midi Vacances (Holiday Reversal)} & 703 & 117,17 & 39,7 \% &
+60,3 \% & 66,3 \% \\
+\textbf{Soirée de pointe (17h00) - Rush Hour} & 1 366 & 227,67 & 62,8 \%
+& 37,2 \% & 59,3 \% \\
+\end{longtable}
+}
 
-\begin{figure}
-\centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Évolution journalière des volumes de trafic par créneaux horaires (11h00, 12h00, 17h00) durant la campagne de mesures à Sao Bien (Hanoï)}]{images/daily_timeline_by_hour.png}}
-\caption{Évolution journalière des volumes de trafic par créneaux
-horaires (11h00, 12h00, 17h00) durant la campagne de mesures à Sao Bien
-(Hanoï)}
-\end{figure}
-
-\pandocbounded{\includegraphics[keepaspectratio,alt={Profil d'intensité horaire global du trafic sur l'avenue Sao Bien}]{images/hourly_peaks.png}}
-\#\#\#\# Modélisation stochastique de la recharge et initialisation par
-Warm-Start
+\paragraph{Modélisation stochastique de la recharge et initialisation
+par
+Warm-Start}\label{moduxe9lisation-stochastique-de-la-recharge-et-initialisation-par-warm-start}
 
 \subparagraph{Le modèle de temps d'arrêt stochastique (Stochastic Dwell
 Time)}\label{le-moduxe8le-de-temps-darruxeat-stochastique-stochastic-dwell-time}
@@ -3053,7 +3100,7 @@ places de manière échelonnée dans le temps, offrant une reproduction
 fidèle des dynamiques d'attente et d'insertion vécues par les
 conducteurs arrivant sur site.
 
-\subsubsection{3.2 Expérimentation globale, inférence IA et validation
+\subsubsection{4.2 Expérimentation globale, inférence IA et validation
 comparative}\label{expuxe9rimentation-globale-infuxe9rence-ia-et-validation-comparative}
 
 \paragraph{Constitution du corpus d'apprentissage à grande
@@ -3276,127 +3323,6 @@ topologiques uniquement \\
 \end{longtable}
 }
 
-\subparagraph{Particularités topologiques et morphologiques des villes
-d'entraînement
-:}\label{particularituxe9s-topologiques-et-morphologiques-des-villes-dentrauxeenement}
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Paris} : Réseau radial organique hyperdense, nombreux sens
-  uniques, goulots sur les grandes artères.
-\item
-  \textbf{Versailles} : Réseau de ville moyenne, plan de ville royal en
-  étoile + damier.
-\item
-  \textbf{Madrid} : Grille orthogonale élargie, avenues majeures et
-  périphériques urbains.
-\item
-  \textbf{London} (Londres) : Réseau médiéval très dense, rues étroites
-  et irrégulières.
-\item
-  \textbf{Casablanca} : Mix de grille coloniale française et de
-  périphérie étalée en développement.
-\item
-  \textbf{Monaco} : Réseau balnéaire ultra-dense, fortement contraint en
-  altitude.
-\item
-  \textbf{Chamonix} : Réseau de montagne linéaire, structuré autour
-  d'une seule vallée principale.
-\item
-  \textbf{Sydney} : Réseau côtier avec CBD très concentré, baies
-  réduisant la connectivité générale.
-\item
-  \textbf{Rio de Janeiro} : Réseau côtier sinueux, fortement contraint
-  par la topographie montagneuse et la mer.
-\item
-  \textbf{Tours} : Centre historique médiéval avec le fleuve de la Loire
-  agissant comme un goulot d'étranglement structurel majeur.
-\item
-  \textbf{Utrecht} : Réseau concentrique de boucles fermées, canaux et
-  très forte présence d'aménagements cyclables.
-\item
-  \textbf{Windhoek} : Structure urbaine très étalée à faible densité,
-  avec de larges artères réduisant la congestion naturelle.
-\item
-  \textbf{Chiang Mai} : Fossé carré historique (Moat) créant une boucle
-  de circulation périphérique obligatoire.
-\item
-  \textbf{Chefchaouen} : Médina berbère montagneuse très serrée aux rues
-  extrêmement étroites, constituant un réseau quasi piéton.
-\item
-  \textbf{Wellington} : Réseau côtier et vallonné autour d'une baie,
-  connectivité réduite dépendante de ponts et tunnels.
-\item
-  \textbf{Ushuaia} : Réseau linéaire contraint par la Terre de Feu,
-  structuré autour d'une seule artère principale.
-\item
-  \textbf{Valparaíso} : Réseau en amphithéâtre avec des pentes
-  extrêmement fortes modifiant l'empreinte cinématique de charge.
-\item
-  \textbf{Victoria (Seychelles)} : Réseau insulaire compact à très
-  faible étendue géographique.
-\item
-  \textbf{Sousse} : Médina historique dense et fermée en interface
-  directe avec des boulevards périphériques saturés.
-\item
-  \textbf{Yazd} : Tissu urbain désertique avec des rues tortueuses et de
-  nombreuses impasses.
-\item
-  \textbf{Nairobi} : Mégalopole africaine en développement rapide,
-  marquée par une forte asymétrie centre/périphérie.
-\item
-  \textbf{Marseille} : Réseau portuaire méditerranéen dense avec un
-  relief prononcé de collines.
-\item
-  \textbf{Cairo} (Le Caire) : Réseau géant très dense à forte composante
-  autoroutière urbaine traversé par le Nil.
-\item
-  \textbf{Berlin} : Grille orthogonale régulière post-reconstruction
-  couplée à des axes radiaux historiques.
-\item
-  \textbf{Amsterdam} : Réseau concentrique de canaux avec une très forte
-  densité de cyclistes.
-\item
-  \textbf{Lyon} : Réseau de type péninsule encadré par le Rhône et la
-  Saône, créant des goulots structurels d'accès.
-\item
-  \textbf{Los Angeles} : Grande grille californienne régulière à grande
-  échelle, vulnérable aux saturations synchronisées.
-\item
-  \textbf{Geneva} (Genève) : Réseau lacustre avec une enclave
-  franco-suisse limitant les débouchés du transit.
-\item
-  \textbf{Dubai} (Dubaï) : Réseau linéaire côtier très étalé, avec une
-  dépendance quasi absolue aux autoroutes urbaines.
-\item
-  \textbf{Hanoi} (Hanoï) : Réseau dense à prédominance historique de
-  deux-roues et de nombreuses impasses.
-\item
-  \textbf{Strasbourg} : Réseau insulaire contraint par l'Ill et le Rhin.
-\item
-  \textbf{Buenos Aires} : Grande grille orthogonale coloniale espagnole
-  avec de très larges boulevards de transit.
-\item
-  \textbf{Queenstown} : Réseau alpin compact contraint par le lac
-  Wakatipu et les montagnes.
-\item
-  \textbf{Hue} (Hue) : Réseau de ville impériale vietnamienne, marqué
-  par un fossé défensif et un axe fluvial contraignant.
-\item
-  \textbf{Hobart} : Réseau estuarien dépendant de ponts critiques
-  traversant la Derwent River.
-\end{itemize}
-
-Les villes marquées \textbf{``Descripteurs topologiques uniquement''}
-contribuent pleinement à l'espace de représentation spectral de l'IA.
-Même sans simulation SUMO associée, leurs 47 descripteurs spectraux
-servent de \textbf{voisins morphologiques} lors de l'inférence
-barycentrique : quand l'IA prédit les émissions d'une nouvelle ville
-inconnue, elle identifie les villes d'apprentissage les plus proches
-géométriquement dans l'espace spectral et pondère leurs connaissances
-accumulées pour construire l'estimation finale.
-
 \paragraph{Analyse comparative des résiliences géométriques : Radial
 européen vs Grille orthogonale vs Boucles
 fermées}\label{analyse-comparative-des-ruxe9siliences-guxe9omuxe9triques-radial-europuxe9en-vs-grille-orthogonale-vs-boucles-fermuxe9es}
@@ -3423,15 +3349,6 @@ Cette vulnérabilité structurelle et la propagation de la congestion le
 long des axes radiaux sont illustrées dans la Figure 9, qui présente
 l'état de saturation du réseau parisien obtenu par simulation
 microscopique.
-
-\begin{figure}
-\centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Figure 9 : Visualisation SIG de la ville test (Illustration de la cartographie des congestions à Paris) - Segments routiers colorés du gris (fluide) au rouge (saturation complète / gridlock).}]{images/paris-heat_map_trafic.png}}
-\caption{\textbf{Figure 9 :} Visualisation SIG de la ville test
-(Illustration de la cartographie des congestions à Paris) - Segments
-routiers colorés du gris (fluide) au rouge (saturation complète /
-gridlock).}
-\end{figure}
 
 \subparagraph{Grille Orthogonale Nord-Américaine (Los
 Angeles)}\label{grille-orthogonale-nord-amuxe9ricaine-los-angeles}
@@ -4643,5 +4560,126 @@ Total Duration
 \textbf{2039.20 s} \\
 \end{longtable}
 }
+
+\subparagraph{Particularités topologiques et morphologiques des villes
+d'entraînement
+:}\label{particularituxe9s-topologiques-et-morphologiques-des-villes-dentrauxeenement}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Paris} : Réseau radial organique hyperdense, nombreux sens
+  uniques, goulots sur les grandes artères.
+\item
+  \textbf{Versailles} : Réseau de ville moyenne, plan de ville royal en
+  étoile + damier.
+\item
+  \textbf{Madrid} : Grille orthogonale élargie, avenues majeures et
+  périphériques urbains.
+\item
+  \textbf{London} (Londres) : Réseau médiéval très dense, rues étroites
+  et irrégulières.
+\item
+  \textbf{Casablanca} : Mix de grille coloniale française et de
+  périphérie étalée en développement.
+\item
+  \textbf{Monaco} : Réseau balnéaire ultra-dense, fortement contraint en
+  altitude.
+\item
+  \textbf{Chamonix} : Réseau de montagne linéaire, structuré autour
+  d'une seule vallée principale.
+\item
+  \textbf{Sydney} : Réseau côtier avec CBD très concentré, baies
+  réduisant la connectivité générale.
+\item
+  \textbf{Rio de Janeiro} : Réseau côtier sinueux, fortement contraint
+  par la topographie montagneuse et la mer.
+\item
+  \textbf{Tours} : Centre historique médiéval avec le fleuve de la Loire
+  agissant comme un goulot d'étranglement structurel majeur.
+\item
+  \textbf{Utrecht} : Réseau concentrique de boucles fermées, canaux et
+  très forte présence d'aménagements cyclables.
+\item
+  \textbf{Windhoek} : Structure urbaine très étalée à faible densité,
+  avec de larges artères réduisant la congestion naturelle.
+\item
+  \textbf{Chiang Mai} : Fossé carré historique (Moat) créant une boucle
+  de circulation périphérique obligatoire.
+\item
+  \textbf{Chefchaouen} : Médina berbère montagneuse très serrée aux rues
+  extrêmement étroites, constituant un réseau quasi piéton.
+\item
+  \textbf{Wellington} : Réseau côtier et vallonné autour d'une baie,
+  connectivité réduite dépendante de ponts et tunnels.
+\item
+  \textbf{Ushuaia} : Réseau linéaire contraint par la Terre de Feu,
+  structuré autour d'une seule artère principale.
+\item
+  \textbf{Valparaíso} : Réseau en amphithéâtre avec des pentes
+  extrêmement fortes modifiant l'empreinte cinématique de charge.
+\item
+  \textbf{Victoria (Seychelles)} : Réseau insulaire compact à très
+  faible étendue géographique.
+\item
+  \textbf{Sousse} : Médina historique dense et fermée en interface
+  directe avec des boulevards périphériques saturés.
+\item
+  \textbf{Yazd} : Tissu urbain désertique avec des rues tortueuses et de
+  nombreuses impasses.
+\item
+  \textbf{Nairobi} : Mégalopole africaine en développement rapide,
+  marquée par une forte asymétrie centre/périphérie.
+\item
+  \textbf{Marseille} : Réseau portuaire méditerranéen dense avec un
+  relief prononcé de collines.
+\item
+  \textbf{Cairo} (Le Caire) : Réseau géant très dense à forte composante
+  autoroutière urbaine traversé par le Nil.
+\item
+  \textbf{Berlin} : Grille orthogonale régulière post-reconstruction
+  couplée à des axes radiaux historiques.
+\item
+  \textbf{Amsterdam} : Réseau concentrique de canaux avec une très forte
+  densité de cyclistes.
+\item
+  \textbf{Lyon} : Réseau de type péninsule encadré par le Rhône et la
+  Saône, créant des goulots structurels d'accès.
+\item
+  \textbf{Los Angeles} : Grande grille californienne régulière à grande
+  échelle, vulnérable aux saturations synchronisées.
+\item
+  \textbf{Geneva} (Genève) : Réseau lacustre avec une enclave
+  franco-suisse limitant les débouchés du transit.
+\item
+  \textbf{Dubai} (Dubaï) : Réseau linéaire côtier très étalé, avec une
+  dépendance quasi absolue aux autoroutes urbaines.
+\item
+  \textbf{Hanoi} (Hanoï) : Réseau dense à prédominance historique de
+  deux-roues et de nombreuses impasses.
+\item
+  \textbf{Strasbourg} : Réseau insulaire contraint par l'Ill et le Rhin.
+\item
+  \textbf{Buenos Aires} : Grande grille orthogonale coloniale espagnole
+  avec de très larges boulevards de transit.
+\item
+  \textbf{Queenstown} : Réseau alpin compact contraint par le lac
+  Wakatipu et les montagnes.
+\item
+  \textbf{Hue} (Hue) : Réseau de ville impériale vietnamienne, marqué
+  par un fossé défensif et un axe fluvial contraignant.
+\item
+  \textbf{Hobart} : Réseau estuarien dépendant de ponts critiques
+  traversant la Derwent River.
+\end{itemize}
+
+Les villes marquées \textbf{``Descripteurs topologiques uniquement''}
+contribuent pleinement à l'espace de représentation spectral de l'IA.
+Même sans simulation SUMO associée, leurs 47 descripteurs spectraux
+servent de \textbf{voisins morphologiques} lors de l'inférence
+barycentrique : quand l'IA prédit les émissions d'une nouvelle ville
+inconnue, elle identifie les villes d'apprentissage les plus proches
+géométriquement dans l'espace spectral et pondère leurs connaissances
+accumulées pour construire l'estimation finale.
 
 \end{document}
