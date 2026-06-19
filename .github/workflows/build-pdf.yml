@@ -33,7 +33,7 @@ jobs:
         run: |
           pandoc REDACTION_MEMOIRE_NOUVEAU.md \
             --template=template.tex \
-            --pdf-engine=pdflatex \
+            --pdf-engine=xelatex \
             --no-highlight \
             --citeproc \
             --bibliography=references.bib \
