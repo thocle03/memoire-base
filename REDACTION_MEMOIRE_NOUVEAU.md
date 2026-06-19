@@ -138,7 +138,8 @@ Pour y répondre, nous développons un **métamodèle d'Intelligence Artificiell
 
 La mise en œuvre de notre approche prédictive repose sur une chaîne de traitement de la géométrie urbaine, convertissant des cartes brutes en graphes mathématiques exploitables.
 
-#### Acquisition des données géographiques brutes
+#### 2.1.1 Métriques empiriques pour alimenter le modèle SUMO
+
 Pour obtenir la géométrie de la voirie d'une ville quelconque, nous exploitons la base de données cartographiques mondiale libre et collaborative **OpenStreetMap (OSM)** [2]. OSM structure l'information géographique selon un modèle de données XML composé de trois primitives fondamentales :
 
 *   **Les nœuds (nodes) :** Points géographiques définis par leur latitude et longitude. Ils représentent des intersections routières, des virages, ou des points d'intérêt.
@@ -161,7 +162,7 @@ Pour transformer le fichier `.osm` brut en un réseau logique routier unifié, n
 
 Le produit final de cette chaîne de traitement est un fichier XML unique nommé **`net.xml`**. Ce fichier contient le graphe épuré et complet de la ville, décrivant de manière structurée les nœuds d'intersection (`<junction>`), les arêtes routières orientées (`<edge>`), les voies de circulation associées (`<lane>`) et les liaisons de carrefour (`<connection>`). 
 
---a faire
+
 *   **nodes (Nœuds) :** Le nombre total d'intersections physiques du réseau routier. Il s'agit de la dimension $n$ de la matrice d'adjacence $A$.
 
 *   **edges (Arêtes) :** Le nombre total de tronçons routiers orientés reliant les nœuds. C'est le nombre de connexions directionnelles du graphe.
@@ -200,7 +201,6 @@ Le produit final de cette chaîne de traitement est un fichier XML unique nommé
 | **Chamonix** | Europe | 848 | 1 896 | 2.64e-03 | 2.24 | -0.35 | 0.009 | 0.012 |
 | **Monaco** | Europe | 672 | 1 286 | 2.85e-03 | 1.91 | 0.00 | 0.039 | 0.039 |
 
-*Explication physique des variables topologiques du Tableau 1 :*
 
 
 
@@ -212,7 +212,7 @@ Ce fichier `net.xml` joue un rôle de passerelle et de pivot dans notre méthodo
 
 ### 2.2 Le moteur behavioriste de SUMO
 
-#### Abstraction de la voirie
+#### 2.2.1 Abstraction de la voirie
 Le simulateur SUMO modélise les réseaux de transport sous forme de réseaux logiques basés sur la théorie des graphes orientés. Dans ce formalisme, chaque intersection physique est représentée par un nœud unique doté d'une géométrie polygonale décrivant sa surface de jonction. Les tronçons routiers reliant les nœuds sont modélisés par des arêtes, subdivisées en une ou plusieurs voies de circulation (*lanes*).
 
 Chaque voie possède des attributs géométriques et comportementaux stricts : une polyligne tridimensionnelle décrivant son axe central, une largeur constante (généralement fixée à 3,2 mètres pour les voies urbaines standards), une liste de classes de véhicules autorisées et une vitesse limite supérieure déterminant la vitesse de référence des agents.
@@ -230,7 +230,7 @@ L'exécution d'une simulation physique microscopique sous le moteur SUMO s'organ
     *   **Le fichier d'itinéraires détaillés (`tripinfo.xml`) :** Enregistre pour chaque véhicule son heure de départ, son heure d'arrivée, son temps de parcours total, son temps d'attente dû aux intersections et sa vitesse moyenne.
     *   **Le fichier d'émissions écologiques (`emission-output.xml`) :** Contient, à chaque seconde de la simulation, le détail des rejets polluants de chaque véhicule (CO2, CO, NOx, PMx, ainsi que le carburant consommé). Ces émissions sont calculées par SUMO à partir de la vitesse et de l'accélération instantanées de chaque véhicule via le modèle d'émission européen standardisé HBEFA3 [8]. Ces fichiers compilés et agrégés constituent notre vérité terrain (Ground Truth) de pollution.
 
-#### Le modèle de poursuite cinématique de Krauß
+#### Le modèle de poursuite cinématique de Krauß [/ref-krauss]
 Pour reproduire le mouvement individuel des véhicules le long des arêtes, SUMO implémente par défaut le modèle comportemental de poursuite de véhicule développé par **Krauß**. Ce modèle cinématique calcule à chaque pas de temps la vitesse optimale d'un véhicule suiveur pour éviter toute collision avec le véhicule leader, même si ce dernier décélère brutalement.
 
 Soit un véhicule suiveur $F$ caractérisé par sa position $x(t)$ et sa vitesse $v(t)$, circulant derrière un véhicule leader $L$ caractérisé par sa position $x_L(t)$ et sa vitesse $v_L(t)$. L'intervalle spatial libre (ou gap) séparant les deux véhicules est défini par :
@@ -252,7 +252,7 @@ Enfin, pour introduire la variabilité des comportements humains (retards de ré
 $$v(t + \Delta t) = \max\left( 0, v_{target}(t) - \eta \right)$$
 où $\eta$ est une variable aléatoire distribuée uniformément sur l'intervalle $[0, \sigma \cdot a \cdot \Delta t]$, le paramètre $\sigma \in [0, 1]$ caractérisant le degré d'inattention du conducteur.
 
-#### Extraction de la connexité par l'algorithme de Tarjan
+#### Extraction de la connexité par l'algorithme de Tarjan [/ref-tarjan]
 Pour garantir la cohérence dynamique du réseau de simulation routière, il est indispensable de vérifier sa connexité globale. En raison de la présence de règles de circulation complexes (sens uniques) et de potentielles erreurs géométriques issues de la base OpenStreetMap, un réseau routier orienté brut comprend fréquemment des sous-graphes déconnectés du flux principal.
 
 *Exemple concret de problème topologique :*
@@ -283,14 +283,14 @@ Voici un exemple de ce qu'on obtient après une simulation SUMO d'une heure de t
 
 \newpage
 
-# CHAPITRE 3 : CHAPITRE MISE EN PLACE D'UN MODELE PREDICTIF 
+# CHAPITRE 3 : ÉLABORATION D'UN MODÈLE PRÉDICTIF
 
 Le développement d'un modèle d'intelligence artificielle capable de se substituer à la simulation physique requiert une compréhension intime des équations cinématiques qui régissent le déplacement des véhicules (microscopique) et des propriétés topologiques du réseau qui gouvernent l'écoulement des flux (macroscopique). Ce chapitre pose le formalisme mathématique de ces deux échelles et explicite physiquement la signification de chaque formule.
 
 
-### 3.1 Fondation théorique de la topologie spectrale des réseaux routiers
+### 3.1 Détermination des métriques spectrales pour alimenter le modèle prédictif
 
-#### Formalisation matricielle et pondération d'impédance
+#### 3.1.1 Formalisation matricielle et pondération d'impédance
 Pour modéliser mathématiquement le réseau routier, nous le représentons sous la forme d'un graphe orienté et pondéré $G = (V, E)$, où $V$ désigne l'ensemble des nœuds ($n = |V|$), représentant les intersections physiques du réseau, et $E$ désigne l'ensemble des arêtes orientées ($m = |E|$), modélisant les tronçons routiers.
 
 La connectivité et l'impédance physique du réseau sont codées dans la **matrice d'adjacence pondérée** $A \in \mathbb{R}^{n \times n}$. La représentation réaliste d'un réseau urbain impose une double complexité :
@@ -320,7 +320,7 @@ $$A_{ex} = \begin{pmatrix}
 \end{pmatrix}$$
 L'absence de symétrie de cette matrice est évidente ($A_{ex} \neq A_{ex}^T$).
 
-#### Le concept de non-normalité et amplification transitoire
+#### 3.1.2 Le concept de non-normalité et amplification transitoire
 Pour les systèmes asymétriques représentés par des matrices non-normales, le spectre classique (les valeurs propres) ne suffit plus à décrire la dynamique transitoire [12].
 Une matrice carrée $A$ est dite **normale** si et seulement si elle commute avec sa transposée, soit $A A^T = A^T A$. Dans le cas des réseaux routiers réels orientés, cette relation n'est jamais vérifiée : la matrice d'adjacence $A$ est intrinsèquement **non-normale** ($A A^T \neq A^T A$).
 
@@ -332,7 +332,7 @@ $$\Delta(A) = \| A A^T - A^T A \|_F = \sqrt{\text{Tr}\left( (A A^T - A^T A)^H (A
 *Explication physique de la non-normalité :*
 > Dans un système dynamique normal (symétrique), les vecteurs propres sont orthogonaux : toute perturbation (ex. un bouchon) s'amortit de façon monotone sans jamais dépasser son intensité initiale. Dans un système non-normal (asymétrique, comme un réseau à sens uniques), les vecteurs propres ne sont plus orthogonaux et peuvent devenir presque colinéaires. Cette non-orthogonalité permet à des perturbations mineures (ex. un carrefour bloqué temporairement) de s'additionner géométriquement à court terme avant de s'amortir. C'est le **phénomène d'amplification transitoire** : le bouchon local engendre une onde de choc cinématique qui se propage vers l'amont en s'amplifiant, forçant des dizaines de véhicules à freiner et à réaccélérer, ce qui cause des pics de pollution localisés massifs.
 
-#### Le Rayon Spectral ($\rho$) et le Théorème de Perron-Frobenius
+#### 3.1.3 Le Rayon Spectral ($\rho$) et le Théorème de Perron-Frobenius
 Le spectre d'une matrice, noté $\sigma(A)$, regroupe ses valeurs propres complexes $\lambda_i \in \mathbb{C}$ résolvant $\det(\lambda I - A) = 0$. Le **rayon spectral** $\rho(A)$ correspond à la borne supérieure du module des valeurs propres :
 $$\rho(A) = \max_{\lambda \in \sigma(A)} |\lambda|$$
 
@@ -345,7 +345,7 @@ Puisque les coefficients $A_{ij}$ de notre matrice d'adjacence pondérée sont s
 *Explication physique du rayon spectral :*
 > Le rayon spectral de la matrice d'impédance $\rho(A)$ caractérise la **résistance globale au transit** du réseau routier. Plus $\rho(A)$ est grand, plus le réseau présente une impédance globale élevée (rues longues, étroites, ou à faibles vitesses limites), ce qui allonge les temps de parcours moyens. Le vecteur propre de Perron-Frobenius $v_{PF}$ quant à lui identifie les carrefours clés du réseau où les flux s'accumulent naturellement.
 
-#### La Constante de Kreiss ($K$) et la dynamique de crise
+#### 3.1.4 La Constante de Kreiss ($K$) et la dynamique de crise
 Pour quantifier la sensibilité d'un réseau non-normal aux amplifications transitoires et modéliser son instabilité dynamique, nous introduisons la **constante de Kreiss [9]** $K(A)$. Soit $A$ une matrice stable ($\rho(A) < 1$). La constante de Kreiss [9] est définie par :
 $$K(A) = \sup_{|z| > 1} (|z| - 1) \left\| (zI - A)^{-1} \right\|_2$$
 où $\|\cdot\|_2$ désigne la norme matricielle induite (norme spectrale). Le théorème des matrices de Kreiss établit des bornes strictes reliant cette constante à l'amplification transitoire maximale de la puissance de la matrice :
@@ -355,7 +355,7 @@ où $n$ est la dimension de la matrice.
 *Explication physique de la constante de Kreiss [9] :*
 > La constante de Kreiss [9] agit comme le **"détecteur de nervosité"** ou de fragilité structurelle de la ville. Elle mesure l'amplitude maximale que peut atteindre une onde de congestion locale avant que le réseau ne revienne à un état d'écoulement libre. Une constante de Kreiss [9] élevée prévient le planificateur qu'une perturbation minime peut déclencher une crise de congestion systémique (effet domino) et paralyser le réseau par refoulement (*spillback*).
 
-#### Les Normes de Hardy $H_2$ et $H_\infty$
+#### 3.1.5 Les Normes de Hardy $H_2$ et $H_\infty$
 En modélisant le réseau routier comme un filtre dynamique linéaire entrée-sortie (où l'entrée est le flux d'injection des véhicules et la sortie la congestion), nous évaluons sa robustesse via les normes $H_2$ et $H_\infty$ de sa fonction de transfert $T(z) = (zI - A)^{-1}$ :
 
 1.  **La Norme $H_\infty$ (Pire scénario d'amplification)** :
@@ -366,7 +366,7 @@ En modélisant le réseau routier comme un filtre dynamique linéaire entrée-so
 *Explication physique des normes de Hardy :*
 > La norme $H_\infty$ caractérise le gain d'amplification maximal dans le **pire des scénarios**. Elle indique le niveau de congestion et de pollution inévitable que le réseau atteindra si la charge de trafic est maximale et localisée sur les axes les plus critiques. La norme $H_2$, quant à elle, mesure la **mémoire temporelle de la congestion**. Elle quantifie le temps nécessaire au réseau pour dissiper l'énergie cinétique accumulée et évacuer les véhicules après la fin d'une heure de pointe. Une ville à forte norme $H_2$ mettra beaucoup plus de temps à retrouver un écoulement fluide.
 
-#### Théorie des perturbations de Kato [6] et Loi de Contrôle
+#### 3.1.6 Théorie des perturbations de Kato [6] et Loi de Contrôle
 Dans le cadre de l'optimisation des réseaux urbains, une question centrale se pose : comment modifier la structure du graphe pour minimiser l'apparition des congestions et la pollution associée sans avoir à recalculer intégralement le spectre de la matrice d'adjacence (ce qui est extrêmement coûteux pour des réseaux de taille métropolitaine) ?
 
 Pour répondre à cela, nous modélisons les modifications d'infrastructure comme des perturbations de la matrice d'adjacence pondérée $A$ sous la forme :
@@ -719,12 +719,12 @@ Ce chapitre présente les applications concrètes de notre démarche prédictive
 
 Pour valider l'interaction entre la micro-simulation et les données de terrain, et pour illustrer la transition vers l'électromobilité sur un cas concret, nous avons développé un jumeau numérique microscopique de haute-fidélité. Ce modèle local sert à évaluer l'impact cinématique et environnemental de la recharge des flottes électriques en zone hyper-dense.
 
-#### Contexte du développement urbain et transition vers l'électromobilité au Vietnam
+#### 4.1.1 Contexte du développement urbain et transition vers l'électromobilité au Vietnam
 Le Vietnam connaît un développement urbain rapide marqué par la planification de cités satellites modernes en périphérie de ses grandes métropoles. À l'est de Hanoï, le complexe résidentiel et commercial *Vinhomes Ocean Park* (VHOP) s'étend sur 420 hectares. Conçu pour accueillir 90 000 habitants, le site a connu une cinétique de croissance accélérée, franchissant les 60 000 résidents permanents dès 2023, avec des projections révisées à 200 000 habitants d'ici 2030. 
 
 VHOP a été choisi comme laboratoire d'étude en raison de son intégration unique d'un écosystème de transport 100 % électrique, piloté par le groupe *Vingroup*. Les liens de transport public internes y sont assurés par des bus électriques (*VinBus*), et la flotte de taxis prédominante est constituée des véhicules électriques de la compagnie *GSM (Green and Smart Mobility)*, rechargeant leurs batteries sur des hubs de recharge ultra-rapides gérés par *V-Green*.
 
-#### Morphologie géométrique et contraintes d'infrastructure du site d'étude
+#### 4.1.2 Morphologie géométrique et contraintes d'infrastructure du site d'étude
 Notre zone d'étude microscopique se concentre sur le corridor de l'avenue Sao Bien, un axe bidirectionnel majeur desservant le centre commercial *Vincom Mega Mall*. Les conflits cinématiques majeurs se concentrent sur une voie de service latérale unidirectionnelle (largeur de 3,5 mètres, limitée à deux voies de circulation après insertion) qui regroupe deux infrastructures clés :
 
 1.  **Une zone d'attente de taxis (GSM Taxi Waiting Zone) :** Disposant de 16 places de stationnement en parallèle le long de la chaussée.
@@ -732,17 +732,11 @@ Notre zone d'étude microscopique se concentre sur le corridor de l'avenue Sao B
 
 La superposition de ces usages dans un espace contraint, combinée à la part importante de deux-roues motorisés (50 % à 64 % de la flotte à Hanoï) qui se faufilent entre les voitures en manœuvre, génère une friction cinématique intense. Les trajectoires d'évitement et d'attente à proximité du hub perturbent l'écoulement naturel du trafic sur l'avenue principale.
 
-#### Protocole de collecte par vision par ordinateur (YOLOv8) pour la calibration du jumeau numérique
+#### 4.1.3 Protocole de collecte par vision par ordinateur pour la calibration du jumeau numérique
 Pour calibrer le jumeau numérique SUMO avec des données comportementales et de débits réels, nous avons mis en place un protocole d'observation par vision artificielle. 
 
 ##### Stratégie d'observation et positionnement de la caméra
 Nous avons installé une caméra haute définition temporaire au **3ème étage du Vincom Mega Mall**, au niveau de la zone de restauration. Ce positionnement en hauteur (angle d'observation incliné entre 30 et 45 degrés par rapport à l'horizontale) répond à une contrainte technique fondamentale : **la minimisation de l'occlusion visuelle**. Dans le contexte de trafic mixte vietnamien, les motos circulent de front et entourent les véhicules de gabarit plus important (bus, taxis). Une prise de vue à hauteur d'homme aurait introduit un biais de masquage systématique. La perspective plongeante offre une vue dégagée, garantissant le suivi continu des trajectoires individuelles le long du corridor.
-
-##### Contraintes de prise de vue : Choix du format Portrait vs Paysage
-L'architecture en béton du Vincom Mega Mall présentait de nombreux piliers et montants de vitrage qui obstruaient la ligne de visée horizontale. 
-
-*   **Le format paysage (horizontal) :** Bien qu'adapté pour capturer la longueur du corridor, il intégrait plusieurs obstacles physiques qui segmentaient visuellement la route en zones disjointes, provoquant des pertes de suivi (*tracking*) par l'algorithme de vision par ordinateur.
-*   **Le format portrait (vertical) :** En orientant la caméra verticalement, nous avons aligné le champ de vision dans l'ouverture située entre deux piliers consécutifs. Cela a permis de filmer sans aucun obstacle les trois zones critiques : l'approche amont, l'insertion au hub de recharge, et la sortie vers le carrefour.
 
 ##### Pipeline de traitement d'images YOLOv8
 Les flux vidéo capturés ont été traités par un pipeline basé sur le réseau de neurones convolutifs **YOLOv8** :
@@ -762,15 +756,6 @@ Cette anomalie s'explique par deux facteurs physiques :
 *   **L'occlusion transitoire :** Le passage de bus électriques occultait brièvement les voitures adjacentes. Lors de leur réapparition, le tracker leur attribuait un nouvel identifiant unique, gonflant artificiellement le décompte total.
 
 Pour corriger ce biais et stabiliser le jeu de données, nous avons appliqué un **facteur de correction multiplicatif de -30 %** à la classe des voitures particulières dans notre base de données consolidée.
-
-##### Exclusion méthodologique des bus
-Dans notre formalisation des flux du hub, **les bus de transport en commun ont été systématiquement exclus des statistiques de composition et d'attente**. Cette décision s'appuie sur deux arguments scientifiques :
-
-1.  **Indépendance fonctionnelle :** Les bus électriques (*VinBus*) suivent des itinéraires et des horaires de passage stricts (2,0 à 3,0 bus par 10 minutes). Ils ne rechargent pas aux bornes du hub de Sao Bien, disposant d'infrastructures de charge haute puissance dédiées au dépôt principal.
-2.  **Distorsion statistique :** L'inclusion de ces bus lourds dans la flotte locale masquerait la dynamique des véhicules légers (taxis et voitures particulières), qui représentent 100 % de la charge réelle pesant sur la station de recharge.
-
-Toutefois, pour rendre compte de leur présence et garantir l'exhaustivité de la campagne de mesure, une analyse dédiée à la flotte de transport public a été menée. Les bus maintiennent un flux faible et constant d'environ 2,0 à 3,0 bus par tranche de 10 minutes, avec une légère diminution en période de vacances scolaires et de fêtes nationales.
-
 
 #### Caractérisation des profils empiriques de trafic (Baselines et Holiday Reversal)
 
@@ -839,14 +824,6 @@ Un régime transitoire de montée en charge avec un volume moyen de **123,83 vé
 *   *Standard Cars (ICE) :* **32,33 unités** (**26,1 %**).
 *   *Electric Vehicles :* **33,50 unités** (**27,1 %**).
 
-##### Tableau 4e : Synthèse de la charge de trafic et du taux de pénétration des véhicules électriques sur l'avenue Sao Bien
-| Profil horaire / Journée | Volume horaire total (véh/h) | Volume moyen (véh/10 min) | Part Deux-roues (%) | Part Quatre roues (ICE+EV) (%) | Taux de pénétration EV (sur 4 roues) (%) |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **Matinée creuse (11h00)** | ~600 | 100,00 | 55,0 % | 45,0 % | 48,0 % |
-| **Midi régulier (12h00) - Baseline** | 804 | 134,10 | 50,7 % | 49,3 % | 54,1 % |
-| **Période transitoire (Pre-Vacances)** | 743 | 123,83 | 46,8 % | 53,2 % | 50,9 % |
-| **Midi Vacances (Holiday Reversal)** | 703 | 117,17 | 39,7 % | 60,3 % | 66,3 % |
-| **Soirée de pointe (17h00) - Rush Hour** | 1 366 | 227,67 | 62,8 % | 37,2 % | 59,3 % |
 
 #### Modélisation stochastique de la recharge et initialisation par Warm-Start
 
@@ -1134,7 +1111,7 @@ L'interface Streamlit propose deux indicateurs de performance avancés :
     $$\text{Taux d'abattement (\%)} = \left( 1 - \frac{\widehat{CO}_2(\text{avec EV})}{\widehat{CO}_2(\text{sans EV})} \right) \times 100$$
     Ce taux compare la configuration active avec un scénario fictif 100% thermique de référence pour quantifier le bénéfice écologique immédiat de la transition.
 
-### 3.3 Perspectives opérationnelles
+### 4.3 Perspectives opérationnelles
 
 La complémentarité des deux approches développées dans ce mémoire ouvre la voie à un cadre d'optimisation urbaine hybride (IA-SUMO) alliant la rapidité de l'apprentissage machine et la précision de la simulation physique. Dans ce schéma opérationnel, le modèle prédictif basé sur l'IA (XGBoost) est utilisé en amont pour explorer rapidement de larges espaces de solutions (par exemple, tester des milliers d'implantations géométriques de voirie ou de localisations de hubs de recharge). L'IA évalue chaque configuration en une fraction de seconde, éliminant les scénarios inefficaces et sélectionnant les configurations optimales. Les scénarios retenus par le modèle prédictif sont ensuite injectés dans le jumeau numérique microscopique haute-fidélité (SUMO) pour affiner l'analyse locale (vérification des files d'attente au mètre près, comportement d'évitement des deux-roues, impact électrique précis).
 

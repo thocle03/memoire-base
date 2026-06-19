@@ -753,8 +753,8 @@ La mise en œuvre de notre approche prédictive repose sur une chaîne de
 traitement de la géométrie urbaine, convertissant des cartes brutes en
 graphes mathématiques exploitables.
 
-\paragraph{Acquisition des données géographiques
-brutes}\label{acquisition-des-donnuxe9es-guxe9ographiques-brutes}
+\paragraph{2.1.1 Métriques empiriques pour alimenter le modèle
+SUMO}\label{muxe9triques-empiriques-pour-alimenter-le-moduxe8le-sumo}
 
 Pour obtenir la géométrie de la voirie d'une ville quelconque, nous
 exploitons la base de données cartographiques mondiale libre et
@@ -843,11 +843,11 @@ routières orientées (\texttt{\textless{}edge\textgreater{}}), les voies
 de circulation associées (\texttt{\textless{}lane\textgreater{}}) et les
 liaisons de carrefour (\texttt{\textless{}connection\textgreater{}}).
 
---a faire * \textbf{nodes (Nœuds) :} Le nombre total d'intersections
-physiques du réseau routier. Il s'agit de la dimension \(n\) de la
-matrice d'adjacence \(A\).
-
 \begin{itemize}
+\item
+  \textbf{nodes (Nœuds) :} Le nombre total d'intersections physiques du
+  réseau routier. Il s'agit de la dimension \(n\) de la matrice
+  d'adjacence \(A\).
 \item
   \textbf{edges (Arêtes) :} Le nombre total de tronçons routiers
   orientés reliant les nœuds. C'est le nombre de connexions
@@ -956,8 +956,6 @@ Ratio
 \end{longtable}
 }
 
-\emph{Explication physique des variables topologiques du Tableau 1 :}
-
 \paragraph{Rôle pivot du fichier
 net.xml}\label{ruxf4le-pivot-du-fichier-net.xml}
 
@@ -982,7 +980,8 @@ notre méthodologie :
 \subsubsection{2.2 Le moteur behavioriste de
 SUMO}\label{le-moteur-behavioriste-de-sumo}
 
-\paragraph{Abstraction de la voirie}\label{abstraction-de-la-voirie}
+\paragraph{2.2.1 Abstraction de la
+voirie}\label{abstraction-de-la-voirie}
 
 Le simulateur SUMO modélise les réseaux de transport sous forme de
 réseaux logiques basés sur la théorie des graphes orientés. Dans ce
@@ -1063,8 +1062,8 @@ sortie XML :
   \end{itemize}
 \end{enumerate}
 
-\paragraph{Le modèle de poursuite cinématique de
-Krauß}\label{le-moduxe8le-de-poursuite-cinuxe9matique-de-krauuxdf}
+\paragraph{Le modèle de poursuite cinématique de Krauß
+{[}/ref-krauss{]}}\label{le-moduxe8le-de-poursuite-cinuxe9matique-de-krauuxdf-ref-krauss}
 
 Pour reproduire le mouvement individuel des véhicules le long des
 arêtes, SUMO implémente par défaut le modèle comportemental de poursuite
@@ -1116,8 +1115,8 @@ l'intervalle \([0, \sigma \cdot a \cdot \Delta t]\), le paramètre
 \(\sigma \in [0, 1]\) caractérisant le degré d'inattention du
 conducteur.
 
-\paragraph{Extraction de la connexité par l'algorithme de
-Tarjan}\label{extraction-de-la-connexituxe9-par-lalgorithme-de-tarjan}
+\paragraph{Extraction de la connexité par l'algorithme de Tarjan
+{[}/ref-tarjan{]}}\label{extraction-de-la-connexituxe9-par-lalgorithme-de-tarjan-ref-tarjan}
 
 Pour garantir la cohérence dynamique du réseau de simulation routière,
 il est indispensable de vérifier sa connexité globale. En raison de la
@@ -1212,8 +1211,8 @@ gridlock).}
 
 \newpage
 
-\section{CHAPITRE 3 : CHAPITRE MISE EN PLACE D'UN MODELE
-PREDICTIF}\label{chapitre-3-chapitre-mise-en-place-dun-modele-predictif}
+\section{CHAPITRE 3 : ÉLABORATION D'UN MODÈLE
+PRÉDICTIF}\label{chapitre-3-uxe9laboration-dun-moduxe8le-pruxe9dictif}
 
 Le développement d'un modèle d'intelligence artificielle capable de se
 substituer à la simulation physique requiert une compréhension intime
@@ -1223,11 +1222,11 @@ l'écoulement des flux (macroscopique). Ce chapitre pose le formalisme
 mathématique de ces deux échelles et explicite physiquement la
 signification de chaque formule.
 
-\subsubsection{3.1 Fondation théorique de la topologie spectrale des
-réseaux
-routiers}\label{fondation-thuxe9orique-de-la-topologie-spectrale-des-ruxe9seaux-routiers}
+\subsubsection{3.1 Détermination des métriques spectrales pour alimenter
+le modèle
+prédictif}\label{duxe9termination-des-muxe9triques-spectrales-pour-alimenter-le-moduxe8le-pruxe9dictif}
 
-\paragraph{Formalisation matricielle et pondération
+\paragraph{3.1.1 Formalisation matricielle et pondération
 d'impédance}\label{formalisation-matricielle-et-ponduxe9ration-dimpuxe9dance}
 
 Pour modéliser mathématiquement le réseau routier, nous le représentons
@@ -1292,7 +1291,7 @@ orientée pondérée \(A_{ex}\) s'écrit : \[A_{ex} = \begin{pmatrix}
 \end{pmatrix}\] L'absence de symétrie de cette matrice est évidente
 (\(A_{ex} \neq A_{ex}^T\)).
 
-\paragraph{Le concept de non-normalité et amplification
+\paragraph{3.1.2 Le concept de non-normalité et amplification
 transitoire}\label{le-concept-de-non-normalituxe9-et-amplification-transitoire}
 
 Pour les systèmes asymétriques représentés par des matrices
@@ -1326,9 +1325,9 @@ choc cinématique qui se propage vers l'amont en s'amplifiant, forçant
 des dizaines de véhicules à freiner et à réaccélérer, ce qui cause des
 pics de pollution localisés massifs.
 
-\paragraph{\texorpdfstring{Le Rayon Spectral (\(\rho\)) et le Théorème
-de
-Perron-Frobenius}{Le Rayon Spectral (\textbackslash rho) et le Théorème de Perron-Frobenius}}\label{le-rayon-spectral-rho-et-le-thuxe9oruxe8me-de-perron-frobenius}
+\paragraph{\texorpdfstring{3.1.3 Le Rayon Spectral (\(\rho\)) et le
+Théorème de
+Perron-Frobenius}{3.1.3 Le Rayon Spectral (\textbackslash rho) et le Théorème de Perron-Frobenius}}\label{le-rayon-spectral-rho-et-le-thuxe9oruxe8me-de-perron-frobenius}
 
 Le spectre d'une matrice, noté \(\sigma(A)\), regroupe ses valeurs
 propres complexes \(\lambda_i \in \mathbb{C}\) résolvant
@@ -1373,9 +1372,9 @@ allonge les temps de parcours moyens. Le vecteur propre de
 Perron-Frobenius \(v_{PF}\) quant à lui identifie les carrefours clés du
 réseau où les flux s'accumulent naturellement.
 
-\paragraph{\texorpdfstring{La Constante de Kreiss (\(K\)) et la
+\paragraph{\texorpdfstring{3.1.4 La Constante de Kreiss (\(K\)) et la
 dynamique de
-crise}{La Constante de Kreiss (K) et la dynamique de crise}}\label{la-constante-de-kreiss-k-et-la-dynamique-de-crise}
+crise}{3.1.4 La Constante de Kreiss (K) et la dynamique de crise}}\label{la-constante-de-kreiss-k-et-la-dynamique-de-crise}
 
 Pour quantifier la sensibilité d'un réseau non-normal aux amplifications
 transitoires et modéliser son instabilité dynamique, nous introduisons
@@ -1399,8 +1398,8 @@ qu'une perturbation minime peut déclencher une crise de congestion
 systémique (effet domino) et paralyser le réseau par refoulement
 (\emph{spillback}).
 
-\paragraph{\texorpdfstring{Les Normes de Hardy \(H_2\) et
-\(H_\infty\)}{Les Normes de Hardy H\_2 et H\_\textbackslash infty}}\label{les-normes-de-hardy-h_2-et-h_infty}
+\paragraph{\texorpdfstring{3.1.5 Les Normes de Hardy \(H_2\) et
+\(H_\infty\)}{3.1.5 Les Normes de Hardy H\_2 et H\_\textbackslash infty}}\label{les-normes-de-hardy-h_2-et-h_infty}
 
 En modélisant le réseau routier comme un filtre dynamique linéaire
 entrée-sortie (où l'entrée est le flux d'injection des véhicules et la
@@ -1430,7 +1429,7 @@ cinétique accumulée et évacuer les véhicules après la fin d'une heure de
 pointe. Une ville à forte norme \(H_2\) mettra beaucoup plus de temps à
 retrouver un écoulement fluide.
 
-\paragraph{Théorie des perturbations de Kato {[}6{]} et Loi de
+\paragraph{3.1.6 Théorie des perturbations de Kato {[}6{]} et Loi de
 Contrôle}\label{thuxe9orie-des-perturbations-de-kato-6-et-loi-de-contruxf4le}
 
 Dans le cadre de l'optimisation des réseaux urbains, une question
@@ -2514,7 +2513,7 @@ haute-fidélité. Ce modèle local sert à évaluer l'impact cinématique et
 environnemental de la recharge des flottes électriques en zone
 hyper-dense.
 
-\paragraph{Contexte du développement urbain et transition vers
+\paragraph{4.1.1 Contexte du développement urbain et transition vers
 l'électromobilité au
 Vietnam}\label{contexte-du-duxe9veloppement-urbain-et-transition-vers-luxe9lectromobilituxe9-au-vietnam}
 
@@ -2534,8 +2533,8 @@ prédominante est constituée des véhicules électriques de la compagnie
 \emph{GSM (Green and Smart Mobility)}, rechargeant leurs batteries sur
 des hubs de recharge ultra-rapides gérés par \emph{V-Green}.
 
-\paragraph{Morphologie géométrique et contraintes d'infrastructure du
-site
+\paragraph{4.1.2 Morphologie géométrique et contraintes d'infrastructure
+du site
 d'étude}\label{morphologie-guxe9omuxe9trique-et-contraintes-dinfrastructure-du-site-duxe9tude}
 
 Notre zone d'étude microscopique se concentre sur le corridor de
@@ -2568,9 +2567,9 @@ friction cinématique intense. Les trajectoires d'évitement et d'attente
 à proximité du hub perturbent l'écoulement naturel du trafic sur
 l'avenue principale.
 
-\paragraph{Protocole de collecte par vision par ordinateur (YOLOv8) pour
-la calibration du jumeau
-numérique}\label{protocole-de-collecte-par-vision-par-ordinateur-yolov8-pour-la-calibration-du-jumeau-numuxe9rique}
+\paragraph{4.1.3 Protocole de collecte par vision par ordinateur pour la
+calibration du jumeau
+numérique}\label{protocole-de-collecte-par-vision-par-ordinateur-pour-la-calibration-du-jumeau-numuxe9rique}
 
 Pour calibrer le jumeau numérique SUMO avec des données comportementales
 et de débits réels, nous avons mis en place un protocole d'observation
@@ -2590,29 +2589,6 @@ important (bus, taxis). Une prise de vue à hauteur d'homme aurait
 introduit un biais de masquage systématique. La perspective plongeante
 offre une vue dégagée, garantissant le suivi continu des trajectoires
 individuelles le long du corridor.
-
-\subparagraph{Contraintes de prise de vue : Choix du format Portrait vs
-Paysage}\label{contraintes-de-prise-de-vue-choix-du-format-portrait-vs-paysage}
-
-L'architecture en béton du Vincom Mega Mall présentait de nombreux
-piliers et montants de vitrage qui obstruaient la ligne de visée
-horizontale.
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Le format paysage (horizontal) :} Bien qu'adapté pour capturer
-  la longueur du corridor, il intégrait plusieurs obstacles physiques
-  qui segmentaient visuellement la route en zones disjointes, provoquant
-  des pertes de suivi (\emph{tracking}) par l'algorithme de vision par
-  ordinateur.
-\item
-  \textbf{Le format portrait (vertical) :} En orientant la caméra
-  verticalement, nous avons aligné le champ de vision dans l'ouverture
-  située entre deux piliers consécutifs. Cela a permis de filmer sans
-  aucun obstacle les trois zones critiques : l'approche amont,
-  l'insertion au hub de recharge, et la sortie vers le carrefour.
-\end{itemize}
 
 \subparagraph{Pipeline de traitement d'images
 YOLOv8}\label{pipeline-de-traitement-dimages-yolov8}
@@ -2671,37 +2647,6 @@ facteurs physiques :
 Pour corriger ce biais et stabiliser le jeu de données, nous avons
 appliqué un \textbf{facteur de correction multiplicatif de -30 \%} à la
 classe des voitures particulières dans notre base de données consolidée.
-
-\subparagraph{Exclusion méthodologique des
-bus}\label{exclusion-muxe9thodologique-des-bus}
-
-Dans notre formalisation des flux du hub, \textbf{les bus de transport
-en commun ont été systématiquement exclus des statistiques de
-composition et d'attente}. Cette décision s'appuie sur deux arguments
-scientifiques :
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  \textbf{Indépendance fonctionnelle :} Les bus électriques
-  (\emph{VinBus}) suivent des itinéraires et des horaires de passage
-  stricts (2,0 à 3,0 bus par 10 minutes). Ils ne rechargent pas aux
-  bornes du hub de Sao Bien, disposant d'infrastructures de charge haute
-  puissance dédiées au dépôt principal.
-\item
-  \textbf{Distorsion statistique :} L'inclusion de ces bus lourds dans
-  la flotte locale masquerait la dynamique des véhicules légers (taxis
-  et voitures particulières), qui représentent 100 \% de la charge
-  réelle pesant sur la station de recharge.
-\end{enumerate}
-
-Toutefois, pour rendre compte de leur présence et garantir
-l'exhaustivité de la campagne de mesure, une analyse dédiée à la flotte
-de transport public a été menée. Les bus maintiennent un flux faible et
-constant d'environ 2,0 à 3,0 bus par tranche de 10 minutes, avec une
-légère diminution en période de vacances scolaires et de fêtes
-nationales.
 
 \paragraph{Caractérisation des profils empiriques de trafic (Baselines
 et Holiday
@@ -2906,49 +2851,6 @@ Un régime transitoire de montée en charge avec un volume moyen de
 \item
   \emph{Electric Vehicles :} \textbf{33,50 unités} (\textbf{27,1 \%}).
 \end{itemize}
-
-\subparagraph{Tableau 4e : Synthèse de la charge de trafic et du taux de
-pénétration des véhicules électriques sur l'avenue Sao
-Bien}\label{tableau-4e-synthuxe8se-de-la-charge-de-trafic-et-du-taux-de-puxe9nuxe9tration-des-vuxe9hicules-uxe9lectriques-sur-lavenue-sao-bien}
-
-{\def\LTcaptype{none} % do not increment counter
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1379}}
-  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1724}}
-  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1724}}
-  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1724}}
-  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1724}}
-  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1724}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Profil horaire / Journée
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Volume horaire total (véh/h)
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Volume moyen (véh/10 min)
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Part Deux-roues (\%)
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Part Quatre roues (ICE+EV) (\%)
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Taux de pénétration EV (sur 4 roues) (\%)
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-\textbf{Matinée creuse (11h00)} & \textasciitilde600 & 100,00 & 55,0 \%
-& 45,0 \% & 48,0 \% \\
-\textbf{Midi régulier (12h00) - Baseline} & 804 & 134,10 & 50,7 \% &
-49,3 \% & 54,1 \% \\
-\textbf{Période transitoire (Pre-Vacances)} & 743 & 123,83 & 46,8 \% &
-53,2 \% & 50,9 \% \\
-\textbf{Midi Vacances (Holiday Reversal)} & 703 & 117,17 & 39,7 \% &
-60,3 \% & 66,3 \% \\
-\textbf{Soirée de pointe (17h00) - Rush Hour} & 1 366 & 227,67 & 62,8 \%
-& 37,2 \% & 59,3 \% \\
-\end{longtable}
-}
 
 \paragraph{Modélisation stochastique de la recharge et initialisation
 par
@@ -3957,7 +3859,7 @@ L'interface Streamlit propose deux indicateurs de performance avancés :
   de la transition.
 \end{itemize}
 
-\subsubsection{3.3 Perspectives
+\subsubsection{4.3 Perspectives
 opérationnelles}\label{perspectives-opuxe9rationnelles}
 
 La complémentarité des deux approches développées dans ce mémoire ouvre
