@@ -22,8 +22,6 @@ Je tiens également à remercier l'École Hexagone, qui m'a permis de réaliser 
 
 Mes remerciements s'adressent également aux équipes de l'Université **VinUniversity** à Hanoï (Vietnam), qui m'ont accueilli lors de mon séjour d'études et m'ont fourni les moyens matériels et de collecte de données nécessaires à cette étude.
 
-Enfin, je remercie chaleureusement ma famille et mes proches pour leur soutien indéfectible durant cette année académique.
-
 \newpage
 
 # GLOSSAIRE DES TERMES TECHNIQUES ET MATHÉMATIQUES
@@ -126,7 +124,7 @@ Les réseaux routiers existants, souvent hérités de structures historiques ou 
 Les réseaux de transport urbain se comportent comme des systèmes complexes adaptatifs (*Complex Adaptive Systems*). La cinématique des véhicules y est régie par des interactions locales non-linéaires entre conducteurs (distances de sécurité, temps de réaction, changements de voie). Une modification infime de la topologie (la fermeture d'une voie pour travaux, l'implantation d'un nouveau carrefour ou d'une zone d'attente) peut déclencher une onde de choc cinématique qui se propage vers l'amont, saturant des intersections situées à plusieurs kilomètres du point d'origine. Ce phénomène, théorisé notamment par le paradoxe de Braess [3], démontre qu'ajouter de la capacité physique à un réseau peut parfois détériorer sa fluidité globale. Par conséquent, évaluer l'impact environnemental d'un aménagement ou d'un volume de trafic nécessite une modélisation fine des flux.
 
 #### Le verrou computationnel des micro-simulateurs physiques (SUMO)
-Pour étudier ces phénomènes granulaires, les ingénieurs et planificateurs s'appuient sur des outils de micro-simulation microscopique multi-agents, parmi lesquels la suite open-source **SUMO (Simulation of Urban MObility)** [7] s'est imposée comme une référence académique et industrielle. Ces outils simulent le comportement de chaque véhicule individuellement, pas de temps par pas de temps (généralement $\Delta t = 1.0$ s), en résolvant des équations différentielles de poursuite de voiture (*car-following models* comme le modèle de Krauß) et de changement de voie. Couplés à des bases de données d'émissions (comme HBEFA3 [8]), ils calculent précisément la pollution en fonction des accélérations et vitesses instantanées.
+Pour étudier ces phénomènes granulaires, les ingénieurs et planificateurs s'appuient sur des outils de micro-simulation microscopique multi-agents, parmi lesquels la suite open-source **SUMO (Simulation of Urban MObility)** [7] s'est imposée comme une référence industrielle. Ces outils simulent le comportement de chaque véhicule individuellement, pas de temps par pas de temps (généralement $\Delta t = 1.0$ s), en résolvant des équations différentielles de poursuite de voiture (*car-following models* comme le modèle de Krauß) et de changement de voie. Couplés à des bases de données d'émissions (comme HBEFA3 [8]), ils calculent précisément la pollution en fonction des accélérations et vitesses instantanées.
 
 Cependant, cette haute fidélité physique se heurte à une **barrière computationnelle majeure**. La résolution séquentielle des trajectoires pour des dizaines de milliers d'agents sur des réseaux routiers complexes est extrêmement gourmande en ressources informatiques :
 
