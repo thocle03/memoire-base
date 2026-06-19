@@ -398,7 +398,7 @@ où $\lambda_{PF}$, $v_{PF}$ et $w_{PF}$ désignent les valeurs et vecteurs prop
 
 L'espace des contrôles admissibles $\mathcal{B}$ est structuré par des contraintes budgétaires réelles ($\sum_{(i,j) \in E} |B_{ij}| \le C_{budget}$), géométriques locales ($B_{ij} \le B_{max}$), et patrimoniales/géographiques ($B_{ij} = 0$ sur les axes non modifiables).
 
-#### Données Expérimentales d'Analyse Topologique et Spectrale
+#### 3.1.7 Données Expérimentales d'Analyse Topologique et Spectrale
 L'analyse systématique des réseaux routiers de notre base de données a permis d'extraire les caractéristiques topologiques et spectrales présentées dans les tableaux ci-dessous.
 
 
@@ -442,7 +442,7 @@ L'analyse systématique des réseaux routiers de notre base de données a permis
 
 ### 3.2 Le modèle d'IA de prediction instantanée : une IA topologique 
 
-#### Formulation mathématique de la fonction objective
+#### 3.2.1 Formulation mathématique de la fonction objective
 L'algorithme XGBoost (*eXtreme Gradient Boosting*) minimise une fonction d'apprentissage objective régularisée à l'étape $t$ pour l'arbre $f_t$ :
 $$\mathcal{L}^{(t)} = \sum_{i=1}^N l\left(y_i, \hat{y}_i^{(t-1)} + f_t(x_i)\right) + \Omega(f_t)$$
 Où le terme de régularisation hybride L1/L2 est défini par :
@@ -455,7 +455,7 @@ $$g_i = \frac{\partial l\left(y_i, \hat{y}_i^{(t-1)}\right)}{\partial \hat{y}_i^
 *Explication physique de XGBoost et de sa formulation :*
 > L'utilisation du développement de Taylor de second ordre (intégrant à la fois le gradient $g_i$ et la hessienne $h_i$) confère à XGBoost une capacité unique à capter les interactions non-linéaires violentes. En dynamique routière, les transitions de phase (le passage brutal de la fluidité à la congestion complète lors d'un gridlock) sont des phénomènes hautement instables. Intégrer la dérivée seconde (la hessienne) permet au modèle d'apprentissage de comprendre l'accélération de la congestion et de corriger ses prédictions d'émissions de $CO_2$ de manière beaucoup plus stable et réactive que des méthodes de régression classiques.
 
-#### L'espace à 47 descripteurs explicatifs
+#### 3.2.2 L'espace à 47 descripteurs explicatifs
 
 Voici la description exhaustive, l'utilité opérationnelle et la justification scientifique de ces 47 descripteurs, classés en 8 catégories :
 
@@ -595,7 +595,7 @@ L'importance des variables confirme la pertinence théorique de nos choix. Le vo
 
 \newpage
 
-#### Importance des variables (Feature Importance CO2 normalisé)
+#### 3.2.3 Importance des variables (Feature Importance CO2 normalisé)
 
 L'extraction de l'importance relative des descripteurs dans le modèle XGBoost optimisé de prédiction du $CO_2$ normalisé par véhicule révèle une hiérarchie d'influence physique très cohérente et robuste :
 
@@ -630,7 +630,7 @@ Pour assurer une clarté totale et justifier scientifiquement ces résultats, no
 
 Ce découplage permet au modèle d'utiliser le volume de trafic comme un régulateur de l'état cinématique et une constante d'échelle, tout en laissant les indicateurs spectraux ($\sigma_1$, $\sigma_4$, Kreiss) expliquer pourquoi, à volume égal, une géométrie de ville est plus efficace ou plus polluante qu'une autre.
 
-#### Pipeline complet d'entraînement : de la carte OpenStreetMap au modèle IA (étape par étape)
+#### 3.2.4 Pipeline complet d'entraînement : de la carte OpenStreetMap au modèle IA (étape par étape)
 
 Pour comprendre exactement comment notre modèle d'intelligence artificielle a été construit, nous détaillons ici la chaîne complète de traitement, de la toute première ligne de code au fichier `.joblib` final contenant le modèle entraîné. Cette pipeline se déroule en **cinq étapes séquentielles et entièrement automatisées**, chacune jouant un rôle précis et irremplaçable dans la construction de la connaissance.
 
@@ -746,7 +746,7 @@ Les flux vidéo capturés ont été traités par un pipeline basé sur le résea
 3.  **Classification catégorielle :** Classification automatique des véhicules détectés en trois classes : *Standard Car*, *Electric Vehicle*, et *Motorcycle*.
 4.  **Suivi de trajectoire (Tracking) :** Association d'identifiants uniques d'une image à l'autre via un filtre de Kalman et une matrice de coût basée sur le recouvrement spatial des boîtes (Intersection over Union - IoU).
 
-#### Audit, traitement et correction systématique des données de trafic
+#### 4.1.4 Audit, traitement et correction systématique des données de trafic
 
 ##### Analyse des biais de classification et application d'un facteur de correction
 La phase d'audit qualité des données a révélé une divergence systématique entre les comptages automatisés de YOLOv8 et un comptage manuel de référence effectué sur 3 heures de vidéo. Nous avons identifié une **surestimation constante de la classe des voitures particulières de l'ordre de +30 %**.
@@ -757,7 +757,7 @@ Cette anomalie s'explique par deux facteurs physiques :
 
 Pour corriger ce biais et stabiliser le jeu de données, nous avons appliqué un **facteur de correction multiplicatif de -30 %** à la classe des voitures particulières dans notre base de données consolidée.
 
-#### Caractérisation des profils empiriques de trafic (Baselines et Holiday Reversal)
+#### 4.1.5 Caractérisation des profils empiriques de trafic (Baselines et Holiday Reversal)
 
 La campagne de mesures a collecté 72 enregistrements unitaires de 10 minutes entre le 14 avril et le 7 mai 2026. L'analyse a été menée en deux temps. D'une part, un audit initial sur une plage de référence de 3 heures a permis d'étalonner l'erreur de classification de YOLOv8 et de définir des baselines préliminaires de trafic (avec un flux moyen de 124,4 véhicules en Midday et 214,5 véhicules en Rush Hour). D'autre part, la consolidation de notre campagne de mesures sur 72 enregistrements unitaires a permis d'affiner ces profils sous forme de quatre scénarios empiriques de référence servant de conditions aux limites pour les runs de micro-simulation physique.
 
@@ -825,7 +825,7 @@ Un régime transitoire de montée en charge avec un volume moyen de **123,83 vé
 *   *Electric Vehicles :* **33,50 unités** (**27,1 %**).
 
 
-#### Modélisation stochastique de la recharge et initialisation par Warm-Start
+#### 4.1.6 Modélisation stochastique de la recharge et initialisation par Warm-Start
 
 ##### Le modèle de temps d'arrêt stochastique (Stochastic Dwell Time)
 Pour représenter fidèlement l'impact de la station de recharge sur le trafic, il est scientifiquement inexact de modéliser le temps de raccordement des véhicules électriques (*dwell time*) par une valeur fixe ou une moyenne simpliste. Dans la réalité physique, la durée d'une session de recharge est une variable stochastique complexe. Elle dépend de la puissance nominale de la borne (150 kW DC), mais également de la courbe de charge de la batterie régie par le système de gestion thermique (Battery Management System - BMS), du niveau de charge initial du véhicule à son arrivée ($SoC_{in}$) et du niveau de charge souhaité par l'usager à son départ ($SoC_{out}$). 
@@ -862,7 +862,7 @@ Ainsi, dès la première seconde de la simulation physique, les bornes de rechar
 
 ### 4.2 Expérimentation globale, inférence IA et validation comparative
 
-#### Constitution du corpus d'apprentissage à grande échelle
+#### 4.2.1 Constitution du corpus d'apprentissage à grande échelle
 
 Pour entraîner et valider le modèle XGBoost spectral, le protocole a collecté les données de **242 simulations physiques complètes** issues du simulateur SUMO, exécutées sur **36 villes de morphologies cartographiques radicalement distinctes**, réparties sur les **six continents**. Les variations systématiques portaient sur le volume cinématique (charge de congestion allant de 1 000 à 128 644 véhicules par heure de simulation), la composition catégorielle de la flotte (voitures, motos, camions, bus) et les taux d'électrification catégoriels indépendants (entre 0 % et 100 % d'EV par classe). Ce corpus d'apprentissage représente plus de **2 000 heures cumulées de simulation physique CPU** et constitue, à notre connaissance, l'un des jeux de données les plus diversifiés géographiquement jamais constitués pour la prédiction de la pollution urbaine par apprentissage machine.
 
@@ -927,7 +927,7 @@ Le tableau ci-dessous récapitule l'intégralité des villes composant notre cor
 | **Hue** | Asia_Middle_East | ~2 000 | Descripteurs topologiques uniquement |
 | **Hobart** | Oceania | 9 970 | 14 970 · 56 340 |
 
-#### Analyse comparative des résiliences géométriques : Radial européen vs Grille orthogonale vs Boucles fermées
+#### 4.2.2 Analyse comparative des résiliences géométriques : Radial européen vs Grille orthogonale vs Boucles fermées
 
 L'évaluation des quatre scénarios comportementaux (Constant, Rush Hour, Max Jam, Bottleneck) sur ces six réseaux révèle l'influence déterminante de la géométrie de la voirie sur la résilience globale du trafic.
 
@@ -945,7 +945,7 @@ La morphologie de Hanoï et des complexes de type Vinhomes se caractérise par d
 
 
 
-#### Limites matérielles et physiques de la simulation SUMO
+#### 4.2.3 Limites matérielles et physiques de la simulation SUMO
 L'analyse comparative met en évidence le goulot d'étranglement informatique que représente la simulation microscopique physique face à l'inférence instantanée de l'IA (0,2 seconde).
 
 Le tableau suivant montre l'empreinte mémoire RAM de l'étape de routage (chargement du graphe XML via `sumolib`) en fonction de la taille du réseau :
@@ -962,7 +962,7 @@ Le tableau suivant montre l'empreinte mémoire RAM de l'étape de routage (charg
 
 Pour les réseaux de très grande taille comme Hanoï, l'empreinte mémoire dépasse la capacité physique de 16 Go de RAM des ordinateurs portables classiques. Le système d'exploitation active le mécanisme de **SWAP (pagination virtuelle sur disque)**, ce qui effondre la vitesse de calcul CPU (les temps de routage Dijkstra s'allongeant de quelques secondes à plusieurs dizaines de minutes) et bloque toute optimisation temps réel.
 
-#### Évaluation de transfert (cross-city) sur une ville cible non entraînée
+#### 4.2.4 Évaluation de transfert (cross-city) sur une ville cible non entraînée
 Pour valider la généralisation transversale du modèle, nous testons la prédiction directe sur une ville cible exclue de la base d'entraînement de l'IA. Soit $\vec{x}_{target}$ le vecteur des descripteurs spectraux et topologiques de cette ville test, extrait instantanément d'OpenStreetMap.
 
 Le modèle projette ce vecteur comme une combinaison linéaire convexe de $k$ villes analogues présentes dans l'entraînement : $\vec{x}_{target} = \sum_{j=1}^k \alpha_j \vec{x}_j$, sous les contraintes $\sum \alpha_j = 1$ et $\alpha_j \ge 0$. Les coefficients $\alpha_j$ (les coordonnées barycentriques spectrales) sont obtenus en résolvant un problème d'optimisation quadratique de distance minimale :
@@ -992,7 +992,7 @@ L'analyse des écarts de prédiction montre que l'IA parvient à capturer la sig
 
 Globalement, ces résultats de transfert confirment la robustesse de l'approche spectrale barycentrique. Obtenir des estimations instantanées (0,2 seconde d'inférence) avec des erreurs relatives contenues dans une enveloppe générale de $\pm 15\ \%$ sur les configurations cibles et de $\pm 30\ \%$ sur les pires cas sur des réseaux complexes représente une alternative computationnelle extrêmement puissante à la micro-simulation physique, qui exige plus de 500 secondes de calcul CPU (voir Tableau 9 en Annexe).
 
-#### Évaluation de validation croisée étendue sur 9 villes inédites (27 scénarios)
+#### 4.2.5 Évaluation de validation croisée étendue sur 9 villes inédites (27 scénarios)
 
 Afin de consolider la validation du métamodèle IA et d'éprouver ses performances hors-échantillon (*zero-shot*), nous avons mené une campagne de validation croisée systématique sur **9 villes mondiales inédites** (Nelson, Maseru, Pamplona, Essaouira, Siem Reap, Nara, Galveston, Guanajuato, Colmar). Ces villes n'ont jamais été observées ni utilisées lors des phases d'apprentissage et d'extraction de descripteurs. Pour chaque ville, nous avons défini **trois scénarios de charge de trafic** distincts (faible, modérée et forte congestion), conduisant à un total de **27 simulations de référence** exécutées sous SUMO (HBEFA3) [8] et comparées aux prédictions directes du métamodèle XGBoost (V3). Conformément aux contraintes de comparaison physique, le taux de pénétration des véhicules électriques a été fixé à 0 % afin de concentrer l'évaluation sur la seule dynamique de combustion thermique.
 
@@ -1065,7 +1065,7 @@ L'analyse physique des écarts prédictifs permet de valider ou de remettre en q
 
 ![**Figure 2 :** Analyse de corrélation et résidus (Scatter Plot) de comparaison entre le métamodèle IA et la simulation SUMO de référence sur les 27 scénarios de validation croisée.](images/real_vs_predicted_validation.png)
 
-#### Interface d'aide à la décision : Dashboard Streamlit
+#### 4.2.6 Interface d'aide à la décision : Dashboard Streamlit
 
 Pour valoriser opérationnellement notre modèle d'IA prédictif et le rendre exploitable par des planificateurs urbains non-spécialistes du code, nous avons développé une interface utilisateur interactive sous forme de tableau de bord **Streamlit**. L'application `app_thesis.py` se structure autour d'un design moderne avec une barre latérale de contrôle globale et **quatre onglets horizontaux positionnés en haut de l'écran** pour naviguer entre les différentes échelles d'analyse.
 
@@ -1115,7 +1115,7 @@ L'interface Streamlit propose deux indicateurs de performance avancés :
 
 La complémentarité des deux approches développées dans ce mémoire ouvre la voie à un cadre d'optimisation urbaine hybride (IA-SUMO) alliant la rapidité de l'apprentissage machine et la précision de la simulation physique. Dans ce schéma opérationnel, le modèle prédictif basé sur l'IA (XGBoost) est utilisé en amont pour explorer rapidement de larges espaces de solutions (par exemple, tester des milliers d'implantations géométriques de voirie ou de localisations de hubs de recharge). L'IA évalue chaque configuration en une fraction de seconde, éliminant les scénarios inefficaces et sélectionnant les configurations optimales. Les scénarios retenus par le modèle prédictif sont ensuite injectés dans le jumeau numérique microscopique haute-fidélité (SUMO) pour affiner l'analyse locale (vérification des files d'attente au mètre près, comportement d'évitement des deux-roues, impact électrique précis).
 
-#### Modélisation de la sensibilité météorologique et perspectives d'extension
+#### 4.3.1 Modélisation de la sensibilité météorologique et perspectives d'extension
 
 Une perspective d'extension majeure pour accroître la fidélité de notre métamodèle d'IA réside dans l'intégration systématique des variables météorologiques (pluie, neige), dont l'impact sur la congestion urbaine est bien documenté. 
 

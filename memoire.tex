@@ -1519,7 +1519,7 @@ contraintes budgétaires réelles
 (\(B_{ij} \le B_{max}\)), et patrimoniales/géographiques (\(B_{ij} = 0\)
 sur les axes non modifiables).
 
-\paragraph{Données Expérimentales d'Analyse Topologique et
+\paragraph{3.1.7 Données Expérimentales d'Analyse Topologique et
 Spectrale}\label{donnuxe9es-expuxe9rimentales-danalyse-topologique-et-spectrale}
 
 L'analyse systématique des réseaux routiers de notre base de données a
@@ -1611,7 +1611,7 @@ Kreiss constant
 \subsubsection{3.2 Le modèle d'IA de prediction instantanée : une IA
 topologique}\label{le-moduxe8le-dia-de-prediction-instantanuxe9e-une-ia-topologique}
 
-\paragraph{Formulation mathématique de la fonction
+\paragraph{3.2.1 Formulation mathématique de la fonction
 objective}\label{formulation-mathuxe9matique-de-la-fonction-objective}
 
 L'algorithme XGBoost (\emph{eXtreme Gradient Boosting}) minimise une
@@ -1639,7 +1639,7 @@ l'accélération de la congestion et de corriger ses prédictions
 d'émissions de \(CO_2\) de manière beaucoup plus stable et réactive que
 des méthodes de régression classiques.
 
-\paragraph{L'espace à 47 descripteurs
+\paragraph{3.2.2 L'espace à 47 descripteurs
 explicatifs}\label{lespace-uxe0-47-descripteurs-explicatifs}
 
 Voici la description exhaustive, l'utilité opérationnelle et la
@@ -2075,7 +2075,7 @@ majeur de coupler la charge cinématique à la structure du graphe.
 
 \newpage
 
-\paragraph{Importance des variables (Feature Importance CO2
+\paragraph{3.2.3 Importance des variables (Feature Importance CO2
 normalisé)}\label{importance-des-variables-feature-importance-co2-normalisuxe9}
 
 L'extraction de l'importance relative des descripteurs dans le modèle
@@ -2219,8 +2219,8 @@ laissant les indicateurs spectraux (\(\sigma_1\), \(\sigma_4\), Kreiss)
 expliquer pourquoi, à volume égal, une géométrie de ville est plus
 efficace ou plus polluante qu'une autre.
 
-\paragraph{Pipeline complet d'entraînement : de la carte OpenStreetMap
-au modèle IA (étape par
+\paragraph{3.2.4 Pipeline complet d'entraînement : de la carte
+OpenStreetMap au modèle IA (étape par
 étape)}\label{pipeline-complet-dentrauxeenement-de-la-carte-openstreetmap-au-moduxe8le-ia-uxe9tape-par-uxe9tape}
 
 Pour comprendre exactement comment notre modèle d'intelligence
@@ -2617,7 +2617,8 @@ réseau de neurones convolutifs \textbf{YOLOv8} :
   over Union - IoU).
 \end{enumerate}
 
-\paragraph{Audit, traitement et correction systématique des données de
+\paragraph{4.1.4 Audit, traitement et correction systématique des
+données de
 trafic}\label{audit-traitement-et-correction-systuxe9matique-des-donnuxe9es-de-trafic}
 
 \subparagraph{Analyse des biais de classification et application d'un
@@ -2649,8 +2650,8 @@ Pour corriger ce biais et stabiliser le jeu de données, nous avons
 appliqué un \textbf{facteur de correction multiplicatif de -30 \%} à la
 classe des voitures particulières dans notre base de données consolidée.
 
-\paragraph{Caractérisation des profils empiriques de trafic (Baselines
-et Holiday
+\paragraph{4.1.5 Caractérisation des profils empiriques de trafic
+(Baselines et Holiday
 Reversal)}\label{caractuxe9risation-des-profils-empiriques-de-trafic-baselines-et-holiday-reversal}
 
 La campagne de mesures a collecté 72 enregistrements unitaires de 10
@@ -2853,8 +2854,8 @@ Un régime transitoire de montée en charge avec un volume moyen de
   \emph{Electric Vehicles :} \textbf{33,50 unités} (\textbf{27,1 \%}).
 \end{itemize}
 
-\paragraph{Modélisation stochastique de la recharge et initialisation
-par
+\paragraph{4.1.6 Modélisation stochastique de la recharge et
+initialisation par
 Warm-Start}\label{moduxe9lisation-stochastique-de-la-recharge-et-initialisation-par-warm-start}
 
 \subparagraph{Le modèle de temps d'arrêt stochastique (Stochastic Dwell
@@ -2954,7 +2955,7 @@ conducteurs arrivant sur site.
 \subsubsection{4.2 Expérimentation globale, inférence IA et validation
 comparative}\label{expuxe9rimentation-globale-infuxe9rence-ia-et-validation-comparative}
 
-\paragraph{Constitution du corpus d'apprentissage à grande
+\paragraph{4.2.1 Constitution du corpus d'apprentissage à grande
 échelle}\label{constitution-du-corpus-dapprentissage-uxe0-grande-uxe9chelle}
 
 Pour entraîner et valider le modèle XGBoost spectral, le protocole a
@@ -3174,8 +3175,8 @@ topologiques uniquement \\
 \end{longtable}
 }
 
-\paragraph{Analyse comparative des résiliences géométriques : Radial
-européen vs Grille orthogonale vs Boucles
+\paragraph{4.2.2 Analyse comparative des résiliences géométriques :
+Radial européen vs Grille orthogonale vs Boucles
 fermées}\label{analyse-comparative-des-ruxe9siliences-guxe9omuxe9triques-radial-europuxe9en-vs-grille-orthogonale-vs-boucles-fermuxe9es}
 
 L'évaluation des quatre scénarios comportementaux (Constant, Rush Hour,
@@ -3228,7 +3229,7 @@ l'ensemble du flux. Ces réseaux présentent un comportement non-linéaire
 prononcé, passant sans transition d'un état fluide à une congestion
 complète.
 
-\paragraph{Limites matérielles et physiques de la simulation
+\paragraph{4.2.3 Limites matérielles et physiques de la simulation
 SUMO}\label{limites-matuxe9rielles-et-physiques-de-la-simulation-sumo}
 
 L'analyse comparative met en évidence le goulot d'étranglement
@@ -3280,7 +3281,8 @@ vitesse de calcul CPU (les temps de routage Dijkstra s'allongeant de
 quelques secondes à plusieurs dizaines de minutes) et bloque toute
 optimisation temps réel.
 
-\paragraph{Évaluation de transfert (cross-city) sur une ville cible non
+\paragraph{4.2.4 Évaluation de transfert (cross-city) sur une ville
+cible non
 entraînée}\label{uxe9valuation-de-transfert-cross-city-sur-une-ville-cible-non-entrauxeenuxe9e}
 
 Pour valider la généralisation transversale du modèle, nous testons la
@@ -3417,7 +3419,7 @@ une alternative computationnelle extrêmement puissante à la
 micro-simulation physique, qui exige plus de 500 secondes de calcul CPU
 (voir Tableau 9 en Annexe).
 
-\paragraph{Évaluation de validation croisée étendue sur 9 villes
+\paragraph{4.2.5 Évaluation de validation croisée étendue sur 9 villes
 inédites (27
 scénarios)}\label{uxe9valuation-de-validation-croisuxe9e-uxe9tendue-sur-9-villes-inuxe9dites-27-scuxe9narios}
 
@@ -3716,7 +3718,7 @@ Plot) de comparaison entre le métamodèle IA et la simulation SUMO de
 référence sur les 27 scénarios de validation croisée.}
 \end{figure}
 
-\paragraph{Interface d'aide à la décision : Dashboard
+\paragraph{4.2.6 Interface d'aide à la décision : Dashboard
 Streamlit}\label{interface-daide-uxe0-la-duxe9cision-dashboard-streamlit}
 
 Pour valoriser opérationnellement notre modèle d'IA prédictif et le
@@ -3877,7 +3879,8 @@ jumeau numérique microscopique haute-fidélité (SUMO) pour affiner
 l'analyse locale (vérification des files d'attente au mètre près,
 comportement d'évitement des deux-roues, impact électrique précis).
 
-\paragraph{Modélisation de la sensibilité météorologique et perspectives
+\paragraph{4.3.1 Modélisation de la sensibilité météorologique et
+perspectives
 d'extension}\label{moduxe9lisation-de-la-sensibilituxe9-muxe9tuxe9orologique-et-perspectives-dextension}
 
 Une perspective d'extension majeure pour accroître la fidélité de notre
