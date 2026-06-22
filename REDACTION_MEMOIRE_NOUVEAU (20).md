@@ -944,48 +944,49 @@ Afin de comprendre comment l'IA s'ajuste aux différentes structures de réseaux
 ##### Interprétation topo-dynamique et physique des écarts
 L'analyse physique des écarts prédictifs permet de valider ou de remettre en question nos hypothèses théoriques et d'identifier les limites actuelles du métamodèle :
 
-*   **La résilience de Nelson et Maseru (Succès spectral) :** Nelson possède un réseau en grille coupé en deux par une rivière, limitant le transit à deux ponts stratégiques. L'IA a parfaitement identif#### 4.2.6 Analyse des performances de calcul, complexité et passage à l'échelle
+*   **La résilience de Nelson et Maseru (Succès spectral) :** Nelson possède un réseau en grille coupé en deux par une rivière, limitant le transit à deux ponts stratégiques. L'IA a parfaitement identifié cette fragilité via sa valeur singulière intermédiaire $\sigma_4$ (qui mesure la redondance et est ici très faible), prédisant la congestion quadratique induite par ces goulots. Maseru présente un étalement urbain linéaire le long d'une artère de transit unique. Cette structure simple, exempte de routes alternatives, est captée avec justesse par la première valeur singulière $\sigma_1$ (capacité du corridor principal dominante) et un $\sigma_4$ quasi nul, permettant à XGBoost de calculer un comportement d'écoulement quasi linéaire d'une précision remarquable.
+*   **Le phénomène de seuil dans Essaouira (Bottleneck de la Médina) :** Essaouira présente une non-linéarité physique spectaculaire. Les émissions réelles de SUMO sont très faibles à 1K ($0,51$ t) et 3K ($1,63$ t) mais explosent à **$14,61$ tonnes** à 6K véhicules. Ce saut s'explique par la morphologie médiévale de la médina entourée de murailles, forçant les flux à converger vers des portes étroites. À 3K, le trafic passe encore ; à 6K, ces portes provoquent une congestion généralisée (*gridlock*), faisant chuter la vitesse à $9,65$ km/h et exploser le ralenti moteur. L'IA, en calculant une constante de Kreiss [9] élevée et un indice d'asymétrie important, a détecté cette vulnérabilité structurelle sous forte charge relative (`load_relative` $= 6000 / 891 \approx 6,73$) et a estimé les émissions à $12,23$ tonnes (seulement $16,3\ \%$ d'erreur relative). Cela démontre l'aptitude de la topologie spectrale à anticiper les points de bascule de congestion.
+*   **L'effet "Tunnels" de Guanajuato et la grille de Galveston (Surestimations par l'IA) :** 
+    Guanajuato est bâtie sur un relief montagneux et utilise un réseau complexe de tunnels routiers souterrains unidirectionnels. Topologiquement, le réseau de surface analysé par l'IA apparaît chaotique, sinueux et déconnecté, ce qui conduit à des indices de Kreiss et de non-normalité critiques et justifie la prédiction d'une forte congestion ($22,23$ tonnes de $CO_2$ à 6K). En réalité, les tunnels de simulation agissent comme des conduites rapides à écoulement libre et sans intersections, préservant une vitesse moyenne élevée ($41,5$ km/h) et des émissions réelles modérées ($11,21$ tonnes). Il s'agit d'une limite physique de notre métamodèle qui ignore la séparation tridimensionnelle des flux. 
+    Galveston est une grille côtière linéaire d'une régularité absolue. En simulation SUMO, ce réseau se révèle exceptionnellement robuste : les véhicules s'étalent sur les avenues parallèles et la vitesse ne baisse que de $7\ \%$ lorsque le volume passe de 1K à 6K véhicules. N'ayant pas de descripteur d'orthogonalité parfaite dans son espace d'entrée, l'IA s'attend à une hausse de congestion classique sous charge élevée et surestime la pollution ($12,82$ t vs $7,17$ t).
 
-Pour évaluer la viabilité opérationnelle et l'utilité pratique du métamodèle d'intelligence artificielle (XGBoost) dans des contextes de planification urbaine réelle, une évaluation systématique des temps d'exécution et de la complexité algorithmique a été menée. Cette analyse s'attache à quantifier le gain de performance informatique par rapport aux simulations multi-agents physiques traditionnelles sous le framework SUMO.
+*   **La friction cinématique mixte dans Siem Reap et Nara (Sous-estimations par l'IA) :** 
+    Dans ces deux villes asiatiques sous fort trafic, le modèle sous-estime le $CO_2$ de $25\ \%$ à $30\ \%$. Le ratio par défaut de ces régions comporte **$60\ \%$ de motos**. Le modèle applique une pondération à la baisse du fait du faible facteur d'émission unitaire des deux-roues. Cependant, en simulation physique, l'insertion de 9 000 motos au milieu de 6 000 voitures dans un réseau dense crée une **friction cinématique extrême**. Le comportement de faufilement des motos perturbe les trajectoires des voitures et des camions, les forçant à des cycles arrêt-démarrage répétés qui augmentent significativement leur pollution thermique. Cet effet d'interaction dynamique n'est pas modélisé par la simple composition moyenne de la flotte.
 
-##### A. Les deux régimes d'évaluation : Warm Start vs Cold Start
 
-Le déploiement du modèle d'IA s'organise autour de deux scénarios d'exploitation distincts selon que la ville cible est déjà connue (en base de données) ou inédite :
+#### 4.2.6 Analyse des performances de calcul, complexité et passage à l'échelle
 
-1. **Le régime nominal ou "Warm Start" (villes connues) :** La topologie du réseau a été analysée au préalable et son vecteur de 47 descripteurs est stocké en base de données. L'évaluation est immédiate : le modèle XGBoost réalise une simple inférence directe à partir de ce vecteur d'entrée. Nos tests révèlent un temps d'inférence moyen constant de **5,62 ms** (soit environ $0,0056$ seconde), indépendant de la taille ou de la complexité de la ville.
-2. **Le régime d'intégration ou "Cold Start" (villes inconnues) :** Lorsque l'utilisateur interroge une ville inédite, le système exécute le pipeline d'intégration automatique décrit par la figure ci-dessous. Les données brutes d'OpenStreetMap sont téléchargées, converties par `netconvert` et soumises au calcul matriciel pour construire les descripteurs spectraux, avant d'effectuer l'inférence. Ce processus d'analyse dure en moyenne **20,48 secondes** de bout en bout. Ce coût computationnel n'est payé qu'une seule fois : dès que la signature topologique est calculée, elle est enregistrée en base de données, et toute prédiction ultérieure bascule en mode Warm Start instantané ($< 6$ ms).
+Pour évaluer la viabilité opérationnelle et l'utilité pratique du métamodèle d'intelligence artificielle (XGBoost V3) dans des contextes de planification urbaine réelle, une évaluation systématique des temps d'exécution et de la complexité algorithmique a été menée. Cette analyse s'attache à quantifier le gain de performance informatique par rapport aux simulations multi-agents physiques traditionnelles sous le framework SUMO.
 
-```mermaid
-graph TD
-    A[1. Téléchargement OSM] -->|OSMnx - Ville entière| B[osm.xml]
-    B -->|2. Conversion SUMO| C[netconvert - Nettoyage & Simplification]
-    C -->|net.xml| D[3. Analyse Spectrale]
-    D -->|36 descripteurs topologiques/spectraux| E[Matrices d'Adjacence sp.csr]
-    E -->|Calcul des Valeurs Propres & Singulières| F[Vecteur de Features]
-    F -->|4. Inférence XGBoost (47 descripteurs)| G[Prédiction CO2]
-```
+Dans le cadre de cette étude, nous distinguons deux cas d'usage opérationnels :
+1. **Les villes connues (en base de données) :** Le réseau routier a déjà fait l'objet d'une modélisation préalable, et ses signatures structurelles et spectrales ont été calculées hors ligne. L'outil n'exécute alors que la phase d'inférence directe par le métamodèle IA.
+2. **Les villes inconnues (inédites) :** Le réseau n'est pas présent dans notre base de données topologiques. Le pipeline complet doit être exécuté de bout en bout pour la ville entière à partir de son nom géographique (téléchargement des données OpenStreetMap, conversion en réseau logique SUMO via netconvert, extraction des descripteurs spectraux par calcul matriciel creux, puis inférence prédictive).
 
-##### B. Coût computationnel des simulations physiques de référence (Ground Truth)
+##### A. Bilan global du coût computationnel des simulations de référence
 
 Pour fonder nos tests de performance sur des données empiriques robustes, nous avons analysé le profil temporel de l'ensemble de notre base de données d'apprentissage physique. Cette base compile un total de **251 simulations physiques microscopiques SUMO complètes** réalisées sur un cœur de processeur standard de bureau.
 
 Le coût computationnel global accumulé pour ces runs de référence s'établit à **236 342,23 secondes**, soit **65,65 heures** de calcul CPU ininterrompu. En moyenne, une simulation physique unitaire sous SUMO requiert **941,60 secondes** (environ 15,7 minutes) de temps de traitement. Ce coût moyen se décompose en trois phases de calcul distinctes :
 *   **Routage cinématique moyen (Dijkstra) :** $648,75$ secondes par run (soit $68,9\%$ du temps CPU total). Cette phase calcule le chemin le plus court pour chaque véhicule entre son point d'injection et sa destination.
-*   **Moteur de micro-simulation microscopique moyen (SUMO) :** $292,44$ secondes par run (soit $31,1\%$ du temps CPU total). Cette phase exécute le modèle comportemental pas-à-pas de Krauß pour chaque agent mobile du réseau.
+*   **Moteur de micro-simulation microscopique moyen (SUMO) :** $292,44$ secondes par run (soit $31,1\%$ du temps CPU total). Cette phase exécute le comportement comportemental pas-à-pas de Krauß pour chaque agent mobile du réseau.
 *   **Traitement et parsing XML moyen (tripinfo) :** $0,41$ seconde par run (négligeable, soit $<0,1\%$).
 
 Cette décomposition met en relief la lourdeur intrinsèque de la simulation physique traditionnelle, dominée par le calcul de routage dynamique et la mise à jour séquentielle pas-à-pas des états physiques, ce qui justifie le besoin de méthodes de contournement par métamodèle prédictif instantané.
 
+##### B. Résultats des tests de performance
+
+Les benchmarks de temps d'inférence de notre modèle d'IA pour les villes connues révèlent un temps moyen de **5,62 ms** (soit environ $0,0056$ seconde). Ce temps est constant et indépendant de la dimension du réseau urbain (le modèle XGBoost prenant en entrée le vecteur compact de 47 descripteurs pré-calculés). Pour les villes inconnues, l'exécution complète du pipeline (téléchargement OSM, conversion, analyse spectrale et inférence) prend en moyenne **20,48 secondes** de bout en bout (dont 1,41 s pour l'analyse spectrale matricielle).
+
 ##### C. Comparaison directe à configuration identique (SUMO vs IA)
 
-Pour évaluer précisément le gain de productivité et la vitesse de calcul, nous comparons à ville et volume de trafic identiques les temps d'exécution requis par la simulation physique SUMO et par notre métamodèle IA en mode nominal (Warm Start).
+Pour évaluer précisément le gain de productivité et la vitesse de calcul, nous comparons à ville et volume de trafic identiques les temps d'exécution requis par la simulation physique SUMO et par notre métamodèle IA. Nous divisons cette analyse en deux cas de figure distincts : les volumes modérés (petits volumes) et les volumes massifs (grands volumes).
 
 ###### Définition des indicateurs de performance (colonnes des tableaux) :
 *   **Ville :** Le réseau routier réel servant de cadre géographique à la simulation.
 *   **Volume (véhicules) :** Le nombre total de véhicules injectés sur le réseau pendant la durée de la simulation (1 heure de trafic).
 *   **Temps SUMO (s) :** Le temps CPU cumulé nécessaire pour exécuter la simulation physique classique (comprenant le calcul initial des itinéraires par Dijkstra, la simulation microscopique seconde par seconde, et l'écriture des rapports XML de sortie).
 *   **Temps IA (s) :** Le temps de calcul requis par notre métamodèle IA pour fournir la prédiction d'émissions (inférence seule fixée à la moyenne de 5,6 ms pour les réseaux connus en base).
-*   **Facteur d'accélération :** Le ratio sans dimension indiquant l'accélération de la vitesse de calcul apportée par l'IA ($Temps_{\text{SUMO}} / Temps_{\text{IA}}$).
+*   **Facteur d'accélération :** Le ratio sans dimension indiquant l'accélération de la vitesse de calcul apportée par l'IA ($Temps_{\text{SUMO}} / Temps_{\text{IA}}$). Ce ratio traduit concrètement l'ampleur du gain computationnel : un facteur de $1\,000\times$ signifie que l'IA réalise en 1 milliseconde ce que SUMO accomplit en 1 seconde.
 
 ###### 1. Analyse sous volumes de trafic modérés (petits volumes)
 
@@ -1026,13 +1027,23 @@ Ce comportement s'explique par deux phénomènes physiques et algorithmiques cum
 1.  **Explosion du coût de routage :** La complexité du calcul d'itinéraires Dijkstra en $\mathcal{O}(|V| \log |V| + |E|)$ est répétée individuellement pour les dizaines de milliers de véhicules injectés, ce qui conduit à des temps de routage colossaux (ex: 28 414 s pour Hobart).
 2.  **Friction dynamique pas-à-pas :** Lorsque la congestion augmente, le moteur physique SUMO doit évaluer les interactions locales à chaque pas de temps discret pour un nombre croissant de véhicules bloqués, allongeant le temps d'exécution.
 
-À l'inverse, le métamodèle IA s'affranchit totalement du routage dynamique et de la résolution de la cinématique des flux : il prédit les émissions globales en **5,62 ms** ($0,0056$ s) pour les graphes connus. Les facteurs d'accélération mesurés atteignent des proportions gigantesques, dépassant **5,1 millions de fois plus rapide** pour Hobart et **2,7 millions de fois** pour Berlin. Le gain de temps computationnel mesuré s'établit à plus de **99,99 %** pour tous ces scénarios massifs. Ce constat empirique valide sans ambiguïté la pertinence du métamodèle pour l'aide à la décision interactive et temps réel.
+À l'inverse, le métamodèle IA s'affranchit totalement du routage dynamique et de la résolution de la cinématique des flux : il prédit les émissions globales en **5,62 ms** ($0,0056$ s) pour les graphes connus. Les facteurs d'accélération mesurés atteignent des proportions gigantesques, dépassant **5,1 millions de fois plus rapide** pour Hobart et **2,7 millions de fois** pour Berlin. Le gain de temps computationnel mesuré s'établit à plus de **99,9 %** pour tous ces scénarios massifs — le gain réel non arrondi dépassant $99{,}9999\%$ dans la quasi-totalité des grandes configurations. Ce constat empirique valide sans ambiguïté la pertinence du métamodèle pour l'aide à la décision interactive et temps réel : là où SUMO nécessite des heures de calcul, l'IA répond en quelques millisecondes.
 
-##### D. Benchmarking du pipeline Cold Start sur des métropoles européennes inédites
 
-Pour évaluer le coût d'intégration d'une ville totalement inédite, nous avons benchmarké **5 grandes métropoles européennes entièrement inconnues du modèle** en téléchargeant leur réseau routier complet depuis OpenStreetMap, sans aucune restriction géographique. 
+##### D. Benchmark du pipeline sur des métropoles européennes inédites
+
+Jusqu'ici, l'analyse de performance s'est concentrée sur les villes connues, dont la topologie est déjà enregistrée dans notre base de données spectrale. Pour ces villes, l'inférence IA se limite à une simple requête de prédiction : le modèle fournit sa réponse en **5,62 ms**, indépendamment de la taille du réseau. Ce cas de figure représente le régime nominal d'exploitation du système.
+
+Toutefois, un aspect fondamental de la robustesse opérationnelle du modèle réside dans sa capacité à traiter des villes totalement inédites, dont la topologie n'a jamais été intégrée. Pour évaluer ce scénario de démarrage à froid (*cold start*), nous avons benchmarké **5 grandes métropoles européennes entièrement inconnues du modèle** en téléchargeant leur réseau routier complet depuis OpenStreetMap, sans aucune restriction géographique. Ces villes n'ont jamais été utilisées lors de l'entraînement ni lors de la constitution de la base topologique.
+
+La distinction entre les deux régimes de fonctionnement est essentielle à comprendre :
+*   **Ville connue (warm start) :** La topologie est déjà en base de données. L'IA délivre sa prédiction en $< 6$ ms.
+*   **Ville inconnue (cold start) :** Le pipeline complet (téléchargement OSM via `osmnx`, conversion en réseau SUMO via `netconvert`, analyse spectrale matricielle, puis inférence XGBoost) doit être exécuté. Ce processus est réalisé une seule et unique fois : dès que la topologie est calculée, elle est automatiquement enregistrée dans notre base de données. Toute prédiction ultérieure sur cette même ville sera alors instantanée ($< 6$ ms), au même titre que les villes initialement connues. La base de données topologique s'enrichit donc à chaque nouvelle ville intégrée, rendant le système progressivement plus universel.
+
+Le temps de traitement lors d'un cold start est donc un coût amorti sur l'ensemble du cycle de vie du modèle, et non un coût récurrent.
 
 ##### Tableau 6h : Benchmarking du pipeline complet sur 5 métropoles européennes inédites
+
 | Ville | Nœuds bruts OSM | Nœuds (Simp.) | Arêtes (Simp.) | DL & Conv. SUMO (s) | Analyse Spectrale (s) | Inférence IA (ms) | Temps Total (s) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Lyon** (FR) | 30 643 | 5 674 | 10 988 | 34,3 s | 1,8 s | 5,52 ms | **36,1 s** |
@@ -1043,21 +1054,27 @@ Pour évaluer le coût d'intégration d'une ville totalement inédite, nous avon
 
 ###### Définition des colonnes du Tableau 6h :
 *   **Nœuds bruts OSM :** Nombre total d'intersections et de nœuds géographiques téléchargés depuis la base OpenStreetMap avant simplification.
-*   **Nœuds (Simp.) / Arêtes (Simp.) :** Nombre de nœuds et d'arêtes conservés après la phase de simplification et de nettoyage topologique opérée par `netconvert` (élimination des nœuds intermédiaires, fusion des tronçons colinéaires).
-*   **DL & Conv. SUMO (s) :** Durée de la phase de téléchargement OSM via l'API Overpass (`osmnx.graph_from_place`) et de conversion en réseau logique SUMO (`netconvert`). Cette phase constitue le principal goulot d'étranglement du pipeline *cold start*, sa durée étant principalement dictée par la taille du réseau et la latence réseau de l'API.
-*   **Analyse Spectrale (s) :** Temps de construction des matrices d'adjacence creuses (format CSR) et de calcul des descripteurs spectraux (valeurs propres complexes, valeurs singulières, constante de Kreiss, norme $H_2$).
-*   **Inférence IA (ms) :** Temps de prédiction XGBoost, réduit à quelques millisecondes.
+*   **Nœuds (Simp.) / Arêtes (Simp.) :** Nombre de nœuds et d'arêtes conservés après la phase de simplification et de nettoyage topologique opérée par `netconvert` (élimination des nœuds intermédiaires, fusion des tronçons colinéaires, reconstruction des priorités aux carrefours).
+*   **DL & Conv. SUMO (s) :** Durée de la phase de téléchargement OSM via l'API Overpass (`osmnx.graph_from_place`) et de conversion en réseau logique SUMO (`netconvert`). Cette phase constitue le principal goulot d'étranglement du pipeline *cold start*, sa durée étant principalement dictée par la taille géographique du réseau et la latence réseau lors de l'accès à l'API Overpass.
+*   **Analyse Spectrale (s) :** Temps de construction des matrices d'adjacence creuses (format CSR) et de calcul des descripteurs spectraux (valeurs propres complexes, valeurs singulières, constante de Kreiss, norme $H_2$) par les algorithmes de sous-espace de Krylov.
+*   **Inférence IA (ms) :** Temps de prédiction XGBoost, réduit à quelques millisecondes et strictement indépendant de la taille du réseau urbain.
 *   **Temps Total (s) :** Durée totale de la première exécution (*cold start*), comprenant toutes les phases du pipeline de bout en bout.
 
 ###### Analyse et commentaire du Tableau 6h :
-Les résultats montrent que le pipeline *cold start* s'exécute en **moins de 2 minutes et 12 secondes** pour la plus grande des cinq métropoles testées (Munich, avec 106 744 nœuds OSM bruts). Ce temps inclut la phase la plus coûteuse — le téléchargement et la conversion du réseau routier —, qui représente en moyenne **95 % du temps total**, l'analyse spectrale étant elle-même très rapide (de 1,3 s pour Bruxelles à 9,9 s pour Munich). L'inférence XGBoost finale reste négligeable dans tous les cas (entre 4,13 ms et 5,52 ms), illustrant que le modèle de prédiction lui-même est parfaitement agnostique à la taille du réseau une fois les descripteurs calculés. 
 
-La progression des temps totaux est cohérente avec la densité et l'étendue géographique des réseaux : Lyon (30 643 nœuds bruts) s'exécute en **36,1 s**, tandis que Munich (106 744 nœuds bruts) requiert **131,4 s**. 
-Même dans le pire scénario (131,4 s pour Munich), le pipeline *cold start* demeure **infiniment plus rapide qu'une simulation SUMO complète** sur un tel réseau. De plus, ce coût n'est payé qu'une seule fois : toute prédiction ultérieure sur Munich sera délivrée en moins de 6 ms en mode Warm Start.
+Les résultats montrent que le pipeline *cold start* s'exécute en **moins de 2 minutes et 12 secondes** pour la plus grande des cinq métropoles testées (Munich, avec 106 744 nœuds OSM bruts). Ce temps inclut la phase la plus coûteuse — le téléchargement et la conversion du réseau routier —, qui représente en moyenne **95 % du temps total**, l'analyse spectrale étant elle-même très rapide (de 1,3 s pour Bruxelles à 9,9 s pour Munich).
+
+L'inférence XGBoost finale reste négligeable dans tous les cas : entre **4,13 ms** (Barcelone) et **5,52 ms** (Lyon), illustrant que le modèle de prédiction lui-même est parfaitement agnostique à la taille du réseau une fois les descripteurs calculés.
+
+La progression des temps totaux est cohérente avec la densité et l'étendue géographique des réseaux : Lyon (30 643 nœuds bruts, réseau plus compact) s'exécute en **36,1 s**, tandis que Munich (106 744 nœuds bruts, réseau nettement plus étendu et dense) requiert **131,4 s**. Un cas légèrement atypique est celui de Bruxelles (18 596 nœuds bruts, réseau le plus petit), qui affiche un temps DL & Conv. de 94,0 s légèrement supérieur à Barcelone malgré une topologie bien plus petite. Cet écart s'explique par la variabilité de latence réseau de l'API Overpass selon les serveurs géographiques sollicités et les horaires d'accès.
+
+En tout état de cause, même dans le pire scénario (131,4 s pour Munich), le pipeline *cold start* demeure **infiniment plus rapide qu'une simulation SUMO complète**, qui nécessiterait plusieurs dizaines de minutes à plusieurs heures pour la même ville selon le volume de trafic simulé. Et ce coût n'est payé qu'une seule fois : toute prédiction ultérieure sur Munich — ou sur l'une quelconque de ces cinq métropoles désormais intégrées — sera délivrée en moins de 6 ms, exactement comme pour les villes connues depuis l'origine.
 
 ##### E. Conclusion sur la viabilité informatique du modèle
 
 Ces résultats empiriques démontrent que la méthodologie d'IA topologique spectrale proposée permet de **briser le verrou computationnel inhérent aux simulateurs physiques**. L'inférence ultra-rapide ($<6$ ms) offre une réactivité totale pour des applications interactives, tandis que l'incorporation dynamique de réseaux urbains inconnus — validée sur cinq grandes métropoles européennes inédites (Lyon, Barcelone, Bruxelles, Amsterdam et Munich) — s'effectue en moins de **2 minutes et 12 secondes** pour les réseaux les plus étendus, et en seulement **36 secondes** pour des réseaux de taille intermédiaire. Après cette phase d'intégration initiale, unique et non récurrente, toute prédiction ultérieure sur la ville nouvellement enregistrée est délivrée en moins de 6 ms. Ce mécanisme d'apprentissage topologique incrémental ouvre la voie à des outils d'aide à la décision flexibles et immédiatement transposables à l'échelle internationale.
+
+
 
 #### 4.2.7 Interface d'aide à la décision : Dashboard Streamlit
 
