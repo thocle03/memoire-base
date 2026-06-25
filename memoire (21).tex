@@ -581,29 +581,25 @@ chapitres :
 \begin{itemize}
 \tightlist
 \item
-  Le \textbf{Chapitre 1 (Enjeux de la congestion urbaine et limites de
-  la simulation physique)} introduit la problématique environnementale
-  de la pollution routière en milieu urbain, décrit la congestion comme
-  un phénomène physique émergent complexe et met en lumière les limites
+  Le chapitre 1 introduit la problématique environnementale de la
+  pollution routière en milieu urbain, décrit la congestion comme un
+  phénomène physique émergent complexe et met en lumière les limites
   matérielles et temporelles des outils classiques de micro-simulation
   microscopique.
 \item
-  Le \textbf{Chapitre 2 (Acquisition de la géométrie urbaine et
-  modélisation du trafic)} présente le protocole de récupération des
-  réseaux de voirie (OpenStreetMap) et leur traitement logique
-  (netconvert, connexité de Tarjan), puis détaille le fonctionnement
-  cinématique sous-jacent du simulateur physique SUMO (modèle de
-  poursuite de Krauß, routage dynamique).
+  Le chapitre 2 présente le protocole de récupération des réseaux de
+  voirie (OpenStreetMap) et leur traitement logique (netconvert,
+  connexité de Tarjan), puis détaille le fonctionnement cinématique
+  sous-jacent du simulateur physique SUMO (modèle de poursuite de Krauß,
+  routage dynamique).
 \item
-  Le \textbf{Chapitre 3 (Analyse spectrale des réseaux et conception de
-  l'IA)} pose le cadre mathématique novateur de notre métamodèle. Il
-  expose le formalisme des graphes non-normaux (rayon spectral,
+  Le chapitre 3 pose le cadre mathématique novateur de notre métamodèle.
+  Il expose le formalisme des graphes non-normaux (rayon spectral,
   constante de Kreiss, perturbations de Kato, normes de Hardy) et
   l'architecture du modèle d'intelligence artificielle XGBoost basé sur
   47 descripteurs explicatifs.
 \item
-  Le \textbf{Chapitre 4 (Étude de cas locale, benchmarks et validations
-  comparatives)} valide notre démarche sur le plan pratique. Il détaille
+  Le chapitre 4 valide notre démarche sur le plan pratique. Il détaille
   d'abord l'étude locale par vision artificielle (YOLOv8) du hub de
   recharge de Vinhomes (Hanoï), puis présente l'évaluation macroscopique
   globale de l'IA (généralisation cross-city, benchmarks de temps et de
@@ -849,9 +845,7 @@ liaisons de carrefour (\texttt{\textless{}connection\textgreater{}}).
   frontières de la ville.
 \end{itemize}
 
-\subparagraph{Tableau 1 : Caractéristiques topologiques générales des 21
-villes
-étudiées}\label{tableau-1-caractuxe9ristiques-topologiques-guxe9nuxe9rales-des-21-villes-uxe9tudiuxe9es}
+\subparagraph{Tableau 1 : Exemples}\label{tableau-1-exemples}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -1062,18 +1056,17 @@ relation suivante :
 où \(\tau\) représente le temps de réaction du conducteur, et \(d\) sa
 capacité de décélération maximale.
 
-\emph{Explication physique de la formule :} \textgreater{} La formule de
-vitesse sécuritaire exprime un principe de conservation physique simple.
-Le numérateur \(g(t) - v_L(t)\tau\) représente la distance de sécurité
-nette disponible (le gap spatial diminué de la distance parcourue par le
-leader pendant le temps de réaction du conducteur suiveur). Le
-dénominateur \(\frac{v(t) + v_L(t)}{2d} + \tau\) représente le temps
-total nécessaire au freinage d'urgence (le rapport entre la vitesse
-moyenne des deux véhicules et leur décélération maximale, auquel
-s'ajoute le temps de réaction). Diviser la distance de sécurité nette
-par ce temps de freinage donne la vitesse maximale sécurisée à laquelle
-le suiveur peut rouler pour s'arrêter à temps si le leader pile devant
-lui.
+La formule de vitesse sécuritaire exprime un principe de conservation
+physique simple. Le numérateur \(g(t) - v_L(t)\tau\) représente la
+distance de sécurité nette disponible (le gap spatial diminué de la
+distance parcourue par le leader pendant le temps de réaction du
+conducteur suiveur). Le dénominateur \(\frac{v(t) + v_L(t)}{2d} + \tau\)
+représente le temps total nécessaire au freinage d'urgence (le rapport
+entre la vitesse moyenne des deux véhicules et leur décélération
+maximale, auquel s'ajoute le temps de réaction). Diviser la distance de
+sécurité nette par ce temps de freinage donne la vitesse maximale
+sécurisée à laquelle le suiveur peut rouler pour s'arrêter à temps si le
+leader pile devant lui.
 
 La vitesse théorique souhaitée pour le pas de temps suivant,
 \(v_{target}(t)\), est le minimum parmi les contraintes physiques et
@@ -1188,8 +1181,8 @@ gridlock).}
 
 \newpage
 
-\section{CHAPITRE 3 : ANALYSE SPECTRALE DES RÉSEAUX ET CONCEPTION DE
-L'IA}\label{chapitre-3-analyse-spectrale-des-ruxe9seaux-et-conception-de-lia}
+\section{CHAPITRE 3 : ÉLABORATION D'UN MODÈLE
+PRÉDICTIF}\label{chapitre-3-uxe9laboration-dun-moduxe8le-pruxe9dictif}
 
 Le développement d'un modèle d'intelligence artificielle capable de se
 substituer à la simulation physique requiert une compréhension intime
@@ -1235,8 +1228,7 @@ complexité :
   nombre de voies de circulation.
 \end{enumerate}
 
-\emph{Explication physique de la pondération :} \textgreater{} Le
-rapport \(\frac{L_{ij}}{W_{ij}}\) représente le \textbf{temps de
+Le rapport \(\frac{L_{ij}}{W_{ij}}\) représente le \textbf{temps de
 parcours libre} de l'arête (combien de secondes un véhicule met à
 traverser la rue à vitesse maximale sans trafic). En le divisant par le
 nombre de voies \(C_{ij}\), on intègre sa capacité d'atténuation de la
@@ -1288,8 +1280,7 @@ de retour identique. La mesure de cette non-normalité est quantifiée
 analytiquement par la \textbf{norme de Frobenius du commutateur} :
 \[\Delta(A) = \| A A^T - A^T A \|_F = \sqrt{\text{Tr}\left( (A A^T - A^T A)^H (A A^T - A^T A) \right)}\]
 
-\emph{Explication physique de la non-normalité :} \textgreater{} Dans un
-système dynamique normal (symétrique), les vecteurs propres sont
+Dans un système dynamique normal (symétrique), les vecteurs propres sont
 orthogonaux : toute perturbation (ex. un bouchon) s'amortit de façon
 monotone sans jamais dépasser son intensité initiale. Dans un système
 non-normal (asymétrique, comme un réseau à sens uniques), les vecteurs
@@ -1340,8 +1331,7 @@ cette condition, le théorème de Perron-Frobenius s'énonce comme suit :
   \(\forall \lambda \in \sigma(A) \setminus \{\rho(A)\}, \ |\lambda| \le \rho(A)\).
 \end{enumerate}
 
-\emph{Explication physique du rayon spectral :} \textgreater{} Le rayon
-spectral de la matrice d'impédance \(\rho(A)\) caractérise la
+Le rayon spectral de la matrice d'impédance \(\rho(A)\) caractérise la
 \textbf{résistance globale au transit} du réseau routier. Plus
 \(\rho(A)\) est grand, plus le réseau présente une impédance globale
 élevée (rues longues, étroites, ou à faibles vitesses limites), ce qui
@@ -1365,14 +1355,13 @@ de la puissance de la matrice :
 \[K(A) \le \sup_{k \ge 0} \left\| A^k \right\|_2 \le e \cdot n \cdot K(A)\]
 où \(n\) est la dimension de la matrice.
 
-\emph{Explication physique de la constante de Kreiss {[}9{]} :}
-\textgreater{} La constante de Kreiss {[}9{]} agit comme le
-\textbf{``détecteur de nervosité''} ou de fragilité structurelle de la
-ville. Elle mesure l'amplitude maximale que peut atteindre une onde de
-congestion locale avant que le réseau ne revienne à un état d'écoulement
-libre. Une constante de Kreiss {[}9{]} élevée prévient le planificateur
-qu'une perturbation minime peut déclencher une crise de congestion
-systémique (effet domino) et paralyser le réseau par refoulement
+La constante de Kreiss {[}9{]} agit comme le \textbf{``détecteur de
+nervosité''} ou de fragilité structurelle de la ville. Elle mesure
+l'amplitude maximale que peut atteindre une onde de congestion locale
+avant que le réseau ne revienne à un état d'écoulement libre. Une
+constante de Kreiss {[}9{]} élevée prévient le planificateur qu'une
+perturbation minime peut déclencher une crise de congestion systémique
+(effet domino) et paralyser le réseau par refoulement
 (\emph{spillback}).
 
 \paragraph{\texorpdfstring{3.1.5 Les Normes de Hardy \(H_2\) et
@@ -1395,16 +1384,15 @@ sortie la congestion), nous évaluons sa robustesse via les normes
   \[\|T\|_{H_2} = \left( \sum_{k=0}^{\infty} \left\| A^k \right\|_F^2 \right)^{1/2}\]
 \end{enumerate}
 
-\emph{Explication physique des normes de Hardy :} \textgreater{} La
-norme \(H_\infty\) caractérise le gain d'amplification maximal dans le
-\textbf{pire des scénarios}. Elle indique le niveau de congestion et de
-pollution inévitable que le réseau atteindra si la charge de trafic est
-maximale et localisée sur les axes les plus critiques. La norme \(H_2\),
-quant à elle, mesure la \textbf{mémoire temporelle de la congestion}.
-Elle quantifie le temps nécessaire au réseau pour dissiper l'énergie
-cinétique accumulée et évacuer les véhicules après la fin d'une heure de
-pointe. Une ville à forte norme \(H_2\) mettra beaucoup plus de temps à
-retrouver un écoulement fluide.
+La norme \(H_\infty\) caractérise le gain d'amplification maximal dans
+le \textbf{pire des scénarios}. Elle indique le niveau de congestion et
+de pollution inévitable que le réseau atteindra si la charge de trafic
+est maximale et localisée sur les axes les plus critiques. La norme
+\(H_2\), quant à elle, mesure la \textbf{mémoire temporelle de la
+congestion}. Elle quantifie le temps nécessaire au réseau pour dissiper
+l'énergie cinétique accumulée et évacuer les véhicules après la fin
+d'une heure de pointe. Une ville à forte norme \(H_2\) mettra beaucoup
+plus de temps à retrouver un écoulement fluide.
 
 \paragraph{3.1.6 Théorie des perturbations de Kato {[}6{]} et Loi de
 Contrôle}\label{thuxe9orie-des-perturbations-de-kato-6-et-loi-de-contruxf4le}
@@ -1472,9 +1460,8 @@ où \(\lambda_{PF}\), \(v_{PF}\) et \(w_{PF}\) désignent les valeurs et
 vecteurs propres dominants de Perron-Frobenius associés au graphe
 initial stable.
 
-\emph{Explication physique de la loi de contrôle et de Kato :}
-\textgreater{} La loi de contrôle montre comment optimiser l'aménagement
-routier de manière chirurgicale. Le produit matriciel du premier ordre
+La loi de contrôle montre comment optimiser l'aménagement routier de
+manière chirurgicale. Le produit matriciel du premier ordre
 \(w_{PF}^T B v_{PF} = \sum_{i,j} w_{PF, i} B_{ij} v_{PF, j}\) indique
 que l'impact d'une modification sur l'arête \((i, j)\) dépend du
 couplage entre la centralité de diffusion du nœud source (mesurée par la
@@ -1483,11 +1470,10 @@ composante gauche \(w_{PF, i}\)) et l'attractivité du nœud cible
 l'impact d'un aménagement (rendre \(B_{ij} < 0\)), l'investissement doit
 être fait en priorité sur les tronçons reliant un nœud hautement
 distributeur (forte valeur propre gauche) à un nœud hautement récepteur
-(forte valeur propre droite). \textgreater{} Le terme de second ordre
-intègre quant à lui les transferts de congestion : il empêche le
-déplacement simple du goulot d'étranglement vers des tronçons adjacents
-en pénalisant les perturbations qui surchargent la résolvante réduite
-\(S_{PF}\).
+(forte valeur propre droite). Le terme de second ordre intègre quant à
+lui les transferts de congestion : il empêche le déplacement simple du
+goulot d'étranglement vers des tronçons adjacents en pénalisant les
+perturbations qui surchargent la résolvante réduite \(S_{PF}\).
 
 L'espace des contrôles admissibles \(\mathcal{B}\) est structuré par des
 contraintes budgétaires réelles
@@ -1498,13 +1484,13 @@ sur les axes non modifiables).
 \paragraph{3.1.7 Données Expérimentales d'Analyse Topologique et
 Spectrale}\label{donnuxe9es-expuxe9rimentales-danalyse-topologique-et-spectrale}
 
-L'analyse systématique des réseaux routiers de notre base de données a
-permis d'extraire les caractéristiques topologiques et spectrales
-présentées dans les tableaux ci-dessous.
+Ce tableau récapitule les métriques spectrales de non-normalité
+calculées pour les réseaux de notre base de données où chaque colonne
+correspond à un indicateur clé comme l'indice de non-normalité, le rayon
+spectral, la valeur singulière maximale, la norme \(H_2\) et la
+constante de Kreiss.
 
-\subparagraph{Tableau 2 : Métriques spectrales de non-normalité des
-matrices d'adjacence non pondérées pour les 21 réseaux
-urbains}\label{tableau-2-muxe9triques-spectrales-de-non-normalituxe9-des-matrices-dadjacence-non-ponduxe9ruxe9es-pour-les-21-ruxe9seaux-urbains}
+\subparagraph{Tableau 2 : Exemple}\label{tableau-2-exemple}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -1556,35 +1542,17 @@ Kreiss constant
 \end{longtable}
 }
 
-\emph{Explication physique des variables spectrales du Tableau 2 :}
-
-\begin{itemize}
-\item
-  \textbf{non\_normalness (Indice de non-normalité) :} Mesure la
-  distance de Schur de la matrice d'adjacence par rapport à une matrice
-  normale. Plus cet indice est élevé, plus le réseau est sensible à des
-  amplifications de congestion transitoires et soudaines.
-\item
-  \textbf{spectral\_radius (Rayon spectral \(\rho\)) :} Module de la
-  valeur propre dominante. Dans notre approche d'impédance, il mesure la
-  résistance globale au transit. Un rayon spectral faible indique que la
-  ville dissipe efficacement ses flux de véhicules.
-\item
-  \textbf{sigma\_max (\(\sigma_{max}\)) :} Valeur singulière maximale de
-  la matrice d'adjacence, caractérisant le pire des scénarios de gain de
-  flux à court terme.
-\item
-  \textbf{h2\_norm (Norme \(H_2\)) :} Énergie cumulée de la réponse
-  impulsionnelle du réseau. En ingénierie de trafic, elle correspond à
-  la ``mémoire de la congestion'', c'est-à-dire le temps nécessaire à la
-  voirie pour évacuer les embouteillages accumulés lors d'une
-  perturbation.
-\item
-  \textbf{kreiss\_constant (Constante de Kreiss \(K\)) :} Borne
-  supérieure de l'amplification transitoire. Elle sert d'indicateur de
-  vulnérabilité structurelle de la ville face à des blocages en cascade
-  (effet domino ou gridlock).
-\end{itemize}
+L'indice de non-normalité mesure la distance de Schur de la matrice
+d'adjacence par rapport à une matrice normale pour évaluer la
+sensibilité du réseau à des amplifications de congestion transitoires.
+Le rayon spectral quant à lui correspond au module de la valeur propre
+dominante et indique la résistance globale au transit, tandis que la
+valeur singulière maximale caractérise le pire des scénarios de gain de
+flux à court terme. Enfin, la norme \(H_2\) quantifie l'énergie cumulée
+de la réponse impulsionnelle pour représenter la mémoire temporelle de
+la congestion, et la constante de Kreiss sert de borne supérieure de
+l'amplification transitoire pour évaluer la vulnérabilité aux blocages
+en cascade.
 
 \paragraph{3.1.8 Validation physique des métriques spectrales
 (Corrélations avec la dynamique
@@ -1685,17 +1653,16 @@ où \(g_i\) (gradient) et \(h_i\) (hessienne) désignent les dérivées
 première et seconde de la perte par rapport à la prédiction précédente :
 \[g_i = \frac{\partial l\left(y_i, \hat{y}_i^{(t-1)}\right)}{\partial \hat{y}_i^{(t-1)}} \quad \text{et} \quad h_i = \frac{\partial^2 l\left(y_i, \hat{y}_i^{(t-1)}\right)}{\partial \left(\hat{y}_i^{(t-1)}\right)^2}\]
 
-\emph{Explication physique de XGBoost et de sa formulation :}
-\textgreater{} L'utilisation du développement de Taylor de second ordre
-(intégrant à la fois le gradient \(g_i\) et la hessienne \(h_i\))
-confère à XGBoost une capacité unique à capter les interactions
-non-linéaires violentes. En dynamique routière, les transitions de phase
-(le passage brutal de la fluidité à la congestion complète lors d'un
-gridlock) sont des phénomènes hautement instables. Intégrer la dérivée
-seconde (la hessienne) permet au modèle d'apprentissage de comprendre
-l'accélération de la congestion et de corriger ses prédictions
-d'émissions de \(CO_2\) de manière beaucoup plus stable et réactive que
-des méthodes de régression classiques.
+L'utilisation du développement de Taylor de second ordre (intégrant à la
+fois le gradient \(g_i\) et la hessienne \(h_i\)) confère à XGBoost une
+capacité unique à capter les interactions non-linéaires violentes. En
+dynamique routière, les transitions de phase (le passage brutal de la
+fluidité à la congestion complète lors d'un gridlock) sont des
+phénomènes hautement instables. Intégrer la dérivée seconde (la
+hessienne) permet au modèle d'apprentissage de comprendre l'accélération
+de la congestion et de corriger ses prédictions d'émissions de \(CO_2\)
+de manière beaucoup plus stable et réactive que des méthodes de
+régression classiques.
 
 \paragraph{3.2.2 L'espace à 47 descripteurs
 explicatifs}\label{lespace-uxe0-47-descripteurs-explicatifs}
@@ -3454,14 +3421,6 @@ Erreur Rel. (\%)
 & 137,96 \% \\
 \end{longtable}
 }
-
-\begin{figure}
-\centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Figure 2 : Analyse de corrélation et résidus (Scatter Plot) de la validation croisée IA vs SUMO sur les 27 scénarios des 9 villes tests.}]{images/real_vs_predicted_validation.png}}
-\caption{\textbf{Figure 2 :} Analyse de corrélation et résidus (Scatter
-Plot) de la validation croisée IA vs SUMO sur les 27 scénarios des 9
-villes tests.}
-\end{figure}
 
 \subparagraph{Analyse statistique des performances prédictives
 globales}\label{analyse-statistique-des-performances-pruxe9dictives-globales}
