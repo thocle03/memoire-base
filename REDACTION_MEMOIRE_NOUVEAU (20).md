@@ -109,19 +109,12 @@ Pour exposer notre travail avec toute la rigueur universitaire requise, ce mémo
 
 \newpage
 
-# CHAPITRE 1 : CONTEXTE DE LA MOBILITÉ, DU PROBLÈME COMPUTATIONNEL ET DE L'ACQUISITION TOPOLOGIQUE
+# CHAPITRE 1 : CONTEXTE DU PROBLÈME COMPUTATIONNEL
 
-### 1.1 Contexte de la décarbonation urbaine, congestion et verrou computationnel
-
-#### 1.1.1 Le paradigme de l'urbanisation globale et l'empreinte carbone des transports
-Le XXIe siècle se caractérise par une transition démographique sans précédent : plus de la moitié de la population mondiale réside désormais en milieu urbain. Selon les rapports officiels des Nations Unies, cette proportion devrait franchir le seuil des 68 % d'ici 2050, entraînant l'émergence de mégapoles et une densification extrême de l'espace habitable. Cette concentration humaine s'accompagne d'une croissance exponentielle de la demande de mobilité et des flux de transport de passagers et de marchandises.
-
-Les réseaux routiers existants, souvent hérités de structures historiques ou planifiés de manière rigide, peinent à absorber cette cinématique de trafic. Il en résulte des congestions chroniques qui altèrent la qualité de l'air et augmentent massivement les émissions de gaz à effet de serre. À l'échelle mondiale, le secteur des transports est responsable de plus de 6 Gt de $CO_2$ émises par an, ce qui en fait l'un des principaux contributeurs au dérèglement climatique. Les émissions ne dépendent pas seulement des caractéristiques individuelles des véhicules, mais également de la dynamique collective des flux. En situation de congestion sévère, les cycles répétés d'arrêt-démarrage (*stop-and-go*) et l'inactivité prolongée des moteurs au ralenti (*idling*) provoquent une surconsommation de carburant et une multiplication par un facteur 2 à 4 des émissions de $CO_2$ par kilomètre parcouru.
-
-#### 1.1.2 La congestion routière comme phénomène émergent complexe
+### 1.1 La congestion routière comme phénomène émergent complexe
 Les réseaux de transport urbain se comportent comme des systèmes complexes adaptatifs (*Complex Adaptive Systems*). La cinématique des véhicules y est régie par des interactions locales non-linéaires entre conducteurs (distances de sécurité, temps de réaction, changements de voie). Une modification infime de la topologie (la fermeture d'une voie pour travaux, l'implantation d'un nouveau carrefour ou d'une zone d'attente) peut déclencher une onde de choc cinématique qui se propage vers l'amont, saturant des intersections situées à plusieurs kilomètres du point d'origine. Ce phénomène, théorisé notamment par le paradoxe de Braess [3], démontre qu'ajouter de la capacité physique à un réseau peut parfois détériorer sa fluidité globale. Par conséquent, évaluer l'impact environnemental d'un aménagement ou d'un volume de trafic nécessite une modélisation fine des flux.
 
-#### 1.1.3 Le verrou computationnel des micro-simulateurs physiques (SUMO)
+### 1.2 Le verrou computationnel des micro-simulateurs physiques (SUMO)
 Pour étudier ces phénomènes granulaires, les ingénieurs et planificateurs s'appuient sur des outils de micro-simulation microscopique multi-agents, parmi lesquels la suite open-source **SUMO (Simulation of Urban MObility)** [7] s'est imposée comme une référence industrielle. Ces outils simulent le comportement de chaque véhicule individuellement, pas de temps par pas de temps (généralement $\Delta t = 1.0$ s), en résolvant des équations différentielles de poursuite de voiture (*car-following models* comme le modèle de Krauß) et de changement de voie. Couplés à des bases de données d'émissions (comme HBEFA3 [8]), ils calculent précisément la pollution en fonction des accélérations et vitesses instantanées.
 
 Cependant, cette haute fidélité physique se heurte à une **barrière computationnelle majeure**. La résolution séquentielle des trajectoires pour des dizaines de milliers d'agents sur des réseaux routiers complexes est extrêmement gourmande en ressources informatiques :
@@ -132,7 +125,7 @@ Cependant, cette haute fidélité physique se heurte à une **barrière computat
 
 Cette lenteur interdit toute utilisation des micro-simulateurs pour la gestion du trafic en temps réel (qui requiert des prédictions en quelques secondes pour réagir à un incident) ou pour des boucles d'optimisation automatique (qui doivent évaluer des milliers de scénarios d'aménagement pour trouver le design optimal).
 
-#### 1.1.4 Problématique et objectifs du projet
+### 1.3 Problématique
 Face à ce verrou technologique, la problématique de ce travail s'établit ainsi : **comment concevoir un modèle prédictif capable de calculer de manière instantanée, précise et généralisable les émissions de $CO_2$ générées par le trafic routier, dans n'importe quelle ville du monde, sous divers volumes de trafic et configurations de flotte, sans exécuter de simulation physique microscopique ?**
 
 Pour y répondre, nous développons un **métamodèle d'Intelligence Artificielle Topologique Spectrale**. L'hypothèse scientifique fondamentale de ce travail est que la structure géométrique et mathématique du réseau routier (caractérisée par les valeurs propres et les valeurs singulières de sa matrice d'adjacence d'impédance) contient l'empreinte de sa résilience cinématique. En apprenant à un modèle d'apprentissage supervisé (XGBoost) la relation non-linéaire entre ces descripteurs spectraux, le volume de trafic et la pollution générée (vérité terrain issue de simulations SUMO préalables), nous pouvons prédire instantanément (en 0,2 seconde) le bilan carbone d'une ville avec une précision supérieure à 95 %, éliminant ainsi le besoin de calculs physiques lourds en phase opérationnelle.
@@ -225,7 +218,7 @@ Chaque voie possède des attributs géométriques et comportementaux stricts : u
 
 La transition entre deux arêtes consécutives s'effectue via des **connecteurs géométriques** (*connections*) définis à l'intérieur des nœuds. Ces connecteurs lient précisément une voie de l'arête d'approche à une voie de l'arête de sortie. Ils supportent les règles de priorité (ex: céder le passage, priorité absolue) et les configurations de signalisation dynamique (phases de feux).
 
-#### 3.1.2 Entrées et Sorties de la Simulation SUMO (Points d'entrée/sortie)
+#### 2.2.2 Entrées et Sorties de la Simulation SUMO (Points d'entrée/sortie)
 L'exécution d'une simulation physique microscopique sous le moteur SUMO s'organise autour d'un ensemble structuré de fichiers d'entrée et de sortie XML :
 
 1.  **Fichiers d'entrée (Inputs) :**
@@ -236,7 +229,7 @@ L'exécution d'une simulation physique microscopique sous le moteur SUMO s'organ
     *   **Le fichier d'itinéraires détaillés (`tripinfo.xml`) :** Enregistre pour chaque véhicule son heure de départ, son heure d'arrivée, son temps de parcours total, son temps d'attente dû aux intersections et sa vitesse moyenne.
     *   **Le fichier d'émissions écologiques (`emission-output.xml`) :** Contient, à chaque seconde de la simulation, le détail des rejets polluants de chaque véhicule (CO2, CO, NOx, PMx, ainsi que le carburant consommé). Ces émissions sont calculées par SUMO à partir de la vitesse et de l'accélération instantanées de chaque véhicule via le modèle d'émission européen standardisé HBEFA3 [8]. Ces fichiers compilés et agrégés constituent notre vérité terrain (Ground Truth) de pollution.
 
-#### 3.1.3 Le modèle de poursuite cinématique de Krauß [/ref-krauss]
+#### 2.2.3 Le modèle de poursuite cinématique de Krauß [/ref-krauss]
 Pour reproduire le mouvement individuel des véhicules le long des arêtes, SUMO implémente par défaut le modèle comportemental de poursuite de véhicule développé par **Krauß**. Ce modèle cinématique calcule à chaque pas de temps la vitesse optimale d'un véhicule suiveur pour éviter toute collision avec le véhicule leader, même si ce dernier décélère brutalement.
 
 Soit un véhicule suiveur $F$ caractérisé par sa position $x(t)$ et sa vitesse $v(t)$, circulant derrière un véhicule leader $L$ caractérisé par sa position $x_L(t)$ et sa vitesse $v_L(t)$. L'intervalle spatial libre (ou gap) séparant les deux véhicules est défini par :
@@ -258,7 +251,7 @@ Enfin, pour introduire la variabilité des comportements humains (retards de ré
 $$v(t + \Delta t) = \max\left( 0, v_{target}(t) - \eta \right)$$
 où $\eta$ est une variable aléatoire distribuée uniformément sur l'intervalle $[0, \sigma \cdot a \cdot \Delta t]$, le paramètre $\sigma \in [0, 1]$ caractérisant le degré d'inattention du conducteur.
 
-#### 3.1.4 Extraction de la connexité par l'algorithme de Tarjan [/ref-tarjan]
+#### 2.2.4 Extraction de la connexité par l'algorithme de Tarjan [/ref-tarjan]
 Pour garantir la cohérence dynamique du réseau de simulation routière, il est indispensable de vérifier sa connexité globale. En raison de la présence de règles de circulation complexes (sens uniques) et de potentielles erreurs géométriques issues de la base OpenStreetMap, un réseau routier orienté brut comprend fréquemment des sous-graphes déconnectés du flux principal.
 
 *Exemple concret de problème topologique :*
@@ -273,7 +266,7 @@ L'**algorithme de Tarjan** utilise un parcours en profondeur (DFS) pour identifi
 *Pourquoi cette étape mathématique est-elle indispensable ?*
 > Au-delà d'éviter les véhicules bloqués en simulation, l'extraction de la plus grande composante fortement connexe par Tarjan est la condition mathématique nécessaire qui garantit l'**irréductibilité** de notre matrice d'adjacence $A$. En effet, en théorie des graphes, une matrice d'adjacence est irréductible si et seulement si le graphe sous-jacent est fortement connexe. Cette propriété est requise pour appliquer le **théorème de Perron-Frobenius** (détaillé à la section suivante), qui valide l'existence et l'unicité d'une valeur propre dominante strictement positive (le rayon spectral $\rho(A)$) et d'un vecteur propre strictement positif. Sans le nettoyage de Tarjan, la matrice d'adjacence serait réductible, le spectre de la matrice serait instable, et la théorie des perturbations de Kato [6] ne pourrait pas être appliquée de manière consistante.
 
-#### 3.1.5 Routage dynamique : Filtre de distance minimale pour l'elimination des micro-trajets parasitaires
+#### 2.2.5 Routage dynamique : Filtre de distance minimale pour l'elimination des micro-trajets parasitaires
 
 Lors de la phase de génération automatique de la demande de trafic (synthèse des trajets), les points d'origine et de destination sont distribués aléatoirement sur le graphe épuré. Pour éviter l'apparition de micro-trajets (déplacements de moins de 300 mètres reliant des intersections adjacentes), nous implémentons une contrainte de distance minimale lors de la phase de routage.
 
