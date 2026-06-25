@@ -374,15 +374,15 @@ MATHÉMATIQUES}\label{glossaire-des-termes-techniques-et-mathuxe9matiques}
 \tightlist
 \item
   \textbf{Figure 1 :} Visualisation SIG de la ville test (Illustration
-  de la cartographie des congestions à Paris) (\emph{Chapitre 3, 3.1}).
+  de la cartographie des congestions à Paris) (\emph{Chapitre 4, 4.2}).
 \item
   \textbf{Figure 2 :} Analyse de corrélation et résidus (Scatter Plot)
   de la validation croisée IA vs SUMO sur les 27 scénarios des 9 villes
-  tests (\emph{Chapitre 3, 3.1}).
+  tests (\emph{Chapitre 4, 4.2}).
 \item
   \textbf{Figure 3 :} Capture d'écran de l'interface utilisateur
   Streamlit - Configuration du scénario de trafic et des taux
-  d'électromobilité (\emph{Chapitre 3, 3.1}).
+  d'électromobilité (\emph{Chapitre 4, 4.2}).
 \end{itemize}
 
 \newpage
@@ -395,12 +395,12 @@ MATHÉMATIQUES}\label{glossaire-des-termes-techniques-et-mathuxe9matiques}
   \textbf{Tableau 1 :} Caractéristiques topologiques générales des 21
   villes étudiées (nombre de nœuds, d'arêtes, densité de connexion,
   degré moyen, indice d'asymétrie, ratio de sources et de puits)
-  (\emph{Chapitre 2, 2.2}).
+  (\emph{Chapitre 2, 2.1}).
 \item
   \textbf{Tableau 2 :} Métriques spectrales de non-normalité des
   matrices d'adjacence non pondérées pour les 21 réseaux urbains
   (asymétrie, rayon spectral, valeur singulière maximale, norme \(H_2\),
-  constante de Kreiss {[}9{]}) (\emph{Chapitre 2, 2.2}).
+  constante de Kreiss {[}9{]}) (\emph{Chapitre 3, 3.1}).
 \item
   \textbf{Tableau 2b :} Corrélations empiriques (Pearson/Spearman) entre
   les métriques spectrales clés (Kreiss, \(H_2\), \(\rho\),
@@ -408,10 +408,9 @@ MATHÉMATIQUES}\label{glossaire-des-termes-techniques-et-mathuxe9matiques}
   (vitesse, \(CO_2\)/veh) sur les 242 simulations (\emph{Chapitre 3,
   3.1}).
 \item
-  \textbf{Tableau 3 :} Performances comparatives des modèles
-  d'apprentissage machine pour la prédiction directe des émissions de
-  \(CO_2\) (RMSE, MAE, \(R^2\) de XGBoost, Ridge, Random Forest et MLP)
-  (\emph{Chapitre 2, 2.3}).
+  \textbf{Tableau 3 :} Évolution des performances et caractéristiques
+  des versions du métamodèle prédictif (V2 normalisée vs V3 optimisée)
+  (\emph{Chapitre 3, 3.2}).
 \item
   \textbf{Tableau 3b :} Étude d'ablation --- contribution incrémentale
   des couches de descripteurs : trafic pur vs + topologie classique vs +
@@ -423,43 +422,21 @@ MATHÉMATIQUES}\label{glossaire-des-termes-techniques-et-mathuxe9matiques}
 \item
   \textbf{Tableau 4 :} Profil d'importance des variables (\emph{Feature
   Importance}) dans le modèle final de prédiction de \(CO_2\) par
-  XGBoost (\emph{Chapitre 2, 2.3}).
-\item
-  \textbf{Tableau 4b :} Répartition modale du trafic en période
-  régulière (Midday Baseline) (\emph{Chapitre 3, 3.1}).
-\item
-  \textbf{Tableau 4c :} Répartition modale du trafic en heure de pointe
-  régulière (Regular Evening Peak) (\emph{Chapitre 3, 3.1}).
-\item
-  \textbf{Tableau 4d :} Comparaison de la structure de trafic : Semaine
-  Régulière vs Période de Vacances (Holiday Reversal) (\emph{Chapitre 3,
-  3.1}).
+  XGBoost (\emph{Chapitre 3, 3.2}).
 \item
   \textbf{Tableau 5 :} Taille géométrique des fichiers net.xml sur
   disque et occupation correspondante de la mémoire RAM en Python
-  (filtrage DOM via sumolib) pour cinq villes types (\emph{Chapitre 3,
-  3.2}).
+  (filtrage DOM via sumolib) pour cinq villes types (\emph{Chapitre 4,
+  4.2}).
 \item
   \textbf{Tableau 6 :} Résultats de la validation croisée
   (Generalization Cross-City) de l'IA face aux simulations physiques
   SUMO de référence pour trois configurations cibles (Nelson, Maseru et
-  Pamplona) (\emph{Chapitre 3, 3.2}).
+  Pamplona) (\emph{Chapitre 4, 4.2}).
 \item
   \textbf{Tableau 6b :} Matrice comparative de la validation croisée
   étendue (IA vs SUMO) sur 9 villes inédites sous 3 scénarios de charge
-  (\emph{Chapitre 3, 3.2}).
-\item
-  \textbf{Tableau 6c :} Profil de temps d'inférence CPU du métamodèle IA
-  pour dix villes connues de la base de données (\emph{Chapitre 4,
-  4.2}).
-\item
-  \textbf{Tableau 6d :} Décomposition temporelle de la chaîne de
-  traitement complète pour l'intégration de dix villes inédites
   (\emph{Chapitre 4, 4.2}).
-\item
-  \textbf{Tableau 6e :} Synthèse comparative des temps de calcul moyens
-  (IA seule vs pipeline complet de bout en bout) (\emph{Chapitre 4,
-  4.2}).
 \item
   \textbf{Tableau 6f :} Comparaison directe des temps de calcul SUMO vs
   IA sous volumes de trafic modérés (\emph{Chapitre 4, 4.2}).
@@ -471,19 +448,14 @@ MATHÉMATIQUES}\label{glossaire-des-termes-techniques-et-mathuxe9matiques}
   (téléchargement, conversion, analyse spectrale et inférence IA) sur 5
   métropoles européennes inédites (\emph{Chapitre 4, 4.2}).
 \item
-  \textbf{Tableau 7 :} Extrait représentatif de 17 simulations parmi les
-  242 simulations complètes du framework multi-villes agnostique
-  (véhicules, vitesse moyenne, \(CO_2\) émis, conditions météo, taux
-  d'adoption EV, temps d'exécution) (\emph{Chapitre 3, 3.2}).
+  \textbf{Tableau 7 :} Extrait des indicateurs macroscopiques des
+  simulations de référence (\emph{Annexes}).
 \item
   \textbf{Tableau 8 :} Répartition des tonnages de \(CO_2\) émis par
-  classe de véhicule de la flotte (voitures, motos, bus, camions) pour
-  l'extrait représentatif des 17 simulations de référence
-  (\emph{Chapitre 3, 3.2}).
+  classe de véhicule de la flotte (\emph{Annexes}).
 \item
-  \textbf{Tableau 9 :} Profil de performance informatique détaillé des
-  exécutions CPU (temps de routage Dijkstra, calcul physique SUMO,
-  parsing XML, durée totale) (\emph{Chapitre 3, 3.2}).
+  \textbf{Tableau 9 :} Profil de performance informatique détaillé
+  (secondes CPU) (\emph{Annexes}).
 \end{itemize}
 
 \newpage
@@ -524,17 +496,6 @@ uniquement de l'efficacité énergétique individuelle des véhicules, mais
 également de la résilience cinématique et de la fluidité des réseaux
 routiers eux-mêmes, qui peinent à dissiper les ondes de congestion en
 conditions de haute densité.
-
-Pour endiguer ce fléau environnemental, l'électrification massive des
-flottes de véhicules s'est imposée comme le pivot central des politiques
-publiques. En France, l'État encourage activement cette transition par
-des aides financières ciblées (bonus écologique, prime à la conversion)
-et un déploiement massif d'infrastructures de recharge porté par des
-initiatives publiques et privées. Le réseau national s'étend rapidement
-le long des grands axes autoroutiers, mais s'implante aussi dans les
-zones commerciales à travers les réseaux de grande distribution, à
-l'image des stations installées par des enseignes de distribution
-majeures.
 
 Dès lors, la problématique générale de ce mémoire s'établit comme suit :
 \textbf{comment développer un modèle numérique capable d'estimer de
@@ -614,80 +575,46 @@ modèle d'apprentissage supervisé XGBoost, capable d'estimer
 instantanément le bilan carbone global d'une ville sans aucune
 simulation physique préalable.
 
-\begin{quote}
-{[}!NOTE{]} \textbf{Gain computationnel clé --- résumé pour le lecteur
-:} Avant d'entrer dans les détails techniques, le tableau ci-dessous
-synthétise l'argument central de ce mémoire.
-
-{\def\LTcaptype{none} % do not increment counter
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3077}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3077}}
-  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3846}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Méthode
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Cas d'usage
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Temps de réponse
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-SUMO (simulation physique) & Ville connue, 2 000 véhicules &
-\textasciitilde520 s (8 min 40 s) \\
-SUMO (simulation physique) & Grande métropole, 100 000 véhicules &
-\textasciitilde15 000 s (\textasciitilde4 heures) \\
-\textbf{IA Spectrale (inférence seule)} & \textbf{Toute ville connue} &
-\textbf{\textless{} 6 ms} \\
-\textbf{IA Spectrale (pipeline complet)} & \textbf{Petite/moyenne ville
-inconnue} & \textbf{\textasciitilde20 s} \\
-\textbf{IA Spectrale (pipeline complet)} & \textbf{Grande métropole
-inconnue (Munich)} & \textbf{\textasciitilde131 s} \\
-\end{longtable}
-}
-
-\textbf{Facteur d'accélération : de x26 (petite ville inconnue) à x5 000
-000 (grande métropole connue).}
-\end{quote}
-
-Pour exposer notre travail avec toute la rigueur universitaire requise,
-ce mémoire est structuré en trois grands chapitres :
+Pour exposer notre travail, ce mémoire est structuré en quatre grands
+chapitres :
 
 \begin{itemize}
 \tightlist
 \item
-  Le chapitre 1 réexplique le contexte général de l'urbanisation
-  mondiale et de la décarbonation des transports, présente le verrou
-  computationnel lié à l'utilisation des micro-simulateurs physiques en
-  temps réel, et détaille le protocole d'acquisition et de traitement
-  topologique des réseaux routiers à partir de cartes.
+  Le \textbf{Chapitre 1 (Enjeux de la congestion urbaine et limites de
+  la simulation physique)} introduit la problématique environnementale
+  de la pollution routière en milieu urbain, décrit la congestion comme
+  un phénomène physique émergent complexe et met en lumière les limites
+  matérielles et temporelles des outils classiques de micro-simulation
+  microscopique.
 \item
-  Le chapitre 2 pose le cadre théorique et mathématique de notre
-  méthodologie. Nous y détaillons les équations cinématiques du modèle
-  de Krauß, le traitement géométrique de la connexité (Tarjan), le
-  formalisme des graphes non-normaux (constante de Kreiss {[}9{]},
-  perturbations de Kato {[}6{]}, normes de Hardy) et l'architecture
-  mathématique de notre modèle IA XGBoost à 47 descripteurs. Chaque
-  formule est accompagnée d'une explication physique vulgarisée.
+  Le \textbf{Chapitre 2 (Acquisition de la géométrie urbaine et
+  modélisation du trafic)} présente le protocole de récupération des
+  réseaux de voirie (OpenStreetMap) et leur traitement logique
+  (netconvert, connexité de Tarjan), puis détaille le fonctionnement
+  cinématique sous-jacent du simulateur physique SUMO (modèle de
+  poursuite de Krauß, routage dynamique).
 \item
-  Le chapitre 3 est notre chapitre d'applications et de validations. Le
-  sous-chapitre 3.1 y présente l'étude de cas microscopique locale du
-  hub de recharge de Vinhomes Ocean Park (Hanoï) à l'aide de données de
-  flux de trafic calibrées par vision par ordinateur et ses scénarios de
-  mitigation. Le sous-chapitre 3.2 y présente l'expérimentation
-  macroscopique globale sur le corpus de 36 villes et 242 simulations,
-  l'évaluation des performances informatiques (RAM, SWAP), la validation
-  transversale (\emph{cross-city}) de l'IA sur des villes cibles non
-  entraînées, et la présentation du dashboard interactif.
+  Le \textbf{Chapitre 3 (Analyse spectrale des réseaux et conception de
+  l'IA)} pose le cadre mathématique novateur de notre métamodèle. Il
+  expose le formalisme des graphes non-normaux (rayon spectral,
+  constante de Kreiss, perturbations de Kato, normes de Hardy) et
+  l'architecture du modèle d'intelligence artificielle XGBoost basé sur
+  47 descripteurs explicatifs.
+\item
+  Le \textbf{Chapitre 4 (Étude de cas locale, benchmarks et validations
+  comparatives)} valide notre démarche sur le plan pratique. Il détaille
+  d'abord l'étude locale par vision artificielle (YOLOv8) du hub de
+  recharge de Vinhomes (Hanoï), puis présente l'évaluation macroscopique
+  globale de l'IA (généralisation cross-city, benchmarks de temps et de
+  mémoire, et présentation du tableau de bord Streamlit).
 \end{itemize}
 
 \newpage
 
-\section{CHAPITRE 1 : CONTEXTE DU PROBLÈME
-COMPUTATIONNEL}\label{chapitre-1-contexte-du-probluxe8me-computationnel}
+\section{CHAPITRE 1 : ENJEUX DE LA CONGESTION URBAINE ET LIMITES DE LA
+SIMULATION
+PHYSIQUE}\label{chapitre-1-enjeux-de-la-congestion-urbaine-et-limites-de-la-simulation-physique}
 
 \subsubsection{1.1 La congestion routière comme phénomène émergent
 complexe}\label{la-congestion-routiuxe8re-comme-phuxe9nomuxe8ne-uxe9mergent-complexe}
@@ -790,8 +717,9 @@ physiques lourds en phase opérationnelle.
 
 \newpage
 
-\section{CHAPITRE 2 : CONSTRUCTION DE LA BASE DE
-CONNAISSANCE}\label{chapitre-2-construction-de-la-base-de-connaissance}
+\section{CHAPITRE 2 : ACQUISITION DE LA GÉOMÉTRIE URBAINE ET
+MODÉLISATION DU
+TRAFIC}\label{chapitre-2-acquisition-de-la-guxe9omuxe9trie-urbaine-et-moduxe9lisation-du-trafic}
 
 \subsubsection{2.1 Traitement topologique des réseaux
 urbains}\label{traitement-topologique-des-ruxe9seaux-urbains}
@@ -921,7 +849,9 @@ liaisons de carrefour (\texttt{\textless{}connection\textgreater{}}).
   frontières de la ville.
 \end{itemize}
 
-\subparagraph{Tableau 1 : Exemples}\label{tableau-1-exemples}
+\subparagraph{Tableau 1 : Caractéristiques topologiques générales des 21
+villes
+étudiées}\label{tableau-1-caractuxe9ristiques-topologiques-guxe9nuxe9rales-des-21-villes-uxe9tudiuxe9es}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -1258,8 +1188,8 @@ gridlock).}
 
 \newpage
 
-\section{CHAPITRE 3 : ÉLABORATION D'UN MODÈLE
-PRÉDICTIF}\label{chapitre-3-uxe9laboration-dun-moduxe8le-pruxe9dictif}
+\section{CHAPITRE 3 : ANALYSE SPECTRALE DES RÉSEAUX ET CONCEPTION DE
+L'IA}\label{chapitre-3-analyse-spectrale-des-ruxe9seaux-et-conception-de-lia}
 
 Le développement d'un modèle d'intelligence artificielle capable de se
 substituer à la simulation physique requiert une compréhension intime
@@ -1572,7 +1502,9 @@ L'analyse systématique des réseaux routiers de notre base de données a
 permis d'extraire les caractéristiques topologiques et spectrales
 présentées dans les tableaux ci-dessous.
 
-\subparagraph{Tableau 2 : Exemple}\label{tableau-2-exemple}
+\subparagraph{Tableau 2 : Métriques spectrales de non-normalité des
+matrices d'adjacence non pondérées pour les 21 réseaux
+urbains}\label{tableau-2-muxe9triques-spectrales-de-non-normalituxe9-des-matrices-dadjacence-non-ponduxe9ruxe9es-pour-les-21-ruxe9seaux-urbains}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -2766,9 +2698,8 @@ plusieurs heures pour une simulation SUMO équivalente.
 
 \newpage
 
-\section{CHAPITRE 4 : APPLICATIONS EMPIRIQUES, ÉTUDES DE CAS ET
-VALIDATIONS
-COMPARATIVES}\label{chapitre-4-applications-empiriques-uxe9tudes-de-cas-et-validations-comparatives}
+\section{CHAPITRE 4 : ÉTUDE DE CAS LOCALE, BENCHMARKS ET VALIDATIONS
+COMPARATIVES}\label{chapitre-4-uxe9tude-de-cas-locale-benchmarks-et-validations-comparatives}
 
 Ce chapitre présente les applications concrètes de notre démarche
 prédictive. L'étude de cas locale et microscopique présentée dans la
@@ -3523,6 +3454,14 @@ Erreur Rel. (\%)
 & 137,96 \% \\
 \end{longtable}
 }
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Figure 2 : Analyse de corrélation et résidus (Scatter Plot) de la validation croisée IA vs SUMO sur les 27 scénarios des 9 villes tests.}]{images/real_vs_predicted_validation.png}}
+\caption{\textbf{Figure 2 :} Analyse de corrélation et résidus (Scatter
+Plot) de la validation croisée IA vs SUMO sur les 27 scénarios des 9
+villes tests.}
+\end{figure}
 
 \subparagraph{Analyse statistique des performances prédictives
 globales}\label{analyse-statistique-des-performances-pruxe9dictives-globales}

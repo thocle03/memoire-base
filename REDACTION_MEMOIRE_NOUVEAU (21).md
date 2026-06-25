@@ -48,37 +48,31 @@ Mes remerciements s'adressent également aux équipes de l'Université **VinUniv
 
 # LISTE DES ILLUSTRATIONS
 
-*   **Figure 1 :** Visualisation SIG de la ville test (Illustration de la cartographie des congestions à Paris) (*Chapitre 3, 3.1*).
-*   **Figure 2 :** Analyse de corrélation et résidus (Scatter Plot) de la validation croisée IA vs SUMO sur les 27 scénarios des 9 villes tests (*Chapitre 3, 3.1*).
-*   **Figure 3 :** Capture d'écran de l'interface utilisateur Streamlit - Configuration du scénario de trafic et des taux d'électromobilité (*Chapitre 3, 3.1*).
+*   **Figure 1 :** Visualisation SIG de la ville test (Illustration de la cartographie des congestions à Paris) (*Chapitre 4, 4.2*).
+*   **Figure 2 :** Analyse de corrélation et résidus (Scatter Plot) de la validation croisée IA vs SUMO sur les 27 scénarios des 9 villes tests (*Chapitre 4, 4.2*).
+*   **Figure 3 :** Capture d'écran de l'interface utilisateur Streamlit - Configuration du scénario de trafic et des taux d'électromobilité (*Chapitre 4, 4.2*).
 
 
 \newpage
 
 # LISTE DES TABLEAUX
 
-*   **Tableau 1 :** Caractéristiques topologiques générales des 21 villes étudiées (nombre de nœuds, d'arêtes, densité de connexion, degré moyen, indice d'asymétrie, ratio de sources et de puits) (*Chapitre 2, 2.2*).
-*   **Tableau 2 :** Métriques spectrales de non-normalité des matrices d'adjacence non pondérées pour les 21 réseaux urbains (asymétrie, rayon spectral, valeur singulière maximale, norme $H_2$, constante de Kreiss [9]) (*Chapitre 2, 2.2*).
+*   **Tableau 1 :** Caractéristiques topologiques générales des 21 villes étudiées (nombre de nœuds, d'arêtes, densité de connexion, degré moyen, indice d'asymétrie, ratio de sources et de puits) (*Chapitre 2, 2.1*).
+*   **Tableau 2 :** Métriques spectrales de non-normalité des matrices d'adjacence non pondérées pour les 21 réseaux urbains (asymétrie, rayon spectral, valeur singulière maximale, norme $H_2$, constante de Kreiss [9]) (*Chapitre 3, 3.1*).
 *   **Tableau 2b :** Corrélations empiriques (Pearson/Spearman) entre les métriques spectrales clés (Kreiss, $H_2$, $\rho$, $\sigma_1$) et les indicateurs cinématiques observés en simulation (vitesse, $CO_2$/veh) sur les 242 simulations (*Chapitre 3, 3.1*).
-*   **Tableau 3 :** Performances comparatives des modèles d'apprentissage machine pour la prédiction directe des émissions de $CO_2$ (RMSE, MAE, $R^2$ de XGBoost, Ridge, Random Forest et MLP) (*Chapitre 2, 2.3*).
+*   **Tableau 3 :** Évolution des performances et caractéristiques des versions du métamodèle prédictif (V2 normalisée vs V3 optimisée) (*Chapitre 3, 3.2*).
 *   **Tableau 3b :** Étude d'ablation — contribution incrémentale des couches de descripteurs : trafic pur vs + topologie classique vs + spectral complet (V3) (*Chapitre 3, 3.2*).
 *   **Tableau 3c :** Résultats de la validation croisée K-Fold (K=5) : $R^2$, RMSE et MAE moyens ± écart-type sur les 5 folds (*Chapitre 3, 3.2*).
-*   **Tableau 4 :** Profil d'importance des variables (*Feature Importance*) dans le modèle final de prédiction de $CO_2$ par XGBoost (*Chapitre 2, 2.3*).
-*   **Tableau 4b :** Répartition modale du trafic en période régulière (Midday Baseline) (*Chapitre 3, 3.1*).
-*   **Tableau 4c :** Répartition modale du trafic en heure de pointe régulière (Regular Evening Peak) (*Chapitre 3, 3.1*).
-*   **Tableau 4d :** Comparaison de la structure de trafic : Semaine Régulière vs Période de Vacances (Holiday Reversal) (*Chapitre 3, 3.1*).
-*   **Tableau 5 :** Taille géométrique des fichiers net.xml sur disque et occupation correspondante de la mémoire RAM en Python (filtrage DOM via sumolib) pour cinq villes types (*Chapitre 3, 3.2*).
-*   **Tableau 6 :** Résultats de la validation croisée (Generalization Cross-City) de l'IA face aux simulations physiques SUMO de référence pour trois configurations cibles (Nelson, Maseru et Pamplona) (*Chapitre 3, 3.2*).
-*   **Tableau 6b :** Matrice comparative de la validation croisée étendue (IA vs SUMO) sur 9 villes inédites sous 3 scénarios de charge (*Chapitre 3, 3.2*).
-*   **Tableau 6c :** Profil de temps d'inférence CPU du métamodèle IA pour dix villes connues de la base de données (*Chapitre 4, 4.2*).
-*   **Tableau 6d :** Décomposition temporelle de la chaîne de traitement complète pour l'intégration de dix villes inédites (*Chapitre 4, 4.2*).
-*   **Tableau 6e :** Synthèse comparative des temps de calcul moyens (IA seule vs pipeline complet de bout en bout) (*Chapitre 4, 4.2*).
+*   **Tableau 4 :** Profil d'importance des variables (*Feature Importance*) dans le modèle final de prédiction de $CO_2$ par XGBoost (*Chapitre 3, 3.2*).
+*   **Tableau 5 :** Taille géométrique des fichiers net.xml sur disque et occupation correspondante de la mémoire RAM en Python (filtrage DOM via sumolib) pour cinq villes types (*Chapitre 4, 4.2*).
+*   **Tableau 6 :** Résultats de la validation croisée (Generalization Cross-City) de l'IA face aux simulations physiques SUMO de référence pour trois configurations cibles (Nelson, Maseru et Pamplona) (*Chapitre 4, 4.2*).
+*   **Tableau 6b :** Matrice comparative de la validation croisée étendue (IA vs SUMO) sur 9 villes inédites sous 3 scénarios de charge (*Chapitre 4, 4.2*).
 *   **Tableau 6f :** Comparaison directe des temps de calcul SUMO vs IA sous volumes de trafic modérés (*Chapitre 4, 4.2*).
 *   **Tableau 6g :** Comparaison directe des temps de calcul SUMO vs IA sous volumes de trafic massifs (*Chapitre 4, 4.2*).
 *   **Tableau 6h :** Benchmarking du pipeline complet (téléchargement, conversion, analyse spectrale et inférence IA) sur 5 métropoles européennes inédites (*Chapitre 4, 4.2*).
-*   **Tableau 7 :** Extrait représentatif de 17 simulations parmi les 242 simulations complètes du framework multi-villes agnostique (véhicules, vitesse moyenne, $CO_2$ émis, conditions météo, taux d'adoption EV, temps d'exécution) (*Chapitre 3, 3.2*).
-*   **Tableau 8 :** Répartition des tonnages de $CO_2$ émis par classe de véhicule de la flotte (voitures, motos, bus, camions) pour l'extrait représentatif des 17 simulations de référence (*Chapitre 3, 3.2*).
-*   **Tableau 9 :** Profil de performance informatique détaillé des exécutions CPU (temps de routage Dijkstra, calcul physique SUMO, parsing XML, durée totale) (*Chapitre 3, 3.2*).
+*   **Tableau 7 :** Extrait des indicateurs macroscopiques des simulations de référence (*Annexes*).
+*   **Tableau 8 :** Répartition des tonnages de $CO_2$ émis par classe de véhicule de la flotte (*Annexes*).
+*   **Tableau 9 :** Profil de performance informatique détaillé (secondes CPU) (*Annexes*).
 
 \newpage
 
@@ -89,8 +83,6 @@ Aujourd'hui, plus de la moitié de la population mondiale réside en milieu urba
 Les infrastructures et réseaux routiers existants n'ayant pas été conçus pour absorber une telle cinématique de croissance, cette saturation engendre des congestions chroniques de trafic et une hausse massive des émissions polluantes. À l'échelle mondiale, le secteur des transports routiers constitue l'un des principaux contributeurs au changement climatique. Selon les données de l'Agence Internationale de l'Énergie, le transport routier est responsable de plus de 6 Gt de $CO_2$ émises en 2024, affichant une croissance continue de 8 % depuis 2015. Dans ce bilan carbone, les véhicules particuliers et utilitaires légers représentent plus de 60 % des émissions, tandis que les véhicules lourds et camions comptent pour environ un tiers.
 
 La congestion routière aggrave considérablement cette situation : les cycles d'arrêt-démarrage et l'inactivité des moteurs thermiques dans les embouteillages (*idling*) provoquent une surconsommation de carburant et des émissions de polluants locaux majeures, en particulier chez les poids lourds. L'évaluation de l'Organisation de Coopération et de Développement Économiques et de l'Agence Européenne pour l'Environnement montre que l'efficacité écologique globale ne dépend pas uniquement de l'efficacité énergétique individuelle des véhicules, mais également de la résilience cinématique et de la fluidité des réseaux routiers eux-mêmes, qui peinent à dissiper les ondes de congestion en conditions de haute densité.
-
-Pour endiguer ce fléau environnemental, l'électrification massive des flottes de véhicules s'est imposée comme le pivot central des politiques publiques. En France, l'État encourage activement cette transition par des aides financières ciblées (bonus écologique, prime à la conversion) et un déploiement massif d'infrastructures de recharge porté par des initiatives publiques et privées. Le réseau national s'étend rapidement le long des grands axes autoroutiers, mais s'implante aussi dans les zones commerciales à travers les réseaux de grande distribution, à l'image des stations installées par des enseignes de distribution majeures.
 
 Dès lors, la problématique générale de ce mémoire s'établit comme suit : **comment développer un modèle numérique capable d'estimer de manière instantanée, précise et généralisable les émissions de $CO_2$ urbaines générées par le trafic routier, dans n'importe quelle ville du monde, sous divers scénarios de transition de flotte et d'infrastructures ?**
 
@@ -104,29 +96,16 @@ Cette limitation majeure justifie le développement de nouvelles approches de ru
 
 Pour briser ce verrou technologique, ce mémoire propose une méthodologie hybride alliant la précision locale de la micro-simulation et la rapidité de prédiction instantanée de l'intelligence artificielle. Afin d'offrir une vision claire et cohérente de la démarche scientifique entreprise, nous décrivons dès cette introduction le rôle de chacun des éléments constituant notre protocole. L'estimation instantanée et agnostique de la pollution urbaine repose sur une chaîne d'outils interconnectés. Tout d'abord, pour acquérir la structure géométrique brute de la voirie d'une ville quelconque, nous exploitons la base de données collaborative OpenStreetMap (OSM). Cette géométrie brute est ensuite compilée par l'outil netconvert [7] afin d'en éliminer les micro-détails déconnectés et de générer un réseau logique d'intersections et de voies unifiées. Ce réseau nettoyé est alors injecté dans le micro-simulateur SUMO (Simulation of Urban MObility) [7] pour simuler différents volumes et compositions de trafic, ce qui nous permet de calculer des trajectoires de véhicules et d'en extraire, via la base de données HBEFA3 [8], les émissions de $CO_2$ réelles correspondantes (constituant notre base d'apprentissage). Pour s'affranchir de la lenteur computationnelle de SUMO sur de grands réseaux, nous traduisons ensuite la topologie de chaque ville sous forme d'une matrice d'adjacence d'impédance physique, dont nous extrayons des caractéristiques spectrales avancées (rayon spectral, constante de Kreiss [9], perturbations de Kato [6]). Ces descripteurs spectraux, qui encodent la vulnérabilité d'un réseau aux embouteillages, sont enfin utilisés comme données d'entrée pour un modèle d'apprentissage supervisé XGBoost, capable d'estimer instantanément le bilan carbone global d'une ville sans aucune simulation physique préalable.
 
+Pour exposer notre travail, ce mémoire est structuré en quatre grands chapitres :
 
-> [!NOTE]
-> **Gain computationnel clé — résumé pour le lecteur :** Avant d'entrer dans les détails techniques, le tableau ci-dessous synthétise l'argument central de ce mémoire.
->
-> | Méthode | Cas d'usage | Temps de réponse |
-> | :--- | :--- | :---: |
-> | SUMO (simulation physique) | Ville connue, 2 000 véhicules | ~520 s (8 min 40 s) |
-> | SUMO (simulation physique) | Grande métropole, 100 000 véhicules | ~15 000 s (~4 heures) |
-> | **IA Spectrale (inférence seule)** | **Toute ville connue** | **< 6 ms** |
-> | **IA Spectrale (pipeline complet)** | **Petite/moyenne ville inconnue** | **~20 s** |
-> | **IA Spectrale (pipeline complet)** | **Grande métropole inconnue (Munich)** | **~131 s** |
->
-> **Facteur d'accélération : de x26 (petite ville inconnue) à x5 000 000 (grande métropole connue).**
-
-Pour exposer notre travail avec toute la rigueur universitaire requise, ce mémoire est structuré en trois grands chapitres :
-
-*   Le chapitre 1 réexplique le contexte général de l'urbanisation mondiale et de la décarbonation des transports, présente le verrou computationnel lié à l'utilisation des micro-simulateurs physiques en temps réel, et détaille le protocole d'acquisition et de traitement topologique des réseaux routiers à partir de cartes.
-*   Le chapitre 2 pose le cadre théorique et mathématique de notre méthodologie. Nous y détaillons les équations cinématiques du modèle de Krauß, le traitement géométrique de la connexité (Tarjan), le formalisme des graphes non-normaux (constante de Kreiss [9], perturbations de Kato [6], normes de Hardy) et l'architecture mathématique de notre modèle IA XGBoost à 47 descripteurs. Chaque formule est accompagnée d'une explication physique vulgarisée.
-*   Le chapitre 3 est notre chapitre d'applications et de validations. Le sous-chapitre 3.1 y présente l'étude de cas microscopique locale du hub de recharge de Vinhomes Ocean Park (Hanoï) à l'aide de données de flux de trafic calibrées par vision par ordinateur et ses scénarios de mitigation. Le sous-chapitre 3.2 y présente l'expérimentation macroscopique globale sur le corpus de 36 villes et 242 simulations, l'évaluation des performances informatiques (RAM, SWAP), la validation transversale (*cross-city*) de l'IA sur des villes cibles non entraînées, et la présentation du dashboard interactif.
+*   Le **Chapitre 1 (Enjeux de la congestion urbaine et limites de la simulation physique)** introduit la problématique environnementale de la pollution routière en milieu urbain, décrit la congestion comme un phénomène physique émergent complexe et met en lumière les limites matérielles et temporelles des outils classiques de micro-simulation microscopique.
+*   Le **Chapitre 2 (Acquisition de la géométrie urbaine et modélisation du trafic)** présente le protocole de récupération des réseaux de voirie (OpenStreetMap) et leur traitement logique (netconvert, connexité de Tarjan), puis détaille le fonctionnement cinématique sous-jacent du simulateur physique SUMO (modèle de poursuite de Krauß, routage dynamique).
+*   Le **Chapitre 3 (Analyse spectrale des réseaux et conception de l'IA)** pose le cadre mathématique novateur de notre métamodèle. Il expose le formalisme des graphes non-normaux (rayon spectral, constante de Kreiss, perturbations de Kato, normes de Hardy) et l'architecture du modèle d'intelligence artificielle XGBoost basé sur 47 descripteurs explicatifs.
+*   Le **Chapitre 4 (Étude de cas locale, benchmarks et validations comparatives)** valide notre démarche sur le plan pratique. Il détaille d'abord l'étude locale par vision artificielle (YOLOv8) du hub de recharge de Vinhomes (Hanoï), puis présente l'évaluation macroscopique globale de l'IA (généralisation cross-city, benchmarks de temps et de mémoire, et présentation du tableau de bord Streamlit).
 
 \newpage
 
-# CHAPITRE 1 : CONTEXTE DU PROBLÈME COMPUTATIONNEL
+# CHAPITRE 1 : ENJEUX DE LA CONGESTION URBAINE ET LIMITES DE LA SIMULATION PHYSIQUE
 
 ### 1.1 La congestion routière comme phénomène émergent complexe
 Les réseaux de transport urbain se comportent comme des systèmes complexes adaptatifs (*Complex Adaptive Systems*). La cinématique des véhicules y est régie par des interactions locales non-linéaires entre conducteurs (distances de sécurité, temps de réaction, changements de voie). Une modification infime de la topologie (la fermeture d'une voie pour travaux, l'implantation d'un nouveau carrefour ou d'une zone d'attente) peut déclencher une onde de choc cinématique qui se propage vers l'amont, saturant des intersections situées à plusieurs kilomètres du point d'origine. Ce phénomène, théorisé notamment par le paradoxe de Braess [3], démontre qu'ajouter de la capacité physique à un réseau peut parfois détériorer sa fluidité globale. Par conséquent, évaluer l'impact environnemental d'un aménagement ou d'un volume de trafic nécessite une modélisation fine des flux.
@@ -149,7 +128,7 @@ Pour y répondre, nous développons un **métamodèle d'Intelligence Artificiell
 
 \newpage
 
-# CHAPITRE 2 : CONSTRUCTION DE LA BASE DE CONNAISSANCE 
+# CHAPITRE 2 : ACQUISITION DE LA GÉOMÉTRIE URBAINE ET MODÉLISATION DU TRAFIC
 ### 2.1 Traitement topologique des réseaux urbains
 
 La mise en œuvre de notre approche prédictive repose sur une chaîne de traitement de la géométrie urbaine, convertissant des cartes brutes en graphes mathématiques exploitables.
@@ -191,7 +170,7 @@ Le produit final de cette chaîne de traitement est un fichier XML unique nommé
 
 *   **sources_ratio & sinks_ratio (Ratio de sources et de puits) :** Proportion de nœuds n'ayant que des voies sortantes (sources) ou uniquement des voies entrantes (puits). Ces nœuds représentent les zones d'injection et d'absorption naturelle des véhicules aux frontières de la ville.
 
-##### Tableau 1 : Exemples
+##### Tableau 1 : Caractéristiques topologiques générales des 21 villes étudiées
 
 | City | Origin | Nodes | Edges | Density | Degree | Index | Ratio | Ratio |
 | :------------------ | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -297,7 +276,7 @@ Voici un exemple de ce qu'on obtient après une simulation SUMO d'une heure de t
 
 \newpage
 
-# CHAPITRE 3 : ÉLABORATION D'UN MODÈLE PRÉDICTIF
+# CHAPITRE 3 : ANALYSE SPECTRALE DES RÉSEAUX ET CONCEPTION DE L'IA
 
 Le développement d'un modèle d'intelligence artificielle capable de se substituer à la simulation physique requiert une compréhension intime des équations cinématiques qui régissent le déplacement des véhicules (microscopique) et des propriétés topologiques du réseau qui gouvernent l'écoulement des flux (macroscopique). Ce chapitre pose le formalisme mathématique de ces deux échelles et explicite physiquement la signification de chaque formule.
 
@@ -416,7 +395,7 @@ L'espace des contrôles admissibles $\mathcal{B}$ est structuré par des contrai
 L'analyse systématique des réseaux routiers de notre base de données a permis d'extraire les caractéristiques topologiques et spectrales présentées dans les tableaux ci-dessous.
 
 
-##### Tableau 2 : Exemple
+##### Tableau 2 : Métriques spectrales de non-normalité des matrices d'adjacence non pondérées pour les 21 réseaux urbains
 
 | City | Non normalness | Spectral radius | Sigma max | H2 norm | Kreiss constant |
 | :------------------ | :---: | :---: | :---: | :---: | :---: |
@@ -794,7 +773,7 @@ Le modèle entraîné est sauvegardé dans le répertoire `models/` sous forme d
 
 \newpage
 
-# CHAPITRE 4 : APPLICATIONS EMPIRIQUES, ÉTUDES DE CAS ET VALIDATIONS COMPARATIVES
+# CHAPITRE 4 : ÉTUDE DE CAS LOCALE, BENCHMARKS ET VALIDATIONS COMPARATIVES
 
 Ce chapitre présente les applications concrètes de notre démarche prédictive. L'étude de cas locale et microscopique présentée dans la section 4.1 a été menée dans le cadre d'un internship au sein de l'université **VinUniversity** (Hanoï, Vietnam). Ce travail sur le terrain a été l'occasion de se familiariser avec le micro-simulateur physique SUMO et de maîtriser la configuration de simulations microscopiques réalistes. Cette expérience technique et pratique initiale a constitué le socle indispensable pour appréhender les dynamiques de trafic complexes et pouvoir, par la suite, concevoir et exécuter des simulations physiques à grande échelle sur le corpus multi-villes présenté dans la partie 4.2.
 
@@ -1009,6 +988,8 @@ Le tableau ci-dessous regroupe l'intégralité des résultats comparatifs, scén
 | **Colmar** | Europe | 2 096 | 4 618 | 1 000 | 0,88 | 2,64 | +1,76 | 199,93 % |
 | **Colmar** | Europe | 2 096 | 4 618 | 3 000 | 2,68 | 7,79 | +5,11 | 190,57 % |
 | **Colmar** | Europe | 2 096 | 4 618 | 6 000 | 7,13 | 16,97 | +9,84 | 137,96 % |
+
+![**Figure 2 :** Analyse de corrélation et résidus (Scatter Plot) de la validation croisée IA vs SUMO sur les 27 scénarios des 9 villes tests.](images/real_vs_predicted_validation.png)
 
 ##### Analyse statistique des performances prédictives globales
 Le traitement statistique des 27 scénarios de validation démontre une excellente adéquation générale du métamodèle IA et valide la robustesse de nos descripteurs spectraux et physiques :
