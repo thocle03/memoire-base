@@ -1384,9 +1384,9 @@ se propage vers l'amont en s'amplifiant, forçant des dizaines de
 véhicules à freiner et à réaccélérer, ce qui cause des pics de pollution
 localisés massifs.
 
-\paragraph{\texorpdfstring{3.1.3 Le Rayon Spectral (\(\rho\)) et le
-Théorème de
-Perron-Frobenius}{3.1.3 Le Rayon Spectral (\textbackslash rho) et le Théorème de Perron-Frobenius}}\label{le-rayon-spectral-rho-et-le-thuxe9oruxe8me-de-perron-frobenius}
+\paragraph{\texorpdfstring{3.1.3 Le rayon spectral (\(\rho\)) et le
+théorème de
+Perron-Frobenius}{3.1.3 Le rayon spectral (\textbackslash rho) et le théorème de Perron-Frobenius}}\label{le-rayon-spectral-rho-et-le-thuxe9oruxe8me-de-perron-frobenius}
 
 Le spectre d'une matrice, noté \(\sigma(A)\), regroupe ses valeurs
 propres complexes \(\lambda_i \in \mathbb{C}\) résolvant
@@ -1397,22 +1397,22 @@ la borne supérieure du module des valeurs propres :
 Puisque les coefficients \(A_{ij}\) de notre matrice d'adjacence
 pondérée sont strictement non-négatifs (\(A_{ij} \ge 0\)), nous pouvons
 appliquer le théorème de Perron-Frobenius. Ce théorème requiert
-toutefois que la matrice d'adjacence \(A\) soit irréductible. En théorie
-des graphes orientés, l'irréductibilité d'une matrice d'adjacence est
-équivalente à la forte connexité du graphe sous-jacent. C'est ici que
-s'établit la cohérence de notre chaîne de traitement : l'extraction de
-la plus grande composante fortement connexe (SCC) via l'algorithme de
-Tarjan détaillée au Chapitre 5 n'est pas une simple opération de
-filtrage topologique, mais constitue la condition mathématique
-nécessaire qui garantit l'irréductibilité de \(A\). Sous cette
-condition, le théorème de Perron-Frobenius s'énonce comme suit :
+toutefois que la matrice d'adjacence \(A\) soit irréductible et non
+négative. En théorie des graphes orientés, l'irréductibilité d'une
+matrice d'adjacence est équivalente à la forte connexité du graphe
+sous-jacent. C'est ici que s'établit la cohérence de notre chaîne de
+traitement : l'extraction de la plus grande composante fortement connexe
+(SCC) via l'algorithme de Tarjan détaillé au chapitre 5 n'est pas une
+simple opération de filtrage topologique, mais constitue la condition
+mathématique nécessaire qui garantit l'irréductibilité de \(A\). Sous
+cette condition, le théorème de Perron-Frobenius s'énonce comme suit :
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Le rayon spectral \(\rho(A)\) est lui-même une valeur propre de \(A\),
-  simple et strictement positive (\(\rho(A) > 0\)).
+  Le rayon spectral \(\rho(A)\), appartient à R, est lui-même une valeur
+  propre de \(A\), simple et strictement positive (\(\rho(A) > 0\)).
 \item
   Il existe un vecteur propre à droite \(v_{PF}\) associé à \(\rho(A)\)
   dont toutes les composantes sont strictement positives
@@ -1423,40 +1423,39 @@ condition, le théorème de Perron-Frobenius s'énonce comme suit :
 \end{enumerate}
 
 Le rayon spectral de la matrice d'impédance \(\rho(A)\) caractérise la
-\textbf{résistance globale au transit} du réseau routier. Plus
-\(\rho(A)\) est grand, plus le réseau présente une impédance globale
-élevée (rues longues, étroites, ou à faibles vitesses limites), ce qui
-allonge les temps de parcours moyens. Le vecteur propre de
-Perron-Frobenius \(v_{PF}\) quant à lui identifie les carrefours clés du
-réseau où les flux s'accumulent naturellement.
+résistance globale au transit du réseau routier. Plus \(\rho(A)\) est
+grand, plus le réseau présente une impédance globale élevée (rues
+longues, étroites, ou à faibles vitesses limites), ce qui allonge les
+temps de parcours moyens. Le vecteur propre de Perron-Frobenius
+\(v_{PF}\) quant à lui identifie les carrefours clés du réseau où les
+flux s'accumulent naturellement.
 
-\paragraph{\texorpdfstring{3.1.4 La Constante de Kreiss (\(K\)) et la
+\paragraph{\texorpdfstring{3.1.4 La constante de Kreiss (\(K\)) et la
 dynamique de
-crise}{3.1.4 La Constante de Kreiss (K) et la dynamique de crise}}\label{la-constante-de-kreiss-k-et-la-dynamique-de-crise}
+crise}{3.1.4 La constante de Kreiss (K) et la dynamique de crise}}\label{la-constante-de-kreiss-k-et-la-dynamique-de-crise}
 
 Pour quantifier la sensibilité d'un réseau non-normal aux amplifications
 transitoires et modéliser son instabilité dynamique, nous introduisons
-la \textbf{constante de Kreiss {[}9{]}} \(K(A)\). Soit \(A\) une matrice
-stable (\(\rho(A) < 1\)). La constante de Kreiss {[}9{]} est définie par
-: \[K(A) = \sup_{|z| > 1} (|z| - 1) \left\| (zI - A)^{-1} \right\|_2\]
-où \(\|\cdot\|_2\) désigne la norme matricielle induite (norme
-spectrale). Le théorème des matrices de Kreiss établit des bornes
-strictes reliant cette constante à l'amplification transitoire maximale
-de la puissance de la matrice :
+la constante de Kreiss {[}9{]} \(K(A)\). Soit \(A\) une matrice stable
+(\(\rho(A) < 1\)). La constante de Kreiss {[}9{]} est définie par :
+\[K(A) = \sup _{|z| > 1} (|z| - 1) \left\| (zI - A)^{-1} \right\|_2\] où
+\(\|\cdot\|_2\) désigne la norme matricielle induite (norme spectrale).
+Le théorème des matrices de Kreiss établit des bornes strictes reliant
+cette constante à l'amplification transitoire maximale de la puissance
+de la matrice :
 \[K(A) \le \sup_{k \ge 0} \left\| A^k \right\|_2 \le e \cdot n \cdot K(A)\]
 où \(n\) est la dimension de la matrice.
 
-La constante de Kreiss {[}9{]} agit comme le \textbf{``détecteur de
-nervosité''} ou de fragilité structurelle de la ville. Elle mesure
-l'amplitude maximale que peut atteindre une onde de congestion locale
-avant que le réseau ne revienne à un état d'écoulement libre. Une
-constante de Kreiss {[}9{]} élevée prévient le planificateur qu'une
-perturbation minime peut déclencher une crise de congestion systémique
-(effet domino) et paralyser le réseau par refoulement
-(\emph{spillback}).
+La constante de Kreiss {[}9{]} agit comme le ``détecteur de nervosité''
+ou de fragilité structurelle de la ville. Elle mesure l'amplitude
+maximale que peut atteindre une onde de congestion locale avant que le
+réseau ne revienne à un état d'écoulement libre. Une constante de Kreiss
+{[}9{]} élevée prévient le planificateur qu'une perturbation minime peut
+déclencher une crise de congestion systémique (effet domino) et
+paralyser le réseau par refoulement (\emph{spillback}).
 
-\paragraph{\texorpdfstring{3.1.5 Les Normes de Hardy \(H_2\) et
-\(H_\infty\)}{3.1.5 Les Normes de Hardy H\_2 et H\_\textbackslash infty}}\label{les-normes-de-hardy-h_2-et-h_infty}
+\paragraph{\texorpdfstring{3.1.5 Les normes de Hardy \(H_2\) et
+\(H_\infty\)}{3.1.5 Les normes de Hardy H\_2 et H\_\textbackslash infty}}\label{les-normes-de-hardy-h_2-et-h_infty}
 
 En modélisant le réseau routier comme un filtre dynamique linéaire
 entrée-sortie (où l'entrée est le flux d'injection des véhicules et la
@@ -1468,25 +1467,25 @@ sortie la congestion), nous évaluons sa robustesse via les normes
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \textbf{La Norme \(H_\infty\) (Pire scénario d'amplification)} :
+  La norme \(H_\infty\) (pire scénario d'amplification) :
   \[\|T\|_{H_\infty} = \sup_{|z| > 1} \left\| (zI - A)^{-1} \right\|_2 = \sup_{\theta \in [0, 2\pi]} \sigma_{max}\left( (e^{i\theta}I - A)^{-1} \right)\]
 \item
-  \textbf{La Norme \(H_2\) (Énergie de perturbation stockée)} :
+  La norme \(H_2\) (énergie de perturbation stockée) :
   \[\|T\|_{H_2} = \left( \sum_{k=0}^{\infty} \left\| A^k \right\|_F^2 \right)^{1/2}\]
 \end{enumerate}
 
 La norme \(H_\infty\) caractérise le gain d'amplification maximal dans
-le \textbf{pire des scénarios}. Elle indique le niveau de congestion et
-de pollution inévitable que le réseau atteindra si la charge de trafic
-est maximale et localisée sur les axes les plus critiques. La norme
-\(H_2\), quant à elle, mesure la \textbf{mémoire temporelle de la
-congestion}. Elle quantifie le temps nécessaire au réseau pour dissiper
-l'énergie cinétique accumulée et évacuer les véhicules après la fin
-d'une heure de pointe. Une ville à forte norme \(H_2\) mettra beaucoup
-plus de temps à retrouver un écoulement fluide.
+le pire des scénarios. Elle indique le niveau de congestion et de
+pollution inévitable que le réseau atteindra si la charge de trafic est
+maximale et localisée sur les axes les plus critiques. La norme \(H_2\),
+quant à elle, mesure la mémoire temporelle de la congestion. Elle
+quantifie le temps nécessaire au réseau pour dissiper l'énergie
+cinétique accumulée et évacuer les véhicules après la fin d'une heure de
+pointe. Une ville à forte norme \(H_2\) mettra beaucoup plus de temps à
+retrouver un écoulement fluide.
 
-\paragraph{3.1.6 Théorie des perturbations de Kato {[}6{]} et Loi de
-Contrôle}\label{thuxe9orie-des-perturbations-de-kato-6-et-loi-de-contruxf4le}
+\paragraph{3.1.6 Théorie des perturbations de Kato {[}6{]} et loi de
+contrôle}\label{thuxe9orie-des-perturbations-de-kato-6-et-loi-de-contruxf4le}
 
 Dans le cadre de l'optimisation des réseaux urbains, une question
 centrale se pose : comment modifier la structure du graphe pour
@@ -1499,10 +1498,10 @@ Pour répondre à cela, nous modélisons les modifications d'infrastructure
 comme des perturbations de la matrice d'adjacence pondérée \(A\) sous la
 forme : \[\delta A = \epsilon B\] où \(\epsilon \in \mathbb{R}^+\) est
 un paramètre d'échelle infinitésimal régissant l'intensité globale de la
-modification, et \(B \in \mathbb{R}^{n \times n}\) désigne la
-\textbf{matrice de perturbation (ou matrice de contrôle topologique)}.
-Chaque élément \(B_{ij}\) quantifie l'action d'aménagement local sur le
-tronçon orienté reliant le nœud \(i\) au nœud \(j\) :
+modification, et \(B \in \mathbb{R}^{n \times n}\) désigne la matrice de
+perturbation (ou matrice de contrôle topologique). Chaque élément
+\(B_{ij}\) quantifie l'action d'aménagement local sur le tronçon orienté
+reliant le nœud \(i\) au nœud \(j\) :
 
 \begin{itemize}
 \tightlist
@@ -1572,8 +1571,8 @@ contraintes budgétaires réelles
 (\(B_{ij} \le B_{max}\)), et patrimoniales/géographiques (\(B_{ij} = 0\)
 sur les axes non modifiables).
 
-\paragraph{3.1.7 Données Expérimentales d'Analyse Topologique et
-Spectrale}\label{donnuxe9es-expuxe9rimentales-danalyse-topologique-et-spectrale}
+\paragraph{3.1.7 Données d'analyse topologique et
+spectrale}\label{donnuxe9es-danalyse-topologique-et-spectrale}
 
 Ce tableau récapitule les métriques spectrales de non-normalité
 calculées pour les réseaux de notre base de données où chaque colonne
@@ -1702,28 +1701,35 @@ Pearson / Spearman calculé sur les 242 scénarios de simulation
 (corrélations significatives au seuil \(p < 0.001\), soulignées en
 \textbf{gras} pour \(|r| > 0.60\)).
 
-\emph{Analyse des corrélations :} \textgreater{} - \textbf{Kreiss \(K\)
-et vitesse moyenne :} La corrélation de Spearman de \(-0.67\) confirme
-que les villes à forte constante de Kreiss (ex. Hanoï, Le Caire, Madrid)
-présentent systématiquement des vitesses moyennes inférieures. Cela
-valide directement l'interprétation physique : une constante de Kreiss
-élevée traduit une sensibilité accrue aux amplifications transitoires,
-ce qui dégrade la fluidité sous charge. \textgreater{} - \textbf{Norme
-\(H_2\) et \(CO_2\) par véhicule :} La corrélation de Pearson de
-\(+0.72\) (Spearman \(+0.74\)) est la plus forte mesurée. Elle confirme
-que la norme \(H_2\) encode bien la \textbf{mémoire de congestion} :
-plus un réseau retient longtemps l'énergie de perturbation, plus les
-véhicules subissent de cycles d'arrêt-démarrage répétés, augmentant
-leurs émissions unitaires. \textgreater{} - \textbf{\(\sigma_1\) et
-\(CO_2\) par véhicule :} La corrélation de Spearman de \(+0.77\)
-confirme que la première valeur singulière est le meilleur prédicteur
-individuel de l'empreinte carbone par véhicule. Elle capture la capacité
-du corridor principal à absorber le flux sans créer de goulot.
+\begin{itemize}
+\tightlist
+\item
+  Kreiss \(K\) et vitesse moyenne : La corrélation de Spearman de
+  \(-0.67\) confirme que les villes à forte constante de Kreiss (ex.
+  Hanoï, Le Caire, Madrid) présentent systématiquement des vitesses
+  moyennes inférieures. Cela valide directement l'interprétation
+  physique : une constante de Kreiss élevée traduit une sensibilité
+  accrue aux amplifications transitoires, ce qui dégrade la fluidité
+  sous charge.
+\item
+  norme \(H_2\) et \(CO_2\) par véhicule : La corrélation de Pearson de
+  \(+0.72\) (Spearman \(+0.74\)) est la plus forte mesurée. Elle
+  confirme que la norme \(H_2\) encode bien la mémoire de congestion :
+  plus un réseau retient longtemps l'énergie de perturbation, plus les
+  véhicules subissent de cycles d'arrêt-démarrage répétés, augmentant
+  leurs émissions unitaires.
+\item
+  \(\sigma_1\) et \(CO_2\) par véhicule : La corrélation de Spearman de
+  \(+0.77\) confirme que la première valeur singulière est le meilleur
+  prédicteur individuel de l'empreinte carbone par véhicule. Elle
+  capture la capacité du corridor principal à absorber le flux sans
+  créer de goulot.
+\end{itemize}
 
-Ces corrélations empiriques apportent la \textbf{démonstration
-scientifique manquante} : les descripteurs spectraux ne sont pas de
-simples paramètres mathématiques abstraits, mais des indicateurs
-\emph{causalement liés} à la dynamique cinématique observée.
+Ces corrélations empiriques apportent la démonstration scientifique
+manquante : les descripteurs spectraux ne sont pas de simples paramètres
+mathématiques abstraits, mais des indicateurs \emph{causalement liés} à
+la dynamique cinématique observée.
 
 \subsubsection{3.2 Le modèle d'IA de prediction instantanée : une IA
 topologique}\label{le-moduxe8le-dia-de-prediction-instantanuxe9e-une-ia-topologique}
