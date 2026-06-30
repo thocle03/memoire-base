@@ -297,11 +297,11 @@ Cette contrainte force le planificateur d'itinéraires à rejeter les trajets de
 
 Voici un exemple de ce qu'on obtient après une simulation SUMO d'une heure de trafic, sur la ville de Versailles :
 
-![Visualisation SIG de la ville de Versailles (Illustration de la cartographie des congestions à Versailles) - Segments routiers colorés du gris (fluide) au rouge (saturation complète).](images/versailles.png)
+![Visualisation SIG de la ville de Versailles (Illustration de la cartographie des congestions à Versailles) - Segments routiers colorés du gris (fluide) au rouge (saturation complète).](images/versailles.png){width=45%}
 
 Et sur la ville de Paris, avec l'intensité du trafic représentée par la couleur des segments routiers :
 
-![Visualisation SIG de la ville de Paris (Illustration de la cartographie des congestions à Paris) - Segments routiers colorés du gris (fluide) au rouge (saturation complète / gridlock).](images/paris-heat_map_trafic.png)
+![Visualisation SIG de la ville de Paris (Illustration de la cartographie des congestions à Paris) - Segments routiers colorés du gris (fluide) au rouge (saturation complète / gridlock).](images/paris-heat_map_trafic.png){width=45%}
 
 
 
@@ -498,9 +498,9 @@ Pour mettre en évidence la manière dont ces caractéristiques spectrales évol
 
 ![Comparaison du rayon spectral $\rho(A)$ et de la valeur singulière maximale $\sigma_{max}(A)$ pour 13 villes représentatives, ordonnées par nombre de nœuds croissant. On observe une quasi-égalité $\rho(A) \approx \sigma_{max}(A)$ propre aux matrices d'adjacence d'impédance non négatives.](images/comparaison_rayon_spectral.png)
 
-![Évolution de la norme de Hardy $H_2$ pour les 13 villes tests (triées par taille). H2 croît de manière monotone avec la taille et la complexité du réseau routier, traduisant une augmentation de la rémanence temporelle de la congestion dans les métropoles.](images/comparaison_h2.png){width=45%}
+![Évolution de la norme de Hardy $H_2$ pour les 13 villes tests (triées par taille). H2 croît de manière monotone avec la taille et la complexité du réseau routier, traduisant une augmentation de la rémanence temporelle de la congestion dans les métropoles.](images/comparaison_h2.png)
 
-![Constante de Kreiss $K(A)$ pour les 12 villes tests majeures (Londres exclue en raison de valeurs singulières proches de zéro). Elle mesure le potentiel d'amplification transitoire des ondes de congestion (Le Caire, Madrid et Marseille présentant des indices élevés).](images/comparaison_kreiss.png){width=45%}
+![Constante de Kreiss $K(A)$ pour les 12 villes tests majeures (Londres exclue en raison de valeurs singulières proches de zéro). Elle mesure le potentiel d'amplification transitoire des ondes de congestion (Le Caire, Madrid et Marseille présentant des indices élevés).](images/comparaison_kreiss.png)
 
 
 
