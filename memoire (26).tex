@@ -480,12 +480,12 @@ Aujourd'hui, plus de la moitié de la population mondiale réside en
 milieu urbain. Selon les rapports officiels des Nations Unies, 55 \% de
 la population globale vivait en ville en 2018, et cette proportion
 devrait franchir le seuil des 68 \% d'ici 2050. Cette transition
-démographique sans précédent représente un apport de plus de 2,5
-milliards d'urbains supplémentaires, dont près de 90 \% de la croissance
-se concentrera dans les pays en développement d'Asie et d'Afrique. Cette
-métamorphose rapide des métropoles s'accompagne d'une densification
-extrême de l'espace et d'une augmentation géométrique des flux de
-transport et des déplacements quotidiens.
+démographique représente un apport de plus de 2,5 milliards d'urbains
+supplémentaires, dont près de 90 \% de la croissance se concentrera dans
+les pays en développement d'Asie et d'Afrique. Cette métamorphose rapide
+des métropoles s'accompagne d'une densification extrême de l'espace et
+d'une augmentation géométrique des flux de transport et des déplacements
+quotidiens.
 
 Les infrastructures et réseaux routiers existants n'ayant pas été conçus
 pour absorber une telle cinématique de croissance, cette saturation
@@ -538,7 +538,7 @@ véhicule, (vitesse, changement de voie, distance de sécurité) seconde
 par seconde en s'appuyant sur des lois physiques de poursuite
 (\emph{car-following}). Couplés à des bases de données d'émissions (CO,
 CO2, NOX, PM10 etc.) de référence telles que le modèle HBEFA3 {[}8{]},
-ils offrent une fidélité remarquable pour quantifier les surémissions de
+ils offrent une bonne fidélité pour quantifier les surémissions de
 \(CO_2\) associées aux comportements transitoires des véhicules (cycles
 d'arrêt-démarrage).
 
@@ -842,7 +842,7 @@ netconvert}\label{compilation-et-nettoyage-topologique-avec-netconvert}
 Pour transformer le fichier \texttt{.osm} brut en un réseau logique
 routier unifié, nous utilisons le compilateur de réseau
 \textbf{\texttt{netconvert}}, un outil clé de la suite logicielle SUMO.
-Cet outil effectue trois opérations de traitement indispensables :
+Cet outil effectue trois opérations de traitement nécessaires :
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -851,7 +851,7 @@ Cet outil effectue trois opérations de traitement indispensables :
   Les coordonnées géographiques brutes d'OSM (latitude/longitude sous le
   système ellipsoïdal WGS84) sont projetées sur un plan cartésien
   bidimensionnel local selon la projection \textbf{UTM (Universal
-  Transverse Mercator)}. Cette étape est cruciale : elle traduit des
+  Transverse Mercator)}. Cette étape est importante : elle traduit des
   coordonnées angulaires en distances métriques réelles. Sans cette
   conversion, le moteur physique de SUMO serait incapable de calculer
   les vitesses (en m/s) et les accélérations des véhicules, et notre
@@ -1033,12 +1033,12 @@ notre méthodologie :
   \textbf{En mathématiques :} Il est lu par notre pipeline Python
   (bibliothèque \texttt{sumolib}) pour construire la matrice d'adjacence
   pondérée par l'impédance physique des tronçons, de laquelle nous
-  extrayons les descripteurs spectraux indispensables aux prédictions de
+  extrayons les descripteurs spectraux requis pour les prédictions de
   l'IA (comme décrit au Chapitre 2).
 \end{itemize}
 
-\subsubsection{2.2 Le moteur behavioriste de
-SUMO}\label{le-moteur-behavioriste-de-sumo}
+\subsubsection{2.2 Modélisation du trafic dans
+SUMO}\label{moduxe9lisation-du-trafic-dans-sumo}
 
 \paragraph{2.2.1 Abstraction de la
 voirie}\label{abstraction-de-la-voirie}
@@ -1178,7 +1178,7 @@ conducteur.
 Tarjan}\label{extraction-de-la-connexituxe9-par-lalgorithme-de-tarjan}
 
 Pour garantir la cohérence dynamique du réseau de simulation routière,
-il est indispensable de vérifier sa connexité globale. En raison de la
+il est nécessaire de vérifier sa connexité globale. En raison de la
 présence de règles de circulation complexes (sens uniques) et de
 potentielles erreurs géométriques issues de la base OpenStreetMap, un
 réseau routier orienté brut comprend fréquemment des sous-graphes
@@ -1287,9 +1287,8 @@ l'écoulement des flux (macroscopique). Ce chapitre pose le formalisme
 mathématique de ces deux échelles et explicite physiquement la
 signification de chaque formule.
 
-\subsubsection{3.1 Détermination des métriques spectrales pour alimenter
-le modèle
-prédictif}\label{duxe9termination-des-muxe9triques-spectrales-pour-alimenter-le-moduxe8le-pruxe9dictif}
+\subsubsection{3.1 Détermination et calcul des métriques
+spectrales}\label{duxe9termination-et-calcul-des-muxe9triques-spectrales}
 
 \paragraph{3.1.1 Formalisation matricielle (matrice d'adjacence)
 pondérée par l'impédance physique du tronçon
@@ -2012,10 +2011,10 @@ manquante : les descripteurs
 spectraux\footnote{La théorie des perturbations de Kato gère rigoureusement le cas des matrices non normales (potentiellement non diagonalisables ou présentant des points exceptionnels d'intersection de valeurs propres), là où la théorie classique des perturbations ne le permet pas.}
 ne sont pas de simples paramètres mathématiques abstraits, mais des
 indicateurs \emph{causalement liés} à la dynamique cinématique observée.
-\#\#\# 3.2 Le modèle d'IA de prediction instantanée : une IA topologique
+\#\#\# 3.2 Modèle de prédiction instantanée par IA
 
-\paragraph{3.2.1 Formulation mathématique de la fonction
-objective}\label{formulation-mathuxe9matique-de-la-fonction-objective}
+\paragraph{3.2.1 Formulation mathématique du
+modèle}\label{formulation-mathuxe9matique-du-moduxe8le}
 
 L'algorithme XGBoost (\emph{eXtreme Gradient Boosting}) minimise une
 fonction d'apprentissage objective régularisée à l'étape \(t\) pour
@@ -2041,8 +2040,8 @@ de la congestion et de corriger ses prédictions d'émissions de \(CO_2\)
 de manière beaucoup plus stable et réactive que des méthodes de
 régression classiques.
 
-\paragraph{3.2.2 L'espace à 47 descripteurs
-explicatifs}\label{lespace-uxe0-47-descripteurs-explicatifs}
+\paragraph{3.2.2 Variables explicatives (47
+descripteurs)}\label{variables-explicatives-47-descripteurs}
 
 Voici la description exhaustive, l'utilité opérationnelle et la
 justification scientifique de ces 47 descripteurs, classés en 8
@@ -2145,7 +2144,7 @@ d'interaction, 47 features & \textbf{11 127,20 kg} & \textbf{82,44
 L'intégration du large corpus d'apprentissage multi-villes étendu (242
 simulations réelles couvrant 36 topologies urbaines distinctes sur les 6
 continents) a permis de briser le biais de volume historique.
-L'évolution du modèle montre un gain spectaculaire de performance. Le
+L'évolution du modèle montre une nette amélioration des performances. Le
 passage de la V1 à la V2 (normalisation par véhicule) a permis de faire
 émerger la topologie spectrale comme variable clé
 (\(R^2 = 74{,}40\ \%\)). L'introduction en V3 de descripteurs physiques
@@ -2156,8 +2155,7 @@ et le rayon spectral) couplée à un réglage optimal des hyperparamètres
 \textbf{17,2 \%} (soit 2,3 tonnes de \(CO_2\) évitées d'incertitude par
 simulation).
 
-\paragraph{Étude d'Ablation : Contribution réelle des descripteurs
-spectraux}\label{uxe9tude-dablation-contribution-ruxe9elle-des-descripteurs-spectraux}
+\paragraph{Étude d'ablation}\label{uxe9tude-dablation}
 
 Pour répondre à la question fondamentale --- \emph{la topologie
 spectrale apporte-t-elle réellement quelque chose, ou le volume de
@@ -2361,14 +2359,14 @@ une hiérarchie d'influence physique très cohérente et robuste :
   quantifie le niveau de connectivité locale de la voirie.
 \end{enumerate}
 
-Ces résultats confirment de façon éclatante l'hypothèse centrale de ce
-mémoire : \textbf{l'empreinte carbone par véhicule n'est pas uniquement
-le produit de la charge de trafic, mais dépend intrinsèquement de la
-structure mathématique et spectrale du graphe routier}. L'intégration
-explicite de descripteurs d'interaction (charge relative et risques
-couplés) et l'optimisation des hyperparamètres ont permis d'atteindre un
-R² global de \textbf{82,44 \%}, validant scientifiquement la capacité
-prédictive du métamodèle sur des infrastructures urbaines inédites.
+Ces résultats confirment l'hypothèse centrale de ce mémoire :
+\textbf{l'empreinte carbone par véhicule n'est pas uniquement le produit
+de la charge de trafic, mais dépend intrinsèquement de la structure
+mathématique et spectrale du graphe routier}. L'intégration explicite de
+descripteurs d'interaction (charge relative et risques couplés) et
+l'optimisation des hyperparamètres ont permis d'atteindre un R² global
+de \textbf{82,44 \%}, validant scientifiquement la capacité prédictive
+du métamodèle sur des infrastructures urbaines inédites.
 
 \subparagraph{Tableau 4 : Profil d'importance relative des variables
 explicatives (Top 15 --- Modèle normalisé
@@ -2405,9 +2403,8 @@ CO2/véh)}\label{tableau-4-profil-dimportance-relative-des-variables-explicative
 \end{longtable}
 }
 
-\subparagraph{Justification théorique de la hiérarchie d'importance et
-rôle découplé du
-volume}\label{justification-thuxe9orique-de-la-hiuxe9rarchie-dimportance-et-ruxf4le-duxe9coupluxe9-du-volume}
+\subparagraph{Analyse de l'importance des
+variables}\label{analyse-de-limportance-des-variables}
 
 Pour assurer une clarté totale et justifier scientifiquement ces
 résultats, nous détaillons ici le sens physique des variables dominantes
@@ -2441,7 +2438,7 @@ sans pour autant écraser les autres signaux :
     offre de nombreuses alternatives d'évitement de capacité similaire.
     Une ville avec un faible \(\sigma_4\) (réseau radial ou arborescent
     sans rocades secondaires) force les conducteurs à attendre dans un
-    goulot d'étranglement unique, provoquant une hausse dramatique des
+    goulot d'étranglement unique, provoquant une forte hausse des
     émissions de CO₂ par véhicule à cause des phases répétées
     d'arrêt-démarrage.
   \end{itemize}
@@ -2759,10 +2756,10 @@ l'université \textbf{VinUniversity} (Hanoï, Vietnam). Ce travail sur le
 terrain a été l'occasion de se familiariser avec le micro-simulateur
 physique SUMO et de maîtriser la configuration de simulations
 microscopiques réalistes. Cette expérience technique et pratique
-initiale a constitué le socle indispensable pour appréhender les
-dynamiques de trafic complexes et pouvoir, par la suite, concevoir et
-exécuter des simulations physiques à grande échelle sur le corpus
-multi-villes présenté dans la partie 4.2.
+initiale a constitué le socle pour appréhender les dynamiques de trafic
+complexes et pouvoir, par la suite, concevoir et exécuter des
+simulations physiques à grande échelle sur le corpus multi-villes
+présenté dans la partie 4.2.
 
 \subsubsection{4.1 Analyse microscopique locale -- Le jumeau numérique
 de Vinhomes Ocean Park
@@ -2775,9 +2772,9 @@ Menée lors d'un séjour d'études au sein de l'université
 servi de socle technique et pratique. Elle a permis de maîtriser les
 outils de micro-simulation microscopique (SUMO, TraCI, netconvert) et
 d'appréhender les dynamiques physiques et stochastiques à petite
-échelle, posant ainsi les bases méthodologiques indispensables avant
-d'entreprendre des simulations à grande échelle sur des réseaux urbains
-entiers dans le cadre de notre stage de fin d'études.
+échelle, posant ainsi les bases méthodologiques avant d'entreprendre des
+simulations à grande échelle sur des réseaux urbains entiers dans le
+cadre de notre stage de fin d'études.
 
 \paragraph{4.1.1 Contexte et morphologie géométrique du site
 d'étude}\label{contexte-et-morphologie-guxe9omuxe9trique-du-site-duxe9tude}
@@ -2863,9 +2860,8 @@ est pré-peuplé à \(t=0\) par des véhicules fantômes occupant 58 \% à 100
 tiré uniformément \(t_{res} \sim \mathcal{U}(300, 900)\) secondes,
 garantissant un écoulement fluide et réaliste dès la première seconde.
 
-\paragraph{4.1.5 Enseignements méthodologiques pour le passage à
-l'échelle
-globale}\label{enseignements-muxe9thodologiques-pour-le-passage-uxe0-luxe9chelle-globale}
+\paragraph{4.1.5 Enseignements pour le passage à
+l'échelle}\label{enseignements-pour-le-passage-uxe0-luxe9chelle}
 
 Cette étude de cas ciblée à Vinhomes Ocean Park a constitué le socle
 pratique essentiel de notre apprentissage. L'utilisation concrète de
@@ -2880,8 +2876,8 @@ de cette première maîtrise technique solide que nous avons pu aborder
 notre projet de stage et concevoir le métamodèle d'IA prédictif
 généralisé présenté dans les sections suivantes.
 
-\paragraph{4.1.6 Contribution du cas Vinhomes à la méthodologie
-globale}\label{contribution-du-cas-vinhomes-uxe0-la-muxe9thodologie-globale}
+\paragraph{4.1.6 Rôle du cas Vinhomes dans la
+méthodologie}\label{ruxf4le-du-cas-vinhomes-dans-la-muxe9thodologie}
 
 Le lecteur pourrait s'interroger sur le lien entre cette étude
 microscopique locale (Vinhomes, Hanoï) et la méthodologie topologique
@@ -2948,8 +2944,8 @@ Pour que notre métamodèle d'IA (XGBoost) devienne un véritable outil
 d'aide à la décision urbanistique et ne se contente pas de multiplier le
 nombre de véhicules par un facteur fixe de pollution (ce qui constituait
 le biais majeur du dataset initial où
-\(CO_2 \approx 3.0 \times \text{nb\_total\_veh}\)), il est indispensable
-de structurer notre base de données selon un plan d'échantillonnage
+\(CO_2 \approx 3.0 \times \text{nb\_total\_veh}\)), il est nécessaire de
+structurer notre base de données selon un plan d'échantillonnage
 multidimensionnel. Cette approche repose sur l'intégration de dizaines
 de villes issues des quatre coins du monde, sélectionnées pour leurs
 caractéristiques topologiques uniques, et simulées sous des volumes de
@@ -2970,8 +2966,8 @@ simplement compter le nombre de véhicules :
   des contraintes d'eau ou de relief forçant le trafic à converger vers
   des goulots d'étranglement (ponts à Tours ou canaux à Bruges). Le
   trafic y est par nature sinueux et sujet à de multiples
-  arrêts/redémarrages, augmentant drastiquement les émissions de
-  \(CO_2\) par véhicule.
+  arrêts/redémarrages, augmentant fortement les émissions de \(CO_2\)
+  par véhicule.
 \item
   \textbf{Amérique du Nord (Ex. Boulder, Savannah, Berkeley)} :
   Représentatives du plan hippodamien (grille orthogonale), ces villes
@@ -3008,8 +3004,8 @@ simplement compter le nombre de véhicules :
   trans-estuaires).
 \end{itemize}
 
-\subparagraph{B. L'importance cruciale de la variabilité des volumes
-(Multi-Volume)}\label{b.-limportance-cruciale-de-la-variabilituxe9-des-volumes-multi-volume}
+\subparagraph{B. L'importance de la variabilité des volumes
+(Multi-Volume)}\label{b.-limportance-de-la-variabilituxe9-des-volumes-multi-volume}
 
 Le cœur de la stratégie de données réside dans l'échantillonnage de
 chaque ville sous plusieurs volumes de trafic distincts (Nocturne,
@@ -3165,9 +3161,8 @@ Simulation 4
 \end{longtable}
 }
 
-\paragraph{4.2.2 Analyse comparative des résiliences géométriques :
-Radial européen vs Grille orthogonale vs Boucles
-fermées}\label{analyse-comparative-des-ruxe9siliences-guxe9omuxe9triques-radial-europuxe9en-vs-grille-orthogonale-vs-boucles-fermuxe9es}
+\paragraph{4.2.2 Impact de la morphologie urbaine sur la
+congestion}\label{impact-de-la-morphologie-urbaine-sur-la-congestion}
 
 L'évaluation des quatre scénarios comportementaux (Constant, Rush Hour,
 Max Jam, Bottleneck) sur ces six réseaux révèle l'influence déterminante
@@ -3219,8 +3214,8 @@ l'ensemble du flux. Ces réseaux présentent un comportement non-linéaire
 prononcé, passant sans transition d'un état fluide à une congestion
 complète.
 
-\paragraph{4.2.3 Limites matérielles et physiques de la simulation
-SUMO}\label{limites-matuxe9rielles-et-physiques-de-la-simulation-sumo}
+\paragraph{4.2.3 Limites de la simulation
+physique}\label{limites-de-la-simulation-physique}
 
 L'analyse comparative met en évidence le goulot d'étranglement
 informatique que représente la simulation microscopique physique face à
@@ -3363,8 +3358,8 @@ kg) & 10,69 tonnes (10 691 kg) & -1,55 \% \\
 
 \emph{Analyse physique et topologique des performances de transfert :}
 L'analyse des écarts de prédiction montre que l'IA parvient à capturer
-la signature spectrale d'écoulement avec une précision remarquable sur
-des topologies équilibrées (Nelson et Maseru affichent moins de 5 \%
+la signature spectrale d'écoulement avec une bonne précision sur des
+topologies équilibrées (Nelson et Maseru affichent moins de 5 \%
 d'erreur relative). Cependant, certains réseaux atypiques de la
 validation croisée élargie font apparaître des écarts plus prononcés,
 représentant les limitations géométriques du métamodèle face aux
@@ -3579,17 +3574,17 @@ erreur relative cumulée sur l'ensemble de leurs 3 scénarios
 \tightlist
 \item
   \textbf{Nelson (Océanie) : \(1,46\ \%\) d'erreur cumulée} (Erreur
-  relative moyenne par scénario : \(14,53\ \%\)) : Nelson est le succès
-  le plus remarquable de cette validation. Les estimations collent
+  relative moyenne par scénario : \(14,53\ \%\)) : Nelson présente
+  l'écart le plus faible de cette validation. Les estimations collent
   fidèlement aux simulations physiques, en particulier pour le régime de
   pointe à 6 000 véhicules où l'écart relatif s'effondre à seulement
   \(1,55\ \%2\).
 \item
   \textbf{Maseru (Afrique) : \(2,10\ \%\) d'erreur cumulée} (Erreur
-  relative moyenne : \(8,84\ \%\)) : Un sans-faute prédictif. Le
-  métamodèle anticipe les émissions sous les trois charges (2K, 7,5K,
-  15K) avec des précisions cliniques respectives de \(3,37\ \%\),
-  \(18,69\ \%\) et \(4,47\ \%\).
+  relative moyenne : \(8,84\ \%\)) : La prédiction est très proche de la
+  simulation. Le métamodèle anticipe les émissions sous les trois
+  charges (2K, 7,5K, 15K) avec des précisions respectives de
+  \(3,37\ \%\), \(18,69\ \%\) et \(4,47\ \%\).
 \item
   \textbf{Pamplona (Europe) : \(3,14\ \%\) d'erreur cumulée} (Erreur
   relative moyenne : \(41,50\ \%\)) : Malgré une surestimation à faible
@@ -3624,8 +3619,8 @@ erreur relative cumulée sur l'ensemble de leurs 3 scénarios
   les rejets polluants de Colmar sur toute la plage de trafic.
 \end{enumerate}
 
-\subparagraph{Interprétation topo-dynamique et physique des
-écarts}\label{interpruxe9tation-topo-dynamique-et-physique-des-uxe9carts}
+\subparagraph{Interprétation des
+écarts}\label{interpruxe9tation-des-uxe9carts}
 
 L'analyse physique des écarts prédictifs permet de valider ou de
 remettre en question nos hypothèses théoriques et d'identifier les
@@ -3644,24 +3639,23 @@ limites actuelles du métamodèle :
   justesse par la première valeur singulière \(\sigma_1\) (capacité du
   corridor principal dominante) et un \(\sigma_4\) quasi nul, permettant
   à XGBoost de calculer un comportement d'écoulement quasi linéaire
-  d'une précision remarquable.
+  d'une grande précision.
 \item
   \textbf{Le phénomène de seuil dans Essaouira (Bottleneck de la Médina)
-  :} Essaouira présente une non-linéarité physique spectaculaire. Les
-  émissions réelles de SUMO sont très faibles à 1K (\(0,51\) t) et 3K
-  (\(1,63\) t) mais explosent à \textbf{\(14,61\) tonnes} à 6K
-  véhicules. Ce saut s'explique par la morphologie médiévale de la
-  médina entourée de murailles, forçant les flux à converger vers des
-  portes étroites. À 3K, le trafic passe encore ; à 6K, ces portes
-  provoquent une congestion généralisée (\emph{gridlock}), faisant
-  chuter la vitesse à \(9,65\) km/h et exploser le ralenti moteur. L'IA,
-  en calculant une constante de Kreiss {[}9{]} élevée et un indice
-  d'asymétrie important, a détecté cette vulnérabilité structurelle sous
-  forte charge relative (\texttt{load\_relative}
-  \(= 6000 / 891 \approx 6,73\)) et a estimé les émissions à \(12,23\)
-  tonnes (seulement \(16,3\ \%\) d'erreur relative). Cela démontre
-  l'aptitude de la topologie spectrale à anticiper les points de bascule
-  de congestion.
+  :} Essaouira présente une forte non-linéarité physique. Les émissions
+  réelles de SUMO sont très faibles à 1K (\(0,51\) t) et 3K (\(1,63\) t)
+  mais explosent à \textbf{\(14,61\) tonnes} à 6K véhicules. Ce saut
+  s'explique par la morphologie médiévale de la médina entourée de
+  murailles, forçant les flux à converger vers des portes étroites. À
+  3K, le trafic passe encore ; à 6K, ces portes provoquent une
+  congestion généralisée (\emph{gridlock}), faisant chuter la vitesse à
+  \(9,65\) km/h et exploser le ralenti moteur. L'IA, en calculant une
+  constante de Kreiss {[}9{]} élevée et un indice d'asymétrie important,
+  a détecté cette vulnérabilité structurelle sous forte charge relative
+  (\texttt{load\_relative} \(= 6000 / 891 \approx 6,73\)) et a estimé
+  les émissions à \(12,23\) tonnes (seulement \(16,3\ \%\) d'erreur
+  relative). Cela démontre l'aptitude de la topologie spectrale à
+  anticiper les points de bascule de congestion.
 \item
   \textbf{L'effet ``Tunnels'' de Guanajuato et la grille de Galveston
   (Surestimations par l'IA) :} Guanajuato est bâtie sur un relief
@@ -3850,8 +3844,8 @@ Facteur d'accélération
 Commentaire des résultats sous volumes modérés :
 
 Même pour de petits volumes de trafic injectés, le métamodèle IA apporte
-une réduction spectaculaire du temps de calcul. L'accélération minimale
-est de \(631\times\) pour Monaco sous 1 000 véhicules, et monte à
+une forte réduction du temps de calcul. L'accélération minimale est de
+\(631\times\) pour Monaco sous 1 000 véhicules, et monte à
 \(14\,227\times\) pour Utrecht. La variabilité du temps SUMO (de 4,55 s
 à 75,55 s) s'explique par la taille topologique des graphes : le réseau
 d'Utrecht (6 131 nœuds) exige un temps de routage Dijkstra initial
@@ -3925,7 +3919,7 @@ par deux phénomènes physiques et algorithmiques cumulatifs : 1.
 \textbf{Explosion du coût de routage :} La complexité du calcul
 d'itinéraires Dijkstra en \(\mathcal{O}(|V| \log |V| + |E|)\) est
 répétée individuellement pour les dizaines de milliers de véhicules
-injectés, ce qui conduit à des temps de routage colossaux (ex: 28 414 s
+injectés, ce qui conduit à des temps de routage très longs (ex: 28 414 s
 pour Hobart). 2. \textbf{Friction dynamique pas-à-pas :} Lorsque la
 congestion augmente, le moteur physique SUMO doit évaluer les
 interactions locales à chaque pas de temps discret pour un nombre
@@ -3934,9 +3928,9 @@ croissant de véhicules bloqués, allongeant le temps d'exécution.
 À l'inverse, le métamodèle IA s'affranchit totalement du routage
 dynamique et de la résolution de la cinématique des flux : il prédit les
 émissions globales en \textbf{5,62 ms} (\(0,0056\) s) pour les graphes
-connus. Les facteurs d'accélération mesurés atteignent des proportions
-gigantesques, dépassant \textbf{5,1 millions de fois plus rapide} pour
-Hobart et \textbf{2,7 millions de fois} pour Berlin. Le gain de temps
+connus. Les facteurs d'accélération mesurés atteignent des valeurs très
+élevées, dépassant \textbf{5,1 millions de fois plus rapide} pour Hobart
+et \textbf{2,7 millions de fois} pour Berlin. Le gain de temps
 computationnel mesuré s'établit à plus de \textbf{99,9 \%} pour tous ces
 scénarios massifs --- le gain réel non arrondi dépassant \(99{,}9999\%\)
 dans la quasi-totalité des grandes configurations. Ce constat empirique
@@ -4103,8 +4097,7 @@ prédiction ultérieure sur Munich --- ou sur l'une quelconque de ces cinq
 métropoles désormais intégrées --- sera délivrée en moins de 6 ms,
 exactement comme pour les villes connues depuis l'origine.
 
-\subparagraph{E. Conclusion sur la viabilité informatique du
-modèle}\label{e.-conclusion-sur-la-viabilituxe9-informatique-du-moduxe8le}
+\subparagraph{E. Conclusion}\label{e.-conclusion}
 
 Ces résultats empiriques démontrent que la méthodologie d'IA topologique
 spectrale proposée permet de \textbf{briser le verrou computationnel
@@ -4281,9 +4274,8 @@ jumeau numérique microscopique haute-fidélité (SUMO) pour affiner
 l'analyse locale (vérification des files d'attente au mètre près,
 comportement d'évitement des deux-roues, impact électrique précis).
 
-\paragraph{4.3.1 Modélisation de la sensibilité météorologique et
-perspectives
-d'extension}\label{moduxe9lisation-de-la-sensibilituxe9-muxe9tuxe9orologique-et-perspectives-dextension}
+\paragraph{4.3.1 Modélisation de la sensibilité
+météorologique}\label{moduxe9lisation-de-la-sensibilituxe9-muxe9tuxe9orologique}
 
 Une perspective d'extension majeure pour accroître la fidélité de notre
 métamodèle d'IA réside dans l'intégration systématique des variables
@@ -4652,7 +4644,7 @@ descripteurs)}\label{paramuxe8tres-de-trafic-charge-et-composition-de-flotte-7-d
 \item
   \textbf{\texttt{fleet\_moto\_ratio} (Ratio de deux-roues motorisés)} :
   Proportion de motos et scooters (\(nb\_motos / nb\_total\_veh\)).
-  \emph{Utilité} : Indispensable pour calibrer le trafic dans les villes
+  \emph{Utilité} : Nécessaire pour calibrer le trafic dans les villes
   d'Asie du Sud-Est où les deux-roues dominent les flux.
 \item
   \textbf{\texttt{fleet\_truck\_ratio} (Ratio de camions)} : Proportion
@@ -4696,7 +4688,7 @@ descripteurs)}\label{taux-duxe9lectrification-duxe9coupluxe9s-4-descripteurs-1}
 \item
   \textbf{\texttt{pct\_moto\_ev} (Taux d'électrification des
   deux-roues)} : Pourcentage de deux-roues électriques (\(0\) à \(100\ %
-  \)). \emph{Utilité} : Crucial pour mesurer la réduction de pollution
+  \)). \emph{Utilité} : Important pour mesurer la réduction de pollution
   sonore et d'émissions locales dans les métropoles asiatiques saturées
   de deux-roues.
 \end{itemize}
