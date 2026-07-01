@@ -297,11 +297,11 @@ Cette contrainte force le planificateur d'itinéraires à rejeter les trajets de
 
 Voici un exemple de ce qu'on obtient après une simulation SUMO d'une heure de trafic, sur la ville de Versailles :
 
-![Visualisation SIG de la ville de Versailles (Illustration de la cartographie des congestions à Versailles) - Segments routiers colorés du gris (fluide) au rouge (saturation complète).](images/versailles.png){width=45%}
+![Visualisation SIG de la ville de Versailles (Illustration de la cartographie des congestions à Versailles) - Segments routiers colorés du gris (fluide) au rouge (saturation complète).](images/versailles.png){width=70%}
 
 Et sur la ville de Paris, avec l'intensité du trafic représentée par la couleur des segments routiers :
 
-![Visualisation SIG de la ville de Paris (Illustration de la cartographie des congestions à Paris) - Segments routiers colorés du gris (fluide) au rouge (saturation complète / gridlock).](images/paris-heat_map_trafic.png){width=45%}
+![Visualisation SIG de la ville de Paris (Illustration de la cartographie des congestions à Paris) - Segments routiers colorés du gris (fluide) au rouge (saturation complète / gridlock).](images/paris-heat_map_trafic.png){width=70%}
 
 
 
