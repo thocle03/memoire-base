@@ -25,6 +25,10 @@ Mes remerciements s'adressent également aux équipes de l'Université VinUniver
 \newpage
 
 # GLOSSAIRE DES TERMES TECHNIQUES ET MATHÉMATIQUES
+
+\begingroup
+\setlength{\parskip}{0.8em}
+
 **Jumeau Numérique (Digital Twin)** : Réplication virtuelle dynamique d'un système physique réel (ici, la voirie et la cinématique des flux de trafic d'une ville) permettant d'effectuer des tests, de simuler des scénarios d'aménagements et de guider la prise de décision.
 
 **Micro-simulation microscopique** : Modélisation individuelle du comportement de chaque agent mobile (vitesse, position, distance de sécurité) à chaque pas de temps discret, par opposition aux modèles macroscopiques basés sur des équations d'écoulement de fluides moyens.
@@ -59,9 +63,14 @@ Mes remerciements s'adressent également aux équipes de l'Université VinUniver
 
 **SWAP (Pagination)** : Mécanisme du noyau système consistant à utiliser une partie de l'espace disque comme mémoire virtuelle lente lorsque la mémoire vive (RAM) physique est saturée.
 
+\endgroup
+
 \newpage
 
 # LISTE DES ILLUSTRATIONS
+
+\begingroup
+\setlength{\parskip}{0.8em}
 
 Figure 1 : Visualisation SIG de la ville de Versailles (Illustration de la cartographie des congestions à Versailles) (*Chapitre 2, 2.2*).
 
@@ -75,9 +84,14 @@ Figure 5 : Constante de Kreiss $K(A)$ pour les 12 villes tests majeures (*Chapit
 
 Figure 6 : Capture d'écran de l'interface utilisateur Streamlit - Configuration du scénario de trafic et des taux d'électromobilité (*Chapitre 4, 4.2*).
 
+\endgroup
+
 \newpage
 
 # LISTE DES TABLEAUX
+
+\begingroup
+\setlength{\parskip}{0.8em}
 
 Tableau 1 : Caractéristiques topologiques générales des 21 villes étudiées (nombre de nœuds, d'arêtes, densité de connexion, degré moyen, indice d'asymétrie, ratio de sources et de puits) (*Chapitre 2, 2.1*).
 
@@ -112,6 +126,8 @@ Tableau 7 : Extrait des indicateurs macroscopiques des simulations de référenc
 Tableau 8 : Répartition des tonnages de $CO_2$ émis par classe de véhicule de la flotte (*Annexes*).
 
 Tableau 9 : Profil de performance informatique détaillé (secondes CPU) (*Annexes*).
+
+\endgroup
 
 \newpage
 
