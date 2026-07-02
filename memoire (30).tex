@@ -272,94 +272,92 @@ nécessaires à cette étude.
 \section{GLOSSAIRE DES TERMES TECHNIQUES ET
 MATHÉMATIQUES}\label{glossaire-des-termes-techniques-et-mathuxe9matiques}
 
-\begin{itemize}
-\tightlist
-\item
-  Jumeau Numérique (Digital Twin) : Réplication virtuelle dynamique d'un
-  système physique réel (ici, la voirie et la cinématique des flux de
-  trafic d'une ville) permettant d'effectuer des tests, de simuler des
-  scénarios d'aménagements et de guider la prise de décision.
-\item
-  Micro-simulation microscopique : Modélisation individuelle du
-  comportement de chaque agent mobile (vitesse, position, distance de
-  sécurité) à chaque pas de temps discret, par opposition aux modèles
-  macroscopiques basés sur des équations d'écoulement de fluides moyens.
-\item
-  Mésoscopique : Modèle de simulation hybride intermédiaire dans lequel
-  les flux de trafic ne sont pas calculés véhicule par véhicule, mais
-  modélisés sous forme de files d'attente de paquets d'agents se
-  déplaçant le long de segments de voies, réduisant nettement la charge
-  computationnelle.
-\item
-  TraCI (Traffic Control Interface) : API native du framework SUMO
-  permettant le contrôle et la modification temps réel des états de
-  simulation (feux, départs, itinéraires) via un script externe
-  (généralement écrit en Python).
-\item
-  Matrice d'Adjacence : Représentation matricielle carrée de taille
-  \(n \times n\) (où \(n\) est le nombre de nœuds) décrivant les
-  connexions d'un graphe. Dans le cadre de l'ingénierie routière, elle
-  est asymétrique pour modéliser les sens uniques et pondérée
-  physiquement par le rapport temps de parcours/capacité des voies.
-\item
-  Opérateur Laplacien : Matrice définie par \(L = D - A\) (ou ses
-  variantes normalisées) décrivant les flux de diffusion sur le graphe
-  de la voirie. Ses valeurs propres caractérisent la connectivité
-  structurelle du réseau.
-\item
-  Rayon Spectral (\(\rho\)) : Module de la valeur propre dominante d'une
-  matrice. En topologie urbaine, il caractérise la capacité globale de
-  transit et la hiérarchisation des corridors de circulation.
-\item
-  Non-normalité : Propriété d'une matrice qui ne commute pas avec sa
-  transposée (\(A A^T \neq A^T A\)). Caractérise les réseaux urbains
-  asymétriques et indique la possibilité d'amplifications transitoires
-  du trafic.
-\item
-  Constante de Kreiss (\(K\)) : Métrique caractérisant l'amplitude
-  maximale de l'amplification transitoire des perturbations avant le
-  retour à l'équilibre asymptotique, traduisant la vulnérabilité d'un
-  réseau aux embouteillages en cascade.
-\item
-  Normes de Hardy (\(H_2 / H_\infty\)) : Normes d'espaces fonctionnels
-  décrivant la réponse d'un système dynamique aux perturbations.
-  \(H_\infty\) caractérise le gain maximal dans le pire scénario de
-  charge, tandis que \(H_2\) caractérise la persistance temporelle de
-  l'énergie de perturbation stockée (mémoire de la congestion).
-\item
-  Théorie des Perturbations de Kato : Formalisme mathématique permettant
-  de dériver analytiquement les variations du spectre d'un opérateur
-  linéaire soumis à une perturbation mineure (par exemple, calculer
-  l'impact de la fermeture d'un pont sur les valeurs propres de transit
-  sans recalculer le système complet).
-\item
-  XGBoost (eXtreme Gradient Boosting) : Algorithme d'apprentissage
-  supervisé basé sur le boosting d'arbres de décision régularisé,
-  optimisant une fonction de coût complexe via un développement de
-  Taylor de second ordre.
-\item
-  YOLOv8 (You Only Look Once, v8) : Modèle de réseau de neurones
-  convolutif monocoup optimisé pour le traitement d'images temps réel,
-  réalisant la détection, la classification et le suivi d'objets
-  (véhicules).
-\item
-  Dwell Time (Temps d'arrêt) : Durée d'immobilisation physique d'un
-  véhicule à une borne pour réaliser sa session de recharge électrique,
-  modélisée sous forme de loi normale tronquée.
-\item
-  Warm-Start (Démarrage à chaud) : Initialisation d'une simulation dans
-  un état pré-chargé (hub de recharge occupé stochastiquement par des
-  véhicules fantômes) pour supprimer le biais transitoire du démarrage à
-  vide.
-\item
-  Spillback (Refoulement) : Phénomène de propagation d'un bouchon où la
-  file d'attente accumulée sur une voie sature et déborde pour paralyser
-  les intersections situées en amont.
-\item
-  SWAP (Pagination) : Mécanisme du noyau système consistant à utiliser
-  une partie de l'espace disque comme mémoire virtuelle lente lorsque la
-  mémoire vive (RAM) physique est saturée.
-\end{itemize}
+\textbf{Jumeau Numérique (Digital Twin)} : Réplication virtuelle
+dynamique d'un système physique réel (ici, la voirie et la cinématique
+des flux de trafic d'une ville) permettant d'effectuer des tests, de
+simuler des scénarios d'aménagements et de guider la prise de décision.
+
+\textbf{Micro-simulation microscopique} : Modélisation individuelle du
+comportement de chaque agent mobile (vitesse, position, distance de
+sécurité) à chaque pas de temps discret, par opposition aux modèles
+macroscopiques basés sur des équations d'écoulement de fluides moyens.
+
+\textbf{Mésoscopique} : Modèle de simulation hybride intermédiaire dans
+lequel les flux de trafic ne sont pas calculés véhicule par véhicule,
+mais modélisés sous forme de files d'attente de paquets d'agents se
+déplaçant le long de segments de voies, réduisant nettement la charge
+computationnelle.
+
+\textbf{TraCI (Traffic Control Interface)} : API native du framework
+SUMO permettant le contrôle et la modification temps réel des états de
+simulation (feux, départs, itinéraires) via un script externe
+(généralement écrit en Python).
+
+\textbf{Matrice d'Adjacence} : Représentation matricielle carrée de
+taille \(n \times n\) (où \(n\) est le nombre de nœuds) décrivant les
+connexions d'un graphe. Dans le cadre de l'ingénierie routière, elle est
+asymétrique pour modéliser les sens uniques et pondérée physiquement par
+le rapport temps de parcours/capacité des voies.
+
+\textbf{Opérateur Laplacien} : Matrice définie par \(L = D - A\) (ou ses
+variantes normalisées) décrivant les flux de diffusion sur le graphe de
+la voirie. Ses valeurs propres caractérisent la connectivité
+structurelle du réseau.
+
+\textbf{Rayon Spectral (\(\rho\))} : Module de la valeur propre
+dominante d'une matrice. En topologie urbaine, il caractérise la
+capacité globale de transit et la hiérarchisation des corridors de
+circulation.
+
+\textbf{Non-normalité} : Propriété d'une matrice qui ne commute pas avec
+sa transposée (\(A A^T \neq A^T A\)). Caractérise les réseaux urbains
+asymétriques et indique la possibilité d'amplifications transitoires du
+trafic.
+
+\textbf{Constante de Kreiss (\(K\))} : Métrique caractérisant
+l'amplitude maximale de l'amplification transitoire des perturbations
+avant le retour à l'équilibre asymptotique, traduisant la vulnérabilité
+d'un réseau aux embouteillages en cascade.
+
+\textbf{Normes de Hardy (\(H_2 / H_\infty\))} : Normes d'espaces
+fonctionnels décrivant la réponse d'un système dynamique aux
+perturbations. \(H_\infty\) caractérise le gain maximal dans le pire
+scénario de charge, tandis que \(H_2\) caractérise la persistance
+temporelle de l'énergie de perturbation stockée (mémoire de la
+congestion).
+
+\textbf{Théorie des Perturbations de Kato} : Formalisme mathématique
+permettant de dériver analytiquement les variations du spectre d'un
+opérateur linéaire soumis à une perturbation mineure (par exemple,
+calculer l'impact de la fermeture d'un pont sur les valeurs propres de
+transit sans recalculer le système complet).
+
+\textbf{XGBoost (eXtreme Gradient Boosting)} : Algorithme
+d'apprentissage supervisé basé sur le boosting d'arbres de décision
+régularisé, optimisant une fonction de coût complexe via un
+développement de Taylor de second ordre.
+
+\textbf{YOLOv8 (You Only Look Once, v8)} : Modèle de réseau de neurones
+convolutif monocoup optimisé pour le traitement d'images temps réel,
+réalisant la détection, la classification et le suivi d'objets
+(véhicules).
+
+\textbf{Dwell Time (Temps d'arrêt)} : Durée d'immobilisation physique
+d'un véhicule à une borne pour réaliser sa session de recharge
+électrique, modélisée sous forme de loi normale tronquée.
+
+\textbf{Warm-Start (Démarrage à chaud)} : Initialisation d'une
+simulation dans un état pré-chargé (hub de recharge occupé
+stochastiquement par des véhicules fantômes) pour supprimer le biais
+transitoire du démarrage à vide.
+
+\textbf{Spillback (Refoulement)} : Phénomène de propagation d'un bouchon
+où la file d'attente accumulée sur une voie sature et déborde pour
+paralyser les intersections situées en amont.
+
+\textbf{SWAP (Pagination)} : Mécanisme du noyau système consistant à
+utiliser une partie de l'espace disque comme mémoire virtuelle lente
+lorsque la mémoire vive (RAM) physique est saturée.
 
 \newpage
 
@@ -367,16 +365,23 @@ MATHÉMATIQUES}\label{glossaire-des-termes-techniques-et-mathuxe9matiques}
 
 Figure 1 : Visualisation SIG de la ville de Versailles (Illustration de
 la cartographie des congestions à Versailles) (\emph{Chapitre 2, 2.2}).
+
 Figure 2 : Visualisation SIG de la ville de Paris (Illustration de la
-cartographie des congestions à Paris) (\emph{Chapitre 2, 2.2}). Figure 3
-: Comparaison du rayon spectral \(\rho(A)\) et de la valeur singulière
-maximale \(\sigma_{max}(A)\) pour 13 villes représentatives
-(\emph{Chapitre 3, 3.1}). Figure 4 : Évolution de la norme de Hardy
-\(H_2\) pour les 13 villes tests (\emph{Chapitre 3, 3.1}). Figure 5 :
-Constante de Kreiss \(K(A)\) pour les 12 villes tests majeures
-(\emph{Chapitre 3, 3.1}). Figure 6 : Capture d'écran de l'interface
-utilisateur Streamlit - Configuration du scénario de trafic et des taux
-d'électromobilité (\emph{Chapitre 4, 4.2}).
+cartographie des congestions à Paris) (\emph{Chapitre 2, 2.2}).
+
+Figure 3 : Comparaison du rayon spectral \(\rho(A)\) et de la valeur
+singulière maximale \(\sigma_{max}(A)\) pour 13 villes représentatives
+(\emph{Chapitre 3, 3.1}).
+
+Figure 4 : Évolution de la norme de Hardy \(H_2\) pour les 13 villes
+tests (\emph{Chapitre 3, 3.1}).
+
+Figure 5 : Constante de Kreiss \(K(A)\) pour les 12 villes tests
+majeures (\emph{Chapitre 3, 3.1}).
+
+Figure 6 : Capture d'écran de l'interface utilisateur Streamlit -
+Configuration du scénario de trafic et des taux d'électromobilité
+(\emph{Chapitre 4, 4.2}).
 
 \newpage
 
@@ -385,43 +390,68 @@ d'électromobilité (\emph{Chapitre 4, 4.2}).
 Tableau 1 : Caractéristiques topologiques générales des 21 villes
 étudiées (nombre de nœuds, d'arêtes, densité de connexion, degré moyen,
 indice d'asymétrie, ratio de sources et de puits) (\emph{Chapitre 2,
-2.1}). Tableau 1b : Temps de calcul détaillés pour des simulations SUMO
-à grande échelle (\emph{Chapitre 1, 1.2}). Tableau 2 : Métriques
-spectrales de non-normalité des matrices d'adjacence non pondérées pour
-les 21 réseaux urbains (asymétrie, rayon spectral, valeur singulière
-maximale, norme \(H_2\), constante de Kreiss {[}9{]}) (\emph{Chapitre 3,
-3.1}). Tableau 2b : Corrélations empiriques (Pearson/Spearman) entre les
+2.1}).
+
+Tableau 1b : Temps de calcul détaillés pour des simulations SUMO à
+grande échelle (\emph{Chapitre 1, 1.2}).
+
+Tableau 2 : Métriques spectrales de non-normalité des matrices
+d'adjacence non pondérées pour les 21 réseaux urbains (asymétrie, rayon
+spectral, valeur singulière maximale, norme \(H_2\), constante de Kreiss
+{[}9{]}) (\emph{Chapitre 3, 3.1}).
+
+Tableau 2b : Corrélations empiriques (Pearson/Spearman) entre les
 métriques spectrales clés (Kreiss, \(H_2\), \(\rho\), \(\sigma_1\)) et
 les indicateurs cinématiques observés en simulation (vitesse,
-\(CO_2\)/veh) sur les 242 simulations (\emph{Chapitre 3, 3.1}). Tableau
-3 : Évolution des performances et caractéristiques des versions du
-métamodèle prédictif (V2 normalisée vs V3 optimisée) (\emph{Chapitre 3,
-3.2}). Tableau 3b : Étude d'ablation : contribution incrémentale des
-couches de descripteurs : trafic pur vs + topologie classique vs +
-spectral complet (V3) (\emph{Chapitre 3, 3.2}). Tableau 3c : Résultats
-de la validation croisée K-Fold (K=5) : \(R^2\), RMSE et MAE moyens ±
-écart-type sur les 5 folds (\emph{Chapitre 3, 3.2}). Tableau 4 : Profil
-d'importance des variables (\emph{Feature Importance}) dans le modèle
-final de prédiction de \(CO_2\) par XGBoost (\emph{Chapitre 3, 3.2}).
+\(CO_2\)/veh) sur les 242 simulations (\emph{Chapitre 3, 3.1}).
+
+Tableau 3 : Évolution des performances et caractéristiques des versions
+du métamodèle prédictif (V2 normalisée vs V3 optimisée) (\emph{Chapitre
+3, 3.2}).
+
+Tableau 3b : Étude d'ablation : contribution incrémentale des couches de
+descripteurs : trafic pur vs + topologie classique vs + spectral complet
+(V3) (\emph{Chapitre 3, 3.2}).
+
+Tableau 3c : Résultats de la validation croisée K-Fold (K=5) : \(R^2\),
+RMSE et MAE moyens ± écart-type sur les 5 folds (\emph{Chapitre 3,
+3.2}).
+
+Tableau 4 : Profil d'importance des variables (\emph{Feature
+Importance}) dans le modèle final de prédiction de \(CO_2\) par XGBoost
+(\emph{Chapitre 3, 3.2}).
+
 Tableau 5 : Taille géométrique des fichiers net.xml sur disque et
 occupation correspondante de la mémoire RAM en Python (filtrage DOM via
-sumolib) pour cinq villes types (\emph{Chapitre 4, 4.2}). Tableau 6 :
-Résultats de la validation croisée (Generalization Cross-City) de l'IA
-face aux simulations physiques SUMO de référence pour trois
-configurations cibles (Nelson, Maseru et Pamplona) (\emph{Chapitre 4,
-4.2}). Tableau 6b : Matrice comparative de la validation croisée étendue
-(IA vs SUMO) sur 9 villes inédites sous 3 scénarios de charge
-(\emph{Chapitre 4, 4.2}). Tableau 6f : Comparaison directe des temps de
-calcul SUMO vs IA sous volumes de trafic modérés (\emph{Chapitre 4,
-4.2}). Tableau 6g : Comparaison directe des temps de calcul SUMO vs IA
-sous volumes de trafic massifs (\emph{Chapitre 4, 4.2}). Tableau 6h :
-Benchmarking du pipeline complet (téléchargement, conversion, analyse
-spectrale et inférence IA) sur 5 métropoles européennes inédites
-(\emph{Chapitre 4, 4.2}). Tableau 7 : Extrait des indicateurs
-macroscopiques des simulations de référence (\emph{Annexes}). Tableau 8
-: Répartition des tonnages de \(CO_2\) émis par classe de véhicule de la
-flotte (\emph{Annexes}). Tableau 9 : Profil de performance informatique
-détaillé (secondes CPU) (\emph{Annexes}).
+sumolib) pour cinq villes types (\emph{Chapitre 4, 4.2}).
+
+Tableau 6 : Résultats de la validation croisée (Generalization
+Cross-City) de l'IA face aux simulations physiques SUMO de référence
+pour trois configurations cibles (Nelson, Maseru et Pamplona)
+(\emph{Chapitre 4, 4.2}).
+
+Tableau 6b : Matrice comparative de la validation croisée étendue (IA vs
+SUMO) sur 9 villes inédites sous 3 scénarios de charge (\emph{Chapitre
+4, 4.2}).
+
+Tableau 6f : Comparaison directe des temps de calcul SUMO vs IA sous
+volumes de trafic modérés (\emph{Chapitre 4, 4.2}).
+
+Tableau 6g : Comparaison directe des temps de calcul SUMO vs IA sous
+volumes de trafic massifs (\emph{Chapitre 4, 4.2}).
+
+Tableau 6h : Benchmarking du pipeline complet (téléchargement,
+conversion, analyse spectrale et inférence IA) sur 5 métropoles
+européennes inédites (\emph{Chapitre 4, 4.2}).
+
+Tableau 7 : Extrait des indicateurs macroscopiques des simulations de
+référence (\emph{Annexes}).
+
+Tableau 8 : Répartition des tonnages de \(CO_2\) émis par classe de
+véhicule de la flotte (\emph{Annexes}).
+
+Tableau 9 : Profil de performance informatique détaillé (secondes CPU)
+(\emph{Annexes}).
 
 \newpage
 

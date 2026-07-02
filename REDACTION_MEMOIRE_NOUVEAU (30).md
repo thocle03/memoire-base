@@ -25,59 +25,93 @@ Mes remerciements s'adressent également aux équipes de l'Université VinUniver
 \newpage
 
 # GLOSSAIRE DES TERMES TECHNIQUES ET MATHÉMATIQUES
+**Jumeau Numérique (Digital Twin)** : Réplication virtuelle dynamique d'un système physique réel (ici, la voirie et la cinématique des flux de trafic d'une ville) permettant d'effectuer des tests, de simuler des scénarios d'aménagements et de guider la prise de décision.
 
--   Jumeau Numérique (Digital Twin) : Réplication virtuelle dynamique d'un système physique réel (ici, la voirie et la cinématique des flux de trafic d'une ville) permettant d'effectuer des tests, de simuler des scénarios d'aménagements et de guider la prise de décision.
--   Micro-simulation microscopique : Modélisation individuelle du comportement de chaque agent mobile (vitesse, position, distance de sécurité) à chaque pas de temps discret, par opposition aux modèles macroscopiques basés sur des équations d'écoulement de fluides moyens.
--   Mésoscopique : Modèle de simulation hybride intermédiaire dans lequel les flux de trafic ne sont pas calculés véhicule par véhicule, mais modélisés sous forme de files d'attente de paquets d'agents se déplaçant le long de segments de voies, réduisant nettement la charge computationnelle.
--   TraCI (Traffic Control Interface) : API native du framework SUMO permettant le contrôle et la modification temps réel des états de simulation (feux, départs, itinéraires) via un script externe (généralement écrit en Python).
--   Matrice d'Adjacence : Représentation matricielle carrée de taille $n \times n$ (où $n$ est le nombre de nœuds) décrivant les connexions d'un graphe. Dans le cadre de l'ingénierie routière, elle est asymétrique pour modéliser les sens uniques et pondérée physiquement par le rapport temps de parcours/capacité des voies.
--   Opérateur Laplacien : Matrice définie par $L = D - A$ (ou ses variantes normalisées) décrivant les flux de diffusion sur le graphe de la voirie. Ses valeurs propres caractérisent la connectivité structurelle du réseau.
--   Rayon Spectral ($\rho$) : Module de la valeur propre dominante d'une matrice. En topologie urbaine, il caractérise la capacité globale de transit et la hiérarchisation des corridors de circulation.
--   Non-normalité : Propriété d'une matrice qui ne commute pas avec sa transposée ($A A^T \neq A^T A$). Caractérise les réseaux urbains asymétriques et indique la possibilité d'amplifications transitoires du trafic.
--   Constante de Kreiss ($K$) : Métrique caractérisant l'amplitude maximale de l'amplification transitoire des perturbations avant le retour à l'équilibre asymptotique, traduisant la vulnérabilité d'un réseau aux embouteillages en cascade.
--   Normes de Hardy ($H_2 / H_\infty$) : Normes d'espaces fonctionnels décrivant la réponse d'un système dynamique aux perturbations. $H_\infty$ caractérise le gain maximal dans le pire scénario de charge, tandis que $H_2$ caractérise la persistance temporelle de l'énergie de perturbation stockée (mémoire de la congestion).
--   Théorie des Perturbations de Kato : Formalisme mathématique permettant de dériver analytiquement les variations du spectre d'un opérateur linéaire soumis à une perturbation mineure (par exemple, calculer l'impact de la fermeture d'un pont sur les valeurs propres de transit sans recalculer le système complet).
--   XGBoost (eXtreme Gradient Boosting) : Algorithme d'apprentissage supervisé basé sur le boosting d'arbres de décision régularisé, optimisant une fonction de coût complexe via un développement de Taylor de second ordre.
--   YOLOv8 (You Only Look Once, v8) : Modèle de réseau de neurones convolutif monocoup optimisé pour le traitement d'images temps réel, réalisant la détection, la classification et le suivi d'objets (véhicules).
--   Dwell Time (Temps d'arrêt) : Durée d'immobilisation physique d'un véhicule à une borne pour réaliser sa session de recharge électrique, modélisée sous forme de loi normale tronquée.
--   Warm-Start (Démarrage à chaud) : Initialisation d'une simulation dans un état pré-chargé (hub de recharge occupé stochastiquement par des véhicules fantômes) pour supprimer le biais transitoire du démarrage à vide.
--   Spillback (Refoulement) : Phénomène de propagation d'un bouchon où la file d'attente accumulée sur une voie sature et déborde pour paralyser les intersections situées en amont.
--   SWAP (Pagination) : Mécanisme du noyau système consistant à utiliser une partie de l'espace disque comme mémoire virtuelle lente lorsque la mémoire vive (RAM) physique est saturée.
+**Micro-simulation microscopique** : Modélisation individuelle du comportement de chaque agent mobile (vitesse, position, distance de sécurité) à chaque pas de temps discret, par opposition aux modèles macroscopiques basés sur des équations d'écoulement de fluides moyens.
+
+**Mésoscopique** : Modèle de simulation hybride intermédiaire dans lequel les flux de trafic ne sont pas calculés véhicule par véhicule, mais modélisés sous forme de files d'attente de paquets d'agents se déplaçant le long de segments de voies, réduisant nettement la charge computationnelle.
+
+**TraCI (Traffic Control Interface)** : API native du framework SUMO permettant le contrôle et la modification temps réel des états de simulation (feux, départs, itinéraires) via un script externe (généralement écrit en Python).
+
+**Matrice d'Adjacence** : Représentation matricielle carrée de taille $n \times n$ (où $n$ est le nombre de nœuds) décrivant les connexions d'un graphe. Dans le cadre de l'ingénierie routière, elle est asymétrique pour modéliser les sens uniques et pondérée physiquement par le rapport temps de parcours/capacité des voies.
+
+**Opérateur Laplacien** : Matrice définie par $L = D - A$ (ou ses variantes normalisées) décrivant les flux de diffusion sur le graphe de la voirie. Ses valeurs propres caractérisent la connectivité structurelle du réseau.
+
+**Rayon Spectral ($\rho$)** : Module de la valeur propre dominante d'une matrice. En topologie urbaine, il caractérise la capacité globale de transit et la hiérarchisation des corridors de circulation.
+
+**Non-normalité** : Propriété d'une matrice qui ne commute pas avec sa transposée ($A A^T \neq A^T A$). Caractérise les réseaux urbains asymétriques et indique la possibilité d'amplifications transitoires du trafic.
+
+**Constante de Kreiss ($K$)** : Métrique caractérisant l'amplitude maximale de l'amplification transitoire des perturbations avant le retour à l'équilibre asymptotique, traduisant la vulnérabilité d'un réseau aux embouteillages en cascade.
+
+**Normes de Hardy ($H_2 / H_\infty$)** : Normes d'espaces fonctionnels décrivant la réponse d'un système dynamique aux perturbations. $H_\infty$ caractérise le gain maximal dans le pire scénario de charge, tandis que $H_2$ caractérise la persistance temporelle de l'énergie de perturbation stockée (mémoire de la congestion).
+
+**Théorie des Perturbations de Kato** : Formalisme mathématique permettant de dériver analytiquement les variations du spectre d'un opérateur linéaire soumis à une perturbation mineure (par exemple, calculer l'impact de la fermeture d'un pont sur les valeurs propres de transit sans recalculer le système complet).
+
+**XGBoost (eXtreme Gradient Boosting)** : Algorithme d'apprentissage supervisé basé sur le boosting d'arbres de décision régularisé, optimisant une fonction de coût complexe via un développement de Taylor de second ordre.
+
+**YOLOv8 (You Only Look Once, v8)** : Modèle de réseau de neurones convolutif monocoup optimisé pour le traitement d'images temps réel, réalisant la détection, la classification et le suivi d'objets (véhicules).
+
+**Dwell Time (Temps d'arrêt)** : Durée d'immobilisation physique d'un véhicule à une borne pour réaliser sa session de recharge électrique, modélisée sous forme de loi normale tronquée.
+
+**Warm-Start (Démarrage à chaud)** : Initialisation d'une simulation dans un état pré-chargé (hub de recharge occupé stochastiquement par des véhicules fantômes) pour supprimer le biais transitoire du démarrage à vide.
+
+**Spillback (Refoulement)** : Phénomène de propagation d'un bouchon où la file d'attente accumulée sur une voie sature et déborde pour paralyser les intersections situées en amont.
+
+**SWAP (Pagination)** : Mécanisme du noyau système consistant à utiliser une partie de l'espace disque comme mémoire virtuelle lente lorsque la mémoire vive (RAM) physique est saturée.
 
 \newpage
 
 # LISTE DES ILLUSTRATIONS
 
 Figure 1 : Visualisation SIG de la ville de Versailles (Illustration de la cartographie des congestions à Versailles) (*Chapitre 2, 2.2*).
-Figure 2 : Visualisation SIG de la ville de Paris (Illustration de la cartographie des congestions à Paris) (*Chapitre 2, 2.2*).
-Figure 3 : Comparaison du rayon spectral $\rho(A)$ et de la valeur singulière maximale $\sigma_{max}(A)$ pour 13 villes représentatives (*Chapitre 3, 3.1*).
-Figure 4 : Évolution de la norme de Hardy $H_2$ pour les 13 villes tests (*Chapitre 3, 3.1*).
-Figure 5 : Constante de Kreiss $K(A)$ pour les 12 villes tests majeures (*Chapitre 3, 3.1*).
-Figure 6 : Capture d'écran de l'interface utilisateur Streamlit - Configuration du scénario de trafic et des taux d'électromobilité (*Chapitre 4, 4.2*).
 
+Figure 2 : Visualisation SIG de la ville de Paris (Illustration de la cartographie des congestions à Paris) (*Chapitre 2, 2.2*).
+
+Figure 3 : Comparaison du rayon spectral $\rho(A)$ et de la valeur singulière maximale $\sigma_{max}(A)$ pour 13 villes représentatives (*Chapitre 3, 3.1*).
+
+Figure 4 : Évolution de la norme de Hardy $H_2$ pour les 13 villes tests (*Chapitre 3, 3.1*).
+
+Figure 5 : Constante de Kreiss $K(A)$ pour les 12 villes tests majeures (*Chapitre 3, 3.1*).
+
+Figure 6 : Capture d'écran de l'interface utilisateur Streamlit - Configuration du scénario de trafic et des taux d'électromobilité (*Chapitre 4, 4.2*).
 
 \newpage
 
 # LISTE DES TABLEAUX
 
 Tableau 1 : Caractéristiques topologiques générales des 21 villes étudiées (nombre de nœuds, d'arêtes, densité de connexion, degré moyen, indice d'asymétrie, ratio de sources et de puits) (*Chapitre 2, 2.1*).
-Tableau 1b : Temps de calcul détaillés pour des simulations SUMO à grande échelle (*Chapitre 1, 1.2*).
-Tableau 2 : Métriques spectrales de non-normalité des matrices d'adjacence non pondérées pour les 21 réseaux urbains (asymétrie, rayon spectral, valeur singulière maximale, norme $H_2$, constante de Kreiss [9]) (*Chapitre 3, 3.1*).
-Tableau 2b : Corrélations empiriques (Pearson/Spearman) entre les métriques spectrales clés (Kreiss, $H_2$, $\rho$, $\sigma_1$) et les indicateurs cinématiques observés en simulation (vitesse, $CO_2$/veh) sur les 242 simulations (*Chapitre 3, 3.1*).
-Tableau 3 : Évolution des performances et caractéristiques des versions du métamodèle prédictif (V2 normalisée vs V3 optimisée) (*Chapitre 3, 3.2*).
-Tableau 3b : Étude d'ablation : contribution incrémentale des couches de descripteurs : trafic pur vs + topologie classique vs + spectral complet (V3) (*Chapitre 3, 3.2*).
-Tableau 3c : Résultats de la validation croisée K-Fold (K=5) : $R^2$, RMSE et MAE moyens ± écart-type sur les 5 folds (*Chapitre 3, 3.2*).
-Tableau 4 : Profil d'importance des variables (*Feature Importance*) dans le modèle final de prédiction de $CO_2$ par XGBoost (*Chapitre 3, 3.2*).
-Tableau 5 : Taille géométrique des fichiers net.xml sur disque et occupation correspondante de la mémoire RAM en Python (filtrage DOM via sumolib) pour cinq villes types (*Chapitre 4, 4.2*).
-Tableau 6 : Résultats de la validation croisée (Generalization Cross-City) de l'IA face aux simulations physiques SUMO de référence pour trois configurations cibles (Nelson, Maseru et Pamplona) (*Chapitre 4, 4.2*).
-Tableau 6b : Matrice comparative de la validation croisée étendue (IA vs SUMO) sur 9 villes inédites sous 3 scénarios de charge (*Chapitre 4, 4.2*).
-Tableau 6f : Comparaison directe des temps de calcul SUMO vs IA sous volumes de trafic modérés (*Chapitre 4, 4.2*).
-Tableau 6g : Comparaison directe des temps de calcul SUMO vs IA sous volumes de trafic massifs (*Chapitre 4, 4.2*).
-Tableau 6h : Benchmarking du pipeline complet (téléchargement, conversion, analyse spectrale et inférence IA) sur 5 métropoles européennes inédites (*Chapitre 4, 4.2*).
-Tableau 7 : Extrait des indicateurs macroscopiques des simulations de référence (*Annexes*).
-Tableau 8 : Répartition des tonnages de $CO_2$ émis par classe de véhicule de la flotte (*Annexes*).
-Tableau 9 : Profil de performance informatique détaillé (secondes CPU) (*Annexes*).
 
+Tableau 1b : Temps de calcul détaillés pour des simulations SUMO à grande échelle (*Chapitre 1, 1.2*).
+
+Tableau 2 : Métriques spectrales de non-normalité des matrices d'adjacence non pondérées pour les 21 réseaux urbains (asymétrie, rayon spectral, valeur singulière maximale, norme $H_2$, constante de Kreiss [9]) (*Chapitre 3, 3.1*).
+
+Tableau 2b : Corrélations empiriques (Pearson/Spearman) entre les métriques spectrales clés (Kreiss, $H_2$, $\rho$, $\sigma_1$) et les indicateurs cinématiques observés en simulation (vitesse, $CO_2$/veh) sur les 242 simulations (*Chapitre 3, 3.1*).
+
+Tableau 3 : Évolution des performances et caractéristiques des versions du métamodèle prédictif (V2 normalisée vs V3 optimisée) (*Chapitre 3, 3.2*).
+
+Tableau 3b : Étude d'ablation : contribution incrémentale des couches de descripteurs : trafic pur vs + topologie classique vs + spectral complet (V3) (*Chapitre 3, 3.2*).
+
+Tableau 3c : Résultats de la validation croisée K-Fold (K=5) : $R^2$, RMSE et MAE moyens ± écart-type sur les 5 folds (*Chapitre 3, 3.2*).
+
+Tableau 4 : Profil d'importance des variables (*Feature Importance*) dans le modèle final de prédiction de $CO_2$ par XGBoost (*Chapitre 3, 3.2*).
+
+Tableau 5 : Taille géométrique des fichiers net.xml sur disque et occupation correspondante de la mémoire RAM en Python (filtrage DOM via sumolib) pour cinq villes types (*Chapitre 4, 4.2*).
+
+Tableau 6 : Résultats de la validation croisée (Generalization Cross-City) de l'IA face aux simulations physiques SUMO de référence pour trois configurations cibles (Nelson, Maseru et Pamplona) (*Chapitre 4, 4.2*).
+
+Tableau 6b : Matrice comparative de la validation croisée étendue (IA vs SUMO) sur 9 villes inédites sous 3 scénarios de charge (*Chapitre 4, 4.2*).
+
+Tableau 6f : Comparaison directe des temps de calcul SUMO vs IA sous volumes de trafic modérés (*Chapitre 4, 4.2*).
+
+Tableau 6g : Comparaison directe des temps de calcul SUMO vs IA sous volumes de trafic massifs (*Chapitre 4, 4.2*).
+
+Tableau 6h : Benchmarking du pipeline complet (téléchargement, conversion, analyse spectrale et inférence IA) sur 5 métropoles européennes inédites (*Chapitre 4, 4.2*).
+
+Tableau 7 : Extrait des indicateurs macroscopiques des simulations de référence (*Annexes*).
+
+Tableau 8 : Répartition des tonnages de $CO_2$ émis par classe de véhicule de la flotte (*Annexes*).
+
+Tableau 9 : Profil de performance informatique détaillé (secondes CPU) (*Annexes*).
 
 \newpage
 
@@ -95,15 +129,11 @@ Les réseaux routiers urbains se comportent comme des systèmes complexes hautem
 
 Pour étudier ces interactions physiques à l'échelle granulaire, l'ingénierie du transport s'est structurée autour d'outils de micro-simulation multi-agents tels que SUMO (Simulation of Urban MObility) [7], Aimsun [13], MATsim [14] ou PTV Vissim [15]. Ces simulateurs modélisent de manière granulaire le déplacement de chaque agent, un agent ici est interprété au sens d'un véhicule, (vitesse, changement de voie, distance de sécurité) seconde par seconde en s'appuyant sur des lois physiques de poursuite (*car-following*). Couplés à des bases de données d'émissions (CO, CO2, NOX, PM10 etc.) de référence telles que le modèle HBEFA3 [8], ils offrent une bonne fidélité pour quantifier les surémissions de $CO_2$ associées aux comportements transitoires des véhicules (cycles d'arrêt-démarrage).
 
-
-
 Néanmoins, cette précision physique se heurte à une barrière computationnelle majeure. La résolution séquentielle des équations différentielles cinématiques pour chaque véhicule est extrêmement coûteuse en temps de calcul CPU et en mémoire vive RAM. Simuler un scénario de plusieurs heures impliquant des centaines de milliers d'agents sur une métropole comme Los Angeles ou Paris sature les ressources matérielles des ordinateurs portables classiques des planificateurs, entraînant des temps de calcul préjudiciables (plusieurs heures par exécution) et des écritures de mémoire virtuelle lentes sur le disque (SWAP). Cette inertie computationnelle empêche l'exploration de larges espaces de scénarios et interdit toute utilisation pour la prise de décision en temps réel ou dans des boucles d'optimisation automatique.
 
 Cette limitation majeure justifie le développement de nouvelles approches de rupture, capables de contourner la simulation physique en s'appuyant sur l'intelligence artificielle pour prédire de manière instantanée la pollution urbaine globale.
 
 Pour briser ce limite de calcul, ce mémoire propose une méthodologie hybride alliant la précision locale de la micro-simulation et la rapidité de prédiction instantanée de l'intelligence artificielle. Afin d'offrir une vision claire et cohérente de la démarche scientifique entreprise, nous décrivons dès cette introduction le rôle de chacun des éléments constituant le protocole. L'estimation instantanée et agnostique de la pollution urbaine repose sur une chaîne d'outils interconnectés. Tout d'abord, pour acquérir la structure géométrique brute de la voirie d'une ville quelconque, nous exploitons la base de données collaborative OpenStreetMap (OSM) [2]. Cette géométrie brute est ensuite traitée par l'outil netconvert [7] afin d'en éliminer les micro-détails géométriques déconnectés (tels que les voies isolées ou les impasses piétonnes non connectées au réseau de transit principal) et de générer un réseau logique d'intersections et de voies unifiées. Ce réseau nettoyé est alors injecté dans le micro-simulateur SUMO (Simulation of Urban MObility) [7] pour simuler différents volumes et compositions de trafic, ce qui nous permet de calculer des trajectoires de véhicules et d'en extraire, via la base de données HBEFA3 [8], les émissions de $CO_2$ réelles correspondantes (constituant la base d'apprentissage). Pour s'affranchir de la lenteur computationnelle de SUMO sur de grands réseaux, nous traduisons ensuite la topologie de chaque ville sous forme d'une matrice d'adjacence d'impédance physique, dont nous extrayons des caractéristiques spectrales avancées (rayon spectral, constante de Kreiss [9], perturbations de Kato [6]). Ces descripteurs spectraux, qui encodent mathématiquement la vulnérabilité intrinsèque du réseau face aux congestions transitoires en exploitant la constante de Kreiss, la norme de Hardy H2 et le rayon spectral, sont ensuite combinés avec les caractéristiques cinématiques de la demande (volume et répartition modale) pour alimenter un modèle de régression XGBoost normalisé par véhicule. Ce métamodèle estime ainsi instantanément (en moins de 15 ms) le volume total de CO2 généré sur le réseau sans nécessiter de micro-simulation physique itérative.
-
-
 
 Pour exposer notre travail, ce mémoire est structuré en quatre grands chapitres :
 
@@ -176,7 +206,6 @@ Pour transformer le fichier `.osm` brut en un réseau logique routier unifié, n
 
 Le produit final de cette chaîne de traitement est un fichier XML unique nommé `net.xml`. Ce fichier contient le graphe épuré et complet de la ville, décrivant de manière structurée les nœuds d'intersection (`<junction>`), les arêtes routières orientées (`<edge>`), les voies de circulation associées (`<lane>`) et les liaisons de carrefour (`<connection>`). 
 
-
 Plusieurs descripteurs topologiques caractérisent ce réseau : le nombre de nœuds (dimension de la matrice d'adjacence $A$), le nombre d'arêtes (tronçons routiers orientés), la densité (ratio d'arêtes réelles sur les arêtes maximales possibles), le degré moyen (nombre moyen d'arêtes par nœud, révélant la complexité des carrefours), l'indice d'asymétrie (proportion de voies à sens unique) et les ratios de nœuds sources et puits (zones d'injection et d'absorption des véhicules aux limites du réseau).
 
 ##### Tableau 1 : Exemples
@@ -207,8 +236,6 @@ Plusieurs descripteurs topologiques caractérisent ce réseau : le nombre de nœ
 
 Ces caractéristiques topologiques globales (Tableau 1) sont calculées directement à partir du graphe orienté $G=(V, E)$ modélisé depuis le réseau routier. Pour effectuer des analyses spectrales plus complexes (comme détaillé au Chapitre 3), ce graphe est formalisé sous la forme d'une matrice d'adjacence $A$, où chaque élément $A_{ij}$ indique la présence (ou l'impédance physique) d'une liaison orientée entre l'intersection $i$ et l'intersection $j$. La non-symétrie de cette matrice, découlant des sens uniques présents dans le réseau urbain, en fait une matrice non-normale. Cette non-normalité joue un rôle fondamental dans la propagation des congestions transitoires.
 
-
-
 #### Rôle pivot du fichier net.xml
 Le fichier `net.xml` sert d'interface entre les modèles physiques et mathématiques :
 
@@ -233,7 +260,6 @@ Les fichiers de sortie regroupent le rapport d'itinéraires (`tripinfo.xml`), d�
 
 #### 2.2.3 Le modèle de poursuite cinématique de Krauß
 Pour reproduire le mouvement individuel des véhicules le long des arêtes, SUMO implémente par défaut le modèle comportemental de poursuite de véhicule développé par Krauß [16]. Ce modèle cinématique calcule à chaque pas de temps la vitesse optimale d'un véhicule suiveur pour éviter toute collision avec le véhicule leader, même si ce dernier décélère brutalement.
-
 
 Soit un véhicule suiveur $F$ caractérisé par sa position $x_F(t)$ et sa vitesse $v_F(t)$, circulant derrière un véhicule leader $L$ caractérisé par sa position $x_L(t)$ et sa vitesse $v_L(t)$. L'intervalle spatial libre (ou gap) séparant les deux véhicules est défini par :
 $$g(t) = x_L(t) - x_F(t) - l_L$$
@@ -264,9 +290,6 @@ Cela signifie qu'un véhicule peut aller de n'importe quel nœud $u$ vers n'impo
 
 L'algorithme de Tarjan [17] utilise un parcours en profondeur (DFS - Depth First Search) pour identifier l'ensemble des composantes fortement connexes d'un graphe orienté en un temps linéaire optimal de $\mathcal{O}(V + E)$. En pratique, la suite logicielle SUMO propose nativement des options d'exécution lors de la compilation par `netconvert` (via le paramètre `--keep-edges.components` ou des scripts Python de filtrage connexes) pour appliquer cet algorithme et ne conserver que la plus grande composante fortement connexe du réseau, en supprimant toutes les autres.
 
-
-
-
 Au-delà d'éviter les véhicules bloqués en simulation, l'extraction de la plus grande composante fortement connexe par Tarjan est la condition mathématique nécessaire qui garantit l'irréductibilité de notre matrice d'adjacence $A$. En effet, en théorie des graphes, une matrice d'adjacence est irréductible si et seulement si le graphe sous-jacent est fortement connexe. Cette propriété est requise pour appliquer le théorème de Perron-Frobenius (détaillé à la section suivante), qui valide l'existence et l'unicité d'une valeur propre dominante strictement positive (le rayon spectral $\rho(A)$) et d'un vecteur propre strictement positif. Sans le nettoyage de Tarjan, la matrice d'adjacence serait réductible, le spectre de la matrice serait instable, et la théorie des perturbations de Kato [6] ne pourrait pas être appliquée de manière consistante.
 
 #### 2.2.5 Routage dynamique : Filtre de distance minimale pour l'elimination des micro-trajets parasitaires
@@ -286,14 +309,11 @@ Et sur la ville de Paris, avec l'intensité du trafic représentée par la coule
 
 ![Visualisation SIG de la ville de Paris (Illustration de la cartographie des congestions à Paris) - Segments routiers colorés du gris (fluide) au rouge (saturation complète / gridlock).](images/paris-heat_map_trafic.png){width=70%}
 
-
-
 \newpage
 
 # CHAPITRE 3 : ÉLABORATION D'UN MODÈLE PRÉDICTIF
 
 Le développement d'un modèle d'intelligence artificielle capable de se substituer à la simulation physique requiert une compréhension intime des équations cinématiques qui régissent le déplacement des véhicules (microscopique) et des propriétés topologiques du réseau qui gouvernent l'écoulement des flux (macroscopique). Ce chapitre pose le formalisme mathématique de ces deux échelles et explicite physiquement la signification de chaque formule.
-
 
 ### 3.1 Détermination et calcul des métriques spectrales
 
@@ -330,12 +350,10 @@ L'absence de symétrie de cette matrice est évidente ($A_{ex} \neq A_{ex}^T$).
 Dans le cas des réseaux routiers la matrice d'adjacence est en général non symétrique et dans la très grande majorité des cas non normale.
 Une matrice carrée $A$ est dite normale si et seulement si elle commute avec sa transposée, soit $A A^T = A^T A$. Dans le cas des réseaux routiers réels orientés, cette relation n'est jamais vérifiée : la matrice d'adjacence $A$ est non-normale ($A A^T \neq A^T A$).
 
-
 La non-symétrie de la matrice implique sa non-normalité. Pour quantifier ce phénomène, nous introduisons l'indice d'asymétrie $\alpha(G)$ :
 $$\alpha(G) = 1.0 - \frac{|E_{bidirectionnel}|}{|E|}$$
 Où $|E_{bidirectionnel}|$ désigne le nombre d'arêtes admettant un arc de retour identique. La mesure de cette non-normalité est quantifiée analytiquement par la norme de Frobenius du commutateur :
 $$\Delta(A) = \| A A^T - A^T A \|_F = \sqrt{\text{Tr}\left( (A A^T - A^T A)^T (A A^T - A^T A) \right)}$$
-
 
 Dans un système dynamique normal (symétrique), les vecteurs propres sont orthogonaux : toute perturbation (ex. un bouchon) s'amortit de façon monotone sans jamais dépasser son intensité initiale. Dans un système non-normal (asymétrique, comme un réseau à sens uniques), les vecteurs propres ne sont plus orthogonaux et peuvent devenir presque colinéaires. Cette non-orthogonalité permet à des perturbations mineures (ex. un carrefour bloqué temporairement) de s'additionner géométriquement à court terme avant de s'amortir. C'est le phénomène d'amplification transitoire : le bouchon local engendre une onde de choc cinématique qui se propage vers l'amont en s'amplifiant, forçant des dizaines de véhicules à freiner et à réaccélérer, ce qui cause des pics de pollution localisés massifs.
 
@@ -447,7 +465,6 @@ Après avoir établi le cadre théorique permettant de quantifier et de contrôl
 #### 3.1.7 Données d'analyse topologique et spectrale
 Ce tableau récapitule les métriques spectrales de non-normalité calculées pour les réseaux de notre base de données où chaque colonne correspond à un indicateur clé comme l'indice de non-normalité, le rayon spectral, la valeur singulière maximale, la norme $H_2$ et la constante de Kreiss.
 
-
 ##### Tableau 2 : Métriques spectrales et caractéristiques topologiques clés des villes étudiées
 
 | Ville | Non-normalité | Rayon spectral | Sigma max | Norme H2 | Constante de Kreiss |
@@ -484,8 +501,6 @@ Pour mettre en évidence la manière dont ces caractéristiques spectrales évol
 ![Évolution de la norme de Hardy $H_2$ pour les 13 villes tests (triées par taille). H2 croît de manière monotone avec la taille et la complexité du réseau routier, traduisant une augmentation de la rémanence temporelle de la congestion dans les métropoles.](images/comparaison_h2.png)
 
 ![Constante de Kreiss $K(A)$ pour les 12 villes tests majeures (Londres exclue en raison de valeurs singulières proches de zéro). Elle mesure le potentiel d'amplification transitoire des ondes de congestion (Le Caire, Madrid et Marseille présentant des indices élevés).](images/comparaison_kreiss.png)
-
-
 
 ##### Analyse de cohérence physique et topologique des métriques spectrales
 L'étude comparative des descripteurs spectraux à travers le corpus de villes révèle une parfaite adéquation avec la morphologie réelle des réseaux et la théorie des graphes non-normaux :
@@ -532,7 +547,6 @@ L'étude comparative des descripteurs spectraux à travers le corpus de villes r
    - Casablanca ($\rho = 5.545$) obtient le rayon le plus élevé, révélant un maillage étiré avec une forte impédance globale de circulation.
 
 Ces valeurs s'inscrivent parfaitement dans les profils attendus et valident la modélisation spectrale de notre base de données.
-
 
 #### 3.1.8 Validation physique des métriques spectrales (Corrélations avec la dynamique réelle)
 
@@ -606,7 +620,6 @@ Ces variables couplent la densité locale des véhicules avec les indicateurs de
 ##### 8. Origine géographique (encodage one-hot) (6 descripteurs)
 Ces variables binaires encodent le continent d'origine de la ville pour servir de proxy statistique aux comportements de conduite locaux et aux répartitions de flottes spécifiques à chaque région du monde.
 
-
 ##### Tableau 3 : Évolution des performances du modèle de prédiction du CO₂
 
 | Version du Modèle | Architecture & Descripteurs | RMSE ($CO_2$ total) | Score $R^2$ total (%) |
@@ -635,7 +648,6 @@ L'analyse des résultats montre les points suivants :
 
 Conclusion de l'étude d'ablation : L'apport net des descripteurs spectraux (Modèle C vs Modèle A) est une réduction du RMSE de 39,1 % (de 18 274 kg à 11 127 kg). Ce résultat valide expérimentalement que la topologie spectrale est le signal dominant pour prédire le $CO_2$ à travers des morphologies urbaines hétérogènes.
 
-
 #### 3.2.3 Validation croisée et robustesse statistique
 
 La taille du jeu de données (242 observations issues de 36 villes) peut paraître modeste pour un modèle d'apprentissage supervisé complexe. Pour répondre à cette objection, il convient d'expliciter la nature physique de chaque observation. Une simulation microscopique SUMO d'une durée de 3 600 secondes ne constitue pas une simple ligne statistique statique. Elle simule des milliers d'interactions dynamiques individuelles entre les véhicules, les carrefours à feux et la voirie. Chaque run représente donc une expérience physique complète. Ainsi, le corpus de 242 observations équivaut à 242 expériences physiques macroscopiques indépendantes.
@@ -659,9 +671,6 @@ L'analyse de ces résultats confirme la robustesse statistique de l'algorithme X
 - La concordance entre l'erreur sur les folds d'entraînement et sur les données d'évaluation écarte l'hypothèse de surapprentissage.
 
 Ces observations empiriques mettent en évidence que la diversité topologique de l'espace d'apprentissage (47 descripteurs issus de structures urbaines réparties sur 6 continents) confère au métamodèle une capacité de généralisation stable et régulière.
-
-
-
 
 L'importance des variables confirme la pertinence théorique de nos choix. Le volume de trafic brut n'est plus la variable exclusive dominante. À la place, les composantes singulières du spectre du graphe (`sigma_1` à $14,94\ \%$ et `sigma_4` à $10,97\ \%$) prennent le premier plan, traduisant la capacité de guidage global du réseau urbain. La variable `load_relative` (charge relative) se classe immédiatement au 3e rang ($7,21\ \%$), prouvant l'intérêt majeur de coupler la charge cinématique à la structure du graphe.
 
@@ -703,7 +712,6 @@ Ces résultats confirment l'hypothèse centrale de ce mémoire : l'empreinte car
 | 13 | `sinks_count` | Topologie | 2,22 % |
 | 14 | `density` | Topologie | 2,12 % |
 | 15 | `kreiss_constant` | Spectral | 2,10 % |
-
 
 ##### Analyse de l'importance des variables
 
@@ -869,7 +877,6 @@ Pour reproduire fidèlement cette dynamique locale sous SUMO, nous avons dévelo
 #### 4.1.5 Enseignements pour le passage à l'échelle
 Cette étude de cas ciblée à Vinhomes Ocean Park a constitué le socle pratique essentiel de notre apprentissage. L'utilisation concrète de SUMO et sa calibration par vision par ordinateur ont permis de valider la pertinence de la micro-simulation pour quantifier les dynamiques cinématiques locales et les surémissions de $CO_2$ associés. Cependant, la complexité de paramétrage de ce modèle et son coût computationnel élevé (le routage de grands réseaux saturant rapidement la mémoire RAM) ont mis en évidence la nécessité de s'affranchir de la simulation véhicule par véhicule à l'échelle macroscopique. C'est fort de cette première maîtrise technique solide que nous avons pu aborder notre projet de stage et concevoir le métamodèle d'IA prédictif généralisé présenté dans les sections suivantes.
 
-
 #### 4.1.6 Rôle du cas Vinhomes dans la méthodologie
 
 Le lecteur pourrait s'interroger sur le lien entre cette étude microscopique locale (Vinhomes, Hanoï) et la méthodologie topologique spectrale développée dans les chapitres 2 et 3. Cette connexion est fondamentale et s'articule autour de quatre contributions méthodologiques directes :
@@ -881,7 +888,6 @@ Le lecteur pourrait s'interroger sur le lien entre cette étude microscopique lo
 3. Génération de scénarios de stress à haute charge : Les 4 profils de trafic empiriques (Midday Baseline, Evening Peak, Transition, Holiday Reversal) ont constitué les cas de test de saturation (régime de congestion complète) utilisés pour entraîner l'IA sur les comportements non-linéaires de transition de phase.
 
 4. Démonstration de la complémentarité IA-SUMO : Vinhomes illustre concrètement le schéma opérationnel de la section 4.4 : l'IA globale identifie les villes à fort risque de congestion (via la constante de Kreiss et la norme $H_2$), puis SUMO affine localement l'analyse sur les points sensibles (hub de recharge, intersections critiques). Le cas Vinhomes *est* cette seconde étape dans notre boucle hybride.
-
 
 ### 4.2 Expérimentation globale, inférence IA et validation comparative
 
@@ -1026,7 +1032,6 @@ Lorsque le vecteur $\vec{x}_{target}$ de la ville cible traverse ces 1 000 arbre
 
 L'évaluation de cette inférence IA est comparée à une simulation physique SUMO de référence (Ground Truth) exécutée sur cette même ville.
 
-
 #### 4.2.5 Test de robustesse et limites physiques sur 9 villes inédites
 
 Afin de consolider la validation de notre métamodèle IA et d'éprouver sa robustesse hors-échantillon (*zero-shot*), nous avons mené une campagne de validation croisée systématique sur 9 villes mondiales inédites (Nelson, Maseru, Pamplona, Essaouira, Siem Reap, Nara, Galveston, Guanajuato, Colmar). Ces villes n'ont jamais été observées ni utilisées lors des phases d'apprentissage et d'extraction de descripteurs. 
@@ -1122,8 +1127,6 @@ Ce groupe rassemble les cas d'étude où les limites inhérentes à l'abstractio
 -   Les plans de circulation locaux de Colmar : Colmar présente un tracé médiéval très dense qui suggère une congestion précoce (constante de Kreiss élevée). Le métamodèle surestime la pollution réelle de 137 % car il ignore les règles de signalisation locale. Les politiques locales d'exploitation routière (sens uniques stricts du centre-ville, boucles de déviation périphériques et priorité absolue aux mobilités douces) empêchent les véhicules de transit d'entrer dans la vieille ville, maintenant une fluidité élevée en périphérie.
 -   L'effet de seuil cinématique d'Essaouira à 3 000 véhicules : À 3 000 véhicules, l'IA surestime la pollution de 137,97 % en anticipant trop tôt la congestion. En simulation microscopique, le réseau d'Essaouira reste fluide jusqu'à 3 000 véhicules et ne sature que vers 5 000 véhicules.
 
-
-
 #### 4.2.6 Analyse des performances de calcul, complexité et passage à l'échelle
 
 Pour évaluer la viabilité opérationnelle et l'utilité pratique du métamodèle d'intelligence artificielle (XGBoost V3) dans des contextes de planification urbaine réelle, une évaluation systématique des temps d'exécution et de la complexité algorithmique a été menée. Cette analyse s'attache à quantifier le gain de performance informatique par rapport aux simulations multi-agents physiques traditionnelles sous le framework SUMO.
@@ -1199,7 +1202,6 @@ Ce comportement s'explique par deux phénomènes physiques et algorithmiques cum
 
 À l'inverse, le métamodèle IA s'affranchit totalement du routage dynamique et de la résolution de la cinématique des flux : il prédit les émissions globales en 5,62 ms ($0,0056$ s) pour les graphes connus. Les facteurs d'accélération mesurés atteignent des valeurs très élevées, dépassant 5,1 millions de fois plus rapide pour Hobart et 2,7 millions de fois pour Berlin. Le gain de temps computationnel mesuré s'établit à plus de 99,9 % pour tous ces scénarios massifs, le gain réel non arrondi dépassant $99{,}9999\%$ dans la quasi-totalité des grandes configurations. Ce constat confirme la pertinence du métamodèle pour l'aide à la décision interactive et temps réel : là où SUMO nécessite des heures de calcul, l'IA répond en quelques millisecondes.
 
-
 ##### D. Benchmark du pipeline sur des métropoles européennes inédites
 
 Jusqu'ici, l'analyse de performance s'est concentrée sur les villes connues, dont la topologie est déjà enregistrée dans notre base de données spectrale. Pour ces villes, l'inférence IA se limite à une simple requête de prédiction : le modèle fournit sa réponse en 5,62 ms, indépendamment de la taille du réseau. Ce cas de figure représente le régime nominal d'exploitation du système.
@@ -1243,7 +1245,6 @@ En tout état de cause, même dans le pire scénario (131,4 s pour Munich), le p
 ##### E. Conclusion
 
 Ces résultats empiriques démontrent que la méthodologie d'IA topologique spectrale proposée permet de briser le limite de calcul inhérent aux simulateurs physiques. L'inférence ultra-rapide ($<6$ ms) offre une réactivité totale pour des applications interactives, tandis que l'incorporation dynamique de réseaux urbains inconnus (validée sur cinq grandes métropoles européennes inédites comme Lyon, Barcelone, Bruxelles, Amsterdam et Munich) s'effectue en moins de 2 minutes et 12 secondes pour les réseaux les plus étendus, et en seulement 36 secondes pour des réseaux de taille intermédiaire. Après cette phase d'intégration initiale, unique et non récurrente, toute prédiction ultérieure sur la ville nouvellement enregistrée est délivrée en moins de 6 ms. Ce mécanisme d'apprentissage topologique incrémental ouvre la voie à des outils d'aide à la décision flexibles et immédiatement transposables à l'échelle internationale.
-
 
 ### 4.3 Interface d'aide à la décision : Dashboard Streamlit
 
@@ -1336,7 +1337,6 @@ Pour rendre cette sensibilité opérationnelle dans notre dashboard Streamlit (`
 
 Cette modulation de la vitesse d'entrée décale le point d'inférence de XGBoost vers une zone de charge plus élevée, permettant de prédire instantanément le surcoût écologique lié à la météo sans devoir relancer une simulation physique lourde.
 
-
 Les résultats de ce travail font d'ailleurs l'objet d'une valorisation académique à travers la préparation de deux publications de fin d'année. La première publication, co-écrite avec VinUniversity, s'intitule *"Microscopic Traffic Flow and Emission Modeling of High-Power Electric Vehicle Charging Infrastructure in Hyper-Dense Master-Planned Communities: The Case of Sao Bien, Vinhomes Ocean Park."* (présentation du protocole YOLOv8, de l'architecture du jumeau numérique SUMO et de l'évaluation des scénarios de densification). La deuxième publication s'intitule *"Topological Graph-Spectral Machine Learning for Real-Time Urban CO2 Emissions Prediction: Applying Kato's Perturbation Theory and Kreiss Constants to Non-Normal Urban Networks."* (formalisation de la méthode de prédiction spectrale sur graphes non-symétriques, étude de la stabilité via la constante de Kreiss [9] et performances de XGBoost).
 
 \newpage
@@ -1376,8 +1376,6 @@ La boucle d'optimisation hybride (IA-SUMO) constitue la perspective ultime de ce
 -   [19] Chen, T., & Guestrin, C. (2016). *XGBoost: A Scalable Tree Boosting System*. Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 785-794.
 -   [20] Kipf, T. N., & Welling, M. (2017). *Semi-Supervised Classification with Graph Convolutional Networks*. International Conference on Learning Representations (ICLR).
 -   [21] Haklay, M., & Weber, P. (2008). *OpenStreetMap: User-generated street maps*. IEEE Pervasive Computing, 7(4), 12-18.
-
-
 
 \newpage
 
@@ -1475,7 +1473,6 @@ La boucle d'optimisation hybride (IA-SUMO) constitue la perspective ultime de ce
 -   `origin_North_America` : Caractérise les structures en grilles orthogonales régulières (ex. Los Angeles).
 -   `origin_South_America` : Caractérise les géométries mixtes côtières (ex. Rio de Janeiro).
 
-
 ### Tableau 7 : Extrait des indicateurs macroscopiques des simulations de référence
 
 | Date & Time | City | Vehicles | Avg Speed | CO₂ Emitted | Weather | EV Adoption | Execution Time |
@@ -1542,7 +1539,6 @@ La boucle d'optimisation hybride (IA-SUMO) constitue la perspective ultime de ce
 | 2026-04-11 16:11:53 | Versailles | 17.36 s | 201.73 s | 0.26 s | 219.36 s |
 | 2026-04-11 13:25:05 | Paris | 1145.37 s | 892.65 s | 1.17 s | 2039.20 s |
 
-
 ##### Particularités topologiques et morphologiques des villes d'entraînement :
 
 -   Paris : Réseau radial organique hyperdense, nombreux sens uniques, goulots sur les grandes artères.
@@ -1580,6 +1576,5 @@ La boucle d'optimisation hybride (IA-SUMO) constitue la perspective ultime de ce
 -   Queenstown : Réseau alpin compact contraint par le lac Wakatipu et les montagnes.
 -   Hue (Hue) : Réseau de ville impériale vietnamienne, marqué par un fossé défensif et un axe fluvial contraignant.
 -   Hobart : Réseau estuarien dépendant de ponts critiques traversant la Derwent River.
-
 
 Les villes marquées "Descripteurs topologiques seulement" contribuent pleinement à l'espace de représentation spectral de l'IA. Même sans simulation SUMO associée, leurs 47 descripteurs spectraux servent de voisins morphologiques lors de l'inférence barycentrique : quand l'IA prédit les émissions d'une nouvelle ville inconnue, elle identifie les villes d'apprentissage les plus proches géométriquement dans l'espace spectral et pondère leurs connaissances accumulées pour construire l'estimation finale.
